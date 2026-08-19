@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Clipping Estratégico ALMG — 19/08/2026</title>
+<meta name="description" content="Leitura institucional do noticiário — 19 de agosto de 2026.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clipping Estratégico — ALMG">
+<meta property="og:description" content="Leitura institucional do noticiário — 19 de agosto de 2026.">
+<meta property="og:image" content="https://anaterra06.github.io/clippingestrategico/og-image.png">
+<meta property="og:url" content="https://anaterra06.github.io/clippingestrategico/2026-08-19/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clipping Estratégico — ALMG">
+<meta name="twitter:description" content="Leitura institucional do noticiário — 19 de agosto de 2026.">
+<meta name="twitter:image" content="https://anaterra06.github.io/clippingestrategico/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,680;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--black:#0a0a0a;
+--black-soft:#161412;
+--paper:#f7f4ee;
+--paper-dim:#ece7dc;
+--red:#a4120a;
+--red-bright:#e2321c;
+--red-deep:#6e0c06;
+--gray:#8a8378;
+--gray-on-black:#9c948a;
+--line:#d8d2c4;
+--line-on-black:#3a352f;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{
+background:var(--black);
+scroll-behavior:smooth;
+}
+body{
+font-family:'IBM Plex Sans', sans-serif;
+color:var(--paper);
+-webkit-font-smoothing:antialiased;
+overflow-x:hidden;
+}
+.eyebrow{
+font-family:'IBM Plex Mono', monospace;
+font-size:11px;
+letter-spacing:.14em;
+text-transform:uppercase;
+font-weight:500;
+}
+.serif{ font-family:'Fraunces', serif; }
+#progress-wrap{
+position:fixed; top:0; left:0; right:0; height:3px;
+background:rgba(255,255,255,.08); z-index:500;
+}
+#progress-bar{
+height:100%; width:0%;
+background:linear-gradient(90deg,var(--red-deep),var(--red-bright));
+}
+#tab{
+position:fixed; top:14px; right:16px; z-index:500;
+font-family:'IBM Plex Mono', monospace;
+font-size:10px; letter-spacing:.12em;
+color:var(--paper);
+background:var(--red);
+padding:5px 9px 4px;
+border-radius:2px;
+box-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+#tab span{opacity:.65;}
+#deck{
+height:100vh; height:100svh;
+overflow-y:scroll;
+scroll-snap-type:y mandatory;
+}
+section{
+min-height:100vh; min-height:100svh;
+width:100%;
+scroll-snap-align:start;
+scroll-snap-stop:always;
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:76px 26px 56px;
+}
+section.dark{ background:var(--black); color:var(--paper); }
+section.light{ background:var(--paper); color:var(--black); }
+section.redsec{ background:var(--red); color:var(--paper); }
+.section-inner{ max-width:560px; margin:0 auto; width:100%; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+section.in-view .section-inner{ opacity:1; transform:translateY(0); }
+.kicker{
+display:flex; align-items:center; gap:10px; margin-bottom:18px;
+}
+.kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--red-bright); flex:none; }
+.dark .kicker .dot, .redsec .kicker .dot{ background:#fff; }
+.light .eyebrow{ color:var(--red-deep); }
+.dark .eyebrow, .redsec .eyebrow{ color:var(--gray-on-black); }
+.redsec .eyebrow{ color:rgba(255,255,255,.75); }
+h1,h2,h3{ font-weight:560; line-height:1.05; }
+h1{ font-size:clamp(34px,9vw,52px); margin-bottom:16px; }
+h2{ font-size:clamp(28px,7.5vw,40px); margin-bottom:14px; }
+h3{ font-size:19px; font-weight:600; font-family:'IBM Plex Sans',sans-serif; margin-bottom:6px; }
+p.lede{ font-size:16px; line-height:1.6; color:var(--gray); }
+.dark p.lede, .redsec p.lede{ color:var(--gray-on-black); }
+.redsec p.lede{ color:rgba(255,255,255,.82); }
+p.body-text{ font-size:15px; line-height:1.65; margin-top:14px; }
+p.body-text + p.body-text{ margin-top:10px; }
+.hint{
+position:absolute; bottom:26px; left:0; right:0; text-align:center;
+font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em;
+color:var(--gray-on-black); animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{ 0%,100%{transform:translateY(0); opacity:.55;} 50%{transform:translateY(6px); opacity:1;} }
+.stamp{
+display:inline-flex; align-items:center; gap:6px;
+font-family:'IBM Plex Mono', monospace;
+font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+border:1.5px solid var(--red-bright);
+color:var(--red-bright);
+padding:4px 9px 3px;
+border-radius:3px;
+transform:rotate(-1.5deg);
+white-space:nowrap;
+}
+.light .stamp{ border-color:var(--red); color:var(--red); }
+.stamp.hi{ background:var(--red-bright); color:#fff; border-color:var(--red-bright); }
+.light .stamp.hi{ background:var(--red); border-color:var(--red); }
+.thread{ position:relative; margin-top:24px; padding-left:26px; }
+.thread::before{
+content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+background:linear-gradient(var(--red-bright), var(--red-deep));
+opacity:.55;
+}
+.thread-item{ position:relative; padding-bottom:22px; }
+.thread-item:last-child{ padding-bottom:0; }
+.thread-item::before{
+content:''; position:absolute; left:-26px; top:4px; width:11px; height:11px;
+border-radius:50%; background:var(--red-bright); border:2px solid var(--black);
+}
+.thread-item h3{ font-size:15.5px; margin-bottom:3px; }
+.thread-item .num{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gray-on-black); }
+.thread-item p{ font-size:13.5px; color:var(--gray-on-black); line-height:1.5; }
+.doc-card{
+margin-top:22px; border:1px solid var(--line-on-black);
+background:rgba(255,255,255,.03);
+padding:18px 18px 16px; border-radius:4px;
+position:relative;
+}
+.light .doc-card{ border-color:var(--line); background:#fff; }
+.doc-card::before{
+content:'DOSSIÊ'; position:absolute; top:-9px; left:14px;
+font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em;
+background:var(--black); color:var(--red-bright); padding:0 6px;
+}
+.light .doc-card::before{ background:var(--paper); color:var(--red); }
+.doc-card .doc-title{ font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--red-bright); margin-bottom:8px; }
+.light .doc-card .doc-title{ color:var(--red); }
+.doc-card .doc-row{ display:flex; justify-content:space-between; gap:12px; font-size:13px; padding:6px 0; border-top:1px dashed var(--line-on-black); }
+.light .doc-card .doc-row{ border-top:1px dashed var(--line); }
+.doc-card .doc-row:first-of-type{ border-top:none; }
+.doc-card .doc-row .k{ color:var(--gray-on-black); flex:none; }
+.light .doc-card .doc-row .k{ color:var(--gray); }
+.doc-card .doc-row .v{ text-align:right; font-weight:500; }
+.versus{ margin-top:22px; display:flex; flex-direction:column; gap:12px; }
+.vs-card{ border:1px solid var(--line-on-black); border-radius:4px; padding:14px 16px; }
+.light .vs-card{ border-color:var(--line); }
+.vs-card .vs-tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red-bright); margin-bottom:4px; }
+.light .vs-card .vs-tag{ color:var(--red); }
+.vs-card h3{ margin-bottom:4px; }
+.vs-card p{ font-size:13px; color:var(--gray-on-black); line-height:1.5; }
+.light .vs-card p{ color:var(--gray); }
+.vs-divider{ text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gray-on-black); letter-spacing:.1em; }
+.chain{ margin-top:22px; display:flex; flex-direction:column; }
+.chain-step{ display:flex; align-items:flex-start; gap:12px; padding:9px 0; }
+.chain-step .arrow{ font-family:'IBM Plex Mono',monospace; color:var(--red-bright); font-size:15px; padding-top:1px; }
+.chain-step span.txt{ font-size:14.5px; line-height:1.5; }
+.stats{ display:flex; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.stat{ flex:1; min-width:100px; }
+.stat .num{ font-family:'Fraunces',serif; font-size:30px; font-weight:560; color:var(--red-bright); line-height:1; }
+.light .stat .num{ color:var(--red); }
+.stat .lbl{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--gray-on-black); margin-top:4px; letter-spacing:.05em; }
+.light .stat .lbl{ color:var(--gray); }
+.checklist{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+.check-item{ display:flex; gap:12px; align-items:flex-start; }
+.check-item .n{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--red-bright); border:1px solid var(--red-bright); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex:none; margin-top:1px;}
+.light .check-item .n{ color:var(--red); border-color:var(--red); }
+.check-item p{ font-size:14px; line-height:1.5; }
+.expo-list{ margin-top:20px; display:flex; flex-direction:column; gap:0; }
+.expo-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 0; border-top:1px solid var(--line); }
+.expo-row:first-child{ border-top:none; }
+.expo-name{ font-weight:600; font-size:14px; }
+.expo-meta{ font-size:12px; color:var(--gray); font-family:'IBM Plex Mono',monospace; }
+.expo-badge{ font-size:10px; font-family:'IBM Plex Mono',monospace; padding:3px 7px; border-radius:2px; white-space:nowrap; text-transform:uppercase; letter-spacing:.05em;}
+.expo-badge.pos{ background:#e9e4d8; color:var(--red-deep); }
+.expo-badge.neu{ background:#e9e4d8; color:var(--gray); }
+.lawlist{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+.law-item{ border-left:3px solid var(--red-bright); padding:2px 0 2px 14px; }
+.light .law-item{ border-left-color:var(--red); }
+.law-item .code{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--red-bright); }
+.light .law-item .code{ color:var(--red); }
+.law-item h3{ margin:3px 0 3px; font-size:15.5px; }
+.law-item p{ font-size:12.5px; color:var(--gray-on-black); }
+.light .law-item p{ color:var(--gray); }
+.closing-quote{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(22px,6vw,30px); line-height:1.35; }
+.signoff{ margin-top:34px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; color:rgba(255,255,255,.7); }
+.divider-rule{ height:1px; background:var(--line-on-black); margin:22px 0; }
+.light .divider-rule{ background:var(--line); }
+.callout{ margin-top:20px; border-left:3px solid var(--red-bright); background:rgba(226,50,28,.08); padding:12px 14px; border-radius:0 4px 4px 0; }
+.callout p{ font-size:13.5px; line-height:1.55; color:var(--paper); }
+.light .callout{ background:rgba(164,18,10,.06); }
+.light .callout p{ color:var(--black); }
+.callout .lbl{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--red-bright); margin-bottom:4px; display:block; }
+.light .callout .lbl{ color:var(--red); }
+::-webkit-scrollbar{ display:none; }
+</style>
+</head>
+<body>
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+<div id="tab">DOSSIÊ ALMG <span>· 19.08</span></div>
+<div id="deck">
+
+<!-- 0 COVER -->
+<section class="dark" id="s0">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
+<h1 class="serif">Clipping<br>Estratégico.</h1>
+<p class="lede">Leitura institucional do noticiário — 19 de agosto de 2026</p>
+<p class="body-text">O dia se organiza em três eixos: o recuo do Governo na concessão do Vetor Norte, um novo capítulo judicial nas escolas cívico-militares e a entrada de temas fiscais no debate eleitoral. Ao fundo, o Sindicato dos Bancários pressiona diretamente a Assembleia pelo PL 6.056/2026.</p>
+</div>
+<div class="hint">deslize para começar ↓</div>
+</section>
+
+<!-- 1 RADAR -->
+<section class="dark" id="s1">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 0 · O radar</span></div>
+<h2 class="serif">Eixos prioritários<br>do dia.</h2>
+<p class="lede">Cinco frentes concentram a leitura institucional de hoje.</p>
+<div class="thread">
+<div class="thread-item">
+<span class="num">01</span>
+<h3>Vetor Norte</h3>
+<p>Governo desiste da concessão após atuação do TCE-MG. <span class="stamp hi" style="margin-top:6px;">muito alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">02</span>
+<h3>Escolas cívico-militares</h3>
+<p>STF mantém a suspensão; disputa migra para a ALMG. <span class="stamp hi" style="margin-top:6px;">muito alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">03</span>
+<h3>Renúncias fiscais</h3>
+<p>Tema técnico-orçamentário vira munição de campanha. <span class="stamp" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">04</span>
+<h3>PL dos bancários</h3>
+<p>Sindicato pressiona por votação do PL 6.056/2026. <span class="stamp" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">05</span>
+<h3>Nutricionistas</h3>
+<p>Audiência expõe falhas estruturais na merenda escolar. <span class="stamp" style="margin-top:6px;">alta</span></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2 VETOR NORTE -->
+<section class="light" id="s2">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 1 · Vetor Norte</span></div>
+<h2 class="serif">A concessão<br>que recuou.</h2>
+<p class="body-text">Estado de Minas e Jovem Pan noticiam que o Governo desistiu de republicar o edital de concessão das rodovias MG-010, MG-424 e LMG-800 — 124 km sob impacto direto de 12 municípios.</p>
+<div class="stats">
+<div class="stat"><div class="num">R$5bi</div><div class="lbl">investimentos previstos</div></div>
+<div class="stat"><div class="num">30</div><div class="lbl">anos de contrato</div></div>
+<div class="stat"><div class="num">13</div><div class="lbl">praças de pedágio</div></div>
+<div class="stat"><div class="num">3M</div><div class="lbl">pessoas impactadas</div></div>
+</div>
+<div class="chain">
+<div class="chain-step"><span class="arrow">›</span><span class="txt">Governo altera o edital sem estudos atualizados</span></div>
+<div class="chain-step"><span class="arrow">›</span><span class="txt">Apenas duas audiências públicas são realizadas</span></div>
+<div class="chain-step"><span class="arrow">›</span><span class="txt">Bloco Democracia e Luta representa ao TCE-MG</span></div>
+<div class="chain-step"><span class="arrow">›</span><span class="txt">TCE-MG suspende o edital</span></div>
+<div class="chain-step"><span class="arrow">›</span><span class="txt"><strong>Governo desiste de republicar</strong></span></div>
+</div>
+<p class="body-text" style="margin-top:20px;">É o fato de maior protagonismo fiscalizador da ALMG no clipping de hoje. A oposição tende a explorar o desfecho como prova de eficácia da fiscalização parlamentar — enquanto o Governo segue com a obrigação de explicar como o DER-MG financiará manutenção e investimentos.</p>
+</div>
+</section>
+
+<!-- 3 ESCOLAS CIVICO-MILITARES -->
+<section class="dark" id="s3">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 2 · Escolas cívico-militares</span></div>
+<h2 class="serif">Decisão judicial,<br>disputa segue.</h2>
+<p class="body-text">O Diário do Comércio noticia que o ministro Edson Fachin, do STF, rejeitou o pedido do Estado para suspender a decisão que determinou a descontinuidade do programa de escolas cívico-militares — mantendo a atuação do TCE-MG.</p>
+<div class="stats">
+<div class="stat"><div class="num">9</div><div class="lbl">escolas no programa</div></div>
+<div class="stat"><div class="num">6.083</div><div class="lbl">estudantes</div></div>
+<div class="stat"><div class="num">R$10M</div><div class="lbl">previstos em 2026</div></div>
+</div>
+<div class="doc-card">
+<div class="doc-title">PL 5.545/2026 · Escolas Cívico-Militares</div>
+<div class="doc-row"><span class="k">Autoria</span><span class="v">Governador do Estado</span></div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Aguardando parecer na CCJ</span></div>
+<div class="doc-row"><span class="k">Relator</span><span class="v">Bruno Engler</span></div>
+<div class="doc-row"><span class="k">Tramitação</span><span class="v">Dois turnos</span></div>
+</div>
+<div class="callout">
+<span class="lbl">Ponto de atenção</span>
+<p>A decisão foi processual — Fachin não examinou o mérito constitucional do programa. Não afirmar que o STF declarou as escolas cívico-militares inconstitucionais.</p>
+</div>
+<p class="body-text" style="margin-top:18px;">A decisão enfraquece a continuidade do modelo administrativo, mas pode aumentar a pressão política pela votação do projeto: a controvérsia tende a migrar do campo administrativo para o Legislativo.</p>
+</div>
+</section>
+
+<!-- 4 RENUNCIAS FISCAIS -->
+<section class="light" id="s4">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 3 · Renúncias fiscais</span></div>
+<h2 class="serif">Da campanha<br>à fiscalização.</h2>
+<p class="body-text">Estado de Minas e O Tempo destacam a promessa de Patrus Ananias de revisar ou cancelar incentivos fiscais que não produzam benefícios públicos.</p>
+<div class="stats">
+<div class="stat"><div class="num">R$19,4bi</div><div class="lbl">em incentivos fiscais concedidos em 2025</div></div>
+</div>
+<p class="body-text" style="margin-top:20px;">O tema deixa de ser apenas técnico-orçamentário e passa a ocupar o debate eleitoral. A ALMG pode ser cobrada sobre transparência, avaliação de resultados e fiscalização das empresas beneficiárias.</p>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Pedidos de detalhamento dos benefícios por empresa e setor</p></div>
+<div class="check-item"><span class="n">→</span><p>Avaliação de emprego e investimento gerados</p></div>
+<div class="check-item"><span class="n">→</span><p>Debate na Comissão de Fiscalização Financeira e Orçamentária</p></div>
+<div class="check-item"><span class="n">→</span><p>Confronto entre atração de investimentos e capacidade de financiar serviços públicos</p></div>
+</div>
+</div>
+</section>
+
+<!-- 5 PL DOS BANCARIOS -->
+<section class="dark" id="s5">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 4 · PL dos bancários</span></div>
+<h2 class="serif">Pressão sindical<br>sobre a pauta.</h2>
+<p class="body-text">O Sindicato dos Bancários de Belo Horizonte e Região iniciou campanha pública em favor do PL 6.056/2026, da deputada Beatriz Cerqueira, que trata da valorização dos bancários mineiros e da manutenção de agências — entre as exigências, preservação de empregos, atendimento presencial e permanência de agências em determinados municípios.</p>
+<div class="doc-card">
+<div class="doc-title">PL 6.056/2026</div>
+<div class="doc-row"><span class="k">Autoria</span><span class="v">Beatriz Cerqueira</span></div>
+<div class="doc-row"><span class="k">Publicação</span><span class="v">14/8/2026</span></div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Aguardando designação de relator</span></div>
+<div class="doc-row"><span class="k">Comissões</span><span class="v">CCJ, Dev. Econômico, Adm. Pública, Fiscalização Financeira</span></div>
+</div>
+<p class="body-text" style="margin-top:20px;">Trata-se de pressão corporativa e social dirigida diretamente à Assembleia. A campanha usa a ferramenta de participação do portal para mobilizar votos e comentários, buscando influenciar a tramitação desde a CCJ.</p>
+</div>
+</section>
+
+<!-- 6 NUTRICIONISTAS -->
+<section class="light" id="s6">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 5 · Nutricionistas</span></div>
+<h2 class="serif">Merenda escolar<br>sob fiscalização.</h2>
+<p class="body-text">A Rádio 98 repercutiu a audiência da Comissão de Administração Pública, realizada em 18/8 a requerimento do deputado Adalclever Lopes, sobre as condições de trabalho dos nutricionistas da educação pública.</p>
+<div class="stats">
+<div class="stat"><div class="num">400mil</div><div class="lbl">alunos em escolas com estrutura precária</div></div>
+<div class="stat"><div class="num">55%</div><div class="lbl">recebem de 1 a 3 salários mínimos</div></div>
+<div class="stat"><div class="num">15%</div><div class="lbl">recebem adicional técnico</div></div>
+<div class="stat"><div class="num">66%</div><div class="lbl">relatam interferência e impacto na saúde mental</div></div>
+</div>
+<p class="body-text" style="margin-top:20px;">É a reunião da Assembleia com maior repercussão externa no clipping de hoje. O tema combina administração pública, educação, saúde, segurança alimentar e fiscalização do PNAE.</p>
+</div>
+</section>
+
+<!-- 7 SUBTRAMA ELEITORAL -->
+<section class="dark" id="s7">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Subtrama · Clima político-eleitoral</span></div>
+<h2 class="serif">As eleições<br>na Assembleia.</h2>
+<p class="body-text">A BandNews informa que 68 dos 77 deputados tentam a reeleição e cinco disputam mandato federal — movimento que já desenha a composição da próxima legislatura.</p>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Patrus inicia campanha de rua com as renúncias fiscais no centro do discurso</p></div>
+<div class="check-item"><span class="n">→</span><p>Flávio Roscoe consolida o palanque oficial do PL com lideranças nacionais</p></div>
+<div class="check-item"><span class="n">→</span><p>Cleitinho mantém apoio de Flávio Bolsonaro fora do palanque oficial</p></div>
+<div class="check-item"><span class="n">→</span><p>Kalil propõe revisão de despesas e incentivos, afastado após cirurgia</p></div>
+</div>
+<div class="divider-rule"></div>
+<p class="lede" style="margin-bottom:8px;">Norte de Minas perde representação:</p>
+<p class="body-text"><strong>Tadeu Leite —</strong> deixa a disputa estadual rumo ao TCE-MG. Menção incidental, mas com impacto institucional sobre a sucessão na Presidência da ALMG.</p>
+<p class="body-text"><strong>Carlos Pimenta —</strong> deixa a disputa estadual para concorrer à Câmara Federal.</p>
+</div>
+</section>
+
+<!-- 8 PROJETOS E LEIS -->
+<section class="light" id="s8">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Projetos e leis</span></div>
+<h2 class="serif">O que está<br>em tramitação.</h2>
+<div class="lawlist">
+<div class="law-item">
+<span class="code">PL 5.545/2026</span>
+<h3>Escolas Cívico-Militares</h3>
+<p>Governador do Estado · aguardando parecer na CCJ</p>
+</div>
+<div class="law-item">
+<span class="code">PL 6.056/2026</span>
+<h3>Valorização dos bancários mineiros</h3>
+<p>Beatriz Cerqueira · aguardando designação de relator</p>
+</div>
+<div class="law-item">
+<span class="code">PL 377/2023</span>
+<h3>Validade indeterminada de laudo de deficiência</h3>
+<p>Professor Wendel Mesquita · transformado na Lei 26.035/2026</p>
+</div>
+<div class="law-item">
+<span class="code">Lei 26.035/2026</span>
+<h3>Validade indeterminada de laudos de deficiência</h3>
+<p>Origem no PL 377/2023 · em vigor</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 9 EXPOSIÇÃO PARLAMENTAR -->
+<section class="light" id="s9">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Exposição parlamentar</span></div>
+<h2 class="serif">Quem apareceu,<br>e como.</h2>
+<div class="expo-list">
+<div class="expo-row">
+<div><div class="expo-name">Beatriz Cerqueira</div><div class="expo-meta">PL 6.056/2026 e emprego bancário · Sindicato dos Bancários</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Professor Wendel Mesquita</div><div class="expo-meta">Lei dos laudos permanentes · Rádio Real</div></div>
+<div class="expo-badge pos">média/alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Macaé Evaristo</div><div class="expo-meta">Caminhada de Patrus · Estado de Minas</div></div>
+<div class="expo-badge neu">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Lohanna França</div><div class="expo-meta">Lançamento de candidatura federal · Metrópoles</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Gil Pereira / Leninha / Arlen Santiago / Ricardo Campos</div><div class="expo-meta">Competitividade no Norte · O Norte de Minas</div></div>
+<div class="expo-badge neu">média/alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Tadeu Leite</div><div class="expo-meta">Saída para o TCE-MG · O Norte de Minas</div></div>
+<div class="expo-badge neu">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Carlos Pimenta</div><div class="expo-meta">Saída para a Câmara Federal · O Norte de Minas</div></div>
+<div class="expo-badge neu">alta</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 10 PONTOS PARA MONITORAR -->
+<section class="dark" id="s10">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">O que vem a seguir</span></div>
+<h2 class="serif">Doze pontos<br>para acompanhar.</h2>
+<div class="checklist">
+<div class="check-item"><span class="n">1</span><p>Plano do DER-MG para manutenção e investimentos no Vetor Norte</p></div>
+<div class="check-item"><span class="n">2</span><p>Eventual convocação da Seinfra para explicar o recuo</p></div>
+<div class="check-item"><span class="n">3</span><p>PL 5.545/2026 segue parado na CCJ, sem inclusão na pauta da última reunião</p></div>
+<div class="check-item"><span class="n">4</span><p>Reação do Governo e de parlamentares favoráveis às escolas cívico-militares</p></div>
+<div class="check-item"><span class="n">5</span><p>Designação de relator para o PL 6.056/2026</p></div>
+<div class="check-item"><span class="n">6</span><p>Crescimento da mobilização sindical no portal da ALMG</p></div>
+<div class="check-item"><span class="n">7</span><p>Resposta da Secretaria de Educação às reivindicações dos nutricionistas</p></div>
+<div class="check-item"><span class="n">8</span><p>Providências aprovadas na audiência da Comissão de Administração Pública</p></div>
+<div class="check-item"><span class="n">9</span><p>Entrada das renúncias fiscais no debate eleitoral e cobranças por transparência</p></div>
+<div class="check-item"><span class="n">10</span><p>Uso do Propag, do RRF e da preservação da Uemg nas campanhas</p></div>
+<div class="check-item"><span class="n">11</span><p>Efeitos da candidatura de deputados federais sobre a renovação da ALMG</p></div>
+<div class="check-item"><span class="n">12</span><p>Sucessão de Tadeu Leite e reorganização da representação do Norte de Minas</p></div>
+</div>
+</div>
+</section>
+
+<!-- 11 ENCERRAMENTO -->
+<section class="redsec" id="s11">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
+<h2 class="serif" style="color:#fff;">Fim do<br>clipping.</h2>
+<p class="body-text" style="margin-top:16px; color:rgba(255,255,255,.9);">Documento de apoio à decisão institucional, elaborado a partir do noticiário do dia.</p>
+<div class="signoff">CLIPPING ESTRATÉGICO · ALMG — 19.08.2026</div>
+</div>
+</section>
+
+</div>
+<script>
+const deck = document.getElementById('deck');
+const bar = document.getElementById('progress-bar');
+const sections = Array.from(document.querySelectorAll('section'));
+function updateProgress(){
+const scrollable = deck.scrollHeight - deck.clientHeight;
+const pct = scrollable > 0 ? (deck.scrollTop / scrollable) * 100 : 0;
+bar.style.width = pct + '%';
+}
+deck.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+const io = new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting){ e.target.classList.add('in-view'); }
+});
+}, { root: deck, threshold: 0.35 });
+sections.forEach(s=> io.observe(s));
+</script>
+</body>
+</html>
