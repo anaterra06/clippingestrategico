@@ -19,12 +19,15 @@
 <style>
 :root{
 --black:#0a0a0a;
+--black-soft:#161412;
 --paper:#f7f4ee;
+--paper-dim:#ece7dc;
 --red:#a4120a;
 --red-bright:#e2321c;
 --red-deep:#6e0c06;
 --gray:#8a8378;
 --gray-on-black:#9c948a;
+--line:#d8d2c4;
 --line-on-black:#3a352f;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
@@ -33,7 +36,7 @@ body{
 font-family:'IBM Plex Sans', sans-serif;
 color:var(--paper);
 -webkit-font-smoothing:antialiased;
-min-height:100vh;
+overflow-x:hidden;
 }
 .eyebrow{
 font-family:'IBM Plex Mono', monospace;
@@ -44,118 +47,73 @@ font-weight:500;
 color:var(--gray-on-black);
 }
 .serif{ font-family:'Fraunces', serif; }
-header{
-max-width:640px; margin:0 auto;
-padding:72px 26px 44px;
-}
-header .kicker{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
-header .kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--red-bright); flex:none; }
-h1{
-font-family:'Fraunces', serif;
-font-weight:560;
-font-size:clamp(34px,9vw,50px);
-line-height:1.05;
-margin-bottom:16px;
-}
-p.lede{
-font-size:16px; line-height:1.6; color:var(--gray-on-black);
-max-width:46ch;
-}
-main{
-max-width:640px; margin:0 auto;
-padding:0 26px 100px;
-}
-.archive-list{ display:flex; flex-direction:column; gap:14px; }
-.edition-card{
-display:block;
+.wrap{ max-width:640px; margin:0 auto; padding:64px 26px 80px; }
+.kicker{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
+.kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--red-bright); flex:none; }
+h1{ font-weight:560; line-height:1.05; font-size:clamp(36px,10vw,54px); margin-bottom:16px; }
+p.lede{ font-size:16px; line-height:1.6; color:var(--gray-on-black); max-width:46ch; }
+.divider-rule{ height:1px; background:var(--line-on-black); margin:40px 0 32px; }
+.archive-label{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-on-black); margin-bottom:22px; }
+.editions{ display:flex; flex-direction:column; gap:16px; }
+a.card{
+display:block; text-decoration:none; color:inherit;
 border:1px solid var(--line-on-black);
 border-radius:6px;
 padding:22px 22px 20px;
-text-decoration:none;
-color:var(--paper);
-background:rgba(255,255,255,.02);
 position:relative;
+background:rgba(255,255,255,.02);
 transition:border-color .2s ease, background .2s ease;
 }
-.edition-card:hover{
-border-color:var(--red-bright);
-background:rgba(226,50,28,.06);
+a.card:hover{ border-color:var(--red-bright); background:rgba(226,50,28,.05); }
+a.card:first-child{ border-color:var(--red-bright); background:rgba(226,50,28,.06); }
+.card .date{
+font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em;
+text-transform:uppercase; color:var(--red-bright); margin-bottom:10px;
 }
-.edition-card.latest{
-border-color:var(--red-bright);
-background:rgba(226,50,28,.05);
+.card h2{ font-family:'Fraunces', serif; font-weight:560; font-size:clamp(19px,5vw,23px); line-height:1.2; margin-bottom:10px; }
+.card p{ font-size:13.5px; line-height:1.6; color:var(--gray-on-black); }
+.card .open{
+display:inline-flex; align-items:center; gap:6px; margin-top:16px;
+font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.06em;
+color:var(--red-bright); font-weight:600;
 }
-.edition-card.latest::before{
-content:'EDIÇÃO MAIS RECENTE';
-position:absolute; top:-9px; left:18px;
-font-family:'IBM Plex Mono',monospace;
-font-size:9.5px; letter-spacing:.14em;
-background:var(--black); color:var(--red-bright);
-padding:0 6px;
+.new-tag{
+position:absolute; top:-9px; right:16px;
+font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:.12em;
+background:var(--red-bright); color:#fff; padding:3px 8px; border-radius:2px;
 }
-.edition-date{
-font-family:'IBM Plex Mono', monospace;
-font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-color:var(--red-bright);
-margin-bottom:10px;
-}
-.edition-card h2{
-font-family:'Fraunces', serif;
-font-weight:560;
-font-size:22px;
-line-height:1.15;
-margin-bottom:8px;
-}
-.edition-card p{
-font-size:13.5px; line-height:1.55;
-color:var(--gray-on-black);
-margin-bottom:14px;
-}
-.edition-open{
-font-family:'IBM Plex Mono', monospace;
-font-size:11px; letter-spacing:.08em; text-transform:uppercase;
-color:var(--paper);
-display:inline-flex; align-items:center; gap:6px;
-}
-.edition-card:hover .edition-open{ color:var(--red-bright); }
-footer{
-max-width:640px; margin:0 auto;
-padding:0 26px 60px;
-font-family:'IBM Plex Mono', monospace;
-font-size:11px; letter-spacing:.08em;
-color:var(--gray-on-black);
-border-top:1px solid var(--line-on-black);
-padding-top:20px;
-}
+footer{ margin-top:56px; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; color:var(--gray-on-black); text-align:center; }
 </style>
 </head>
 <body>
-<header>
+<div class="wrap">
 <div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
 <h1 class="serif">Clipping<br>Estratégico.</h1>
 <p class="lede">Leitura institucional diária do noticiário que envolve a Assembleia — fiscalização, projetos de lei e obrigações legais.</p>
-</header>
-<main>
-<div class="archive-list">
 
-<a class="edition-card latest" href="2026-08-19/">
-<div class="edition-date">19 de agosto de 2026</div>
-<h2 class="serif">Recuo no Vetor Norte, novo capítulo das escolas cívico-militares e pressão sindical pelo PL 6.056/2026.</h2>
-<p>Governo desiste da concessão das rodovias do Vetor Norte após atuação do TCE-MG; STF mantém suspensão do programa cívico-militar sem julgar o mérito; Sindicato dos Bancários pressiona pela votação do projeto de Beatriz Cerqueira.</p>
-<div class="edition-open">Abrir edição →</div>
+<div class="divider-rule"></div>
+<div class="archive-label">Arquivo de edições</div>
+
+<div class="editions">
+
+<a class="card" href="https://anaterra06.github.io/clippingestrategico/2026-08-26/">
+<span class="new-tag">nova</span>
+<div class="date">26 de agosto de 2026</div>
+<h2>Novo secretário de Governo assume missão de aprovar orçamento e Refis, e PL 4.430/2025 sobre autismo chega ao plenário.</h2>
+<p>Renato Rezende toma posse na Secretaria de Governo em plena campanha eleitoral; Comissão de Educação fiscaliza a Escola Reparata e a exploração de terras raras no Sul de Minas; promessa de Mateus Simões para pessoas com TEA colide com vetos anteriores do próprio governo.</p>
+<span class="open">Abrir edição →</span>
 </a>
 
-<a class="edition-card" href="2026-08-18/">
-<div class="edition-date">18 de agosto de 2026</div>
-<h2 class="serif">Imóveis do Propag entram em execução e o Mineirão vira projeto de lei.</h2>
-<p>Primeiro passo concreto na destinação de imóveis ao Propag; deputado propõe autorizar a venda ou permuta do Complexo do Mineirão; decisão judicial também pressiona as escolas cívico-militares.</p>
-<div class="edition-open">Abrir edição →</div>
+<a class="card" href="https://anaterra06.github.io/clippingestrategico/2026-08-19/">
+<div class="date">19 de agosto de 2026</div>
+<h2>Recuo no Vetor Norte, novo capítulo das escolas cívico-militares e pressão sindical pelo PL 6.056/2026.</h2>
+<p>Governo desiste da concessão das rodovias do Vetor Norte após atuação do TCE-MG; STF mantém suspensão do programa cívico-militar sem julgar o mérito; Sindicato dos Bancários pressiona pela votação do projeto de Beatriz Cerqueira.</p>
+<span class="open">Abrir edição →</span>
 </a>
 
 </div>
-</main>
-<footer>
-CLIPPING ESTRATÉGICO · ALMG — ARQUIVO DE EDIÇÕES
-</footer>
+
+<footer>CLIPPING ESTRATÉGICO · ALMG — ARQUIVO DE EDIÇÕES</footer>
+</div>
 </body>
 </html>
