@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Clipping Estratégico ALMG — 26/08/2026</title>
+<meta name="description" content="Leitura institucional do noticiário — 26 de agosto de 2026.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clipping Estratégico — ALMG">
+<meta property="og:description" content="Leitura institucional do noticiário — 26 de agosto de 2026.">
+<meta property="og:image" content="https://anaterra06.github.io/clippingestrategico/og-image.png">
+<meta property="og:url" content="https://anaterra06.github.io/clippingestrategico/2026-08-26/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clipping Estratégico — ALMG">
+<meta name="twitter:description" content="Leitura institucional do noticiário — 26 de agosto de 2026.">
+<meta name="twitter:image" content="https://anaterra06.github.io/clippingestrategico/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,680;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--black:#0a0a0a;
+--black-soft:#161412;
+--paper:#f7f4ee;
+--paper-dim:#ece7dc;
+--red:#a4120a;
+--red-bright:#e2321c;
+--red-deep:#6e0c06;
+--gray:#8a8378;
+--gray-on-black:#9c948a;
+--line:#d8d2c4;
+--line-on-black:#3a352f;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{
+background:var(--black);
+scroll-behavior:smooth;
+}
+body{
+font-family:'IBM Plex Sans', sans-serif;
+color:var(--paper);
+-webkit-font-smoothing:antialiased;
+overflow-x:hidden;
+}
+.eyebrow{
+font-family:'IBM Plex Mono', monospace;
+font-size:11px;
+letter-spacing:.14em;
+text-transform:uppercase;
+font-weight:500;
+}
+.serif{ font-family:'Fraunces', serif; }
+#progress-wrap{
+position:fixed; top:0; left:0; right:0; height:3px;
+background:rgba(255,255,255,.08); z-index:500;
+}
+#progress-bar{
+height:100%; width:0%;
+background:linear-gradient(90deg,var(--red-deep),var(--red-bright));
+}
+#tab{
+position:fixed; top:14px; right:16px; z-index:500;
+font-family:'IBM Plex Mono', monospace;
+font-size:10px; letter-spacing:.12em;
+color:var(--paper);
+background:var(--red);
+padding:5px 9px 4px;
+border-radius:2px;
+box-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+#tab span{opacity:.65;}
+#deck{
+height:100vh; height:100svh;
+overflow-y:scroll;
+scroll-snap-type:y mandatory;
+}
+section{
+min-height:100vh; min-height:100svh;
+width:100%;
+scroll-snap-align:start;
+scroll-snap-stop:always;
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:76px 26px 56px;
+}
+section.dark{ background:var(--black); color:var(--paper); }
+section.light{ background:var(--paper); color:var(--black); }
+section.redsec{ background:var(--red); color:var(--paper); }
+.section-inner{ max-width:560px; margin:0 auto; width:100%; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+section.in-view .section-inner{ opacity:1; transform:translateY(0); }
+.kicker{
+display:flex; align-items:center; gap:10px; margin-bottom:18px;
+}
+.kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--red-bright); flex:none; }
+.dark .kicker .dot, .redsec .kicker .dot{ background:#fff; }
+.light .eyebrow{ color:var(--red-deep); }
+.dark .eyebrow, .redsec .eyebrow{ color:var(--gray-on-black); }
+.redsec .eyebrow{ color:rgba(255,255,255,.75); }
+h1,h2,h3{ font-weight:560; line-height:1.05; }
+h1{ font-size:clamp(34px,9vw,52px); margin-bottom:16px; }
+h2{ font-size:clamp(28px,7.5vw,40px); margin-bottom:14px; }
+h3{ font-size:19px; font-weight:600; font-family:'IBM Plex Sans',sans-serif; margin-bottom:6px; }
+p.lede{ font-size:16px; line-height:1.6; color:var(--gray); }
+.dark p.lede, .redsec p.lede{ color:var(--gray-on-black); }
+.redsec p.lede{ color:rgba(255,255,255,.82); }
+p.body-text{ font-size:15px; line-height:1.65; margin-top:14px; }
+p.body-text + p.body-text{ margin-top:10px; }
+.hint{
+position:absolute; bottom:26px; left:0; right:0; text-align:center;
+font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em;
+color:var(--gray-on-black); animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{ 0%,100%{transform:translateY(0); opacity:.55;} 50%{transform:translateY(6px); opacity:1;} }
+.stamp{
+display:inline-flex; align-items:center; gap:6px;
+font-family:'IBM Plex Mono', monospace;
+font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+border:1.5px solid var(--red-bright);
+color:var(--red-bright);
+padding:4px 9px 3px;
+border-radius:3px;
+transform:rotate(-1.5deg);
+white-space:nowrap;
+}
+.light .stamp{ border-color:var(--red); color:var(--red); }
+.stamp.hi{ background:var(--red-bright); color:#fff; border-color:var(--red-bright); }
+.light .stamp.hi{ background:var(--red); border-color:var(--red); }
+.thread{ position:relative; margin-top:24px; padding-left:26px; }
+.thread::before{
+content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+background:linear-gradient(var(--red-bright), var(--red-deep));
+opacity:.55;
+}
+.thread-item{ position:relative; padding-bottom:22px; }
+.thread-item:last-child{ padding-bottom:0; }
+.thread-item::before{
+content:''; position:absolute; left:-26px; top:4px; width:11px; height:11px;
+border-radius:50%; background:var(--red-bright); border:2px solid var(--black);
+}
+.thread-item h3{ font-size:15.5px; margin-bottom:3px; }
+.thread-item .num{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gray-on-black); }
+.thread-item p{ font-size:13.5px; color:var(--gray-on-black); line-height:1.5; }
+.doc-card{
+margin-top:22px; border:1px solid var(--line-on-black);
+background:rgba(255,255,255,.03);
+padding:18px 18px 16px; border-radius:4px;
+position:relative;
+}
+.light .doc-card{ border-color:var(--line); background:#fff; }
+.doc-card::before{
+content:'DOSSIÊ'; position:absolute; top:-9px; left:14px;
+font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em;
+background:var(--black); color:var(--red-bright); padding:0 6px;
+}
+.light .doc-card::before{ background:var(--paper); color:var(--red); }
+.doc-card .doc-title{ font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--red-bright); margin-bottom:8px; }
+.light .doc-card .doc-title{ color:var(--red); }
+.doc-card .doc-row{ display:flex; justify-content:space-between; gap:12px; font-size:13px; padding:6px 0; border-top:1px dashed var(--line-on-black); }
+.light .doc-card .doc-row{ border-top:1px dashed var(--line); }
+.doc-card .doc-row:first-of-type{ border-top:none; }
+.doc-card .doc-row .k{ color:var(--gray-on-black); flex:none; }
+.light .doc-card .doc-row .k{ color:var(--gray); }
+.doc-card .doc-row .v{ text-align:right; font-weight:500; }
+.versus{ margin-top:22px; display:flex; flex-direction:column; gap:12px; }
+.vs-card{ border:1px solid var(--line-on-black); border-radius:4px; padding:14px 16px; }
+.light .vs-card{ border-color:var(--line); }
+.vs-card .vs-tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red-bright); margin-bottom:4px; }
+.light .vs-card .vs-tag{ color:var(--red); }
+.vs-card h3{ margin-bottom:4px; }
+.vs-card p{ font-size:13px; color:var(--gray-on-black); line-height:1.5; }
+.light .vs-card p{ color:var(--gray); }
+.vs-divider{ text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gray-on-black); letter-spacing:.1em; }
+.chain{ margin-top:22px; display:flex; flex-direction:column; }
+.chain-step{ display:flex; align-items:flex-start; gap:12px; padding:9px 0; }
+.chain-step .arrow{ font-family:'IBM Plex Mono',monospace; color:var(--red-bright); font-size:15px; padding-top:1px; }
+.chain-step span.txt{ font-size:14.5px; line-height:1.5; }
+.stats{ display:flex; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.stat{ flex:1; min-width:100px; }
+.stat .num{ font-family:'Fraunces',serif; font-size:30px; font-weight:560; color:var(--red-bright); line-height:1; }
+.light .stat .num{ color:var(--red); }
+.stat .lbl{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--gray-on-black); margin-top:4px; letter-spacing:.05em; }
+.light .stat .lbl{ color:var(--gray); }
+.checklist{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+.check-item{ display:flex; gap:12px; align-items:flex-start; }
+.check-item .n{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--red-bright); border:1px solid var(--red-bright); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex:none; margin-top:1px;}
+.light .check-item .n{ color:var(--red); border-color:var(--red); }
+.check-item p{ font-size:14px; line-height:1.5; }
+.expo-list{ margin-top:20px; display:flex; flex-direction:column; gap:0; }
+.expo-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 0; border-top:1px solid var(--line-on-black); }
+.dark .expo-row{ border-top:1px solid var(--line-on-black); }
+.light .expo-row{ border-top:1px solid var(--line); }
+.expo-row:first-child{ border-top:none; }
+.expo-name{ font-weight:600; font-size:14px; }
+.expo-meta{ font-size:12px; color:var(--gray-on-black); font-family:'IBM Plex Mono',monospace; }
+.light .expo-meta{ color:var(--gray); }
+.expo-badge{ font-size:10px; font-family:'IBM Plex Mono',monospace; padding:3px 7px; border-radius:2px; white-space:nowrap; text-transform:uppercase; letter-spacing:.05em;}
+.expo-badge.pos{ background:#e9e4d8; color:var(--red-deep); }
+.dark .expo-badge.pos{ background:rgba(226,50,28,.16); color:var(--red-bright); }
+.expo-badge.neu{ background:#e9e4d8; color:var(--gray); }
+.dark .expo-badge.neu{ background:rgba(255,255,255,.08); color:var(--gray-on-black); }
+.lawlist{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+.law-item{ border-left:3px solid var(--red-bright); padding:2px 0 2px 14px; }
+.light .law-item{ border-left-color:var(--red); }
+.law-item .code{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--red-bright); }
+.light .law-item .code{ color:var(--red); }
+.law-item h3{ margin:3px 0 3px; font-size:15.5px; }
+.law-item p{ font-size:12.5px; color:var(--gray-on-black); }
+.light .law-item p{ color:var(--gray); }
+.closing-quote{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(22px,6vw,30px); line-height:1.35; }
+.signoff{ margin-top:34px; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; color:rgba(255,255,255,.7); }
+.divider-rule{ height:1px; background:var(--line-on-black); margin:22px 0; }
+.light .divider-rule{ background:var(--line); }
+::-webkit-scrollbar{ display:none; }
+</style>
+</head>
+<body>
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+<div id="tab">DOSSIÊ ALMG <span>· 26.08</span></div>
+<div id="deck">
+
+<!-- 0 COVER -->
+<section class="dark" id="s0">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
+<h1 class="serif">Clipping<br>Estratégico.</h1>
+<p class="lede">Leitura institucional do noticiário — 26 de agosto de 2026</p>
+<p class="body-text">Quatro eixos concentram a leitura institucional do dia: a articulação do novo secretário de Governo para aprovar orçamento, Refis e pautas fazendárias em plena campanha; o avanço do PL 4.430/2025 sobre estudantes autistas; a atuação fiscalizadora da Comissão de Educação — entre a Escola Reparata e as terras raras do Sul de Minas; e o acirramento do clima eleitoral.</p>
+</div>
+<div class="hint">deslize para começar ↓</div>
+</section>
+
+<!-- 1 RADAR -->
+<section class="dark" id="s1">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 0 · O radar</span></div>
+<h2 class="serif">Eixos prioritários<br>do dia.</h2>
+<p class="lede">Cinco frentes concentram a leitura institucional de hoje.</p>
+<div class="thread">
+<div class="thread-item">
+<span class="num">01</span>
+<h3>Articulação Executivo–Legislativo</h3>
+<p>Renato Rezende assume a Secretaria de Governo com missão de aprovar orçamento, Refis e pautas fazendárias. <span class="stamp hi" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">02</span>
+<h3>PL 4.430/2025 — TEA</h3>
+<p>Pronto para votação definitiva em segundo turno. <span class="stamp hi" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">03</span>
+<h3>Promessa de Simões x vetos anteriores</h3>
+<p>Política anunciada colide com vetos do próprio governo. <span class="stamp hi" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">04</span>
+<h3>Escola Reparata → Colégio Tiradentes</h3>
+<p>Comunidade rejeita a mudança sem diagnóstico público. <span class="stamp hi" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">05</span>
+<h3>Terras raras no Sul de Minas</h3>
+<p>Mineração, licenciamento e recursos do Propag em pauta. <span class="stamp hi" style="margin-top:6px;">alta</span></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2 ARTICULAÇÃO EXECUTIVO-LEGISLATIVO -->
+<section class="light" id="s2">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 1 · Articulação Executivo-Legislativo</span></div>
+<h2 class="serif">Um secretário,<br>uma missão.</h2>
+<p class="body-text">Renato Rezende toma posse na Secretaria de Governo com a missão explícita de aprovar orçamento, Refis e pautas fazendárias na Assembleia — em pleno período eleitoral. O próprio governador reconhece que será necessário fazer as pautas avançarem durante a campanha.</p>
+<div class="doc-card">
+<div class="doc-title">Articulação de Governo</div>
+<div class="doc-row"><span class="k">Secretário</span><span class="v">Renato Rezende</span></div>
+<div class="doc-row"><span class="k">Pastas prioritárias</span><span class="v">Orçamento, Refis, Fazenda</span></div>
+<div class="doc-row"><span class="k">Contexto</span><span class="v">Período eleitoral</span></div>
+</div>
+<p class="body-text" style="margin-top:20px;">No mesmo eixo fiscal, Mateus Simões propôs contabilizar obras em rodovias federais como forma de abatimento da dívida de Minas — ainda como proposta de campanha, não como alteração formal do acordo do Propag. Alexandre Kalil criticou a retirada de recursos, afirmando que o programa retiraria R$ 165 bilhões dos cofres estaduais em cinco anos; a Rede 98 questionou as promessas de renegociação.</p>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Identificação do projeto do Refis citado pelo governador e sua situação real</p></div>
+<div class="check-item"><span class="n">→</span><p>Proposta concreta do governo sobre obras federais como abatimento da dívida</p></div>
+<div class="check-item"><span class="n">→</span><p>Capacidade de Renato Rezende de construir quórum no período eleitoral</p></div>
+</div>
+</div>
+</section>
+
+<!-- 3 PL 4.430/2025 -->
+<section class="dark" id="s3">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 2 · PL 4.430/2025</span></div>
+<h2 class="serif">TEA: pronto<br>para o plenário.</h2>
+<p class="body-text">O projeto, de autoria de Cristiano Silveira, trata da prevenção e do manejo de crises envolvendo estudantes com deficiência ou neurodivergentes, alterando a Lei Estadual 24.844/2024. Prevê integração entre escola, família e saúde, plano individual de prevenção e manejo, formação de professores e espaços para acolhimento e regulação sensorial.</p>
+<div class="doc-card">
+<div class="doc-title">PL 4.430/2025</div>
+<div class="doc-row"><span class="k">Autor</span><span class="v">Cristiano Silveira</span></div>
+<div class="doc-row"><span class="k">Relatora (2º turno)</span><span class="v">Beatriz Cerqueira</span></div>
+<div class="doc-row"><span class="k">Lei alterada</span><span class="v">Lei Estadual 24.844/2024</span></div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Pronto para ordem do dia</span></div>
+<div class="doc-row"><span class="k">Último andamento</span><span class="v">Parecer de 2º turno aprovado em 25/8</span></div>
+</div>
+<p class="body-text" style="margin-top:20px;">O Regionalzão citou o Substitutivo nº 1 — a checagem oficial confirma a informação, mas com um detalhe que faltava:</p>
+<div class="chain">
+<div class="chain-step"><span class="arrow">›</span><span class="txt">Em 1º turno, o Plenário aprova o projeto na forma do Substitutivo nº 3</span></div>
+<div class="chain-step"><span class="arrow">›</span><span class="txt">Em 2º turno, a Comissão de Educação aprova o Substitutivo nº 1 ao vencido em 1º turno</span></div>
+<div class="chain-step"><span class="arrow">›</span><span class="txt"><strong>A referência do Regionalzão está correta — mas precisava desse contexto</strong></span></div>
+</div>
+</div>
+</section>
+
+<!-- 4 PROMESSA X VETO -->
+<section class="light" id="s4">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 3 · Promessa e veto</span></div>
+<h2 class="serif">A mesma pauta,<br>dois momentos.</h2>
+<p class="body-text">O governador Mateus Simões anunciou política para pessoas com TEA semelhante a medidas que o próprio governo vetou anteriormente. A matéria transforma política pública em vulnerabilidade eleitoral e pode provocar cobrança da oposição.</p>
+<div class="versus">
+<div class="vs-card">
+<div class="vs-tag">Veto 20/2025 · Governo do Estado</div>
+<h3>Veto parcial à Lei Orçamentária</h3>
+<p>Atingiu recursos para formação de profissionais especializados e para centros de atendimento integral a pessoas autistas.</p>
+</div>
+<div class="vs-divider">enquanto isso</div>
+<div class="vs-card">
+<div class="vs-tag">Campanha 2026 · Mateus Simões</div>
+<h3>Promessa de política para pessoas com TEA</h3>
+<p>Anunciada como proposta eleitoral — sem, até aqui, apresentação formal na Assembleia.</p>
+</div>
+</div>
+<p class="body-text" style="margin-top:18px;">A reportagem menciona ainda outro veto, em 2023, mas não informa seu número — nenhuma inferência foi feita sobre ele.</p>
+</div>
+</section>
+
+<!-- 5 ESCOLA REPARATA -->
+<section class="dark" id="s5">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 4 · Escola Reparata</span></div>
+<h2 class="serif">Comunidade<br>reage à mudança.</h2>
+<p class="body-text">A Comissão de Educação visitou a Escola Estadual Reparata Dias de Oliveira, em Lagoa Santa, onde a comunidade rejeita a possível transformação da unidade em Colégio Tiradentes.</p>
+<div class="stats">
+<div class="stat"><div class="num">80%+</div><div class="lbl">dos alunos trabalham</div></div>
+</div>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Ausência de comunicação oficial da Secretaria de Educação</p></div>
+<div class="check-item"><span class="n">→</span><p>Falta de diagnóstico público</p></div>
+<div class="check-item"><span class="n">→</span><p>Risco de evasão com a implantação de ensino integral</p></div>
+<div class="check-item"><span class="n">→</span><p>Possível comprometimento do ensino fundamental e da EJA</p></div>
+<div class="check-item"><span class="n">→</span><p>Necessidade de consulta à comunidade</p></div>
+</div>
+<div class="doc-card">
+<div class="doc-title">RQN 18.130/2026</div>
+<div class="doc-row"><span class="k">Autoria</span><span class="v">Lohanna</span></div>
+<div class="doc-row"><span class="k">Objeto</span><span class="v">Informações sobre a transição para Colégio Tiradentes</span></div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Pronto para ordem do dia</span></div>
+</div>
+<p class="body-text" style="margin-top:18px;">Na visita, Beatriz Cerqueira citou a Lei Estadual 24.482/2023, que trata da prevenção e do combate ao abandono e à evasão escolar, para cobrar a manutenção do ensino médio regular quando houver demanda.</p>
+</div>
+</section>
+
+<!-- 6 TERRAS RARAS -->
+<section class="light" id="s6">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 5 · Terras raras</span></div>
+<h2 class="serif">Mineração sob<br>fiscalização.</h2>
+<p class="body-text">Audiência da Comissão de Educação discutiu a criação do Citar — Centro de Inteligência e Tecnologia em Terras Raras —, estimado em R$ 40 milhões, para pesquisa, formação profissional, processamento mineral e monitoramento ambiental.</p>
+<div class="stats">
+<div class="stat"><div class="num">R$40M</div><div class="lbl">estimados para o Citar</div></div>
+<div class="stat"><div class="num">R$1,09bi</div><div class="lbl">via Juros por Educação/Propag</div></div>
+</div>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Dois grandes empreendimentos já em licenciamento</p></div>
+<div class="check-item"><span class="n">→</span><p>Participantes apontaram insuficiência de estudos</p></div>
+<div class="check-item"><span class="n">→</span><p>Pedido de participação das Secretarias da Fazenda e da Educação</p></div>
+</div>
+<div class="doc-card">
+<div class="doc-title">PL 5.492/2026 · proposição relacionada</div>
+<div class="doc-row"><span class="k">Autor</span><span class="v">Alê Portela</span></div>
+<div class="doc-row"><span class="k">Ementa</span><span class="v">Governança de terras raras e minerais críticos</span></div>
+<div class="doc-row"><span class="k">Também cria</span><span class="v">Fundo Estadual de Desenv. Estratégico Mineral</span></div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Aguarda parecer na CCJ</span></div>
+</div>
+<p class="body-text" style="margin-top:18px;"><strong>Ponto de atenção:</strong> o projeto não foi citado na reportagem sobre a audiência. Deve ser registrado como proposição relacionada ao tema — não como projeto efetivamente mencionado na matéria.</p>
+</div>
+</section>
+
+<!-- 7 CLIMA ELEITORAL -->
+<section class="dark" id="s7">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 6 · Clima eleitoral</span></div>
+<h2 class="serif">Liderança firme,<br>segunda vaga em aberto.</h2>
+<p class="body-text">Datafolha e Quaest confirmam Cleitinho na liderança e, no cenário atual, no segundo turno. Patrus Ananias e Alexandre Kalil disputam a segunda posição; Mateus Simões varia de 4% (Datafolha) a 7% (Quaest), com expectativa de crescimento a partir da entrada da propaganda eleitoral, da qual dispõe de cerca de um terço do tempo.</p>
+<p class="body-text">Eduardo Azevedo, deputado estadual e irmão de Cleitinho, recebeu autorização para apoiar o candidato do Republicanos — mesmo com Flávio Roscoe concorrendo pelo PL. O episódio sinaliza fragilidade da candidatura própria do partido e risco de novas dissidências.</p>
+<div class="doc-card">
+<div class="doc-title">Financiamento eleitoral</div>
+<div class="doc-row"><span class="k">Doador</span><span class="v">Clésio Andrade</span></div>
+<div class="doc-row"><span class="k">Valor</span><span class="v">R$ 500 mil</span></div>
+<div class="doc-row"><span class="k">Beneficiários</span><span class="v">4 candidatos, 2 à ALMG</span></div>
+</div>
+<div class="checklist" style="margin-top:20px;">
+<div class="check-item"><span class="n">→</span><p>Celinho Sintrocel presta contas em Ipatinga: R$ 15,1 milhões destinados ao município</p></div>
+<div class="check-item"><span class="n">→</span><p>Chiara e Eros Biondini: cerca de R$ 16 milhões destinados a Caratinga</p></div>
+<div class="check-item"><span class="n">→</span><p>Dalmo Ribeiro é creditado pela doação de imóvel estadual a uma creche em Dores de Campos</p></div>
+</div>
+</div>
+</section>
+
+<!-- 8 INVESTIGAÇÕES -->
+<section class="light" id="s8">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 7 · Investigações e judicialização</span></div>
+<h2 class="serif">Minerários,<br>fake news e o Buser.</h2>
+<p class="body-text">A Polícia Federal indiciou dez pessoas na Operação Intrafortis, por suspeita de organização criminosa, corrupção e lavagem de dinheiro ligadas a negociações de direitos minerários.</p>
+<div class="stats">
+<div class="stat"><div class="num">10</div><div class="lbl">indiciados</div></div>
+</div>
+<p class="body-text">Entre os citados: Hidelbrando Neto (ex-vice-prefeito de Itaúna), Rodrigo de Melo Teixeira (ex-superintendente da PF em Minas) e João Alberto Paixão Lages (ex-deputado). Não há parlamentar estadual em exercício entre os indiciados, mas o caso guarda potencial de desdobramento fiscalizador pela ligação com mineração e direitos minerários em Minas — tema que dialoga com a audiência sobre terras raras.</p>
+<div class="divider-rule"></div>
+<p class="body-text"><strong>Retratação judicial —</strong> o ex-vice-prefeito Geremias Ferreira Brito publicou retratação por informações consideradas falsas contra o deputado estadual Enes Candido, com decisões liminares nas esferas cível e criminal.</p>
+<p class="body-text"><strong>STF —</strong> pode adiar o julgamento da lei mineira que restringe o transporte intermunicipal por aplicativo (Lei do Buser).</p>
+</div>
+</section>
+
+<!-- 9 REFERÊNCIA PROJETOS E LEIS -->
+<section class="light" id="s9">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Projetos e leis</span></div>
+<h2 class="serif">O que está<br>em tramitação.</h2>
+<div class="lawlist">
+<div class="law-item">
+<span class="code">PL 4.430/2025</span>
+<h3>Prevenção e manejo de crises — TEA</h3>
+<p>Cristiano Silveira · pronto para ordem do dia</p>
+</div>
+<div class="law-item">
+<span class="code">PL 5.492/2026</span>
+<h3>Governança de terras raras e minerais críticos</h3>
+<p>Alê Portela · aguarda parecer na CCJ</p>
+</div>
+<div class="law-item">
+<span class="code">RQN 18.130/2026</span>
+<h3>Informações sobre a Escola Reparata</h3>
+<p>Lohanna · pronto para ordem do dia</p>
+</div>
+<div class="law-item">
+<span class="code">Lei Estadual 24.844/2024</span>
+<h3>Atendimento a estudantes com deficiência e TEA</h3>
+<p>Em vigor · alterada pelo PL 4.430/2025</p>
+</div>
+<div class="law-item">
+<span class="code">Lei Estadual 24.482/2023</span>
+<h3>Prevenção do abandono e da evasão escolar</h3>
+<p>Em vigor</p>
+</div>
+<div class="law-item">
+<span class="code">Veto 20/2025</span>
+<h3>Veto parcial à Lei Orçamentária — TEA</h3>
+<p>Atingiu formação de profissionais e centros de atendimento a autistas</p>
+</div>
+<div class="law-item">
+<span class="code">Resolução 5.653/2026</span>
+<h3>Estado de calamidade pública em Juiz de Fora</h3>
+<p>ALMG · reconhecimento formal</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 10 EXPOSIÇÃO PARLAMENTAR -->
+<section class="dark" id="s10">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Exposição parlamentar</span></div>
+<h2 class="serif">Quem apareceu,<br>e como.</h2>
+<p class="lede">Tadeu Leite teve sete entradas no dia, todas sobre o mesmo fato: a renovação da parceria ALMG–TRE-MG contra a desinformação.</p>
+<div class="expo-list">
+<div class="expo-row">
+<div><div class="expo-name">Tadeu Leite</div><div class="expo-meta">Parceria ALMG–TRE-MG · 7 veículos</div></div>
+<div class="expo-badge pos">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Beatriz Cerqueira</div><div class="expo-meta">Escola Reparata · Impactto / Por Dentro de Tudo</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Beatriz Cerqueira</div><div class="expo-meta">PL 4.430/2025 · Regionalzão / JM Online</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Beatriz Cerqueira</div><div class="expo-meta">Terras raras · Poços.com</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Cristiano Silveira</div><div class="expo-meta">PL 4.430/2025 · Regionalzão / JM Online</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Bella Gonçalves</div><div class="expo-meta">Terras raras · Poços.com</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Eduardo Azevedo</div><div class="expo-meta">Apoio a candidato fora do PL · BH 24 Horas</div></div>
+<div class="expo-badge neu">média/alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Enes Candido</div><div class="expo-meta">Retratação judicial · Jornal da Cidade / Sindijori</div></div>
+<div class="expo-badge pos">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Celinho Sintrocel</div><div class="expo-meta">Prestação de contas em Ipatinga · Vox 97</div></div>
+<div class="expo-badge neu">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Chiara Biondini</div><div class="expo-meta">Recursos para Caratinga · diários regionais</div></div>
+<div class="expo-badge neu">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Dalmo Ribeiro</div><div class="expo-meta">Doação de imóvel para creche · Portal Dores de Campos</div></div>
+<div class="expo-badge pos">média</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 11 PONTOS PARA MONITORAR -->
+<section class="dark" id="s11">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">O que vem a seguir</span></div>
+<h2 class="serif">Treze pontos<br>para acompanhar.</h2>
+<div class="checklist">
+<div class="check-item"><span class="n">1</span><p>Inclusão do PL 4.430/2025 na ordem do dia e votação definitiva em 2º turno</p></div>
+<div class="check-item"><span class="n">2</span><p>Resposta da Secretaria de Educação ao RQN 18.130/2026</p></div>
+<div class="check-item"><span class="n">3</span><p>Definição sobre a Escola Reparata e realização de consulta à comunidade</p></div>
+<div class="check-item"><span class="n">4</span><p>Convocação das Secretarias da Fazenda e Educação para discutir o Citar</p></div>
+<div class="check-item"><span class="n">5</span><p>Tramitação do PL 5.492/2026 e eventual aproximação com os resultados da audiência</p></div>
+<div class="check-item"><span class="n">6</span><p>Apresentação formal da política de Simões para pessoas com TEA</p></div>
+<div class="check-item"><span class="n">7</span><p>Proposta concreta do governo sobre obras federais como abatimento da dívida</p></div>
+<div class="check-item"><span class="n">8</span><p>Identificação do projeto do Refis citado pelo governador e sua situação real</p></div>
+<div class="check-item"><span class="n">9</span><p>Capacidade de Renato Rezende de construir quórum no período eleitoral</p></div>
+<div class="check-item"><span class="n">10</span><p>Novos apoios de candidatos do PL a Cleitinho</p></div>
+<div class="check-item"><span class="n">11</span><p>Desdobramentos judiciais da Operação Intrafortis</p></div>
+<div class="check-item"><span class="n">12</span><p>Julgamento da Lei do Buser pelo STF</p></div>
+<div class="check-item"><span class="n">13</span><p>Prestação de contas das doações e despesas das candidaturas financiadas por Clésio Andrade</p></div>
+</div>
+</div>
+</section>
+
+<!-- 12 ENCERRAMENTO -->
+<section class="redsec" id="s12">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
+<h2 class="serif" style="color:#fff;">Fim do<br>clipping.</h2>
+<p class="body-text" style="margin-top:16px; color:rgba(255,255,255,.9);">Documento de apoio à decisão institucional, elaborado a partir do noticiário do dia.</p>
+<div class="signoff">CLIPPING ESTRATÉGICO · ALMG — 26.08.2026</div>
+</div>
+</section>
+
+</div>
+<script>
+const deck = document.getElementById('deck');
+const bar = document.getElementById('progress-bar');
+const sections = Array.from(document.querySelectorAll('section'));
+function updateProgress(){
+const scrollable = deck.scrollHeight - deck.clientHeight;
+const pct = scrollable > 0 ? (deck.scrollTop / scrollable) * 100 : 0;
+bar.style.width = pct + '%';
+}
+deck.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+const io = new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting){ e.target.classList.add('in-view'); }
+});
+}, { root: deck, threshold: 0.35 });
+sections.forEach(s=> io.observe(s));
+</script>
+</body>
+</html>
