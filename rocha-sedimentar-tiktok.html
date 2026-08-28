@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Como se forma a Rocha Sedimentar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --display: 'Baloo 2', sans-serif;
+    --corpo: 'Inter', sans-serif;
+  }
+  *{ margin:0; padding:0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body{ height: 100%; background: #0C0806; font-family: var(--corpo); overflow: hidden; }
+
+  .stage{ height: 100vh; height: 100dvh; display:flex; align-items:center; justify-content:center; background:#0C0806; }
+
+  .phone{
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    max-height: 900px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 0 60px rgba(0,0,0,0.6);
+  }
+  @media (min-width: 460px){ .phone{ border-radius: 32px; height: 90vh; } }
+
+  .barras{ position:absolute; top: 14px; left: 12px; right: 12px; display:flex; gap: 5px; z-index: 50; }
+  .barra{ flex:1; height: 3px; border-radius: 999px; background: rgba(255,255,255,0.28); overflow:hidden; }
+  .barra .preench{ height:100%; width:0%; background: #fff; }
+  .barra.feita .preench{ width: 100%; }
+  @keyframes preencher{ from{width:0%;} to{width:100%;} }
+
+  .topo-ui{
+    position:absolute; top: 30px; left:14px; right:14px; z-index: 50;
+    display:flex; align-items:center; justify-content:space-between;
+    color: white; font-family: var(--display); font-weight:700; font-size:13px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
+  .topo-ui .conta{ display:flex; align-items:center; gap:8px; }
+  .avatar{ width:26px; height:26px; border-radius:50%; background: linear-gradient(135deg,#C97B3B,#7A4A2A); display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .pausa-btn{ background: rgba(0,0,0,0.35); border:none; color:white; width:30px; height:30px; border-radius:50%; font-size:14px; display:flex; align-items:center; justify-content:center; }
+
+  .slide{ position:absolute; inset:0; display:none; flex-direction:column; justify-content: flex-end; padding: 90px 26px 130px; color: white; overflow:hidden; }
+  .slide.ativa{ display:flex; }
+
+  .fundo{ position:absolute; inset:0; z-index:0; }
+  .conteudo{ position:relative; z-index: 5; }
+
+  .badge{
+    display:inline-block; font-family: var(--display); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing:.09em;
+    background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 14px;
+    animation: subir .5s ease both;
+  }
+  .titulo{
+    font-family: var(--display); font-weight: 800; font-size: 36px; line-height: 1.08;
+    margin-bottom: 14px; text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    animation: subir .55s .05s ease both;
+  }
+  .passo-tag{
+    font-family: var(--display); font-weight:700; font-size:15px; opacity:.9; margin-bottom: 18px;
+    animation: subir .55s .1s ease both;
+  }
+  .legenda{
+    background: rgba(0,0,0,0.42); backdrop-filter: blur(8px); border-radius: 18px;
+    padding: 16px 18px; font-size: 16.5px; line-height: 1.5; font-weight: 500;
+    animation: subir .55s .18s ease both;
+  }
+  .legenda strong{ font-weight:700; }
+  .fato{
+    margin-top: 12px; display:flex; align-items:flex-start; gap:8px;
+    font-size: 14.5px; opacity:.95; animation: subir .55s .26s ease both;
+  }
+  .fato .emoji{ font-size: 18px; flex-shrink:0; }
+
+  @keyframes subir{ from{ opacity:0; transform: translateY(16px);} to{opacity:1; transform:none;} }
+
+  .toque-zona{ position:absolute; top:0; bottom:0; width:35%; z-index:40; }
+  .toque-esq{ left:0; }
+  .toque-dir{ right:0; }
+
+  .avancar-manual{
+    position:absolute; bottom: 34px; left:26px; right:26px; z-index: 45;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    font-family: var(--display); font-weight:700; font-size:13px;
+    color: rgba(255,255,255,0.75);
+    animation: pulsar 1.8s ease-in-out infinite;
+  }
+  @keyframes pulsar{ 0%,100%{opacity:.55;} 50%{opacity:1;} }
+
+  .camada-svg{ width:100%; height:100%; }
+
+  .resumo-lista{ display:flex; flex-direction:column; gap:10px; margin-top: 8px; }
+  .resumo-item{
+    display:flex; align-items:center; gap:12px; background: rgba(255,255,255,0.12);
+    border-radius: 14px; padding: 10px 14px; font-family: var(--display); font-weight:700; font-size:14px;
+    animation: subir .4s ease both;
+  }
+  .resumo-item .num{
+    width:26px; height:26px; border-radius:50%; background: rgba(255,255,255,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0;
+  }
+  .formula{
+    margin-top: 16px; font-family: var(--display); font-weight:800; font-size: 17px;
+    background: rgba(255,255,255,0.14); border-radius: 14px; padding: 14px 16px; text-align:center; line-height:1.4;
+  }
+  .btn-reiniciar{
+    margin-top: 22px; background: white; color:#111; border:none; padding: 13px 24px; border-radius: 999px;
+    font-family: var(--display); font-weight:700; font-size:15px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="phone" id="phone">
+
+    <div class="barras" id="barras"></div>
+
+    <div class="topo-ui">
+      <div class="conta">
+        <div class="avatar">🪨</div>
+        <span>rocha.sedimentar</span>
+      </div>
+      <button class="pausa-btn" id="btnPausa">⏸</button>
+    </div>
+
+    <div class="toque-zona toque-esq" id="toqueEsq"></div>
+    <div class="toque-zona toque-dir" id="toqueDir"></div>
+
+    <!-- SLIDE 0 - INTRO -->
+    <div class="slide ativa" data-dur="4200">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g0" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3B2A1E"/>
+              <stop offset="100%" stop-color="#1A120B"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g0)"/>
+          <rect y="560" width="420" height="60" fill="#8A6B45"/>
+          <rect y="620" width="420" height="55" fill="#6E4E2E"/>
+          <rect y="675" width="420" height="70" fill="#4F3620"/>
+          <rect y="745" width="420" height="80" fill="#3A2716"/>
+          <rect y="825" width="420" height="75" fill="#2A1B0F"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">⏳ Milhões de anos em segundos</div>
+        <div class="titulo">Como uma rocha nasce de puro sedimento?</div>
+        <div class="legenda">Rocha sedimentar: formada pelo <strong>acúmulo e compactação de sedimentos</strong> ao longo de milhares ou milhões de anos. Vem ver o processo completo. ⬇️</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 1 - O QUE SÃO SEDIMENTOS -->
+    <div class="slide" data-dur="5200">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D9B888"/>
+              <stop offset="100%" stop-color="#9A7548"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g1)"/>
+          <circle cx="90" cy="260" r="9" fill="#7A5A34"/>
+          <circle cx="140" cy="300" r="6" fill="#634524"/>
+          <circle cx="200" cy="250" r="12" fill="#8A6438"/>
+          <circle cx="270" cy="310" r="7" fill="#7A5A34"/>
+          <circle cx="330" cy="270" r="10" fill="#634524"/>
+          <circle cx="60" cy="340" r="5" fill="#9A7548"/>
+          <circle cx="240" cy="360" r="8" fill="#7A5A34"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">🧩 A matéria-prima</div>
+        <div class="titulo">Tudo começa com os sedimentos</div>
+        <div class="legenda">Sedimentos são <strong>pequenos fragmentos</strong> de:</div>
+        <div class="fato"><span class="emoji">🪨</span> outras rochas</div>
+        <div class="fato"><span class="emoji">🏖️</span> areia e argila</div>
+        <div class="fato"><span class="emoji">🍂</span> restos de plantas e animais</div>
+        <div class="fato"><span class="emoji">💎</span> minerais</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 - DESGASTE -->
+    <div class="slide" data-dur="5000">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7FA6C9"/>
+              <stop offset="100%" stop-color="#8C7355"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g2)"/>
+          <polygon points="80,500 180,300 260,500" fill="#6B5842"/>
+          <polygon points="200,520 300,340 400,520" fill="#7A6650"/>
+          <line x1="60" y1="200" x2="40" y2="260" stroke="#fff" stroke-width="4" opacity="0.6"/>
+          <line x1="110" y1="180" x2="90" y2="250" stroke="#fff" stroke-width="4" opacity="0.5"/>
+          <line x1="340" y1="220" x2="360" y2="280" stroke="#fff" stroke-width="4" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">1️⃣ Desgaste</div>
+        <div class="titulo">A natureza quebra a rocha aos poucos</div>
+        <div class="passo-tag">Etapa 1 de 4</div>
+        <div class="legenda">Chuva, vento e as <strong>variações de temperatura</strong> vão rachando e desgastando as rochas maiores, até que pedacinhos comecem a se soltar.</div>
+        <div class="fato"><span class="emoji">🌧️</span> Esse processo pode levar milhares de anos.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 - TRANSPORTE -->
+    <div class="slide" data-dur="5000">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4C86AE"/>
+              <stop offset="100%" stop-color="#1F4E68"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g3)"/>
+          <path d="M0 420 Q120 380 210 430 T420 400" stroke="#BFE3F7" stroke-width="10" fill="none" opacity="0.5"/>
+          <path d="M0 480 Q120 520 210 470 T420 500" stroke="#BFE3F7" stroke-width="8" fill="none" opacity="0.4"/>
+          <circle cx="120" cy="440" r="5" fill="#7A5A34"/>
+          <circle cx="200" cy="410" r="4" fill="#634524"/>
+          <circle cx="280" cy="460" r="6" fill="#7A5A34"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">2️⃣ Transporte</div>
+        <div class="titulo">Os fragmentos viajam para longe</div>
+        <div class="passo-tag">Etapa 2 de 4</div>
+        <div class="legenda">A <strong>água, o vento ou o gelo</strong> carregam esses fragmentos, levando-os cada vez mais longe do lugar onde surgiram.</div>
+        <div class="fato"><span class="emoji">🌊</span> Rios são um dos principais "caminhões de mudança" da natureza.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 - DEPOSIÇÃO -->
+    <div class="slide" data-dur="5000">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6FA8C9"/>
+              <stop offset="55%" stop-color="#3E7FA0"/>
+              <stop offset="100%" stop-color="#C9A570"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g4)"/>
+          <ellipse cx="210" cy="640" rx="240" ry="60" fill="#B08A50"/>
+          <ellipse cx="210" cy="690" rx="260" ry="55" fill="#96703E"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">3️⃣ Deposição</div>
+        <div class="titulo">Os sedimentos se acomodam no fundo</div>
+        <div class="passo-tag">Etapa 3 de 4</div>
+        <div class="legenda">Quando perdem força, água, vento ou gelo <strong>soltam os sedimentos</strong>, que se acumulam em rios, lagos, mares ou terrenos baixos.</div>
+        <div class="fato"><span class="emoji">🏞️</span> Camada por camada, o material vai se empilhando.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 - COMPACTAÇÃO E CIMENTAÇÃO -->
+    <div class="slide" data-dur="5500">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g5" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4A3826"/>
+              <stop offset="100%" stop-color="#231609"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g5)"/>
+          <rect y="420" width="420" height="45" fill="#B08A50"/>
+          <rect y="465" width="420" height="45" fill="#96703E"/>
+          <rect y="510" width="420" height="50" fill="#7A5A34"/>
+          <rect y="560" width="420" height="55" fill="#634524"/>
+          <rect y="615" width="420" height="60" fill="#4F3620"/>
+          <rect y="675" width="420" height="70" fill="#3A2716"/>
+          <line x1="0" y1="390" x2="420" y2="390" stroke="#fff" stroke-width="2" opacity="0.3"/>
+          <polygon points="200,340 220,390 180,390" fill="#fff" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">4️⃣ Compactação e cimentação</div>
+        <div class="titulo">O peso das camadas transforma tudo em rocha</div>
+        <div class="passo-tag">Etapa 4 de 4</div>
+        <div class="legenda">O <strong>peso das camadas superiores</strong> aperta os sedimentos de baixo. Minerais dissolvidos agem como "cola" entre os grãos — e assim nasce a rocha.</div>
+        <div class="fato"><span class="emoji">📚</span> Imagine folhas de areia empilhadas e prensadas por muito tempo.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 - EXEMPLOS -->
+    <div class="slide" data-dur="6000">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g6" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D9B888"/>
+              <stop offset="50%" stop-color="#B7A98C"/>
+              <stop offset="100%" stop-color="#2E2A26"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g6)"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">🔍 Na prática</div>
+        <div class="titulo" style="font-size:30px;">Três rochas sedimentares do dia a dia</div>
+        <div class="resumo-lista">
+          <div class="resumo-item" style="animation-delay:.05s"><span class="num">🏖️</span> Arenito — grãos de areia compactados</div>
+          <div class="resumo-item" style="animation-delay:.12s"><span class="num">🐚</span> Calcário — restos de organismos marinhos</div>
+          <div class="resumo-item" style="animation-delay:.19s"><span class="num">🌿</span> Carvão mineral — acúmulo de restos vegetais</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 - FÓSSEIS -->
+    <div class="slide" data-dur="5000">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g7" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8C7355"/>
+              <stop offset="100%" stop-color="#2A1B0F"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g7)"/>
+          <rect y="500" width="420" height="30" fill="#6E4E2E" opacity="0.7"/>
+          <rect y="560" width="420" height="30" fill="#4F3620" opacity="0.7"/>
+          <rect y="620" width="420" height="30" fill="#3A2716" opacity="0.7"/>
+          <path d="M180 545 q20 -25 45 0 q10 15 -5 20 q-15 5 -25 -5 q-15 -10 -15 -15z" fill="#E8D9B5" opacity="0.85"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">🦴 Um bônus curioso</div>
+        <div class="titulo">É aqui que os fósseis se escondem</div>
+        <div class="legenda">As rochas sedimentares geralmente apresentam <strong>camadas visíveis</strong> — e são elas que guardam <strong>fósseis com maior frequência</strong>, preservando restos de seres que viveram há milhões de anos.</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 - RESUMO FINAL -->
+    <div class="slide" data-dur="99999">
+      <div class="fundo">
+        <svg class="camada-svg" viewBox="0 0 420 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="g8" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1A120B"/>
+              <stop offset="100%" stop-color="#4F3620"/>
+            </linearGradient>
+          </defs>
+          <rect width="420" height="900" fill="url(#g8)"/>
+        </svg>
+      </div>
+      <div class="conteudo">
+        <div class="badge">✅ Pra fixar</div>
+        <div class="titulo" style="font-size:28px;">O caminho até virar rocha</div>
+        <div class="resumo-lista">
+          <div class="resumo-item" style="animation-delay:.05s"><span class="num">1</span> Desgaste — a rocha se quebra</div>
+          <div class="resumo-item" style="animation-delay:.12s"><span class="num">2</span> Transporte — o vento/água carrega</div>
+          <div class="resumo-item" style="animation-delay:.19s"><span class="num">3</span> Deposição — os sedimentos se acumulam</div>
+          <div class="resumo-item" style="animation-delay:.26s"><span class="num">4</span> Compactação — o peso vira rocha</div>
+        </div>
+        <div class="formula">sedimentos acumulados + pressão + muito tempo = rocha sedimentar</div>
+        <button class="btn-reiniciar" id="btnReiniciar">🔁 Assistir de novo</button>
+      </div>
+    </div>
+
+    <div class="avancar-manual" id="dicaToque">toque para avançar →</div>
+
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const barrasContainer = document.getElementById('barras');
+  const dicaToque = document.getElementById('dicaToque');
+  const btnPausa = document.getElementById('btnPausa');
+  const btnReiniciar = document.getElementById('btnReiniciar');
+  let atual = 0;
+  let pausado = false;
+  let timeoutId = null;
+
+  slides.forEach(() => {
+    const b = document.createElement('div');
+    b.className = 'barra';
+    b.innerHTML = '<div class="preench"></div>';
+    barrasContainer.appendChild(b);
+  });
+  const barras = document.querySelectorAll('.barra');
+
+  function irPara(indice){
+    if(indice < 0) indice = 0;
+    if(indice >= slides.length) indice = slides.length - 1;
+
+    slides[atual].classList.remove('ativa');
+    barras[atual].classList.remove('ativa');
+    barras[atual].classList.add('feita');
+
+    atual = indice;
+    slides[atual].classList.add('ativa');
+
+    barras.forEach((b, i) => {
+      b.classList.remove('feita','ativa');
+      if(i < atual) b.classList.add('feita');
+    });
+
+    dicaToque.style.display = (atual === slides.length - 1) ? 'none' : 'flex';
+
+    agendarAvanco();
+  }
+
+  function agendarAvanco(){
+    clearTimeout(timeoutId);
+    if(atual === slides.length - 1) return;
+
+    const barraAtual = barras[atual];
+    barraAtual.classList.add('ativa');
+    const dur = parseInt(slides[atual].dataset.dur, 10);
+
+    const preench = barraAtual.querySelector('.preench');
+    preench.style.animation = 'none';
+    void preench.offsetWidth;
+    preench.style.animation = `preencher ${dur}ms linear forwards`;
+
+    if(!pausado){
+      timeoutId = setTimeout(() => irPara(atual + 1), dur);
+    }
+  }
+
+  document.getElementById('toqueDir').addEventListener('click', () => {
+    if(atual < slides.length - 1) irPara(atual + 1);
+  });
+  document.getElementById('toqueEsq').addEventListener('click', () => {
+    if(atual > 0) irPara(atual - 1);
+  });
+
+  btnPausa.addEventListener('click', (e) => {
+    e.stopPropagation();
+    pausado = !pausado;
+    btnPausa.textContent = pausado ? '▶' : '⏸';
+    const preench = barras[atual].querySelector('.preench');
+    if(pausado){
+      clearTimeout(timeoutId);
+      preench.style.animationPlayState = 'paused';
+    } else {
+      preench.style.animationPlayState = 'running';
+      const restante = preench.getBoundingClientRect().width;
+      const total = barras[atual].getBoundingClientRect().width;
+      const duracaoTotal = parseInt(slides[atual].dataset.dur, 10);
+      const tempoRestante = duracaoTotal * (1 - restante/total);
+      timeoutId = setTimeout(() => irPara(atual + 1), Math.max(tempoRestante, 300));
+    }
+  });
+
+  btnReiniciar.addEventListener('click', () => {
+    barras.forEach(b => {
+      b.classList.remove('feita','ativa');
+      const p = b.querySelector('.preench');
+      p.style.animation = 'none';
+      p.style.width = '0%';
+    });
+    slides[atual].classList.remove('ativa');
+    atual = 0;
+    slides[0].classList.add('ativa');
+    pausado = false;
+    btnPausa.textContent = '⏸';
+    irPara(0);
+  });
+
+  agendarAvanco();
+</script>
+
+</body>
+</html>
