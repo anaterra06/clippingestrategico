@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Da Rocha ao Clima — Combustíveis Fósseis e Aquecimento Global</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --marrom-escuro: #241609;
+    --marrom: #4F3620;
+    --areia: #C9A570;
+    --creme: #FBF6EC;
+    --laranja: #E4572E;
+    --vermelho: #B23A2C;
+    --amarelo: #F4B942;
+    --fumaca: #7C8894;
+    --verde: #2FA36B;
+    --tinta: #1F1710;
+    --linha: rgba(31,23,16,0.12);
+    --display: 'Baloo 2', sans-serif;
+    --corpo: 'Inter', sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{ font-family: var(--corpo); background: var(--creme); color: var(--tinta); line-height:1.55; overflow-x:hidden; }
+  img, svg{ display:block; max-width:100%; }
+  .wrap{ max-width: 980px; margin:0 auto; padding:0 24px; }
+
+  /* HERO */
+  .hero{
+    background: linear-gradient(165deg, var(--marrom-escuro) 0%, var(--marrom) 55%, #7A4A2A 100%);
+    color: var(--creme);
+    padding: 72px 24px 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after{
+    content:""; position:absolute; inset:auto -10% -35% -10%; height:280px;
+    background: var(--laranja); opacity:.16; border-radius:50%; filter: blur(20px);
+  }
+  .eyebrow{
+    font-family: var(--display); font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+    font-size:13px; color: var(--amarelo); margin-bottom:18px;
+  }
+  .hero h1{ font-family: var(--display); font-weight:800; font-size: clamp(32px,5.6vw,56px); line-height:1.08; max-width:760px; }
+  .hero h1 span{ color: var(--amarelo); }
+  .hero p.lead{ margin-top:20px; max-width:580px; font-size:18px; color: rgba(251,246,236,0.85); }
+
+  .cadeia-hero{
+    display:flex; align-items:center; gap:8px; margin-top:36px; flex-wrap:wrap;
+    font-family: var(--display); font-weight:700; font-size:14px;
+  }
+  .elo{
+    background: rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.22);
+    padding:8px 14px; border-radius:999px;
+  }
+  .seta-elo{ color: var(--amarelo); font-size:16px; }
+
+  /* SECTIONS */
+  section{ padding:64px 24px; }
+  .section-inner{ max-width:860px; margin:0 auto; }
+  .kicker{
+    font-family: var(--display); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.1em;
+    color: var(--marrom); background: rgba(79,54,32,0.08); display:inline-block; padding:6px 14px; border-radius:999px; margin-bottom:18px;
+  }
+  h2{ font-family: var(--display); font-weight:800; font-size: clamp(24px,3.8vw,36px); margin-bottom:16px; color: var(--marrom-escuro); }
+  p{ font-size:16.5px; color:#3A2E22; max-width:700px; }
+  strong{ color: var(--marrom-escuro); }
+
+  /* recap card */
+  .recap-card{
+    margin-top:28px; background: white; border:1.5px solid var(--linha); border-radius:18px; padding:22px 24px;
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  .recap-card .icone{ font-size:30px; flex-shrink:0; }
+  .recap-card p{ margin:0; font-size:15.5px; }
+
+  /* três combustíveis */
+  .combustiveis{ display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:32px; }
+  .combustivel-card{
+    border-radius:20px; padding:24px 20px; color:white; position:relative; overflow:hidden;
+  }
+  .combustivel-card.carvao{ background: linear-gradient(160deg, #1F1710, #4F3620); }
+  .combustivel-card.petroleo{ background: linear-gradient(160deg, #0B2E2E, #16504F); }
+  .combustivel-card.gas{ background: linear-gradient(160deg, #2A2438, #4A4066); }
+  .combustivel-card .icone{ font-size:30px; margin-bottom:10px; }
+  .combustivel-card h4{ font-family: var(--display); font-size:18px; margin-bottom:8px; }
+  .combustivel-card p{ font-size:13.5px; color: rgba(255,255,255,0.85); margin:0; }
+
+  /* linha do tempo comparativa */
+  .tempo-comparacao{ margin-top:36px; display:flex; flex-direction:column; gap:22px; }
+  .tempo-linha{ }
+  .tempo-linha .rotulo{
+    font-family: var(--display); font-weight:700; font-size:14px; margin-bottom:8px;
+    display:flex; justify-content:space-between; color: var(--marrom-escuro);
+  }
+  .tempo-trilho{ height:16px; background:#EDE4D2; border-radius:999px; overflow:hidden; }
+  .tempo-preench{ height:100%; border-radius:999px; width:0%; transition:width 1.2s cubic-bezier(.2,.8,.2,1); }
+  .tempo-preench.formacao{ background: linear-gradient(90deg, var(--marrom), var(--areia)); }
+  .tempo-preench.queima{ background: linear-gradient(90deg, var(--vermelho), var(--laranja)); }
+  .tempo-nota{ font-size:13px; color:#6B5A45; margin-top:6px; }
+
+  .destaque-caixa{
+    margin-top:28px; background: var(--amarelo); color: var(--marrom-escuro);
+    border-radius:16px; padding:18px 22px; font-family: var(--display); font-weight:700; font-size:16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .destaque-caixa .icone{ font-size:26px; }
+
+  /* diagrama de cadeia causal */
+  .cadeia-diagrama{
+    margin-top:36px; display:flex; flex-direction:column; gap:0;
+  }
+  .cadeia-passo{
+    display:flex; align-items:center; gap:16px; background:white; border:1.5px solid var(--linha);
+    border-radius:16px; padding:16px 18px;
+  }
+  .cadeia-passo .num{
+    width:36px; height:36px; border-radius:50%; background: var(--marrom); color:white;
+    display:flex; align-items:center; justify-content:center; font-family: var(--display); font-weight:800; font-size:15px; flex-shrink:0;
+  }
+  .cadeia-passo.alerta .num{ background: var(--laranja); }
+  .cadeia-passo strong{ display:block; font-family: var(--display); font-size:15.5px; margin-bottom:2px; }
+  .cadeia-passo span{ font-size:14px; color:#5A4A38; }
+  .cadeia-seta{ text-align:center; font-size:20px; color: var(--areia); margin: 4px 0; }
+
+  /* efeito estufa visual */
+  .estufa-visual{ margin-top:32px; background: linear-gradient(180deg, #BFE3F7, #EDE4D2); border-radius:20px; padding:30px 24px; position:relative; overflow:hidden; }
+  .estufa-svg{ width:100%; height:auto; }
+
+  .memoria{
+    margin-top:28px; background: var(--marrom-escuro); color: var(--creme);
+    border-radius:16px; padding:18px 22px; font-family: var(--display); font-weight:700; font-size:17px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .memoria .icone{ font-size:26px; }
+
+  table{ width:100%; border-collapse:collapse; margin-top:24px; background:white; border-radius:16px; overflow:hidden; border:1.5px solid var(--linha); }
+  th, td{ padding:14px 16px; text-align:left; font-size:14.5px; }
+  th{ background: var(--marrom-escuro); color:white; font-family: var(--display); font-weight:700; font-size:13px; }
+  tr:nth-child(even){ background:#F6EFE1; }
+  td.destaque{ font-family: var(--display); font-weight:700; color: var(--marrom); }
+
+  /* QUIZ */
+  .quiz-section{ background: var(--marrom-escuro); color: var(--creme); }
+  .quiz-section .kicker{ background: rgba(244,185,66,0.15); color: var(--amarelo); }
+  .quiz-section h2{ color:white; }
+  .quiz-section > .section-inner > p{ color: rgba(251,246,236,0.75); }
+
+  .progresso{ margin:28px 0; height:8px; background: rgba(255,255,255,0.12); border-radius:999px; overflow:hidden; }
+  .progresso-preench{ height:100%; width:0%; background: var(--amarelo); border-radius:999px; transition: width .4s ease; }
+
+  .pergunta{ display:none; background: rgba(255,255,255,0.04); border:1.5px solid rgba(255,255,255,0.12); border-radius:20px; padding:28px; margin-bottom:20px; }
+  .pergunta.ativa{ display:block; animation: entra .35s ease; }
+  @keyframes entra{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+  .pergunta .numero{ font-family: var(--display); font-weight:700; font-size:13px; color: var(--amarelo); text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+  .pergunta .texto{ font-family: var(--display); font-size:21px; font-weight:700; margin-bottom:20px; line-height:1.35; }
+
+  .opcoes{ display:flex; flex-direction:column; gap:10px; }
+  .opcao{
+    text-align:left; background: rgba(255,255,255,0.06); border:1.5px solid rgba(255,255,255,0.15);
+    color: var(--creme); padding:14px 18px; border-radius:12px; font-family: var(--corpo); font-size:15.5px;
+    cursor:pointer; transition: all .18s ease;
+  }
+  .opcao:hover:not(:disabled){ background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); }
+  .opcao:disabled{ cursor:default; }
+  .opcao.correta{ background: rgba(47,163,107,0.25); border-color: var(--verde); }
+  .opcao.errada{ background: rgba(178,58,44,0.3); border-color: var(--vermelho); }
+
+  .feedback{ margin-top:16px; padding:14px 16px; border-radius:12px; font-size:14.5px; display:none; }
+  .feedback.mostrar{ display:block; animation: entra .3s ease; }
+  .feedback.acerto{ background: rgba(47,163,107,0.15); border:1px solid rgba(47,163,107,0.4); }
+  .feedback.erro{ background: rgba(178,58,44,0.18); border:1px solid rgba(178,58,44,0.4); }
+
+  .quiz-nav{ display:flex; justify-content:flex-end; margin-top:4px; }
+  .btn{
+    font-family: var(--display); font-weight:700; font-size:15px; background: var(--amarelo); color: var(--marrom-escuro);
+    border:none; padding:12px 26px; border-radius:999px; cursor:pointer; transition: transform .15s ease; display:none;
+  }
+  .btn.mostrar{ display:inline-block; }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn:focus-visible, .opcao:focus-visible{ outline:3px solid var(--amarelo); outline-offset:2px; }
+
+  .resultado-final{ display:none; text-align:center; padding:40px 28px; background: rgba(255,255,255,0.04); border:1.5px solid rgba(255,255,255,0.12); border-radius:20px; }
+  .resultado-final.ativa{ display:block; animation: entra .4s ease; }
+  .resultado-final .emoji{ font-size:52px; margin-bottom:10px; }
+  .resultado-final .placar{ font-family: var(--display); font-weight:800; font-size:32px; color: var(--amarelo); margin-bottom:8px; }
+  .resultado-final p{ color: rgba(251,246,236,0.8); max-width:480px; margin:0 auto 22px; }
+
+  footer{ text-align:center; padding:32px 24px 50px; font-size:13px; color:#8A7A66; }
+
+  @media (max-width:680px){
+    .combustiveis{ grid-template-columns:1fr; }
+    table{ font-size:13px; }
+    th, td{ padding:10px; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Geografia · 7º ano</div>
+      <h1>Da rocha sedimentar ao <span>aquecimento global</span></h1>
+      <p class="lead">Você já parou pra pensar que o combustível de um carro pode ter começado como restos de plantas e animais enterrados há milhões de anos? Vamos seguir essa cadeia até o clima do planeta.</p>
+      <div class="cadeia-hero">
+        <span class="elo">🪨 Rocha sedimentar</span>
+        <span class="seta-elo">→</span>
+        <span class="elo">⛽ Combustível fóssil</span>
+        <span class="seta-elo">→</span>
+        <span class="elo">🌡️ Aquecimento global</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- RECAP -->
+  <section>
+    <div class="section-inner">
+      <span class="kicker">Relembrando</span>
+      <h2>Tudo começa na rocha sedimentar</h2>
+      <p>Sedimentos — restos de plantas, animais, areia e minerais — se acumulam em camadas ao longo de milhões de anos. Com o <strong>peso e a pressão</strong> das camadas superiores, esse material se transforma em rocha sedimentar.</p>
+      <div class="recap-card">
+        <div class="icone">💡</div>
+        <p>Quando os sedimentos enterrados são, principalmente, <strong>restos de organismos</strong> (plantas e microrganismos marinhos), o processo pode seguir um caminho diferente: em vez de virar apenas rocha, esse material pode se transformar em <strong>combustível fóssil</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OS TRÊS COMBUSTÍVEIS -->
+  <section style="background:#F6EFE1;">
+    <div class="section-inner">
+      <span class="kicker">Parte 1</span>
+      <h2>Os três combustíveis fósseis</h2>
+      <p>Cada um se forma a partir de um tipo de sedimento orgânico diferente, sob calor e pressão, ao longo de milhões de anos:</p>
+
+      <div class="combustiveis">
+        <div class="combustivel-card carvao">
+          <div class="icone">⚫</div>
+          <h4>Carvão mineral</h4>
+          <p>Formado pelo acúmulo de <strong>restos vegetais</strong> em pântanos e florestas antigas, comprimidos ao longo do tempo.</p>
+        </div>
+        <div class="combustivel-card petroleo">
+          <div class="icone">🛢️</div>
+          <h4>Petróleo</h4>
+          <p>Origem em <strong>restos de organismos marinhos microscópicos</strong> acumulados no fundo de mares e lagos antigos.</p>
+        </div>
+        <div class="combustivel-card gas">
+          <div class="icone">💨</div>
+          <h4>Gás natural</h4>
+          <p>Formado de maneira parecida com o petróleo, muitas vezes <strong>na mesma rocha</strong>, sob calor e pressão ainda maiores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPO DE FORMAÇÃO X TEMPO DE QUEIMA -->
+  <section>
+    <div class="section-inner">
+      <span class="kicker">Parte 2</span>
+      <h2>Milhões de anos para se formar, segundos para queimar</h2>
+      <p>Essa diferença de tempo é o motivo pelo qual os combustíveis fósseis são chamados de <strong>recursos não renováveis</strong>: gastamos em segundos o que a natureza levou milhões de anos para criar.</p>
+
+      <div class="tempo-comparacao" id="tempoComparacao">
+        <div class="tempo-linha">
+          <div class="rotulo"><span>🪨 Tempo de formação</span><span>~milhões de anos</span></div>
+          <div class="tempo-trilho"><div class="tempo-preench formacao" data-valor="95"></div></div>
+          <div class="tempo-nota">Sedimentação, compactação, calor e pressão indo pouco a pouco.</div>
+        </div>
+        <div class="tempo-linha">
+          <div class="rotulo"><span>🔥 Tempo de queima</span><span>segundos</span></div>
+          <div class="tempo-trilho"><div class="tempo-preench queima" data-valor="3"></div></div>
+          <div class="tempo-nota">Extraído, transportado e queimado em usinas, carros e indústrias.</div>
+        </div>
+      </div>
+
+      <div class="destaque-caixa">
+        <span class="icone">⚠️</span>
+        <span>Não dá para "repor" o combustível fóssil gasto hoje — não no tempo de uma vida humana.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CADEIA CAUSAL: QUEIMA -> CO2 -> AQUECIMENTO -->
+  <section style="background:#F6EFE1;">
+    <div class="section-inner">
+      <span class="kicker">Parte 3</span>
+      <h2>O que acontece quando queimamos esses combustíveis?</h2>
+      <p>Usamos carvão, petróleo e gás natural como fontes de energia — para gerar eletricidade, mover veículos e abastecer indústrias. Mas essa queima tem uma consequência direta:</p>
+
+      <div class="cadeia-diagrama">
+        <div class="cadeia-passo">
+          <div class="num">1</div>
+          <div><strong>Extração e queima</strong><span>O combustível fóssil é retirado do solo e queimado para gerar energia.</span></div>
+        </div>
+        <div class="cadeia-seta">↓</div>
+        <div class="cadeia-passo">
+          <div class="num">2</div>
+          <div><strong>Liberação de CO₂</strong><span>A queima libera gás carbônico (CO₂) e outros gases na atmosfera.</span></div>
+        </div>
+        <div class="cadeia-seta">↓</div>
+        <div class="cadeia-passo alerta">
+          <div class="num">3</div>
+          <div><strong>Efeito estufa reforçado</strong><span>Esses gases retêm mais calor do sol perto da superfície da Terra.</span></div>
+        </div>
+        <div class="cadeia-seta">↓</div>
+        <div class="cadeia-passo alerta">
+          <div class="num">4</div>
+          <div><strong>Aquecimento global</strong><span>A temperatura média do planeta sobe, alterando o clima em escala mundial.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EFEITO ESTUFA VISUAL -->
+  <section>
+    <div class="section-inner">
+      <span class="kicker">Como funciona</span>
+      <h2>O efeito estufa, em uma imagem</h2>
+      <p>O efeito estufa é natural e necessário — sem ele, a Terra seria fria demais para a vida. O problema é que a queima de combustíveis fósseis está <strong>reforçando esse efeito além do normal</strong>.</p>
+
+      <div class="estufa-visual">
+        <svg class="estufa-svg" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- sol -->
+          <circle cx="90" cy="70" r="34" fill="#F4B942"/>
+          <g stroke="#F4B942" stroke-width="4">
+            <line x1="90" y1="18" x2="90" y2="4"/>
+            <line x1="90" y1="122" x2="90" y2="136"/>
+            <line x1="38" y1="70" x2="24" y2="70"/>
+          </g>
+          <!-- raios entrando -->
+          <line x1="130" y1="55" x2="330" y2="230" stroke="#F4B942" stroke-width="3" opacity="0.8"/>
+          <line x1="150" y1="40" x2="420" y2="230" stroke="#F4B942" stroke-width="3" opacity="0.8"/>
+          <!-- camada de gases estufa -->
+          <path d="M40 150 Q400 100 760 150" stroke="#7C8894" stroke-width="14" fill="none" opacity="0.55" stroke-linecap="round"/>
+          <text x="400" y="115" text-anchor="middle" font-family="Inter" font-size="14" fill="#5A4A38" font-weight="600">gases do efeito estufa (CO₂ e outros)</text>
+          <!-- terra -->
+          <rect x="0" y="255" width="800" height="65" fill="#4F3620"/>
+          <ellipse cx="400" cy="255" rx="420" ry="20" fill="#2FA36B"/>
+          <!-- calor refletido preso -->
+          <line x1="330" y1="230" x2="230" y2="160" stroke="#E4572E" stroke-width="3" opacity="0.9"/>
+          <line x1="420" y1="230" x2="500" y2="160" stroke="#E4572E" stroke-width="3" opacity="0.9"/>
+          <line x1="380" y1="235" x2="380" y2="165" stroke="#E4572E" stroke-width="3" opacity="0.7"/>
+          <text x="400" y="290" text-anchor="middle" font-family="Baloo 2" font-size="16" font-weight="700" fill="#FBF6EC">superfície da Terra</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUMO E MEMORIA -->
+  <section style="background:#F6EFE1;">
+    <div class="section-inner">
+      <span class="kicker">Resumo</span>
+      <h2>Conectando os três conceitos</h2>
+      <table>
+        <thead><tr><th>Conceito</th><th>O que é</th><th>Escala de tempo</th></tr></thead>
+        <tbody>
+          <tr><td class="destaque">Rocha sedimentar</td><td>Sedimentos compactados e cimentados</td><td>Milhares a milhões de anos</td></tr>
+          <tr><td class="destaque">Combustível fóssil</td><td>Restos orgânicos transformados por calor e pressão</td><td>Milhões de anos</td></tr>
+          <tr><td class="destaque">Aquecimento global</td><td>Aumento da temperatura média do planeta</td><td>Décadas — acelerado pela ação humana</td></tr>
+        </tbody>
+      </table>
+
+      <div class="memoria">
+        <span class="icone">💡</span>
+        <span>Sedimentos + milhões de anos = combustível fóssil. Combustível fóssil + queima = mais CO₂ = mais calor retido na Terra.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="quiz-section">
+    <div class="section-inner">
+      <span class="kicker">Teste rápido</span>
+      <h2>Agora é com você</h2>
+      <p>Responda para fixar a relação entre rochas sedimentares, combustíveis fósseis e aquecimento global.</p>
+
+      <div class="progresso"><div class="progresso-preench" id="progressoBarra"></div></div>
+      <div id="perguntas"></div>
+
+      <div class="quiz-nav"><button class="btn" id="btnProxima">Próxima pergunta →</button></div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <div class="emoji" id="resultadoEmoji">🎉</div>
+        <div class="placar" id="resultadoPlacar">0/6</div>
+        <p id="resultadoTexto">Confira seu desempenho e revise o que precisar.</p>
+        <button class="btn mostrar" id="btnRefazer">Refazer o teste</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>Geografia · Rochas sedimentares, combustíveis fósseis e aquecimento global</footer>
+
+<script>
+  // animações de entrada
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if(entrada.isIntersecting){
+        entrada.target.querySelectorAll('.tempo-preench').forEach(el => {
+          el.style.width = el.getAttribute('data-valor') + '%';
+        });
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('#tempoComparacao').forEach(el => observador.observe(el));
+
+  // QUIZ
+  const perguntas = [
+    {
+      texto: "O que precisa acontecer para que sedimentos orgânicos se transformem em combustível fóssil?",
+      opcoes: [
+        "Ficarem expostos ao sol por poucos dias",
+        "Serem soterrados e sofrerem calor e pressão por milhões de anos",
+        "Serem misturados com água do mar apenas uma vez",
+        "Nada além do peso de uma pessoa em cima"
+      ],
+      correta: 1,
+      explicacao: "Restos orgânicos soterrados sob camadas de sedimento sofrem calor e pressão ao longo de milhões de anos, o que os transforma em carvão, petróleo ou gás natural."
+    },
+    {
+      texto: "O carvão mineral se forma principalmente a partir de:",
+      opcoes: [
+        "Restos de organismos marinhos microscópicos",
+        "Grãos de areia do deserto",
+        "Restos de vegetais acumulados em pântanos e florestas antigas",
+        "Rochas vulcânicas resfriadas"
+      ],
+      correta: 2,
+      explicacao: "O carvão mineral se origina do acúmulo e compactação de restos vegetais ao longo de milhões de anos."
+    },
+    {
+      texto: "Por que os combustíveis fósseis são considerados recursos não renováveis?",
+      opcoes: [
+        "Porque são muito caros de extrair",
+        "Porque levam milhões de anos para se formar, muito mais do que o tempo em que os consumimos",
+        "Porque só existem em poucos países",
+        "Porque não servem para gerar energia"
+      ],
+      correta: 1,
+      explicacao: "A formação leva milhões de anos, enquanto a queima acontece em segundos — por isso não é possível \"repor\" o que é consumido em escala humana."
+    },
+    {
+      texto: "O que é liberado na atmosfera quando queimamos carvão, petróleo ou gás natural?",
+      opcoes: [
+        "Oxigênio puro",
+        "Água apenas",
+        "CO₂ e outros gases do efeito estufa",
+        "Nitrogênio líquido"
+      ],
+      correta: 2,
+      explicacao: "A queima de combustíveis fósseis libera CO₂ e outros gases que reforçam o efeito estufa na atmosfera."
+    },
+    {
+      texto: "Como o aumento de CO₂ na atmosfera está ligado ao aquecimento global?",
+      opcoes: [
+        "O CO₂ esfria o planeta ao bloquear o sol",
+        "O CO₂ retém mais calor perto da superfície da Terra, reforçando o efeito estufa",
+        "O CO₂ não tem nenhum efeito sobre a temperatura",
+        "O CO₂ só afeta o oceano, não o ar"
+      ],
+      correta: 1,
+      explicacao: "Gases como o CO₂ retêm calor na atmosfera. Com mais desses gases, mais calor fica preso perto da superfície, elevando a temperatura média do planeta."
+    },
+    {
+      texto: "Qual é a cadeia correta que liga rocha sedimentar a aquecimento global?",
+      opcoes: [
+        "Rocha sedimentar → combustível fóssil → queima → CO₂ → efeito estufa reforçado → aquecimento global",
+        "Aquecimento global → CO₂ → rocha sedimentar → combustível fóssil",
+        "Combustível fóssil → rocha sedimentar → aquecimento global → CO₂",
+        "Não existe relação entre esses conceitos"
+      ],
+      correta: 0,
+      explicacao: "Sedimentos orgânicos viram rocha/combustível fóssil ao longo de milhões de anos; ao serem queimados, liberam CO₂, que reforça o efeito estufa e eleva a temperatura do planeta."
+    }
+  ];
+
+  let atual = 0;
+  let acertos = 0;
+  const respondidas = new Array(perguntas.length).fill(false);
+
+  const containerPerguntas = document.getElementById('perguntas');
+  const btnProxima = document.getElementById('btnProxima');
+  const progressoBarra = document.getElementById('progressoBarra');
+  const resultadoFinal = document.getElementById('resultadoFinal');
+
+  function montarPerguntas(){
+    perguntas.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'pergunta';
+      div.id = 'pergunta-' + i;
+      const opcoesHtml = p.opcoes.map((op, j) => `<button class="opcao" data-indice="${j}">${op}</button>`).join('');
+      div.innerHTML = `
+        <div class="numero">Pergunta ${i+1} de ${perguntas.length}</div>
+        <div class="texto">${p.texto}</div>
+        <div class="opcoes">${opcoesHtml}</div>
+        <div class="feedback"></div>
+      `;
+      containerPerguntas.appendChild(div);
+    });
+    document.getElementById('pergunta-0').classList.add('ativa');
+    atualizarProgresso();
+
+    containerPerguntas.addEventListener('click', (e) => {
+      const btn = e.target.closest('.opcao');
+      if(!btn) return;
+      const perguntaDiv = btn.closest('.pergunta');
+      const indicePergunta = parseInt(perguntaDiv.id.split('-')[1]);
+      if(respondidas[indicePergunta]) return;
+      responder(indicePergunta, parseInt(btn.dataset.indice));
+    });
+  }
+
+  function responder(indicePergunta, indiceEscolhido){
+    respondidas[indicePergunta] = true;
+    const p = perguntas[indicePergunta];
+    const perguntaDiv = document.getElementById('pergunta-' + indicePergunta);
+    const botoes = perguntaDiv.querySelectorAll('.opcao');
+    const feedback = perguntaDiv.querySelector('.feedback');
+
+    botoes.forEach((b, j) => {
+      b.disabled = true;
+      if(j === p.correta) b.classList.add('correta');
+      if(j === indiceEscolhido && j !== p.correta) b.classList.add('errada');
+    });
+
+    const acertou = indiceEscolhido === p.correta;
+    if(acertou) acertos++;
+
+    feedback.classList.add('mostrar', acertou ? 'acerto' : 'erro');
+    feedback.innerHTML = `<strong>${acertou ? '✅ Certinho!' : '❌ Quase lá.'}</strong> ${p.explicacao}`;
+
+    if(indicePergunta === perguntas.length - 1){
+      btnProxima.textContent = 'Ver resultado →';
+    }
+    btnProxima.classList.add('mostrar');
+  }
+
+  function atualizarProgresso(){
+    progressoBarra.style.width = ((atual) / perguntas.length * 100) + '%';
+  }
+
+  btnProxima.addEventListener('click', () => {
+    if(atual < perguntas.length - 1){
+      document.getElementById('pergunta-' + atual).classList.remove('ativa');
+      atual++;
+      document.getElementById('pergunta-' + atual).classList.add('ativa');
+      btnProxima.classList.remove('mostrar');
+      atualizarProgresso();
+    } else {
+      mostrarResultado();
+    }
+  });
+
+  function mostrarResultado(){
+    document.getElementById('pergunta-' + atual).classList.remove('ativa');
+    btnProxima.classList.remove('mostrar');
+    progressoBarra.style.width = '100%';
+    resultadoFinal.classList.add('ativa');
+    document.getElementById('resultadoPlacar').textContent = acertos + '/' + perguntas.length;
+
+    let emoji = '🎉', texto = '';
+    if(acertos === perguntas.length){
+      emoji = '🏆';
+      texto = 'Mandou muito bem! Você entendeu a cadeia completa: rocha sedimentar, combustível fóssil e aquecimento global.';
+    } else if(acertos >= perguntas.length - 2){
+      emoji = '👏';
+      texto = 'Muito bom! Vale revisar os pontos que errou para fixar de vez.';
+    } else {
+      emoji = '💪';
+      texto = 'Bom começo! Releia as seções acima com calma e tente de novo.';
+    }
+    document.getElementById('resultadoEmoji').textContent = emoji;
+    document.getElementById('resultadoTexto').textContent = texto;
+  }
+
+  document.getElementById('btnRefazer').addEventListener('click', () => {
+    atual = 0;
+    acertos = 0;
+    respondidas.fill(false);
+    containerPerguntas.innerHTML = '';
+    montarPerguntas();
+    resultadoFinal.classList.remove('ativa');
+    btnProxima.textContent = 'Próxima pergunta →';
+  });
+
+  montarPerguntas();
+</script>
+
+</body>
+</html>
