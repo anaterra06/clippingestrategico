@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDH x Gini — Dois países, duas histórias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul: #1B4B6B;
+    --azul-escuro: #0F2F44;
+    --amarelo: #F4B942;
+    --coral: #FF6B5B;
+    --creme: #FDFBF5;
+    --verde: #2FA36B;
+    --tinta: #16283A;
+    --linha: rgba(22,40,58,0.12);
+    --display: 'Baloo 2', sans-serif;
+    --corpo: 'Inter', sans-serif;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    font-family: var(--corpo);
+    background: var(--creme);
+    color: var(--tinta);
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  img, svg{ display:block; max-width:100%; }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: linear-gradient(160deg, var(--azul-escuro) 0%, var(--azul) 60%, #2C6A8F 100%);
+    color: var(--creme);
+    padding: 72px 24px 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:auto -10% -30% -10%;
+    height: 260px;
+    background: var(--amarelo);
+    opacity: .12;
+    border-radius: 50%;
+    filter: blur(10px);
+  }
+  .eyebrow{
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: 13px;
+    color: var(--amarelo);
+    margin-bottom: 18px;
+  }
+  .hero h1{
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(36px, 6vw, 62px);
+    line-height: 1.05;
+    max-width: 760px;
+  }
+  .hero h1 span{ color: var(--amarelo); }
+  .hero p.lead{
+    margin-top: 20px;
+    max-width: 560px;
+    font-size: 18px;
+    color: rgba(253,251,245,0.85);
+  }
+
+  .paises-hero{
+    display:flex; gap: 14px; margin-top: 40px; max-width: 560px;
+  }
+  .pais-chip{
+    flex:1;
+    border-radius: 16px;
+    padding: 16px 18px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .pais-chip.azul{ background: rgba(244,185,66,0.12); border: 1.5px solid rgba(244,185,66,0.4); }
+  .pais-chip.amarelo{ background: rgba(255,107,91,0.14); border: 1.5px solid rgba(255,107,91,0.4); }
+  .dot{ width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+  .dot.azul-dot{ background: var(--amarelo); }
+  .dot.amarelo-dot{ background: var(--coral); }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: 64px 24px; }
+  .section-inner{ max-width: 860px; margin: 0 auto; }
+
+  .kicker{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--azul);
+    background: rgba(27,75,107,0.08);
+    display:inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  h2{
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(26px, 4vw, 38px);
+    margin-bottom: 16px;
+    color: var(--azul-escuro);
+  }
+  h3{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--azul-escuro);
+  }
+  p{ font-size: 16.5px; color: #2B3D4E; max-width: 700px; }
+  strong{ color: var(--azul-escuro); }
+
+  /* pillars */
+  .pilares{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .pilar{
+    background: white;
+    border: 1.5px solid var(--linha);
+    border-radius: 18px;
+    padding: 22px 18px;
+    text-align:center;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .pilar:hover{ transform: translateY(-4px); box-shadow: 0 12px 24px rgba(27,75,107,0.12); }
+  .pilar .icone{ font-size: 34px; margin-bottom: 10px; }
+  .pilar h4{ font-family: var(--display); font-size: 16px; color: var(--azul-escuro); margin-bottom: 6px; }
+  .pilar p{ font-size: 14px; margin: 0; }
+
+  /* scale bar */
+  .escala{ margin-top: 40px; }
+  .escala-barra{
+    height: 22px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #E7ECEF 0%, var(--azul) 100%);
+    position: relative;
+    overflow: visible;
+  }
+  .escala-legenda{
+    display:flex; justify-content: space-between;
+    font-family: var(--display); font-weight: 700; font-size: 13px;
+    color: #5B6B79; margin-top: 8px;
+  }
+  .marcador{
+    position:absolute; top: -34px;
+    transform: translateX(-50%);
+    font-family: var(--display); font-weight: 700; font-size: 13px;
+    background: var(--azul-escuro); color: white;
+    padding: 4px 10px; border-radius: 8px;
+    white-space: nowrap;
+  }
+  .marcador::after{
+    content:""; position:absolute; bottom:-5px; left:50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: var(--azul-escuro);
+  }
+
+  /* country compare cards */
+  .comparacao{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .pais-card{
+    border-radius: 20px;
+    padding: 26px;
+    color: white;
+    position: relative;
+  }
+  .pais-card.azul-card{ background: linear-gradient(160deg, var(--azul-escuro), var(--azul)); }
+  .pais-card.amarelo-card{ background: linear-gradient(160deg, #7A3B2E, var(--coral)); }
+  .pais-card h3{ color: white; font-size: 22px; margin-bottom: 4px; }
+  .pais-card .subt{ font-size: 13px; opacity: .8; margin-bottom: 18px; }
+  .barra-mini{ margin-bottom: 12px; }
+  .barra-mini .rotulo{ font-size: 13px; margin-bottom: 4px; display:flex; justify-content:space-between; opacity:.9; }
+  .barra-trilho{ height: 10px; background: rgba(255,255,255,0.22); border-radius: 999px; overflow:hidden; }
+  .barra-preench{ height:100%; border-radius: 999px; background: var(--amarelo); width: 0%; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
+  .amarelo-card .barra-preench{ background: #FFD8CF; }
+  .idh-resultado{ margin-top: 18px; font-family: var(--display); font-weight: 800; font-size: 28px; }
+  .idh-resultado span{ font-size: 13px; font-weight: 500; display:block; opacity:.8; font-family: var(--corpo); }
+
+  .memoria{
+    margin-top: 28px;
+    background: var(--amarelo);
+    color: var(--azul-escuro);
+    border-radius: 16px;
+    padding: 18px 22px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 17px;
+    display:flex; align-items:center; gap: 12px;
+  }
+  .memoria .icone{ font-size: 26px; }
+
+  /* gini distribution visual */
+  .gini-visual{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .gini-card{
+    background: white;
+    border: 1.5px solid var(--linha);
+    border-radius: 18px;
+    padding: 22px;
+  }
+  .gini-card h4{ font-family: var(--display); font-size: 16px; margin-bottom: 4px; }
+  .gini-card .total{ font-size: 13px; color:#5B6B79; margin-bottom: 16px; }
+  .pessoas{ display:flex; align-items:flex-end; gap: 8px; height: 140px; margin-bottom: 6px; }
+  .pessoa{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+  .pessoa .barra{ width: 100%; border-radius: 6px 6px 0 0; background: var(--azul); transition: height 1s cubic-bezier(.2,.8,.2,1); }
+  .gini-card.desigual .barra{ background: var(--coral); }
+  .pessoa .valor{ font-size: 11px; font-weight: 700; margin-bottom: 4px; color: var(--azul-escuro); }
+  .pessoa .nome{ font-size: 11px; color: #5B6B79; margin-top: 6px; }
+  .gini-resultado{
+    margin-top: 14px; font-family: var(--display); font-weight: 800; font-size: 15px;
+    padding: 8px 12px; border-radius: 10px; background: rgba(27,75,107,0.07); text-align:center;
+  }
+  .gini-card.desigual .gini-resultado{ background: rgba(255,107,91,0.12); color: #B23A2C; }
+
+  /* comparison table */
+  table{
+    width: 100%; border-collapse: collapse; margin-top: 28px;
+    background: white; border-radius: 16px; overflow: hidden;
+    border: 1.5px solid var(--linha);
+  }
+  th, td{ padding: 16px 18px; text-align: left; font-size: 15px; }
+  th{ background: var(--azul-escuro); color: white; font-family: var(--display); font-weight: 700; font-size: 14px; }
+  tr:nth-child(even){ background: #F6F4EC; }
+  td.destaque{ font-family: var(--display); font-weight: 700; color: var(--azul); }
+
+  .truque-final{
+    margin-top: 40px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .truque-card{
+    border-radius: 18px; padding: 22px; text-align:center;
+    font-family: var(--display); font-weight: 800; font-size: 20px;
+  }
+  .truque-card.bom{ background: rgba(47,163,107,0.12); color: var(--verde); border: 1.5px solid rgba(47,163,107,0.3); }
+  .truque-card.ruim{ background: rgba(255,107,91,0.12); color: #B23A2C; border: 1.5px solid rgba(255,107,91,0.3); }
+  .truque-card small{ display:block; font-family: var(--corpo); font-weight: 500; font-size: 13px; margin-top: 6px; color: #5B6B79; }
+
+  .obs-final{
+    margin-top: 24px; background: white; border: 1.5px dashed var(--azul);
+    border-radius: 16px; padding: 18px 22px; font-size: 15px;
+  }
+
+  /* ---------- QUIZ ---------- */
+  .quiz-section{ background: var(--azul-escuro); color: var(--creme); }
+  .quiz-section .kicker{ background: rgba(244,185,66,0.15); color: var(--amarelo); }
+  .quiz-section h2{ color: white; }
+  .quiz-section > .section-inner > p{ color: rgba(253,251,245,0.75); }
+
+  .progresso{
+    margin: 28px 0; height: 8px; background: rgba(255,255,255,0.12); border-radius: 999px; overflow:hidden;
+  }
+  .progresso-preench{ height:100%; width:0%; background: var(--amarelo); border-radius:999px; transition: width .4s ease; }
+
+  .pergunta{
+    display:none;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .pergunta.ativa{ display:block; animation: entra .35s ease; }
+  @keyframes entra{ from{ opacity:0; transform: translateY(8px);} to{opacity:1; transform:none;} }
+
+  .pergunta .numero{
+    font-family: var(--display); font-weight: 700; font-size: 13px; color: var(--amarelo);
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px;
+  }
+  .pergunta .texto{ font-family: var(--display); font-size: 21px; font-weight: 700; margin-bottom: 20px; line-height:1.35; }
+
+  .opcoes{ display:flex; flex-direction:column; gap: 10px; }
+  .opcao{
+    text-align:left;
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: var(--creme);
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-family: var(--corpo);
+    font-size: 15.5px;
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+  .opcao:hover:not(:disabled){ background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); }
+  .opcao:disabled{ cursor: default; }
+  .opcao.correta{ background: rgba(47,163,107,0.25); border-color: var(--verde); }
+  .opcao.errada{ background: rgba(255,107,91,0.25); border-color: var(--coral); }
+
+  .feedback{
+    margin-top: 16px; padding: 14px 16px; border-radius: 12px;
+    font-size: 14.5px; display:none;
+  }
+  .feedback.mostrar{ display:block; animation: entra .3s ease; }
+  .feedback.acerto{ background: rgba(47,163,107,0.15); border: 1px solid rgba(47,163,107,0.4); }
+  .feedback.erro{ background: rgba(255,107,91,0.15); border: 1px solid rgba(255,107,91,0.4); }
+
+  .quiz-nav{ display:flex; justify-content:flex-end; margin-top: 4px; }
+  .btn{
+    font-family: var(--display); font-weight: 700; font-size: 15px;
+    background: var(--amarelo); color: var(--azul-escuro);
+    border: none; padding: 12px 26px; border-radius: 999px;
+    cursor: pointer; transition: transform .15s ease;
+    display:none;
+  }
+  .btn.mostrar{ display:inline-block; }
+  .btn:hover{ transform: translateY(-2px); }
+  .btn:focus-visible, .opcao:focus-visible{ outline: 3px solid var(--amarelo); outline-offset: 2px; }
+
+  .resultado-final{
+    display:none;
+    text-align:center;
+    padding: 40px 28px;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+  }
+  .resultado-final.ativa{ display:block; animation: entra .4s ease; }
+  .resultado-final .emoji{ font-size: 52px; margin-bottom: 10px; }
+  .resultado-final .placar{ font-family: var(--display); font-weight: 800; font-size: 32px; color: var(--amarelo); margin-bottom: 8px; }
+  .resultado-final p{ color: rgba(253,251,245,0.8); max-width: 480px; margin: 0 auto 22px; }
+
+  footer{
+    text-align:center; padding: 32px 24px 50px; font-size: 13px; color: #5B6B79;
+  }
+
+  @media (max-width: 680px){
+    .pilares, .comparacao, .gini-visual, .truque-final{ grid-template-columns: 1fr; }
+    table{ font-size: 13px; }
+    th, td{ padding: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Geografia · 7º ano</div>
+      <h1>Por que dois países podem ser tão <span>diferentes</span>?</h1>
+      <p class="lead">Vamos entender dois números que ajudam a explicar a qualidade de vida e a desigualdade em um país: o <strong style="color:#fff">IDH</strong> e o <strong style="color:#fff">coeficiente de Gini</strong>.</p>
+      <div class="paises-hero">
+        <div class="pais-chip azul"><span class="dot azul-dot"></span> País Azul</div>
+        <div class="pais-chip amarelo"><span class="dot amarelo-dot"></span> País Amarelo</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- IDH INTRO -->
+  <section>
+    <div class="section-inner">
+      <span class="kicker">Parte 1</span>
+      <h2>O que é o IDH?</h2>
+      <p>IDH significa <strong>Índice de Desenvolvimento Humano</strong>. Ele procura mostrar como está a qualidade de vida da população de um lugar — não olhando só para o dinheiro, mas para a vida das pessoas como um todo.</p>
+
+      <div class="pilares">
+        <div class="pilar">
+          <div class="icone">🏥</div>
+          <h4>Saúde</h4>
+          <p>As pessoas vivem por muitos anos?</p>
+        </div>
+        <div class="pilar">
+          <div class="icone">🎓</div>
+          <h4>Educação</h4>
+          <p>A população estuda e frequenta a escola?</p>
+        </div>
+        <div class="pilar">
+          <div class="icone">💰</div>
+          <h4>Renda</h4>
+          <p>As pessoas têm recursos para suas necessidades?</p>
+        </div>
+      </div>
+
+      <div class="escala">
+        <div class="escala-barra">
+          <div class="marcador" style="left:8%">0<br>baixo</div>
+          <div class="marcador" style="left:92%">1<br>alto</div>
+        </div>
+        <div class="escala-legenda">
+          <span>Menor desenvolvimento</span>
+          <span>Maior desenvolvimento</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXEMPLO PAISES -->
+  <section style="background:#F6F4EC;">
+    <div class="section-inner">
+      <span class="kicker">Exemplo</span>
+      <h2>Dois países, dois destinos</h2>
+      <p>Veja como as três dimensões do IDH mudam de um país para o outro:</p>
+
+      <div class="comparacao" id="comparacao">
+        <div class="pais-card azul-card">
+          <h3>🔵 País Azul</h3>
+          <div class="subt">Pessoas vivem bastante, estudam por muitos anos e têm boa renda.</div>
+          <div class="barra-mini">
+            <div class="rotulo"><span>Saúde</span></div>
+            <div class="barra-trilho"><div class="barra-preench" data-valor="88"></div></div>
+          </div>
+          <div class="barra-mini">
+            <div class="rotulo"><span>Educação</span></div>
+            <div class="barra-trilho"><div class="barra-preench" data-valor="85"></div></div>
+          </div>
+          <div class="barra-mini">
+            <div class="rotulo"><span>Renda</span></div>
+            <div class="barra-trilho"><div class="barra-preench" data-valor="82"></div></div>
+          </div>
+          <div class="idh-resultado">IDH alto <span>perto de 1</span></div>
+        </div>
+
+        <div class="pais-card amarelo-card">
+          <h3>🟡 País Amarelo</h3>
+          <div class="subt">Muitas pessoas não têm acesso à escola, vivem menos e têm renda baixa.</div>
+          <div class="barra-mini">
+            <div class="rotulo"><span>Saúde</span></div>
+            <div class="barra-trilho"><div class="barra-preench" data-valor="32"></div></div>
+          </div>
+          <div class="barra-mini">
+            <div class="rotulo"><span>Educação</span></div>
+            <div class="barra-trilho"><div class="barra-preench" data-valor="28"></div></div>
+          </div>
+          <div class="barra-mini">
+            <div class="rotulo"><span>Renda</span></div>
+            <div class="barra-trilho"><div class="barra-preench" data-valor="24"></div></div>
+          </div>
+          <div class="idh-resultado">IDH baixo <span>perto de 0</span></div>
+        </div>
+      </div>
+
+      <div class="memoria">
+        <span class="icone">💡</span>
+        <span>Frase para memorizar: o IDH mostra <u>como a população vive</u>.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GINI INTRO -->
+  <section>
+    <div class="section-inner">
+      <span class="kicker">Parte 2</span>
+      <h2>O que é o coeficiente de Gini?</h2>
+      <p>O coeficiente de Gini mede a <strong>desigualdade na distribuição da renda</strong>. Ele também varia, normalmente, de 0 a 1:</p>
+      <ul style="margin: 18px 0 0 20px; color:#2B3D4E; font-size:16.5px;">
+        <li style="margin-bottom:6px;"><strong>0</strong> → igualdade completa: todos recebem a mesma renda.</li>
+        <li><strong>1</strong> → desigualdade máxima: uma pessoa concentra toda a renda.</li>
+      </ul>
+      <p style="margin-top:16px;"><strong>Quanto maior o Gini, maior a desigualdade.</strong></p>
+    </div>
+  </section>
+
+  <!-- EXEMPLO GINI -->
+  <section style="background:#F6F4EC;">
+    <div class="section-inner">
+      <span class="kicker">Exemplo</span>
+      <h2>R$ 5.000 divididos de duas formas</h2>
+      <p>Em ambos os casos, o total é o mesmo: <strong>R$ 5.000</strong>. O que muda é como esse dinheiro é repartido entre 5 pessoas.</p>
+
+      <div class="gini-visual" id="giniVisual">
+        <div class="gini-card">
+          <h4>Distribuição igualitária</h4>
+          <div class="total">Total: R$ 5.000</div>
+          <div class="pessoas">
+            <div class="pessoa"><div class="valor">R$1.000</div><div class="barra" data-h="20" style="height:0"></div><div class="nome">Ana</div></div>
+            <div class="pessoa"><div class="valor">R$1.000</div><div class="barra" data-h="20" style="height:0"></div><div class="nome">Beto</div></div>
+            <div class="pessoa"><div class="valor">R$1.000</div><div class="barra" data-h="20" style="height:0"></div><div class="nome">Caio</div></div>
+            <div class="pessoa"><div class="valor">R$1.000</div><div class="barra" data-h="20" style="height:0"></div><div class="nome">Duda</div></div>
+            <div class="pessoa"><div class="valor">R$1.000</div><div class="barra" data-h="20" style="height:0"></div><div class="nome">Eva</div></div>
+          </div>
+          <div class="gini-resultado">Gini próximo de 0</div>
+        </div>
+
+        <div class="gini-card desigual">
+          <h4>Distribuição desigual</h4>
+          <div class="total">Total: R$ 5.000</div>
+          <div class="pessoas">
+            <div class="pessoa"><div class="valor">R$100</div><div class="barra" data-h="2" style="height:0"></div><div class="nome">Ana</div></div>
+            <div class="pessoa"><div class="valor">R$100</div><div class="barra" data-h="2" style="height:0"></div><div class="nome">Beto</div></div>
+            <div class="pessoa"><div class="valor">R$200</div><div class="barra" data-h="4" style="height:0"></div><div class="nome">Caio</div></div>
+            <div class="pessoa"><div class="valor">R$600</div><div class="barra" data-h="12" style="height:0"></div><div class="nome">Duda</div></div>
+            <div class="pessoa"><div class="valor">R$4.000</div><div class="barra" data-h="80" style="height:0"></div><div class="nome">Eva</div></div>
+          </div>
+          <div class="gini-resultado">Gini mais elevado</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARACAO E TRUQUE -->
+  <section>
+    <div class="section-inner">
+      <span class="kicker">Resumo</span>
+      <h2>IDH x Gini: qual a diferença?</h2>
+      <table>
+        <thead>
+          <tr><th>Indicador</th><th>O que mede?</th><th>Melhor resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="destaque">IDH</td><td>Saúde, educação e renda</td><td>Próximo de <strong>1</strong></td></tr>
+          <tr><td class="destaque">Gini</td><td>Desigualdade de renda</td><td>Próximo de <strong>0</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="truque-final">
+        <div class="truque-card bom">IDH alto é bom <small>Boa saúde, educação e renda</small></div>
+        <div class="truque-card ruim">Gini alto é ruim <small>Renda concentrada e desigual</small></div>
+      </div>
+
+      <div class="obs-final">
+        <strong>Atenção:</strong> um país pode ter IDH alto e Gini alto ao mesmo tempo. Isso significa que os resultados gerais são bons, mas a riqueza não é distribuída de forma igual entre a população.
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="quiz-section">
+    <div class="section-inner">
+      <span class="kicker">Teste rápido</span>
+      <h2>Agora é com você</h2>
+      <p>Responda às perguntas para fixar o que aprendeu sobre IDH e Gini.</p>
+
+      <div class="progresso"><div class="progresso-preench" id="progressoBarra"></div></div>
+
+      <div id="perguntas"></div>
+
+      <div class="quiz-nav">
+        <button class="btn" id="btnProxima">Próxima pergunta →</button>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <div class="emoji" id="resultadoEmoji">🎉</div>
+        <div class="placar" id="resultadoPlacar">0/5</div>
+        <p id="resultadoTexto">Confira seu desempenho e revise o que precisar.</p>
+        <button class="btn mostrar" id="btnRefazer">Refazer o teste</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>Geografia · IDH e Coeficiente de Gini</footer>
+
+<script>
+  // ---- animações de entrada ao rolar a página ----
+  const animarBarras = (seletor, atributo) => {
+    document.querySelectorAll(seletor).forEach(el => {
+      const valor = el.getAttribute(atributo);
+      if(atributo === 'data-valor'){
+        el.style.width = valor + '%';
+      } else {
+        el.style.height = valor + '%';
+      }
+    });
+  };
+
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if(entrada.isIntersecting){
+        if(entrada.target.id === 'comparacao') animarBarras('#comparacao .barra-preench', 'data-valor');
+        if(entrada.target.id === 'giniVisual') animarBarras('#giniVisual .barra', 'data-h');
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('#comparacao, #giniVisual').forEach(el => observador.observe(el));
+
+  // ---- QUIZ ----
+  const perguntas = [
+    {
+      texto: "O que significa a sigla IDH?",
+      opcoes: [
+        "Índice de Desenvolvimento Humano",
+        "Índice de Distribuição de Habitantes",
+        "Imposto de Desenvolvimento Habitacional",
+        "Índice de Densidade Humana"
+      ],
+      correta: 0,
+      explicacao: "IDH é o Índice de Desenvolvimento Humano — ele mostra a qualidade de vida da população, considerando saúde, educação e renda."
+    },
+    {
+      texto: "Quais três aspectos são usados para calcular o IDH?",
+      opcoes: [
+        "População, território e clima",
+        "Saúde, educação e renda",
+        "Exportações, importações e PIB",
+        "Idade, gênero e religião"
+      ],
+      correta: 1,
+      explicacao: "O IDH combina três dimensões: saúde (expectativa de vida), educação (acesso à escola) e renda (recursos para as necessidades)."
+    },
+    {
+      texto: "Um lugar com boa saúde, educação e renda tende a ter IDH...",
+      opcoes: [
+        "Baixo, próximo de 0",
+        "Alto, próximo de 1",
+        "Sempre igual a 0,5",
+        "O IDH não depende disso"
+      ],
+      correta: 1,
+      explicacao: "Quanto melhores os resultados nas três dimensões, mais perto de 1 fica o IDH — indicando maior desenvolvimento humano."
+    },
+    {
+      texto: "O que o coeficiente de Gini mede?",
+      opcoes: [
+        "A quantidade de anos que as pessoas estudam",
+        "A desigualdade na distribuição da renda",
+        "O número de hospitais de um país",
+        "A taxa de natalidade da população"
+      ],
+      correta: 1,
+      explicacao: "O Gini mede como a renda está distribuída entre a população: se está espalhada de forma igual ou concentrada nas mãos de poucos."
+    },
+    {
+      texto: "Se poucas pessoas concentram quase toda a renda de um país, o Gini fica mais perto de...",
+      opcoes: [
+        "0",
+        "1",
+        "10",
+        "Isso não altera o Gini"
+      ],
+      correta: 1,
+      explicacao: "Quanto mais concentrada a renda, mais perto de 1 fica o Gini. Um Gini próximo de 0 indica renda bem distribuída."
+    },
+    {
+      texto: "O IDH mostra diretamente se a renda de um país é bem distribuída?",
+      opcoes: [
+        "Sim, é exatamente para isso que ele serve",
+        "Não — quem mede isso é o coeficiente de Gini",
+        "Sim, mas só em países pobres",
+        "Não, o IDH não usa a renda em seu cálculo"
+      ],
+      correta: 1,
+      explicacao: "O IDH olha para a renda média da população, mas não mostra como ela é distribuída. Quem mede a distribuição/desigualdade é o Gini."
+    }
+  ];
+
+  let atual = 0;
+  let acertos = 0;
+  const respondidas = new Array(perguntas.length).fill(false);
+
+  const containerPerguntas = document.getElementById('perguntas');
+  const btnProxima = document.getElementById('btnProxima');
+  const progressoBarra = document.getElementById('progressoBarra');
+  const resultadoFinal = document.getElementById('resultadoFinal');
+
+  function montarPerguntas(){
+    perguntas.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'pergunta';
+      div.id = 'pergunta-' + i;
+
+      const opcoesHtml = p.opcoes.map((op, j) =>
+        `<button class="opcao" data-indice="${j}">${op}</button>`
+      ).join('');
+
+      div.innerHTML = `
+        <div class="numero">Pergunta ${i+1} de ${perguntas.length}</div>
+        <div class="texto">${p.texto}</div>
+        <div class="opcoes">${opcoesHtml}</div>
+        <div class="feedback"></div>
+      `;
+      containerPerguntas.appendChild(div);
+    });
+
+    document.getElementById('pergunta-0').classList.add('ativa');
+    atualizarProgresso();
+
+    containerPerguntas.addEventListener('click', (e) => {
+      const btn = e.target.closest('.opcao');
+      if(!btn) return;
+      const perguntaDiv = btn.closest('.pergunta');
+      const indicePergunta = parseInt(perguntaDiv.id.split('-')[1]);
+      if(respondidas[indicePergunta]) return;
+
+      responder(indicePergunta, parseInt(btn.dataset.indice));
+    });
+  }
+
+  function responder(indicePergunta, indiceEscolhido){
+    respondidas[indicePergunta] = true;
+    const p = perguntas[indicePergunta];
+    const perguntaDiv = document.getElementById('pergunta-' + indicePergunta);
+    const botoes = perguntaDiv.querySelectorAll('.opcao');
+    const feedback = perguntaDiv.querySelector('.feedback');
+
+    botoes.forEach((b, j) => {
+      b.disabled = true;
+      if(j === p.correta) b.classList.add('correta');
+      if(j === indiceEscolhido && j !== p.correta) b.classList.add('errada');
+    });
+
+    const acertou = indiceEscolhido === p.correta;
+    if(acertou) acertos++;
+
+    feedback.classList.add('mostrar', acertou ? 'acerto' : 'erro');
+    feedback.innerHTML = `<strong>${acertou ? '✅ Certinho!' : '❌ Quase lá.'}</strong> ${p.explicacao}`;
+
+    if(indicePergunta === perguntas.length - 1){
+      btnProxima.textContent = 'Ver resultado →';
+    }
+    btnProxima.classList.add('mostrar');
+  }
+
+  function atualizarProgresso(){
+    progressoBarra.style.width = ((atual) / perguntas.length * 100) + '%';
+  }
+
+  btnProxima.addEventListener('click', () => {
+    if(atual < perguntas.length - 1){
+      document.getElementById('pergunta-' + atual).classList.remove('ativa');
+      atual++;
+      document.getElementById('pergunta-' + atual).classList.add('ativa');
+      btnProxima.classList.remove('mostrar');
+      atualizarProgresso();
+    } else {
+      mostrarResultado();
+    }
+  });
+
+  function mostrarResultado(){
+    document.getElementById('pergunta-' + atual).classList.remove('ativa');
+    btnProxima.classList.remove('mostrar');
+    progressoBarra.style.width = '100%';
+
+    resultadoFinal.classList.add('ativa');
+    document.getElementById('resultadoPlacar').textContent = acertos + '/' + perguntas.length;
+
+    let emoji = '🎉', texto = '';
+    if(acertos === perguntas.length){
+      emoji = '🏆';
+      texto = 'Mandou muito bem! Você entendeu direitinho a diferença entre IDH e Gini.';
+    } else if(acertos >= perguntas.length - 2){
+      emoji = '👏';
+      texto = 'Muito bom! Você já entendeu o essencial — vale revisar os pontos que errou.';
+    } else {
+      emoji = '💪';
+      texto = 'Bom começo! Releia as seções acima com calma e tente de novo.';
+    }
+    document.getElementById('resultadoEmoji').textContent = emoji;
+    document.getElementById('resultadoTexto').textContent = texto;
+  }
+
+  document.getElementById('btnRefazer').addEventListener('click', () => {
+    atual = 0;
+    acertos = 0;
+    respondidas.fill(false);
+    containerPerguntas.innerHTML = '';
+    montarPerguntas();
+    resultadoFinal.classList.remove('ativa');
+    btnProxima.textContent = 'Próxima pergunta →';
+  });
+
+  montarPerguntas();
+</script>
+
+</body>
+</html>
