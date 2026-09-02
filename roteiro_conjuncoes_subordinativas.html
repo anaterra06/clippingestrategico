@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro de Estudos — Conjunções Subordinativas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Literata:opsz,wght@18..144,400;18..144,500;18..144,600;18..144,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fffdf8;
+    --rule:#c7d6ea;
+    --margin:#c65d57;
+    --ink:#1b2a4a;
+    --ink-soft:#3c4a68;
+    --yellow:#f5d949;
+    --yellow-soft:#fbf0bd;
+    --green:#a8d5ba;
+    --green-soft:#e2f2e7;
+    --orange:#f2a65a;
+    --orange-soft:#fcead4;
+    --tab-w:190px;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:#e7e2d6;
+    font-family:'Literata', serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== layout: notebook page + side tabs ===== */
+  .book{
+    display:flex;
+    max-width:1180px;
+    margin:0 auto;
+    min-height:100vh;
+  }
+
+  nav.tabs{
+    width:var(--tab-w);
+    flex:0 0 var(--tab-w);
+    padding:48px 0 40px;
+    position:sticky;
+    top:0;
+    align-self:flex-start;
+    height:100vh;
+    overflow-y:auto;
+  }
+  nav.tabs .tabs-title{
+    font-family:'Kalam',cursive;
+    font-size:1.4rem;
+    color:var(--ink);
+    padding:0 18px 18px;
+    border-bottom:2px solid var(--ink);
+    margin:0 12px 14px;
+  }
+  nav.tabs a{
+    display:block;
+    text-decoration:none;
+    color:var(--ink-soft);
+    font-family:'Kalam',cursive;
+    font-size:1.05rem;
+    padding:11px 18px;
+    margin:2px 8px;
+    border-radius:3px 10px 10px 3px;
+    border-left:4px solid transparent;
+    transition:background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  nav.tabs a:hover{ background:var(--yellow-soft); border-left-color:var(--yellow); color:var(--ink);}
+  nav.tabs a.active{ background:var(--green-soft); border-left-color:var(--green); color:var(--ink); font-weight:700;}
+
+  main.page{
+    flex:1;
+    background:
+      repeating-linear-gradient(var(--paper) 0 39px, var(--rule) 39px 40px);
+    background-color:var(--paper);
+    border-left:3px solid var(--margin);
+    padding:56px 60px 56px 76px;
+    position:relative;
+    box-shadow:-1px 0 0 rgba(0,0,0,.02), 0 0 40px rgba(0,0,0,.06);
+  }
+  main.page::before{
+    content:"";
+    position:absolute;
+    left:34px; top:0; bottom:0;
+    width:0;
+  }
+
+  header.hero{
+    padding-bottom:34px;
+    margin-bottom:38px;
+    border-bottom:2px dashed var(--rule);
+  }
+  header.hero .eyebrow{
+    font-family:'Kalam',cursive;
+    color:var(--margin);
+    font-size:1.05rem;
+    transform:rotate(-1.2deg);
+    display:inline-block;
+    margin-bottom:6px;
+  }
+  header.hero h1{
+    font-family:'Kalam',cursive;
+    font-size:3rem;
+    line-height:1.05;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+  header.hero p.lead{
+    max-width:62ch;
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    line-height:1.65;
+    margin:0;
+  }
+  header.hero .prof{
+    margin-top:16px;
+    font-family:'Kalam',cursive;
+    font-size:1.1rem;
+    color:var(--ink-soft);
+  }
+
+  section{
+    margin-bottom:56px;
+    scroll-margin-top:24px;
+  }
+  section h2{
+    font-family:'Kalam',cursive;
+    font-size:1.9rem;
+    color:var(--ink);
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin:0 0 6px;
+  }
+  section h2 .num{
+    font-size:1.1rem;
+    color:var(--margin);
+  }
+  section > .subtitle{
+    font-size:.98rem;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+    font-style:italic;
+  }
+
+  h3{
+    font-family:'Literata', serif;
+    font-weight:700;
+    font-size:1.18rem;
+    margin:26px 0 10px;
+    color:var(--ink);
+  }
+  p{ line-height:1.72; font-size:1.02rem; color:var(--ink-soft); margin:0 0 14px;}
+  strong{ color:var(--ink); }
+
+  /* highlight marks matching the source deck's color coding */
+  mark.principal{ background:var(--orange-soft); padding:1px 5px; border-radius:3px; color:var(--ink); font-weight:600;}
+  mark.conj{ background:var(--yellow-soft); padding:1px 5px; border-radius:3px; color:var(--ink); font-weight:600;}
+  mark.subordinada{ background:var(--green-soft); padding:1px 5px; border-radius:3px; color:var(--ink); font-weight:600;}
+
+  .legend{
+    display:flex; flex-wrap:wrap; gap:14px;
+    margin:6px 0 24px;
+    font-family:'Kalam',cursive;
+    font-size:.95rem;
+  }
+  .legend span{ display:flex; align-items:center; gap:6px;}
+  .legend i{ width:14px; height:14px; border-radius:3px; display:inline-block;}
+  .legend i.o{background:var(--orange);} .legend i.c{background:var(--yellow);} .legend i.s{background:var(--green);}
+
+  .formula{
+    font-family:'Kalam',cursive;
+    font-size:1.25rem;
+    text-align:center;
+    padding:18px;
+    border:2px dashed var(--rule);
+    border-radius:10px;
+    margin:20px 0 26px;
+    color:var(--ink);
+  }
+  .formula .plus{ color:var(--margin); margin:0 8px;}
+
+  .example{
+    background:rgba(199,214,234,.16);
+    border-left:3px solid var(--rule);
+    padding:12px 16px;
+    border-radius:0 8px 8px 0;
+    margin:12px 0;
+    font-size:1rem;
+  }
+  .example .fr{ display:block; margin-bottom:4px;}
+  .example .fr.ok{ color:var(--ink);}
+
+  /* card grid for OSS types */
+  .oss-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:8px;
+  }
+  @media (max-width:760px){ .oss-grid{ grid-template-columns:1fr; } }
+
+  .oss-card{
+    border:1px solid var(--rule);
+    border-radius:12px;
+    padding:18px 20px;
+    background:#fffef c;
+    background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,0));
+    position:relative;
+  }
+  .oss-card h4{
+    margin:0 0 8px;
+    font-family:'Kalam',cursive;
+    font-size:1.2rem;
+    color:var(--ink);
+  }
+  .oss-card .func{
+    display:inline-block;
+    font-size:.78rem;
+    letter-spacing:.02em;
+    color:var(--margin);
+    font-family:'Literata',serif;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .oss-card p{ font-size:.94rem; margin-bottom:8px;}
+  .oss-card .example{ font-size:.92rem; }
+
+  /* adverbial table */
+  .table-wrap{ overflow-x:auto; border:1px solid var(--rule); border-radius:12px; margin-top:10px;}
+  table.adv{
+    border-collapse:collapse;
+    width:100%;
+    font-size:.94rem;
+  }
+  table.adv thead th{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Kalam',cursive;
+    font-weight:400;
+    font-size:1.02rem;
+    text-align:left;
+    padding:12px 14px;
+  }
+  table.adv td{
+    padding:13px 14px;
+    border-top:1px solid var(--rule);
+    vertical-align:top;
+    color:var(--ink-soft);
+  }
+  table.adv tr:nth-child(even) td{ background:rgba(199,214,234,.10); }
+  table.adv td.tipo{
+    font-family:'Kalam',cursive;
+    font-size:1.05rem;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  table.adv td.conj{ font-style:italic; }
+  table.adv td.ex{ color:var(--ink); }
+
+  /* exercises */
+  .ex-item{
+    border:1px solid var(--rule);
+    border-radius:12px;
+    padding:18px 20px;
+    margin-bottom:16px;
+    background:rgba(255,255,255,.5);
+  }
+  .ex-item .q-num{
+    font-family:'Kalam',cursive;
+    color:var(--margin);
+    font-size:1.05rem;
+    margin-right:6px;
+  }
+  .ex-item p.enun{ margin-bottom:10px; font-size:1.02rem; color:var(--ink);}
+  .ex-item .frase{
+    font-style:italic;
+    color:var(--ink);
+    display:block;
+    margin:6px 0 10px;
+    padding-left:12px;
+    border-left:3px solid var(--yellow);
+  }
+  details.answer{
+    margin-top:8px;
+  }
+  details.answer summary{
+    cursor:pointer;
+    font-family:'Kalam',cursive;
+    color:var(--ink-soft);
+    font-size:.98rem;
+    outline:none;
+    user-select:none;
+    list-style:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 12px;
+    border:1px solid var(--rule);
+    border-radius:20px;
+    transition:background .15s ease;
+  }
+  details.answer summary::-webkit-details-marker{ display:none; }
+  details.answer summary:hover{ background:var(--yellow-soft); }
+  details.answer summary::before{ content:"✎ "; }
+  details.answer[open] summary::before{ content:"✓ "; color:#3f7a52; }
+  details.answer .reveal{
+    margin-top:10px;
+    padding:12px 14px;
+    background:var(--green-soft);
+    border-radius:8px;
+    font-size:.96rem;
+    color:var(--ink);
+  }
+  .badge-list{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-bottom:12px;
+  }
+  .badge-list li{
+    list-style:none;
+    font-family:'Kalam',cursive;
+    font-size:.92rem;
+    background:var(--yellow-soft);
+    border:1px solid var(--yellow);
+    padding:4px 12px;
+    border-radius:14px;
+    color:var(--ink);
+  }
+
+  .fill-list{ padding-left:0; margin:0;}
+  .fill-list li{
+    list-style:none;
+    margin-bottom:14px;
+  }
+  .blank{
+    display:inline-block;
+    min-width:110px;
+    border-bottom:2px dotted var(--ink-soft);
+    text-align:center;
+  }
+
+  footer.page-end{
+    margin-top:60px;
+    padding-top:20px;
+    border-top:2px dashed var(--rule);
+    font-family:'Kalam',cursive;
+    font-size:.95rem;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  @media (max-width:900px){
+    .book{ flex-direction:column; }
+    nav.tabs{ position:static; width:100%; height:auto; padding:20px 0; display:flex; overflow-x:auto; white-space:nowrap;}
+    nav.tabs .tabs-title{ display:none;}
+    nav.tabs a{ display:inline-block; margin:0 6px;}
+    main.page{ padding:36px 22px 40px 34px; border-left:none; border-top:3px solid var(--margin);}
+    header.hero h1{ font-size:2.1rem;}
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+  <nav class="tabs" id="tabs">
+    <div class="tabs-title">Índice</div>
+    <a href="#fundamentos">Fundamentos</a>
+    <a href="#integrante">Conjunção integrante</a>
+    <a href="#substantivas">Orações substantivas</a>
+    <a href="#adverbiais">Orações adverbiais</a>
+    <a href="#exercicios">Exercícios</a>
+  </nav>
+
+  <main class="page">
+
+    <header class="hero">
+      <span class="eyebrow">roteiro de estudos</span>
+      <h1>Conjunções Subordinativas</h1>
+      <p class="lead">Um guia para revisar como uma oração pode depender sintaticamente de outra — das conjunções integrantes às adverbiais — com exemplos comentados e exercícios de fixação ao final.</p>
+      <p class="prof">Baseado no material do Professor Felipe Vilanova</p>
+    </header>
+
+    <!-- ===================== FUNDAMENTOS ===================== -->
+    <section id="fundamentos">
+      <h2><span class="num">01</span> Relembrando os conceitos</h2>
+      <p class="subtitle">Antes das conjunções, vale revisar a estrutura que elas conectam.</p>
+
+      <p><strong>Oração</strong> é a sentença ou parte da sentença organizada em torno de um verbo. <strong>Período</strong> é a sentença formada por uma ou mais orações: se houver uma só, é <strong>período simples</strong>; se houver mais de uma, é <strong>período composto</strong> — por coordenação ou por subordinação.</p>
+
+      <h3>A subordinação</h3>
+      <p>Na subordinação, uma oração é <strong>dependente</strong>: ela exerce uma função sintática em relação a outra. Formam-se, assim, uma <strong>oração principal</strong> e uma <strong>oração subordinada</strong>.</p>
+
+      <div class="formula">
+        ORAÇÃO PRINCIPAL <span class="plus">+</span> ORAÇÃO SUBORDINADA <span class="plus">=</span> PERÍODO COMPOSTO POR SUBORDINAÇÃO
+      </div>
+
+      <div class="legend">
+        <span><i class="o"></i> oração principal</span>
+        <span><i class="c"></i> conjunção</span>
+        <span><i class="s"></i> oração subordinada</span>
+      </div>
+    </section>
+
+    <!-- ===================== CONJUNÇÃO INTEGRANTE ===================== -->
+    <section id="integrante">
+      <h2><span class="num">02</span> Conjunção integrante (CI)</h2>
+      <p class="subtitle">A porta de entrada das orações subordinadas substantivas.</p>
+
+      <p>As <strong>conjunções integrantes</strong> abrem uma <strong>oração subordinada substantiva</strong>, conectando-a à oração principal. Elas são apenas duas: <mark class="conj">que</mark> e <mark class="conj">se</mark>.</p>
+
+      <div class="example">
+        <span class="fr ok"><mark class="principal">É provável</mark> <mark class="conj">que</mark> <mark class="subordinada">o time vença</mark>.</span>
+      </div>
+    </section>
+
+    <!-- ===================== ORAÇÕES SUBSTANTIVAS ===================== -->
+    <section id="substantivas">
+      <h2><span class="num">03</span> Oração subordinada substantiva</h2>
+      <p class="subtitle">Ela ocupa o lugar de um substantivo — e por isso herda as funções que um substantivo teria.</p>
+
+      <p>Uma oração subordinada substantiva substitui um termo da classe dos substantivos, podendo exercer as funções de <strong>sujeito</strong>, <strong>objeto direto</strong>, <strong>objeto indireto</strong>, <strong>predicativo</strong>, <strong>complemento nominal</strong> ou <strong>aposto</strong>.</p>
+
+      <div class="oss-grid">
+
+        <div class="oss-card">
+          <span class="func">função de sujeito</span>
+          <h4>Subjetiva</h4>
+          <div class="example">
+            <span class="fr">O fim do mundo é provável. <em>(substantivo)</em></span>
+            <span class="fr ok">Que <mark class="subordinada">o mundo acabe</mark> é provável. <em>(oração)</em></span>
+          </div>
+        </div>
+
+        <div class="oss-card">
+          <span class="func">função de objeto direto</span>
+          <h4>Objetiva direta</h4>
+          <div class="example">
+            <span class="fr">João conseguiu o carro. <em>(substantivo)</em></span>
+            <span class="fr ok">João conseguiu <mark class="conj">que</mark> <mark class="subordinada">o carro chegasse</mark>. <em>(oração)</em></span>
+          </div>
+        </div>
+
+        <div class="oss-card">
+          <span class="func">função de objeto indireto</span>
+          <h4>Objetiva indireta</h4>
+          <div class="example">
+            <span class="fr">João gosta de novos peixes. <em>(substantivo)</em></span>
+            <span class="fr ok">João gosta de <mark class="conj">que</mark> <mark class="subordinada">lhe comprem peixes novos</mark>. <em>(oração)</em></span>
+          </div>
+        </div>
+
+        <div class="oss-card">
+          <span class="func">função de complemento nominal</span>
+          <h4>Completiva nominal</h4>
+          <div class="example">
+            <span class="fr">João tem certeza do fim do inverno. <em>(substantivo)</em></span>
+            <span class="fr ok">João tem certeza de <mark class="conj">que</mark> <mark class="subordinada">o inverno acabará</mark>. <em>(oração)</em></span>
+          </div>
+        </div>
+
+        <div class="oss-card">
+          <span class="func">função de predicativo</span>
+          <h4>Predicativa</h4>
+          <div class="example">
+            <span class="fr">A verdade é o fim inevitável. <em>(substantivo)</em></span>
+            <span class="fr ok">A verdade é <mark class="conj">que</mark> <mark class="subordinada">o fim ocorrerá</mark>. <em>(oração)</em></span>
+          </div>
+        </div>
+
+        <div class="oss-card">
+          <span class="func">função de aposto</span>
+          <h4>Apositiva</h4>
+          <div class="example">
+            <span class="fr">O problema, a prova de português, é terrível. <em>(substantivo)</em></span>
+            <span class="fr ok">O problema é só um: <mark class="conj">que</mark> <mark class="subordinada">eu não estudei para a prova</mark>. <em>(oração)</em></span>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="margin-top:18px;"><strong>Dica de identificação:</strong> pergunte sempre o que o verbo (ou o nome) da oração principal exige. Se ele "pede" um complemento, a oração que o completa provavelmente é substantiva — e o tipo depende de qual função esse complemento exerceria se fosse um substantivo isolado.</p>
+    </section>
+
+    <!-- ===================== ORAÇÕES ADVERBIAIS ===================== -->
+    <section id="adverbiais">
+      <h2><span class="num">04</span> Oração subordinada adverbial</h2>
+      <p class="subtitle">Sempre com a mesma função — adjunto adverbial — mudando apenas a ideia que expressa.</p>
+
+      <p>As orações subordinadas adverbiais ocupam o lugar que um advérbio ocuparia na frase e exercem, sempre, a função de <strong>adjunto adverbial</strong>. Por isso, ao classificá-las, não indicamos a função sintática — indicamos apenas o <strong>tipo de ideia</strong> que trazem. As conjunções que as introduzem são chamadas de <strong>conjunções subordinativas adverbiais</strong>.</p>
+
+      <div class="table-wrap">
+        <table class="adv">
+          <thead>
+            <tr><th>Tipo</th><th>Ideia</th><th>Conjunções</th><th>Exemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tipo">Causal</td>
+              <td>Indica a causa do que ocorreu na oração principal</td>
+              <td class="conj">porque, já que, uma vez que, visto que, como</td>
+              <td class="ex">Visto que estava doente, não fui à escola.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Concessiva</td>
+              <td>Indica uma concessão — uma "quebra de expectativa"</td>
+              <td class="conj">embora, ainda que, apesar de que, mesmo que</td>
+              <td class="ex">Embora o Brasil seja um país rico, existe muita pobreza.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Condicional</td>
+              <td>Indica uma condição para que ocorra a ideia da principal</td>
+              <td class="conj">se, caso, desde que, salvo se</td>
+              <td class="ex">Se eu tirar uma boa nota na prova, tomarei sorvete.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Comparativa</td>
+              <td>Indica uma comparação com a oração principal</td>
+              <td class="conj">como, tal qual, mais... do que, menos... do que</td>
+              <td class="ex">Ele estava tão nervoso quanto eu estava.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Consecutiva</td>
+              <td>Indica a consequência do que foi dito na principal</td>
+              <td class="conj">tão... que, de sorte que, de forma que</td>
+              <td class="ex">Nunca desistiu dos seus sonhos, de forma que acabou realizando-os.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Conformativa</td>
+              <td>Indica uma conformidade em relação à principal</td>
+              <td class="conj">conforme, consoante, segundo, como</td>
+              <td class="ex">Conforme o professor explicou, fiz todas as tarefas no livro.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Temporal</td>
+              <td>Indica a circunstância de tempo em que ocorreu a principal</td>
+              <td class="conj">quando, desde que, logo que, assim que, depois que</td>
+              <td class="ex">Quando o professor entrou na sala, estávamos em silêncio.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Final</td>
+              <td>Indica a finalidade da ideia da oração principal</td>
+              <td class="conj">para que, a fim de que, com o objetivo de</td>
+              <td class="ex">O diretor deve tomar essa medida, a fim de melhorar a situação do funcionário.</td>
+            </tr>
+            <tr>
+              <td class="tipo">Proporcional</td>
+              <td>Indica uma proporção</td>
+              <td class="conj">à medida que, à proporção que, quanto mais... mais</td>
+              <td class="ex">Quanto mais eu estudo, mais eu fico feliz.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== EXERCÍCIOS ===================== -->
+    <section id="exercicios">
+      <h2><span class="num">05</span> Exercícios</h2>
+      <p class="subtitle">Clique em "ver resposta" para conferir depois de tentar responder.</p>
+
+      <h3>Parte A — Classifique a oração subordinada substantiva destacada</h3>
+      <ul class="badge-list">
+        <li>subjetiva</li><li>objetiva direta</li><li>objetiva indireta</li>
+        <li>completiva nominal</li><li>predicativa</li><li>apositiva</li>
+      </ul>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">1.</span>Classifique a oração destacada:</p>
+        <span class="frase">É necessário <strong>que todos cheguem cedo</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Subjetiva.</strong> A oração funciona como sujeito do verbo de ligação "é" (compare: "Isso é necessário").</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">2.</span>Classifique a oração destacada:</p>
+        <span class="frase">Espero <strong>que você tenha um bom dia</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Objetiva direta.</strong> A oração completa o sentido do verbo transitivo direto "esperar" (compare: "Espero isso").</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">3.</span>Classifique a oração destacada:</p>
+        <span class="frase">Ele insistiu em <strong>que ficássemos até o fim</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Objetiva indireta.</strong> O verbo "insistir" exige preposição, e a oração completa esse objeto indireto (compare: "Ele insistiu nisso").</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">4.</span>Classifique a oração destacada:</p>
+        <span class="frase">Tenho medo de <strong>que a prova seja difícil</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Completiva nominal.</strong> A oração completa o sentido do substantivo "medo", que exige complemento preposicionado (compare: "Tenho medo disso").</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">5.</span>Classifique a oração destacada:</p>
+        <span class="frase">O meu desejo é <strong>que você seja feliz</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Predicativa.</strong> A oração é o predicativo do sujeito "o meu desejo", ligado pelo verbo de ligação "é".</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">6.</span>Classifique a oração destacada:</p>
+        <span class="frase">Só peço uma coisa: <strong>que você não desista</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Apositiva.</strong> A oração explica e detalha o termo "uma coisa", funcionando como aposto explicativo.</div>
+        </details>
+      </div>
+
+      <h3>Parte B — Complete com uma conjunção subordinativa adverbial adequada ao tipo indicado</h3>
+
+      <ol class="fill-list">
+        <li>
+          <span class="q-num">7.</span> (causal) <span class="blank">&nbsp;</span>, choveu muito ontem, o passeio foi cancelado.
+          <details class="answer"><summary>ver resposta</summary>
+            <div class="reveal">Ex.: <em>Como / Já que / Visto que</em> choveu muito ontem, o passeio foi cancelado.</div>
+          </details>
+        </li>
+        <li>
+          <span class="q-num">8.</span> (concessiva) <span class="blank">&nbsp;</span> estivesse cansado, terminou o treino.
+          <details class="answer"><summary>ver resposta</summary>
+            <div class="reveal">Ex.: <em>Embora / Ainda que / Mesmo que</em> estivesse cansado, terminou o treino.</div>
+          </details>
+        </li>
+        <li>
+          <span class="q-num">9.</span> (condicional) Você será aprovado <span class="blank">&nbsp;</span> estudar todos os dias.
+          <details class="answer"><summary>ver resposta</summary>
+            <div class="reveal">Ex.: Você será aprovado <em>se / desde que / caso</em> estudar todos os dias.</div>
+          </details>
+        </li>
+        <li>
+          <span class="q-num">10.</span> (final) Ele economizou dinheiro <span class="blank">&nbsp;</span> pudesse viajar no fim do ano.
+          <details class="answer"><summary>ver resposta</summary>
+            <div class="reveal">Ex.: Ele economizou dinheiro <em>para que / a fim de que</em> pudesse viajar no fim do ano.</div>
+          </details>
+        </li>
+      </ol>
+
+      <h3>Parte C — Identifique o tipo de oração subordinada adverbial</h3>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">11.</span>Identifique o tipo de oração adverbial destacada:</p>
+        <span class="frase">Estudou tanto, <strong>que passou em primeiro lugar</strong>.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Consecutiva</strong> — indica a consequência do que foi dito na oração principal.</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">12.</span>Identifique o tipo de oração adverbial destacada:</p>
+        <span class="frase"><strong>Conforme combinamos</strong>, entreguei o relatório hoje.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Conformativa</strong> — indica conformidade em relação à ideia da oração principal.</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">13.</span>Identifique o tipo de oração adverbial destacada:</p>
+        <span class="frase"><strong>À medida que o tempo passava</strong>, a plateia ficava mais ansiosa.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Proporcional</strong> — indica uma proporção entre os fatos das duas orações.</div>
+        </details>
+      </div>
+
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">14.</span>Identifique o tipo de oração adverbial destacada:</p>
+        <span class="frase"><strong>Assim que o sinal tocou</strong>, os alunos saíram da sala.</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal"><strong>Temporal</strong> — indica a circunstância de tempo em que ocorreu a ação da principal.</div>
+        </details>
+      </div>
+
+      <h3>Parte D — Junção de períodos</h3>
+      <div class="ex-item">
+        <p class="enun"><span class="q-num">15.</span>Una as duas orações abaixo em um único período, usando uma conjunção subordinativa adverbial condicional:</p>
+        <span class="frase">"Você se esforça." + "Você alcança seus objetivos."</span>
+        <details class="answer"><summary>ver resposta</summary>
+          <div class="reveal">Ex.: <em>Se você se esforçar, você alcança seus objetivos.</em> (também aceitável: caso, desde que)</div>
+        </details>
+      </div>
+
+    </section>
+
+    <footer class="page-end">— fim do roteiro · revise, refaça os exercícios sem consultar as respostas e depois confira —</footer>
+
+  </main>
+</div>
+
+<script>
+  // highlight active tab on scroll
+  const sections = document.querySelectorAll('main.page section');
+  const links = document.querySelectorAll('nav.tabs a');
+  const setActive = () => {
+    let current = sections[0].id;
+    const offset = 120;
+    sections.forEach(sec => {
+      if (window.scrollY + offset >= sec.offsetTop) current = sec.id;
+    });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  window.addEventListener('scroll', setActive);
+  setActive();
+</script>
+
+</body>
+</html>
