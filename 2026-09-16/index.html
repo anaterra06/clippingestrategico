@@ -43,4 +43,578 @@ overflow-x:hidden;
 }
 .eyebrow{
 font-family:'IBM Plex Mono', monospace;
-font-size:1
+font-size:11px;
+letter-spacing:.14em;
+text-transform:uppercase;
+font-weight:500;
+}
+.serif{ font-family:'Fraunces', serif; }
+#progress-wrap{
+position:fixed; top:0; left:0; right:0; height:3px;
+background:rgba(255,255,255,.08); z-index:500;
+}
+#progress-bar{
+height:100%; width:0%;
+background:linear-gradient(90deg,var(--red-deep),var(--red-bright));
+}
+#tab{
+position:fixed; top:14px; right:16px; z-index:500;
+font-family:'IBM Plex Mono', monospace;
+font-size:10px; letter-spacing:.12em;
+color:var(--paper);
+background:var(--red);
+padding:5px 9px 4px;
+border-radius:2px;
+box-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+#tab span{opacity:.65;}
+#deck{
+height:100vh; height:100svh;
+overflow-y:scroll;
+scroll-snap-type:y mandatory;
+}
+section{
+min-height:100vh; min-height:100svh;
+width:100%;
+scroll-snap-align:start;
+scroll-snap-stop:always;
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:76px 26px 56px;
+}
+section.dark{ background:var(--black); color:var(--paper); }
+section.light{ background:var(--paper); color:var(--black); }
+section.redsec{ background:var(--red); color:var(--paper); }
+.section-inner{ max-width:560px; margin:0 auto; width:100%; opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+section.in-view .section-inner{ opacity:1; transform:translateY(0); }
+.kicker{
+display:flex; align-items:center; gap:10px; margin-bottom:18px;
+}
+.kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--red-bright); flex:none; }
+.dark .kicker .dot, .redsec .kicker .dot{ background:#fff; }
+.light .eyebrow{ color:var(--red-deep); }
+.dark .eyebrow, .redsec .eyebrow{ color:var(--gray-on-black); }
+.redsec .eyebrow{ color:rgba(255,255,255,.75); }
+h1,h2,h3{ font-weight:560; line-height:1.05; }
+h1{ font-size:clamp(34px,9vw,52px); margin-bottom:16px; }
+h2{ font-size:clamp(28px,7.5vw,40px); margin-bottom:14px; }
+h3{ font-size:19px; font-weight:600; font-family:'IBM Plex Sans',sans-serif; margin-bottom:6px; }
+p.lede{ font-size:16px; line-height:1.6; color:var(--gray); }
+.dark p.lede, .redsec p.lede{ color:var(--gray-on-black); }
+.redsec p.lede{ color:rgba(255,255,255,.82); }
+p.body-text{ font-size:15px; line-height:1.65; margin-top:14px; }
+p.body-text + p.body-text{ margin-top:10px; }
+.hint{
+position:absolute; bottom:26px; left:0; right:0; text-align:center;
+font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em;
+color:var(--gray-on-black); animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{ 0%,100%{transform:translateY(0); opacity:.55;} 50%{transform:translateY(6px); opacity:1;} }
+.stamp{
+display:inline-flex; align-items:center; gap:6px;
+font-family:'IBM Plex Mono', monospace;
+font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+border:1.5px solid var(--red-bright);
+color:var(--red-bright);
+padding:4px 9px 3px;
+border-radius:3px;
+transform:rotate(-1.5deg);
+white-space:nowrap;
+}
+.light .stamp{ border-color:var(--red); color:var(--red); }
+.stamp.hi{ background:var(--red-bright); color:#fff; border-color:var(--red-bright); }
+.light .stamp.hi{ background:var(--red); border-color:var(--red); }
+.thread{ position:relative; margin-top:24px; padding-left:26px; }
+.thread::before{
+content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+background:linear-gradient(var(--red-bright), var(--red-deep));
+opacity:.55;
+}
+.thread-item{ position:relative; padding-bottom:22px; }
+.thread-item:last-child{ padding-bottom:0; }
+.thread-item::before{
+content:''; position:absolute; left:-26px; top:4px; width:11px; height:11px;
+border-radius:50%; background:var(--red-bright); border:2px solid var(--black);
+}
+.thread-item h3{ font-size:15.5px; margin-bottom:3px; }
+.thread-item .num{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gray-on-black); }
+.thread-item p{ font-size:13.5px; color:var(--gray-on-black); line-height:1.5; }
+.doc-card{
+margin-top:22px; border:1px solid var(--line-on-black);
+background:rgba(255,255,255,.03);
+padding:18px 18px 16px; border-radius:4px;
+position:relative;
+}
+.light .doc-card{ border-color:var(--line); background:#fff; }
+.doc-card::before{
+content:'DOSSIÊ'; position:absolute; top:-9px; left:14px;
+font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.14em;
+background:var(--black); color:var(--red-bright); padding:0 6px;
+}
+.light .doc-card::before{ background:var(--paper); color:var(--red); }
+.doc-card .doc-title{ font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; color:var(--red-bright); margin-bottom:8px; }
+.light .doc-card .doc-title{ color:var(--red); }
+.doc-card .doc-row{ display:flex; justify-content:space-between; gap:12px; font-size:13px; padding:6px 0; border-top:1px dashed var(--line-on-black); }
+.light .doc-card .doc-row{ border-top:1px dashed var(--line); }
+.doc-card .doc-row:first-of-type{ border-top:none; }
+.doc-card .doc-row .k{ color:var(--gray-on-black); flex:none; }
+.light .doc-card .doc-row .k{ color:var(--gray); }
+.doc-card .doc-row .v{ text-align:right; font-weight:500; }
+.versus{ margin-top:22px; display:flex; flex-direction:column; gap:12px; }
+.vs-card{ border:1px solid var(--line-on-black); border-radius:4px; padding:14px 16px; }
+.light .vs-card{ border-color:var(--line); }
+.vs-card .vs-tag{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--red-bright); margin-bottom:4px; }
+.light .vs-card .vs-tag{ color:var(--red); }
+.vs-card h3{ margin-bottom:4px; }
+.vs-card p{ font-size:13px; color:var(--gray-on-black); line-height:1.5; }
+.light .vs-card p{ color:var(--gray); }
+.vs-divider{ text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gray-on-black); letter-spacing:.1em; }
+.chain{ margin-top:22px; display:flex; flex-direction:column; }
+.chain-step{ display:flex; align-items:flex-start; gap:12px; padding:9px 0; }
+.chain-step .arrow{ font-family:'IBM Plex Mono',monospace; color:var(--red-bright); font-size:15px; padding-top:1px; }
+.chain-step span.txt{ font-size:14.5px; line-height:1.5; }
+.stats{ display:flex; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.stat{ flex:1; min-width:100px; }
+.stat .num{ font-family:'Fraunces',serif; font-size:30px; font-weight:560; color:var(--red-bright); line-height:1; }
+.light .stat .num{ color:var(--red); }
+.stat .lbl{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--gray-on-black); margin-top:4px; letter-spacing:.05em; }
+.light .stat .lbl{ color:var(--gray); }
+.checklist{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+.check-item{ display:flex; gap:12px; align-items:flex-start; }
+.check-item .n{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--red-bright); border:1px solid var(--red-bright); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex:none; margin-top:1px;}
+.light .check-item .n{ color:var(--red); border-color:var(--red); }
+.check-item p{ font-size:14px; line-height:1.5; }
+.expo-list{ margin-top:20px; display:flex; flex-direction:column; gap:0; }
+.expo-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 0; border-top:1px solid var(--line); }
+.expo-row:first-child{ border-top:none; }
+.expo-name{ font-weight:600; font-size:14px; }
+.expo-meta{ font-size:12px; color:var(--gray); font-family:'IBM Plex Mono',monospace; }
+.expo-badge{ font-size:10px; font-family:'IBM Plex Mono',monospace; padding:3px 7px; border-radius:2px; white-space:nowrap; text-transform:uppercase; letter-spacing:.05em;}
+.expo-badge.pos{ background:#e9e4d8; color:var(--red-deep); }
+.expo-badge.neg{ background:#e9e4d8; color:var(--red-deep); }
+.expo-badge.neu{ background:#e9e4d8; color:var(--gray); }
+.lawlist{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
+.law-item{ border-left:3px solid var(--red-bright); padding:2px 0 2px 14px; }
+.light .law-item{ border-left-color:var(--red); }
+.law-item .code{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--red-bright); }
+.light .law-item .code{ color:var(--red); }
+.law-item h3{ margin:3px 0 3px; font-size:15.5px; }
+.law-item p{ font-size:12.5px; color:var(--gray-on-black); }
+.light .law-item p{ color:var(--gray); }
+.closing-quote{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(22px,6vw,30px); line-height:1.35; }
+.signoff{ margin-top:34px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; color:rgba(255,255,255,.7); }
+.divider-rule{ height:1px; background:var(--line-on-black); margin:22px 0; }
+.light .divider-rule{ background:var(--line); }
+.note{ font-size:12px; color:var(--gray-on-black); font-style:italic; margin-top:10px; }
+.light .note{ color:var(--gray); }
+::-webkit-scrollbar{ display:none; }
+</style>
+</head>
+<body>
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+<div id="tab">DOSSIÊ ALMG <span>· 16.09</span></div>
+<div id="deck">
+
+<!-- 0 CAPA -->
+<section class="dark" id="s0">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
+<h1 class="serif">Clipping<br>Estratégico.</h1>
+<p class="lede">Leitura institucional do noticiário — 15 e 16 de setembro de 2026</p>
+<p class="body-text">Cinco núcleos concentram a relevância institucional do período: Ipsemg, Gasmig, Copasa, Parque do Biribiri e Propag. Todos têm em comum a mesma pergunta de fundo — como o Estado gere seu patrimônio, seus contratos e suas obrigações com o cidadão.</p>
+</div>
+<div class="hint">deslize para começar ↓</div>
+</section>
+
+<!-- 1 RADAR -->
+<section class="dark" id="s1">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 0 · O radar</span></div>
+<h2 class="serif">Eixos prioritários<br>do período.</h2>
+<p class="lede">A eleição domina o volume. A relevância institucional está em outro lugar.</p>
+<div class="thread">
+<div class="thread-item">
+<span class="num">01</span>
+<h3>Ipsemg</h3>
+<p>R$ 954 milhões a mais não resolvem as reclamações da rede. <span class="stamp hi" style="margin-top:6px;">muito alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">02</span>
+<h3>Gasmig</h3>
+<p>Governador admite discutir privatização — decisão passa pela ALMG. <span class="stamp hi" style="margin-top:6px;">muito alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">03</span>
+<h3>Copasa</h3>
+<p>Sabotagem ou sucateamento? Duas narrativas, uma fiscalização possível. <span class="stamp" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">04</span>
+<h3>Parque do Biribiri</h3>
+<p>Concessão de 30 anos contestada pela comunidade de Diamantina. <span class="stamp" style="margin-top:6px;">alta</span></p>
+</div>
+<div class="thread-item">
+<span class="num">05</span>
+<h3>Propag</h3>
+<p>Eixo central das sabatinas ao governo — dívida vira programa de campanha. <span class="stamp" style="margin-top:6px;">alta</span></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2 IPSEMG -->
+<section class="light" id="s2">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 1 · Ipsemg</span></div>
+<h2 class="serif">Mais receita,<br>as mesmas filas.</h2>
+<p class="body-text">A audiência da Comissão de Administração Pública produziu o fato institucional mais relevante do período. O reajuste das contribuições deve gerar R$ 954 milhões adicionais até o fim de 2026 — mas servidores e entidades relataram dificuldade para marcar consultas e exames, rede credenciada insuficiente, falta de profissionais no interior, cotas limitadas e defasagem salarial dos trabalhadores do instituto.</p>
+<p class="body-text">O presidente do Ipsemg, André Luiz dos Anjos, apresentou como contrapartida 177 leitos abertos, 376 aprovados em concurso já em exercício, aumento de 767 para 1.047 profissionais credenciados, R$ 24 milhões para a reabertura da ala B do Hospital Governador Israel Pinheiro e R$ 21 milhões em equipamentos.</p>
+<div class="doc-card">
+<div class="doc-title">Destinação informada dos recursos adicionais</div>
+<div class="doc-row"><span class="k">Rede contratada</span><span class="v">65%</span></div>
+<div class="doc-row"><span class="k">Pessoal</span><span class="v">25%</span></div>
+<div class="doc-row"><span class="k">Rede própria</span><span class="v">7%</span></div>
+<div class="doc-row"><span class="k">Gestão</span><span class="v">3%</span></div>
+</div>
+<p class="body-text" style="margin-top:20px;"><strong>O ponto central:</strong> a discrepância entre os indicadores apresentados pela administração e a experiência relatada pelos usuários, sobretudo no interior. A deputada Beatriz Cerqueira questionou a metodologia da apresentação e anunciou o encaminhamento das informações ao Tribunal de Contas.</p>
+<div class="doc-card">
+<div class="doc-title">RQN 9.992/2025 · Beatriz Cerqueira</div>
+<div class="doc-row"><span class="k">Pede</span><span class="v">Plano de investimentos do Ipsemg</span></div>
+<div class="doc-row"><span class="k">Base</span><span class="v">Lei nº 25.143/2025</span></div>
+<div class="doc-row"><span class="k">Correspondência</span><span class="v">Direta com o debate noticiado</span></div>
+</div>
+</div>
+</section>
+
+<!-- 3 GASMIG -->
+<section class="dark" id="s3">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 2 · Gasmig</span></div>
+<h2 class="serif">A privatização<br>passa pela Casa.</h2>
+<p class="body-text">Em sabatina do Estado de Minas, Mateus Simões afirmou que não pretende privatizar a Cemig, mas defendeu discutir a venda da Gasmig — que, segundo ele, investe abaixo do necessário, tem baixa capacidade de expansão e concentra sua atuação no atendimento industrial, sem alcançar adequadamente comércio e outros consumidores.</p>
+<p class="body-text">O próprio governador reconheceu que a operação exigiria alteração da Constituição estadual e aprovação posterior de lei autorizativa pela Assembleia. A proposta pode entrar na pauta da próxima legislatura — discussão patrimonial e regulatória de alta relevância.</p>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Modelagem da venda</p></div>
+<div class="check-item"><span class="n">→</span><p>Valor estimado da empresa</p></div>
+<div class="check-item"><span class="n">→</span><p>Tratamento dos contratos atuais</p></div>
+<div class="check-item"><span class="n">→</span><p>Consequências para tarifas e expansão da rede</p></div>
+<div class="check-item"><span class="n">→</span><p>Participação da Cemig após a operação</p></div>
+<div class="check-item"><span class="n">→</span><p>Eventual necessidade de consulta popular</p></div>
+</div>
+<p class="note">Pontos sem resposta na sabatina — todos de competência futura da ALMG.</p>
+</div>
+</section>
+
+<!-- 4 COPASA -->
+<section class="light" id="s4">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 3 · Copasa</span></div>
+<h2 class="serif">Duas versões<br>para os rompimentos.</h2>
+<p class="body-text">Quatro rompimentos de tubulações e adutoras na Grande BH, registrados entre 19 de agosto e 8 de setembro, geram narrativas concorrentes.</p>
+<div class="versus">
+<div class="vs-card">
+<div class="vs-tag">Versão da Copasa</div>
+<h3>Suspeita de sabotagem</h3>
+<p>A presidente Marília Carvalho pediu investigação ao Ministério Público, levantando a hipótese de desgaste eleitoral deliberado.</p>
+</div>
+<div class="vs-divider">enquanto isso</div>
+<div class="vs-card">
+<div class="vs-tag">Versão do Sindágua</div>
+<h3>Sucateamento estrutural</h3>
+<p>Reportagem do Brasil de Fato relaciona os episódios a insuficiência histórica de manutenção, redução de custos, terceirização, deslocamento de trabalhadores experientes e prioridade à remuneração de acionistas.</p>
+</div>
+</div>
+<p class="body-text" style="margin-top:20px;">A Assembleia tem espaço para fiscalizar as duas frentes ao mesmo tempo: a hipótese de sabotagem e as condições de manutenção, investimento, terceirização e reorganização do quadro técnico.</p>
+</div>
+</section>
+
+<!-- 5 BIRIBIRI -->
+<section class="dark" id="s5">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 4 · Parque do Biribiri</span></div>
+<h2 class="serif">Concessão de<br>30 anos, sob contestação.</h2>
+<p class="body-text">O Estado de Minas publicou reportagem sobre a concessão de parte do Parque Estadual do Biribiri, em Diamantina: contrato de 30 anos, investimentos de aproximadamente R$ 38 milhões, ingresso de R$ 30, estacionamento de R$ 10 e concessão inicial de 30% da área do parque.</p>
+<p class="body-text">Movimentos locais questionam a falta de diálogo com a comunidade, a ausência de análise socioeconômica e socioambiental suficiente, a possibilidade de ampliação da área concedida e os efeitos do aumento de visitantes sobre comunidades tradicionais. O governo afirma que manterá a gestão ambiental e que moradores de Diamantina não pagarão ingresso. Estudo da própria ALMG já aponta problemas atuais do parque — incêndios, resíduos, erosão e ausência de banheiros nas cachoeiras.</p>
+<div class="lawlist">
+<div class="law-item">
+<span class="code">RQN 16.444/2026</span>
+<h3>Comunidades tradicionais e direito à consulta</h3>
+<p>Bella Gonçalves · pronto para ordem do dia</p>
+</div>
+<div class="law-item">
+<span class="code">RQN 17.298/2026</span>
+<h3>Estudos de impacto ambiental da concessão</h3>
+<p>Marquinho Lemos · pronto para ordem do dia</p>
+</div>
+<div class="law-item">
+<span class="code">PL 5.555/2026</span>
+<h3>Caminho dos Escravos como relevante interesse cultural</h3>
+<p>Beatriz Cerqueira · aguardando parecer na CCJ</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 6 PROPAG -->
+<section class="light" id="s6">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 5 · Propag</span></div>
+<h2 class="serif">A dívida vira<br>programa de campanha.</h2>
+<p class="body-text">O Propag domina as sabatinas em O Tempo, Estado de Minas, G1/Globo, Metrópoles, UOL, Estadão e Valor Econômico, com posições divergentes sobre renegociação, investimentos e incentivos fiscais.</p>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Alexandre Kalil: renegociar prazo e condições, rever incentivos fiscais</p></div>
+<div class="check-item"><span class="n">→</span><p>Gabriel Azevedo: avalia o Propag como positivo, credita participação a Tadeu Leite e Rodrigo Pacheco</p></div>
+<div class="check-item"><span class="n">→</span><p>Mateus Simões: contra nova renegociação; propõe aplicar parcelas da dívida em obras federais em Minas</p></div>
+<div class="check-item"><span class="n">→</span><p>Patrus Ananias: defende renegociação, mas prioriza a dívida social</p></div>
+<div class="check-item"><span class="n">→</span><p>Cleitinho: cobra nova solução do governo federal; é rebatido pelo ministro Dario Durigan</p></div>
+</div>
+<div class="stats">
+<div class="stat"><div class="num">R$ 3,134 bi</div><div class="lbl">garantias honradas jan-ago</div></div>
+<div class="stat"><div class="num">-55,1%</div><div class="lbl">vs. mesmo período de 2025</div></div>
+</div>
+<p class="note">Dado do Valor Econômico: o Propag reduziu os pagamentos feitos pela União por inadimplência dos estados.</p>
+</div>
+</section>
+
+<!-- 7 ESCOLA NOSSA SENHORA DAS NEVES -->
+<section class="dark" id="s7">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 6 · Rede estadual</span></div>
+<h2 class="serif">Uma escola,<br>249 estudantes.</h2>
+<p class="body-text">A Comissão de Educação, conduzida por Beatriz Cerqueira, visitou a Escola Estadual Nossa Senhora das Neves, em Ribeirão das Neves, diante da possível transformação em Colégio Tiradentes. A comunidade questiona o destino dos 249 estudantes, a continuidade do ensino médio e do curso técnico, o atendimento a alunos com deficiência, a situação dos trabalhadores e a ausência de outra escola equivalente em um raio de 5 km.</p>
+<p class="body-text">Os relatos serão encaminhados ao Governo do Estado. A planilha não traz requerimento específico sobre esta escola, mas registra proposições sobre a expansão dos Colégios Tiradentes de forma mais ampla.</p>
+<div class="lawlist">
+<div class="law-item">
+<span class="code">RQN 18.329/2026</span>
+<h3>Expansão dos Colégios Tiradentes</h3>
+<p>Lohanna</p>
+</div>
+<div class="law-item">
+<span class="code">RQN 17.620/2026</span>
+<h3>Expansão dos Colégios Tiradentes</h3>
+<p>Beatriz Cerqueira</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 8 VIOLENCIA POLITICA -->
+<section class="light" id="s8">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 7 · Violência política de gênero</span></div>
+<h2 class="serif">Ameaças que já<br>têm nome de projeto.</h2>
+<p class="body-text">Bella Gonçalves, Andréia de Jesus e outras candidatas relataram ameaças de morte, estupro, violência racista ou agressões. Bella informou ter acionado a Polícia Legislativa e a Justiça Eleitoral, e cobrou investigação policial e estrutura partidária para garantir proteção às candidatas.</p>
+<div class="doc-card">
+<div class="doc-title">PL 5.422/2026 · Leninha</div>
+<div class="doc-row"><span class="k">Institui</span><span class="v">Política estadual de enfrentamento</span></div>
+<div class="doc-row"><span class="k">Escopo</span><span class="v">Violência política de gênero e raça, inclusive digital</span></div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Aguarda parecer na CCJ</span></div>
+</div>
+<p class="note">Marco vigente citado: Lei federal 14.192/2021, sobre violência política contra a mulher.</p>
+</div>
+</section>
+
+<!-- 9 TERRAS RARAS -->
+<section class="dark" id="s9">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Capítulo 8 · Minerais críticos</span></div>
+<h2 class="serif">Terras raras,<br>duas frentes.</h2>
+<p class="body-text">De um lado, preocupações sociais e ambientais com projetos em Poços de Caldas e Caldas. De outro, estudo para implantar em Uberlândia uma unidade de processamento e refino estimada em R$ 2 bilhões. A reportagem sobre Uberlândia afirma que tramita na ALMG projeto com diretrizes para exploração e governança de minerais críticos, mas não informa número nem autoria.</p>
+<div class="doc-card">
+<div class="doc-title">PL 5.492/2026 · Alê Portela</div>
+<div class="doc-row"><span class="k">Situação</span><span class="v">Aguardando parecer na CCJ</span></div>
+</div>
+<p class="note">Como a imprensa não identifica o projeto citado, este PL é registrado como proposição relacionada localizada na planilha — não como número confirmado pela própria reportagem.</p>
+</div>
+</section>
+
+<!-- 10 REFERENCIA PROJETOS E LEIS -->
+<section class="light" id="s10">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Projetos e leis</span></div>
+<h2 class="serif">O que está<br>em tramitação.</h2>
+<div class="lawlist">
+<div class="law-item">
+<span class="code">Lei estadual 25.143/2025</span>
+<h3>Contribuições e assistência à saúde do Ipsemg</h3>
+<p>Cobrança de resultados e fiscalização da aplicação dos recursos</p>
+</div>
+<div class="law-item">
+<span class="code">PL municipal 72/2026 — Teófilo Otoni</span>
+<h3>Política de atendimento à mulher vítima de violência</h3>
+<p>Aprovado pela Câmara Municipal · não é proposição da ALMG</p>
+</div>
+<div class="law-item">
+<span class="code">Lei federal 14.192/2021</span>
+<h3>Violência política contra a mulher</h3>
+<p>Citada como marco vigente</p>
+</div>
+<div class="law-item">
+<span class="code">Projeto estadual sobre terras raras</span>
+<h3>Exploração e governança de minerais críticos</h3>
+<p>Número e autoria omitidos pela imprensa · PL 5.492/2026 aparece como proposta relacionada na planilha</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 11 COMISSOES -->
+<section class="dark" id="s11">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Comissões noticiadas</span></div>
+<h2 class="serif">O que passou<br>pelas comissões.</h2>
+<div class="thread">
+<div class="thread-item">
+<span class="num">·</span>
+<h3>Comissão de Administração Pública</h3>
+<p>Aplicação dos recursos e atendimento do Ipsemg — repercussão estadual, com replicação regional.</p>
+</div>
+<div class="thread-item">
+<span class="num">·</span>
+<h3>Comissão de Educação, Ciência e Tecnologia</h3>
+<p>Visita à Escola Nossa Senhora das Neves — repercussão local/regional.</p>
+</div>
+<div class="thread-item">
+<span class="num">·</span>
+<h3>Audiência anterior sobre terras raras</h3>
+<p>Projetos minerários em Poços de Caldas e Caldas — retomada como contexto.</p>
+</div>
+<div class="thread-item">
+<span class="num">·</span>
+<h3>Audiência sobre trabalhadores da Copasa</h3>
+<p>Remoções e reorganização do quadro técnico — mencionada como antecedente, não como nova reunião.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 12 CORRIDA PELO GOVERNO -->
+<section class="light" id="s12">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Clima político-eleitoral · Governo</span></div>
+<h2 class="serif">Quatro eixos<br>nas sabatinas.</h2>
+<p class="body-text">Dívida e Propag, saúde regional, segurança pública e infraestrutura/ferrovias organizam o debate entre os candidatos ao governo.</p>
+<div class="checklist">
+<div class="check-item"><span class="n">→</span><p>Ataques de Kalil a Cleitinho e Patrus</p></div>
+<div class="check-item"><span class="n">→</span><p>Críticas de Gabriel Azevedo a Zema, Kalil e Patrus</p></div>
+<div class="check-item"><span class="n">→</span><p>Simões questiona a viabilidade financeira das propostas de Cleitinho</p></div>
+<div class="check-item"><span class="n">→</span><p>Simões tenta mobilizar prefeitos para chegar ao segundo turno</p></div>
+<div class="check-item"><span class="n">→</span><p>Debate sobre a relação futura do governador com a Assembleia</p></div>
+</div>
+</div>
+</section>
+
+<!-- 13 DISPUTA ALMG E FUNDO ELEITORAL -->
+<section class="dark" id="s13">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Clima político-eleitoral · ALMG</span></div>
+<h2 class="serif">Pesquisa local,<br>fundo nacional.</h2>
+<p class="body-text">Pesquisa municipal em Juiz de Fora: Noraldino Júnior (17,73%), Delegada Sheila (14,54%), Betão (10,82%), Tiago Bonecão (7,91%) e Dr. Antônio Aguiar (5,82%).</p>
+<p class="note">Por ser pesquisa municipal, não permite projeção segura para o resultado estadual.</p>
+<div class="divider-rule"></div>
+<p class="body-text">O Divinews informa que o PL destinou R$ 84,9 milhões a candidaturas em Minas, ante R$ 41,6 milhões do PT. Entre candidaturas estaduais, o maior repasse de FEFC identificado foi para Amanda Teixeira Dias (R$ 1,195 milhão); Andréia de Jesus, Lucas Lasmar e Rodrigo Nicolau aparecem com R$ 1 milhão cada.</p>
+<p class="note">Dados são uma fotografia parcial de 15 de setembro e podem mudar com novas prestações de contas.</p>
+</div>
+</section>
+
+<!-- 14 EXPOSICAO PARLAMENTAR -->
+<section class="light" id="s14">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Referência · Exposição parlamentar</span></div>
+<h2 class="serif">Quem apareceu,<br>e como.</h2>
+<div class="expo-list">
+<div class="expo-row">
+<div><div class="expo-name">Tadeu Leite</div><div class="expo-meta">Homenagem do MPMG · Gazeta Norte Mineira</div></div>
+<div class="expo-badge pos">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Tadeu Leite</div><div class="expo-meta">Construção política do Propag · O Tempo, Metrópoles</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Beatriz Cerqueira</div><div class="expo-meta">Fiscalização dos recursos do Ipsemg</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Beatriz Cerqueira</div><div class="expo-meta">Visita à escola ameaçada de transformação</div></div>
+<div class="expo-badge pos">alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Bella Gonçalves</div><div class="expo-meta">Ameaças e violência política de gênero</div></div>
+<div class="expo-badge neg">alta · risco pessoal</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Andréia de Jesus</div><div class="expo-meta">Ameaças racistas e físicas</div></div>
+<div class="expo-badge neg">alta · risco pessoal</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Lohanna</div><div class="expo-meta">Educação, saúde, emendas e mineração · Portal Gerais</div></div>
+<div class="expo-badge pos">média-alta</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Noraldino Júnior / Delegada Sheila / Betão</div><div class="expo-meta">Pesquisa eleitoral em Juiz de Fora · Acessa.com</div></div>
+<div class="expo-badge neu">média</div>
+</div>
+<div class="expo-row">
+<div><div class="expo-name">Leninha</div><div class="expo-meta">Comício de Lula em sua base eleitoral · O Fator</div></div>
+<div class="expo-badge neu">média</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 15 PONTOS PARA MONITORAR -->
+<section class="dark" id="s15">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">O que vem a seguir</span></div>
+<h2 class="serif">Doze pontos<br>para acompanhar.</h2>
+<div class="checklist">
+<div class="check-item"><span class="n">1</span><p>Eventual procedimento do TCE sobre os R$ 954 milhões adicionais do Ipsemg</p></div>
+<div class="check-item"><span class="n">2</span><p>Dados regionalizados e comparáveis do instituto sobre atendimento antes e depois do reajuste</p></div>
+<div class="check-item"><span class="n">3</span><p>Formalização de proposta de privatização da Gasmig</p></div>
+<div class="check-item"><span class="n">4</span><p>Abertura de investigação do MPMG sobre os rompimentos da Copasa</p></div>
+<div class="check-item"><span class="n">5</span><p>Divulgação de laudos que sustentem ou afastem a hipótese de sabotagem</p></div>
+<div class="check-item"><span class="n">6</span><p>Respostas aos RQNs 16.444/2026 e 17.298/2026, sobre o Parque do Biribiri</p></div>
+<div class="check-item"><span class="n">7</span><p>Definição do edital e realização da licitação do parque</p></div>
+<div class="check-item"><span class="n">8</span><p>Providências do Governo do Estado sobre a Escola Nossa Senhora das Neves</p></div>
+<div class="check-item"><span class="n">9</span><p>Investigação das ameaças contra Bella Gonçalves, Andréia de Jesus e outras candidatas</p></div>
+<div class="check-item"><span class="n">10</span><p>Tramitação do PL 5.422/2026, sobre violência política de gênero e raça</p></div>
+<div class="check-item"><span class="n">11</span><p>Tramitação do PL 5.492/2026, relacionado às terras raras e minerais críticos</p></div>
+<div class="check-item"><span class="n">12</span><p>Eventual judicialização do uso de culto religioso para promoção eleitoral em Uberaba</p></div>
+</div>
+</div>
+</section>
+
+<!-- 16 ENCERRAMENTO -->
+<section class="redsec" id="s16">
+<div class="section-inner">
+<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
+<h2 class="serif" style="color:#fff;">Fim do<br>clipping.</h2>
+<p class="body-text" style="margin-top:16px; color:rgba(255,255,255,.9);">Documento de apoio à decisão institucional, elaborado a partir do noticiário de 15 e 16 de setembro de 2026.</p>
+<div class="signoff">CLIPPING ESTRATÉGICO · ALMG — 16.09.2026</div>
+</div>
+</section>
+
+</div>
+<script>
+const deck = document.getElementById('deck');
+const bar = document.getElementById('progress-bar');
+const sections = Array.from(document.querySelectorAll('section'));
+function updateProgress(){
+const scrollable = deck.scrollHeight - deck.clientHeight;
+const pct = scrollable > 0 ? (deck.scrollTop / scrollable) * 100 : 0;
+bar.style.width = pct + '%';
+}
+deck.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+const io = new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting){ e.target.classList.add('in-view'); }
+});
+}, { root: deck, threshold: 0.35 });
+sections.forEach(s=> io.observe(s));
+</script>
+</body>
+</html>
