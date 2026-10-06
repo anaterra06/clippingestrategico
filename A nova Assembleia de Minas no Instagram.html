@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A nova Assembleia de Minas no Instagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4F7;--surface:#FFFFFF;--ink:#13233F;--muted:#5A6A80;--line:#D8DEE7;--soft:#E8ECF2;
+  --red:#C8102E;--focus:#1F5FD1;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D1524;--surface:#152038;--ink:#E7ECF4;--muted:#9AA8BE;--line:#27365A;--soft:#1C2945;--red:#FF5C70;--focus:#7FA8FF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1524;--surface:#152038;--ink:#E7ECF4;--muted:#9AA8BE;--line:#27365A;--soft:#1C2945;--red:#FF5C70;--focus:#7FA8FF;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* Hero */
+header.hero{padding:36px 0 8px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;align-items:end}
+h1{font-stretch:118%;font-weight:850;font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:.98;letter-spacing:-.02em;margin:0 0 16px}
+.lede{color:var(--muted);max-width:44ch;margin:0 0 20px}
+.facts{display:flex;flex-wrap:wrap;gap:20px 28px;margin:0;padding:0;list-style:none}
+.facts b{display:block;font-stretch:112%;font-size:1.6rem;font-weight:800;line-height:1.1}
+.facts span{color:var(--muted);font-size:.85rem}
+.hemi-box{position:relative}
+.hemi-box svg{width:100%;height:auto;display:block}
+.seat{cursor:pointer;transition:r .12s}
+.seat:hover,.seat.on{stroke:var(--ink);stroke-width:2}
+.seat.dim{opacity:.18}
+.hemi-center{font-stretch:125%;font-weight:900;fill:var(--ink)}
+.hemi-sub{fill:var(--muted);font-size:13px}
+.modes{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.chip-btn{border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:999px;font-size:.88rem;cursor:pointer}
+.chip-btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:10px 0 0;padding:0;list-style:none;font-size:.82rem;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px;cursor:pointer}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);padding:6px 10px;border-radius:6px;font-size:.82rem;white-space:nowrap;transform:translate(-50%,-120%);opacity:0;transition:opacity .1s}
+
+/* Tabs */
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-top:24px;padding-top:env(safe-area-inset-top,0px)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto}
+nav.tabs button{background:none;border:0;padding:14px 14px 12px;font-weight:600;font-stretch:108%;color:var(--muted);border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
+section.panel{padding:28px 0 48px}
+section.panel[hidden]{display:none}
+h2{font-stretch:112%;font-weight:800;font-size:1.6rem;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 20px;max-width:72ch}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.toolbar label{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+select,input[type=search],input[type=text],input[type=number]{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+input[type=search]{min-width:220px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:8px 12px;cursor:pointer;font-size:.88rem}
+.seg button[aria-pressed="true"]{background:var(--soft);font-weight:700}
+
+/* Ranking */
+.rank{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.rank li{display:grid;grid-template-columns:44px minmax(0,1.6fr) minmax(0,2fr) auto;gap:14px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.rank li:hover{background:var(--soft)}
+.pos{font-stretch:120%;font-weight:850;font-size:1.25rem;text-align:right;color:var(--muted)}
+.rank li:nth-child(-n+3) .pos{color:var(--red)}
+.who b{display:block;font-weight:700;line-height:1.25}
+.who small{color:var(--muted);font-size:.8rem}
+.badge-new{display:inline-block;font-size:.7rem;font-weight:700;color:var(--red);border:1px solid currentColor;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:2px}
+.bar{height:10px;background:var(--soft);border-radius:5px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:5px}
+.val{font-variant-numeric:tabular-nums;font-weight:700;text-align:right;min-width:92px}
+.val.na{color:var(--muted);font-weight:400;font-size:.85rem}
+.netdots{display:flex;gap:6px}
+.net{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:7px;border:1px solid var(--line);background:var(--surface);text-decoration:none}
+.net svg{width:15px;height:15px}
+.net.miss{opacity:.35;border-style:dashed}
+.note{font-size:.85rem;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--red);padding:10px 14px;border-radius:6px;margin:0 0 16px;max-width:80ch}
+
+.coleta{font-size:.85rem;color:var(--muted);margin:-4px 0 14px}
+.gap{font-size:.78rem;font-weight:700;font-variant-numeric:tabular-nums;padding:1px 6px;border-radius:4px;margin-left:6px;white-space:nowrap}
+.gap.up{color:#11795B;background:color-mix(in srgb,#11795B 14%,transparent)}
+.gap.down{color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+.gap.eq{color:var(--muted);background:var(--soft)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:28px 24px;text-align:center}
+.empty b{display:block;font-stretch:110%;font-size:1.2rem;margin-bottom:6px}
+.empty p{color:var(--muted);margin:0 auto 14px;max-width:56ch}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+.verdict .rho{font-stretch:120%;font-weight:850;font-size:2.4rem;line-height:1;grid-row:span 2}
+.verdict b{font-size:1.05rem}
+.verdict span{color:var(--muted);font-size:.9rem}
+.scatter-box{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px}
+.scatter-box svg{width:100%;height:auto;display:block}
+.scatter-box .dot{cursor:pointer}
+.scatter-box .dot:hover{stroke:var(--ink);stroke-width:2}
+.axis text{fill:var(--muted);font-size:12px}
+.axis line{stroke:var(--line)}
+.lbl{fill:var(--ink);font-size:12px;font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:4px}
+.quads{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:16px 0 28px}
+.quad{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.quad h4{margin:0 0 2px;font-stretch:110%;font-size:1.02rem}
+.quad p{margin:0 0 10px;color:var(--muted);font-size:.85rem}
+.h3{font-stretch:110%;font-weight:800;font-size:1.2rem;margin:0 0 4px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.tbl{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl th{font-weight:700;color:var(--muted);font-size:.8rem;background:var(--soft)}
+.tbl tbody tr{cursor:pointer}
+.tbl tbody tr:hover{background:var(--soft)}
+dialog.imp{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);width:min(720px,94vw);padding:22px 24px;max-height:90vh;overflow:auto}
+dialog.imp::backdrop{background:rgba(10,18,32,.5)}
+dialog.imp h2{margin-bottom:4px}
+dialog.imp textarea{width:100%;min-height:200px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;font-size:.88rem;color:inherit}
+dialog.imp pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:.82rem;overflow-x:auto;margin:6px 0 14px}
+.imp-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.imp-result{font-size:.88rem;margin-top:10px}
+/* Temas */
+.stack{display:flex;height:22px;border-radius:6px;overflow:hidden;margin:0 0 22px}
+.stack span{display:block;height:100%}
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.theme{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;border-top:5px solid var(--c)}
+.theme h3{margin:0;font-stretch:110%;font-size:1.15rem;font-weight:800;display:flex;justify-content:space-between;gap:10px}
+.theme h3 span{white-space:nowrap;color:var(--muted);font-weight:600;font-size:.9rem;font-stretch:100%}
+.theme p{margin:6px 0 10px;color:var(--muted);font-size:.9rem}
+.theme ul.hooks{margin:0 0 12px;padding-left:18px;font-size:.9rem}
+.theme ul.hooks li{margin:2px 0}
+.people{display:flex;flex-wrap:wrap;gap:6px}
+.person{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:3px 10px;font-size:.82rem;cursor:pointer}
+.person:hover{border-color:var(--ink)}
+
+/* Perfis */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px}
+.card-top{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.mono{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-stretch:115%;color:#fff;font-size:.95rem}
+.card b{display:block;line-height:1.2}
+.card small{color:var(--muted);font-size:.8rem}
+.handles{display:grid;gap:6px;font-size:.88rem}
+.handle{display:flex;align-items:center;gap:8px;text-decoration:none;min-width:0}
+.handle span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.handle.miss{color:var(--muted)}
+.handle svg{flex:none;width:16px;height:16px}
+.count{margin:0 0 12px;color:var(--muted);font-size:.88rem}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,18,32,.45);opacity:0;pointer-events:none;transition:opacity .18s;z-index:20}
+.scrim.open{opacity:1;pointer-events:auto}
+aside.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);z-index:21;transform:translateX(100%);visibility:hidden;transition:transform .22s ease,visibility 0s .22s;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 22px calc(28px + env(safe-area-inset-bottom,0px));box-shadow:-12px 0 40px rgba(0,0,0,.18)}
+aside.drawer.open{transform:none;visibility:visible;transition:transform .22s ease}
+.close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;border:1px solid var(--line);background:var(--bg);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem}
+.drawer h2{font-size:1.7rem;margin:8px 40px 4px 0;line-height:1.05}
+.drawer .meta{color:var(--muted);margin:0 0 18px}
+.drawer h4{margin:20px 0 8px;font-size:.95rem;font-stretch:108%}
+.field{display:grid;gap:4px;margin-bottom:12px;font-size:.88rem}
+.field span{color:var(--muted)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.links{display:grid;gap:8px}
+.biglink{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;text-decoration:none;font-weight:600}
+.biglink small{display:block;font-weight:400;color:var(--muted)}
+.biglink svg{width:20px;height:20px;flex:none}
+.others{display:flex;flex-wrap:wrap;gap:6px}
+.others a{font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;text-decoration:none}
+.saved{font-size:.8rem;color:var(--muted);min-height:1.2em}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer p{margin:0 0 8px;max-width:90ch}
+
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+  .rank li{grid-template-columns:34px minmax(0,1fr) auto;row-gap:6px}
+  .rank .barcell{grid-column:2 / -1;grid-row:2}
+  .rank .netdots{display:none}
+  input[type=search]{min-width:0;flex:1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.gap{font-size:.78rem;font-weight:700;font-variant-numeric:tabular-nums;padding:1px 6px;border-radius:4px;margin-left:6px;white-space:nowrap}
+.gap.up{color:#11795B;background:color-mix(in srgb,#11795B 14%,transparent)}
+.gap.down{color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+.gap.eq{color:var(--muted);background:var(--soft)}
+.flag{display:inline-block;font-size:.7rem;color:var(--muted);border:1px dashed var(--muted);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.ertag{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+.verdict .rho{font-stretch:120%;font-weight:850;font-size:2.4rem;line-height:1;grid-row:span 2}
+.verdict b{font-size:1.02rem}
+.verdict span{color:var(--muted);font-size:.9rem}
+.scatter-box{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px}
+.scatter-box svg{width:100%;height:auto;display:block}
+.dot{cursor:pointer}
+.dot:hover{stroke:var(--ink);stroke-width:2.5}
+.axis text{fill:var(--muted);font-size:12px}
+.axis line{stroke:var(--line)}
+.lbl{fill:var(--ink);font-size:12.5px;font-weight:650;paint-order:stroke;stroke:var(--surface);stroke-width:4px;pointer-events:none}
+.h3{font-stretch:110%;font-weight:800;font-size:1.25rem;margin:32px 0 4px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.tbl{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child,.tbl td.l,.tbl th.l{text-align:left}
+.tbl td.wrap{white-space:normal;min-width:240px}
+.tbl th{font-weight:700;color:var(--muted);font-size:.8rem;background:var(--soft)}
+.tbl tbody tr[data-id]{cursor:pointer}
+.tbl tbody tr[data-id]:hover{background:var(--soft)}
+.pending{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.lead-q{font-stretch:118%;font-weight:850;font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.08;letter-spacing:-.01em;max-width:24ch;margin:4px 0 26px}
+.pot{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.pot i{display:inline-flex;gap:2px}
+.pot i b{width:8px;height:14px;border-radius:2px;background:var(--line);display:block}
+.pot i b.on{background:var(--red)}
+.pot i b.half{background:linear-gradient(90deg,var(--red) 50%,var(--line) 50%)}
+.mechs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.mech{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.mech h4{margin:0 0 6px;font-stretch:110%;font-size:1.05rem}
+.mech q{display:block;font-stretch:112%;font-weight:750;font-size:1.25rem;line-height:1.15;margin:0 0 12px;quotes:"“" "”"}
+.cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.case h4{margin:0 0 8px;font-stretch:110%;font-size:1.08rem;line-height:1.25}
+.case p{margin:0 0 10px;font-size:.92rem;max-width:68ch}
+.case .src{font-size:.8rem;color:var(--muted);margin-top:8px}
+.case .src a{color:var(--muted)}
+.mini{margin:6px 0 14px}
+.mini .r{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:4px 10px;align-items:center;font-size:.84rem;margin-bottom:6px}
+.mini .r .bar{grid-column:1/-1;height:8px}
+.mini .r span:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.dstat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 6px}
+.dstat div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.dstat b{display:block;font-stretch:112%;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.dstat span{color:var(--muted);font-size:.8rem}
+.dnote{font-size:.88rem;margin:0 0 10px}
+.dnote span{color:var(--muted)}
+@media (max-width:700px){
+  .scatter-box{overflow-x:auto}
+  .scatter-box svg{min-width:720px}
+  .verdict{grid-template-columns:1fr}
+  .verdict .rho{grid-row:auto;font-size:2rem}
+}
+:root{--el:#1E3A6E;--dg:#D9485F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--el:#7FA3E6;--dg:#FF7A8C}}
+:root[data-theme="dark"]{--el:#7FA3E6;--dg:#FF7A8C}
+.c-el{color:var(--el)}.c-dg{color:var(--dg)}
+.c-el-bg{background:var(--el)}.c-dg-bg{background:var(--dg)}
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 20px;margin:0 0 18px}
+.formula b{font-stretch:118%;font-weight:850;font-size:1.7rem;line-height:1}
+.formula small{display:block;color:var(--muted);font-size:.82rem}
+.formula>span{font-size:1.4rem;color:var(--muted)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
+.legend-inline{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+.legend-inline .sw{border-radius:2px;margin-left:10px}
+.bar.stack2{display:flex;height:14px;border-radius:4px}
+.bar.stack2 span{border-radius:0}
+.quads{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:16px 0 8px}
+.quad{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.quad h4{margin:0 0 2px;font-stretch:110%;font-size:1.02rem}
+.quad p{margin:0 0 10px;color:var(--muted);font-size:.85rem}
+#quadFilter .chip-btn{display:inline-flex;align-items:center}
+details.method{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 20px}
+details.method summary{cursor:pointer;font-weight:700;font-stretch:108%}
+details.method p{font-size:.92rem;max-width:78ch;margin:10px 0}
+#map .dot{transition:fill-opacity .15s}
+.gapn{font-weight:800;font-variant-numeric:tabular-nums;margin-left:2px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Os 77 da nova Assembleia de Minas, no Instagram</h1>
+      <p class="lede">Quem tem mais seguidores, como força digital e força eleitoral se combinam, e quais temas fazem os perfis circularem. Legislatura 2027–2031.</p>
+      <ul class="facts" id="facts"></ul>
+    </div>
+    <div class="hemi-box" id="hemiBox">
+      <svg id="hemi" viewBox="0 0 640 350" role="img" aria-label="Plenário com as 77 cadeiras"></svg>
+      <div class="tip" id="tip"></div>
+      <div class="modes" role="group" aria-label="Colorir cadeiras por">
+        <button class="chip-btn" data-mode="faixa" aria-pressed="true">Seguidores</button>
+        <button class="chip-btn" data-mode="partido" aria-pressed="false">Partido</button>
+        <button class="chip-btn" data-mode="status" aria-pressed="false">Novos e reeleitos</button>
+      </div>
+      <ul class="legend" id="legend"></ul>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Seções">
+  <div class="wrap" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="ranking">Ranking de seguidores</button>
+    <button role="tab" aria-selected="false" data-tab="ifde">Força Digital-Eleitoral</button>
+    <button role="tab" aria-selected="false" data-tab="temas">Temas de engajamento</button>
+    <button role="tab" aria-selected="false" data-tab="perfis">Perfis</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="panel" id="ranking">
+    <h2>Ranking de seguidores no Instagram</h2>
+    <p class="sub">Ao lado de cada nome, a posição na votação de 2026. A seta mostra quantas posições o deputado sobe ou desce quando a régua passa a ser seguidores.</p>
+    <div class="verdict" id="verdict1"></div>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Mostrar">
+        <button data-st="all" aria-pressed="true">Todos</button>
+        <button data-st="novo" aria-pressed="false">Novos</button>
+        <button data-st="reeleito" aria-pressed="false">Reeleitos</button>
+      </div>
+      <button class="btn ghost" id="exportBtn" hidden>Baixar planilha (CSV)</button>
+    </div>
+    <ol class="rank" id="rankList"></ol>
+  </section>
+
+  <section class="panel" id="ifde" hidden>
+    <h2>Índice de Força Digital-Eleitoral (IFDE)</h2>
+    <p class="sub">Duas notas de 0 a 100 para cada deputado: força eleitoral, pelos votos de 2026, e força digital, pelos seguidores no Instagram. O IFDE é a média das duas. O mapa mostra onde cada um está em relação ao resto da Assembleia.</p>
+    <div class="formula" aria-label="Fórmula do IFDE">
+      <div><b>IFDE</b></div><span>=</span>
+      <div><b class="c-el">50%</b><small>força eleitoral</small></div><span>+</span>
+      <div><b class="c-dg">50%</b><small>força digital</small></div>
+    </div>
+    <div class="toolbar" id="quadFilter" role="group" aria-label="Destacar perfil"></div>
+    <div class="scatter-box" id="mapBox"><svg id="map" viewBox="0 0 900 620" role="img" aria-label="Mapa de força eleitoral por força digital"></svg><div class="tip" id="tip3"></div></div>
+    <p class="coleta" style="margin-top:8px">Linhas tracejadas: medianas da Assembleia. Diagonal: equilíbrio entre as duas forças; os pontos com anel são as três maiores diferenças para cada lado, com a diferença em pontos entre parênteses. Contorno escuro: deputado novato. Toque em um ponto para ver o perfil.</p>
+    <div class="quads" id="quads"></div>
+    <h3 class="h3">Ranking IFDE</h3>
+    <p class="sub">Cada barra mostra quanto do índice vem dos votos e quanto vem do Instagram.</p>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Mostrar">
+        <button data-st2="all" aria-pressed="true">Todos</button>
+        <button data-st2="novo" aria-pressed="false">Novos</button>
+        <button data-st2="reeleito" aria-pressed="false">Reeleitos</button>
+      </div>
+      <span class="legend-inline"><i class="sw c-el-bg"></i>Força eleitoral <i class="sw c-dg-bg"></i>Força digital</span>
+    </div>
+    <ol class="rank" id="ifdeList"></ol>
+    <details class="method">
+      <summary>Como o IFDE é calculado</summary>
+      <p><b>Força eleitoral:</b> votos de 2026 convertidos em nota de 0 a 100 em escala logarítmica. Bruno Engler, o mais votado, recebe 100; o menos votado, 0.</p>
+      <p><b>Força digital:</b> seguidores no Instagram, na mesma escala. Delegada Sheila, o maior perfil, recebe 100; o menor, 0. A escala logarítmica evita que um único perfil gigante achate todos os outros.</p>
+      <p><b>Por que a eficiência (votos por mil seguidores) saiu do índice:</b> na versão da planilha (50% votação + 25% audiência + 25% eficiência), a audiência soma pontos e a eficiência tira os mesmos pontos de quem tem muitos seguidores, porque ela é votos divididos por seguidores. As duas se anulam, e o resultado ficou praticamente igual ao ranking de votos (correlação de 0,998). A eficiência continua visível no mapa: quem fica acima da diagonal tem mais força digital do que eleitoral, e vice-versa.</p>
+      <p><b>Engajamento:</b> só 5 deputados têm taxa de engajamento comparável (mesma família de ferramentas). Ela aparece no perfil de cada um, mas não entra no índice, para não comparar 5 deputados por uma régua e 67 por outra.</p>
+      <p><b>Perfis do mapa:</b> as linhas tracejadas são as medianas da Assembleia, ${MEDV} votos e ${MEDF} seguidores. Metade dos deputados fica de cada lado.</p>
+      <p><b>Cautelas:</b> seguidores não equivalem a eleitores; o índice não demonstra que seguidores geraram votos; audiências podem incluir pessoas de outros estados e países. Sem contagem de seguidores confirmada, ficam fora do índice: <span id="pendList"></span>.</p>
+    </details>
+  </section>
+
+  <section class="panel" id="temas" hidden></section>
+
+  <section class="panel" id="perfis" hidden>
+    <h2>Perfis</h2>
+    <p class="sub">Instagram de cada parlamentar, com seguidores, situação do dado e assinatura temática.</p>
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Buscar por nome ou @" aria-label="Buscar parlamentar">
+      <select id="fParty" aria-label="Partido"><option value="">Todos os partidos</option></select>
+      <select id="fFaixa" aria-label="Faixa de seguidores"><option value="">Todas as faixas</option></select>
+      <select id="fSt" aria-label="Situação"><option value="">Novos e reeleitos</option><option value="novo">Novos</option><option value="re">Reeleitos</option></select>
+    </div>
+    <p class="count" id="count"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Seguidores, taxa de engajamento, visualizações e assinaturas temáticas: planilha “ALMG presença digital 2027, fase 1” (fotografia preliminar de 06/10/2026) e ranking enviado pelo gabinete. Valores marcados com “confirmar” ou “revalidar” têm fonte divergente ou desatualizada.</p>
+    <p>Votos e IFDE: planilha “ALMG IFDE 77 deputados 2026” (resultados da ALMG/TSE, 100% apurado). Análise de temas: levantamento do gabinete, com fontes indicadas em cada caso.</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="dName" role="dialog"></aside>
+
+<script>
+const PACK={"deps": [{"id": "d40", "nome": "Delegada Sheila", "partido": "PL", "novo": false, "votos": 70171, "ig": "delegadasheila", "fol": 1720000, "er": 3.98, "reels": null, "status": "Verificado recente", "flag": false, "tema": "Proteção de crianças; segurança; mulheres; valores conservadores", "cresc": null, "fonte": "https://hypeauditor.com/pt/instagram/delegadasheila/", "nv": 25.1, "naud": 100.0, "ifde": 62.5, "quad": "d", "vpm": 41.0, "ifde_orig": 37.5, "erfonte": "https://hypeauditor.com/pt/instagram/delegadasheila/"}, {"id": "d1", "nome": "Bruno Engler", "partido": "PL", "novo": false, "votos": 675932, "ig": "brunoenglerdm", "fol": 598000, "er": null, "reels": null, "status": "Verificado set/2026", "flag": false, "tema": "Conservadorismo; disputa ideológica; política nacional; segurança", "cresc": null, "fonte": null, "nv": 100.0, "naud": 80.9, "ifde": 90.4, "quad": "c", "vpm": 1130.0, "ifde_orig": 86.3, "erfonte": null}, {"id": "d3", "nome": "Pablo Almeida", "partido": "PL", "novo": true, "votos": 227009, "ig": "pabloalmeidadm", "fol": 551000, "er": 2.54, "reels": 445700, "status": "Verificado out/2026", "flag": false, "tema": "Direita/conservadorismo; política nacional; liberdade/censura", "cresc": null, "fonte": "https://www.modash.io/find-influencers/brazil/belo-horizonte", "nv": 63.9, "naud": 79.4, "ifde": 71.6, "quad": "c", "vpm": 412.0, "ifde_orig": 63.0, "erfonte": "https://www.modash.io/find-influencers/brazil/belo-horizonte"}, {"id": "d6", "nome": "Macaé Evaristo", "partido": "PT", "novo": false, "votos": 157267, "ig": "macaeevaristo", "fol": 395000, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": "Educação pública; direitos humanos; igualdade racial", "cresc": null, "fonte": null, "nv": 51.8, "naud": 73.3, "ifde": 62.6, "quad": "c", "vpm": 398.0, "ifde_orig": 55.2, "erfonte": null}, {"id": "d64", "nome": "Mário Henrique Caixa", "partido": "PV", "novo": false, "votos": 53501, "ig": "mariocaixaoficial", "fol": 346000, "er": null, "reels": null, "status": "Estimativa recente; revalidar", "flag": true, "tema": "Esporte/futebol; mídia; municípios", "cresc": null, "fonte": null, "nv": 16.1, "naud": 70.9, "ifde": 43.5, "quad": "d", "vpm": 155.0, "ifde_orig": 32.2, "erfonte": null}, {"id": "d22", "nome": "Noraldino Júnior", "partido": "PSB", "novo": false, "votos": 89480, "ig": "noraldinojr", "fol": 316000, "er": null, "reels": null, "status": "Estimativa recente; revalidar", "flag": true, "tema": "Proteção animal; meio ambiente", "cresc": null, "fonte": null, "nv": 33.1, "naud": 69.3, "ifde": 51.2, "quad": "c", "vpm": 283.0, "ifde_orig": 43.2, "erfonte": null}, {"id": "d30", "nome": "Mauro Tramonte", "partido": "REPUBLICANOS", "novo": false, "votos": 78922, "ig": "maurotramontereal", "fol": 274000, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": "Municípios; proximidade popular; saúde/serviços", "cresc": null, "fonte": null, "nv": 29.0, "naud": 66.7, "ifde": 47.8, "quad": "c", "vpm": 288.0, "ifde_orig": 40.6, "erfonte": null}, {"id": "d2", "nome": "Beatriz Cerqueira", "partido": "PT", "novo": false, "votos": 328399, "ig": "beatriz__cerqueira", "fol": 203000, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": "Educação pública; servidores; trabalho", "cresc": null, "fonte": null, "nv": 76.1, "naud": 61.3, "ifde": 68.7, "quad": "c", "vpm": 1618.0, "ifde_orig": 71.2, "erfonte": null}, {"id": "d4", "nome": "Eduardo Azevedo", "partido": "PL", "novo": false, "votos": 165935, "ig": "eduardoazevedomg", "fol": 200000, "er": null, "reels": null, "status": "Aprox.; identidade/qualidade da fonte requer validação", "flag": true, "tema": "Valores cristãos/conservadores; impostos; segurança", "cresc": null, "fonte": null, "nv": 53.5, "naud": 61.0, "ifde": 57.3, "quad": "c", "vpm": 830.0, "ifde_orig": 56.6, "erfonte": null}, {"id": "d69", "nome": "Amanda Teixeira Dias", "partido": "PL", "novo": false, "votos": 45156, "ig": "amandateixeiradias", "fol": 195000, "er": 0.45, "reels": null, "status": "Verificado set/2026", "flag": false, "tema": "Família; infância; mulheres; conservadorismo", "cresc": null, "fonte": "https://socialblade.com/instagram/user/amandateixeiradias/realtime", "nv": 10.5, "naud": 60.5, "ifde": 35.5, "quad": "d", "vpm": 232.0, "ifde_orig": 28.8, "erfonte": "https://socialblade.com/instagram/user/amandateixeiradias/realtime"}, {"id": "d75", "nome": "Flávia Borja", "partido": "PODE", "novo": true, "votos": 39658, "ig": "flaviaborjaoficial", "fol": 180000, "er": 1.35, "reels": null, "status": "Verificado set/2026", "flag": false, "tema": "Fé cristã; família; valores conservadores", "cresc": null, "fonte": "https://www.heepsy.com/es/instagram-profile/flaviaborjaoficial", "nv": 6.2, "naud": 59.1, "ifde": 32.7, "quad": "d", "vpm": 220.0, "ifde_orig": 26.0, "erfonte": "https://www.heepsy.com/es/instagram-profile/flaviaborjaoficial"}, {"id": "d46", "nome": "Roberta Lopes", "partido": "PL", "novo": true, "votos": 63840, "ig": "robertalopesdm", "fol": 171000, "er": 2.27, "reels": 31100, "status": "Verificado out/2026", "flag": false, "tema": "Tributos/IPTU; direita; política nacional; Juiz de Fora", "cresc": null, "fonte": "https://www.modash.io/find-influencers/brazil/juiz-de-fora", "nv": 22.0, "naud": 58.2, "ifde": 40.1, "quad": "d", "vpm": 373.0, "ifde_orig": 36.2, "erfonte": "https://www.modash.io/find-influencers/brazil/juiz-de-fora"}, {"id": "d27", "nome": "Delegado Christiano Xavier", "partido": "PSD", "novo": false, "votos": 79871, "ig": "chrisdelega", "fol": 151000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 29.4, "naud": 55.9, "ifde": 42.6, "quad": "c", "vpm": 529.0, "ifde_orig": 41.0, "erfonte": null}, {"id": "d19", "nome": "Adriano Alvarenga", "partido": "PP", "novo": false, "votos": 93559, "ig": "adriano_aalvarenga", "fol": 138000, "er": null, "reels": null, "status": "Fonte recente diverge de medição anterior; confirmar", "flag": true, "tema": "Saúde; agro; estradas", "cresc": "Fonte recente indica 138,1 mil vs 42,8 mil em fonte de 2 meses antes: requer confirmação", "fonte": "https://imginn.com/adriano_aalvarenga/", "nv": 34.6, "naud": 54.3, "ifde": 44.4, "quad": "c", "vpm": 678.0, "ifde_orig": 44.5, "erfonte": null}, {"id": "d10", "nome": "Chiara Biondini", "partido": "PL", "novo": false, "votos": 112817, "ig": "chiarabiondinit", "fol": 129000, "er": null, "reels": null, "status": "Verificado set/2026", "flag": false, "tema": "Família; vida; fé católica; inclusão", "cresc": null, "fonte": "https://socialblade.com/instagram/user/chiarabiondinit", "nv": 40.8, "naud": 53.1, "ifde": 46.9, "quad": "c", "vpm": 875.0, "ifde_orig": 48.5, "erfonte": null}, {"id": "d5", "nome": "Lud Falcão", "partido": "REPUBLICANOS", "novo": false, "votos": 159944, "ig": "ludfalcao", "fol": 126000, "er": null, "reels": null, "status": "Observado set/2026", "flag": false, "tema": "Saúde; políticas sociais; municípios", "cresc": null, "fonte": null, "nv": 52.3, "naud": 52.6, "ifde": 52.5, "quad": "c", "vpm": 1269.0, "ifde_orig": 55.9, "erfonte": null}, {"id": "d38", "nome": "Cristiano Silveira", "partido": "PT", "novo": false, "votos": 73305, "ig": "cristianosilveiramg", "fol": 117000, "er": null, "reels": null, "status": "Estimativa anterior; revalidar", "flag": true, "tema": "TEA/inclusão; serviço público; educação", "cresc": null, "fonte": null, "nv": 26.5, "naud": 51.3, "ifde": 38.9, "quad": "d", "vpm": 627.0, "ifde_orig": 39.3, "erfonte": null}, {"id": "d57", "nome": "Leleco Pimentel", "partido": "PT", "novo": false, "votos": 59497, "ig": "dep_lelecopimentel", "fol": 113000, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": "Meio ambiente; patrimônio; fiscalização/denúncia", "cresc": "~18 mil jan/2025 → 40 mil jul/2025 → 51,6 mil set/2025 → 113,2 mil out/2026", "fonte": null, "nv": 19.6, "naud": 50.7, "ifde": 35.1, "quad": "d", "vpm": 527.0, "ifde_orig": 34.8, "erfonte": null}, {"id": "d74", "nome": "Pedro Luiz", "partido": "PL", "novo": true, "votos": 40876, "ig": "pedroluizdm", "fol": 103000, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": "Comunicação política conservadora; política nacional/local", "cresc": null, "fonte": null, "nv": 7.2, "naud": 49.0, "ifde": 28.1, "quad": "d", "vpm": 397.0, "ifde_orig": 26.8, "erfonte": null}, {"id": "d72", "nome": "Marília Amaral", "partido": "PL", "novo": true, "votos": 42874, "ig": "mariliaamaral999", "fol": 100000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 8.8, "naud": 48.4, "ifde": 28.6, "quad": "d", "vpm": 429.0, "ifde_orig": 27.9, "erfonte": null}, {"id": "d53", "nome": "Andréia de Jesus", "partido": "PT", "novo": false, "votos": 61253, "ig": "andreiadejesuus", "fol": 89000, "er": null, "reels": null, "status": "Estimativa anterior; revalidar", "flag": true, "tema": "Direitos humanos; igualdade racial; mulheres; periferias", "cresc": null, "fonte": null, "nv": 20.6, "naud": 46.3, "ifde": 33.5, "quad": "d", "vpm": 688.0, "ifde_orig": 35.5, "erfonte": null}, {"id": "d43", "nome": "Ugleno Alves", "partido": "PL", "novo": true, "votos": 66001, "ig": "uglenoalves", "fol": 87000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 23.1, "naud": 45.9, "ifde": 34.5, "quad": "d", "vpm": 759.0, "ifde_orig": 37.1, "erfonte": null}, {"id": "d66", "nome": "Fabão", "partido": "PV", "novo": true, "votos": 52940, "ig": "fabaovereador", "fol": 78000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 15.8, "naud": 43.9, "ifde": 29.9, "quad": "d", "vpm": 679.0, "ifde_orig": 32.5, "erfonte": null}, {"id": "d12", "nome": "Iza Lourença", "partido": "PSOL", "novo": true, "votos": 104524, "ig": "izalourenca", "fol": 76400, "er": null, "reels": null, "status": "76,4 mil observado out/2026; ER refere-se a jul/2026", "flag": false, "tema": "Tarifa zero; cultura; trabalho/fim da 6x1; direitos sociais", "cresc": "57,6 mil em jul/2026 → 76,4 mil em out/2026 (+~33%)", "fonte": null, "nv": 38.3, "naud": 43.6, "ifde": 40.9, "quad": "c", "vpm": 1368.0, "ifde_orig": 47.0, "erfonte": null}, {"id": "d56", "nome": "Daniel Sucupira", "partido": "PT", "novo": true, "votos": 59769, "ig": "danielsucupira", "fol": 71600, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 19.8, "naud": 42.4, "ifde": 31.1, "quad": "d", "vpm": 835.0, "ifde_orig": 35.1, "erfonte": null}, {"id": "d71", "nome": "Samuel Caires", "partido": "PL", "novo": true, "votos": 42962, "ig": "samuelcairesmg", "fol": 69000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 8.9, "naud": 41.7, "ifde": 25.3, "quad": "d", "vpm": 623.0, "ifde_orig": 28.0, "erfonte": null}, {"id": "d24", "nome": "Adriana Souza", "partido": "PT", "novo": true, "votos": 85316, "ig": "adrianasouza.13", "fol": 68400, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 31.5, "naud": 41.6, "ifde": 36.6, "quad": "c", "vpm": 1247.0, "ifde_orig": 42.7, "erfonte": null}, {"id": "d31", "nome": "Vittorio Medioli", "partido": "PL", "novo": true, "votos": 77931, "ig": "vittorio.medioli", "fol": 62800, "er": null, "reels": null, "status": "Verificado mai/2026; revalidar", "flag": true, "tema": null, "cresc": null, "fonte": null, "nv": 28.6, "naud": 40.0, "ifde": 34.3, "quad": "c", "vpm": 1241.0, "ifde_orig": 40.8, "erfonte": null}, {"id": "d7", "nome": "Antonio Carlos Arantes", "partido": "PL", "novo": false, "votos": 145912, "ig": "antoniocarlosarantes", "fol": 62700, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 49.3, "naud": 40.0, "ifde": 44.6, "quad": "c", "vpm": 2327.0, "ifde_orig": 54.2, "erfonte": null}, {"id": "d41", "nome": "João do Social", "partido": "AVANTE", "novo": true, "votos": 69329, "ig": "joaosantosdosocial", "fol": 62400, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": "Reparação a cidades mineradoras; causa animal; inclusão", "cresc": null, "fonte": null, "nv": 24.7, "naud": 39.9, "ifde": 32.3, "quad": "d", "vpm": 1111.0, "ifde_orig": 38.3, "erfonte": null}, {"id": "d23", "nome": "Leninha", "partido": "PT", "novo": false, "votos": 87647, "ig": "leninhamoc13", "fol": 60000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 32.4, "naud": 39.2, "ifde": 35.8, "quad": "c", "vpm": 1461.0, "ifde_orig": 43.3, "erfonte": null}, {"id": "d13", "nome": "Sargento Rodrigues", "partido": "PL", "novo": false, "votos": 103311, "ig": "sargentorodriguesoficial", "fol": 56900, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 37.9, "naud": 38.2, "ifde": 38.1, "quad": "c", "vpm": 1816.0, "ifde_orig": 46.8, "erfonte": null}, {"id": "d70", "nome": "Luiz Paulo", "partido": "PSB", "novo": true, "votos": 45108, "ig": "luizpaulocurvelo", "fol": 55700, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 10.5, "naud": 37.8, "ifde": 24.2, "quad": "d", "vpm": 810.0, "ifde_orig": 29.1, "erfonte": null}, {"id": "d67", "nome": "Rodrigo Cadeirante", "partido": "PODE", "novo": true, "votos": 50949, "ig": "rodrigocadeirante", "fol": 54000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 14.5, "naud": 37.3, "ifde": 25.9, "quad": "d", "vpm": 944.0, "ifde_orig": 31.7, "erfonte": null}, {"id": "d20", "nome": "Lucas Lasmar", "partido": "REDE", "novo": false, "votos": 93290, "ig": "lucaslasmarmg", "fol": 50600, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 34.5, "naud": 36.1, "ifde": 35.3, "quad": "c", "vpm": 1844.0, "ifde_orig": 44.7, "erfonte": null}, {"id": "d21", "nome": "Maria Clara Marra", "partido": "PSDB", "novo": false, "votos": 91436, "ig": "mariaclaramarramg", "fol": 49000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 33.8, "naud": 35.5, "ifde": 34.7, "quad": "c", "vpm": 1866.0, "ifde_orig": 44.3, "erfonte": null}, {"id": "d11", "nome": "Enes Cândido", "partido": "PSD", "novo": false, "votos": 105260, "ig": "enescandido", "fol": 48800, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 38.5, "naud": 35.4, "ifde": 37.0, "quad": "t", "vpm": 2157.0, "ifde_orig": 47.3, "erfonte": null}, {"id": "d33", "nome": "Ulysses Gomes", "partido": "PT", "novo": false, "votos": 77015, "ig": "ulyssesgomes", "fol": 44400, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 28.2, "naud": 33.7, "ifde": 30.9, "quad": "t", "vpm": 1735.0, "ifde_orig": 40.6, "erfonte": null}, {"id": "d73", "nome": "Juca Bahia", "partido": "PRD", "novo": true, "votos": 41155, "ig": "jucabahiaoficial", "fol": 43300, "er": null, "reels": null, "status": "Observado out/2026", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 7.4, "naud": 33.3, "ifde": 20.4, "quad": "e", "vpm": 950.0, "ifde_orig": 27.3, "erfonte": null}, {"id": "d48", "nome": "Alê Portela", "partido": "PL", "novo": false, "votos": 63095, "ig": "aleportelaoficial", "fol": 42400, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 21.6, "naud": 32.9, "ifde": 27.2, "quad": "e", "vpm": 1488.0, "ifde_orig": 36.4, "erfonte": null}, {"id": "d60", "nome": "Doutor Jean Freire", "partido": "PT", "novo": false, "votos": 56442, "ig": "drjeanfreire", "fol": 40900, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 17.9, "naud": 32.2, "ifde": 25.1, "quad": "e", "vpm": 1380.0, "ifde_orig": 34.0, "erfonte": null}, {"id": "d35", "nome": "Ana Paula Siqueira", "partido": "PT", "novo": false, "votos": 76125, "ig": "anapaulasiqueiraoficial", "fol": 40000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 27.8, "naud": 31.8, "ifde": 29.8, "quad": "t", "vpm": 1903.0, "ifde_orig": 40.4, "erfonte": null}, {"id": "d36", "nome": "Carol Caram", "partido": "AVANTE", "novo": false, "votos": 75869, "ig": "depcarolcaram", "fol": 40000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 27.7, "naud": 31.8, "ifde": 29.8, "quad": "t", "vpm": 1897.0, "ifde_orig": 40.4, "erfonte": null}, {"id": "d32", "nome": "Nayara Rocha", "partido": "PP", "novo": false, "votos": 77412, "ig": "nayararochamg", "fol": 39300, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 28.3, "naud": 31.5, "ifde": 29.9, "quad": "t", "vpm": 1970.0, "ifde_orig": 40.8, "erfonte": null}, {"id": "d34", "nome": "Carlos Henrique", "partido": "REPUBLICANOS", "novo": false, "votos": 76133, "ig": "carloshenrique.mg", "fol": 36500, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 27.8, "naud": 30.2, "ifde": 29.0, "quad": "t", "vpm": 2086.0, "ifde_orig": 40.5, "erfonte": null}, {"id": "d65", "nome": "Coronel Henrique", "partido": "PL", "novo": false, "votos": 52948, "ig": "coronel_henrique", "fol": 34200, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 15.8, "naud": 29.0, "ifde": 22.4, "quad": "e", "vpm": 1548.0, "ifde_orig": 32.7, "erfonte": null}, {"id": "d26", "nome": "Gil Pereira", "partido": "PSD", "novo": false, "votos": 80733, "ig": "gilpereira.mg", "fol": 34000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 29.7, "naud": 28.9, "ifde": 29.3, "quad": "t", "vpm": 2374.0, "ifde_orig": 41.7, "erfonte": null}, {"id": "d37", "nome": "Raul Belém", "partido": "PSD", "novo": false, "votos": 74546, "ig": "raulbelemoficial", "fol": 30500, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 27.1, "naud": 26.9, "ifde": 27.0, "quad": "t", "vpm": 2444.0, "ifde_orig": 40.1, "erfonte": null}, {"id": "d15", "nome": "Doorgal Andrada", "partido": "PP", "novo": false, "votos": 100333, "ig": "doorgalandradamg", "fol": 30000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 36.9, "naud": 26.6, "ifde": 31.8, "quad": "t", "vpm": 3344.0, "ifde_orig": 46.4, "erfonte": null}, {"id": "d17", "nome": "Grego da Fundação", "partido": "UNIÃO", "novo": false, "votos": 96385, "ig": "gregodafundacao", "fol": 30000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 35.6, "naud": 26.6, "ifde": 31.1, "quad": "t", "vpm": 3213.0, "ifde_orig": 45.6, "erfonte": null}, {"id": "d62", "nome": "Marli Ribeiro", "partido": "PL", "novo": false, "votos": 53729, "ig": "marliribeiromg", "fol": 29500, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 16.3, "naud": 26.3, "ifde": 21.3, "quad": "e", "vpm": 1821.0, "ifde_orig": 33.1, "erfonte": null}, {"id": "d8", "nome": "Neilando Pimenta", "partido": "REPUBLICANOS", "novo": false, "votos": 125858, "ig": "deputadoneilando", "fol": 29000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 44.4, "naud": 26.0, "ifde": 35.2, "quad": "t", "vpm": 4340.0, "ifde_orig": 51.3, "erfonte": null}, {"id": "d50", "nome": "Vitório Júnior", "partido": "PP", "novo": false, "votos": 62235, "ig": "vitoriojuniormg", "fol": 27000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 21.1, "naud": 24.7, "ifde": 22.9, "quad": "e", "vpm": 2305.0, "ifde_orig": 36.2, "erfonte": null}, {"id": "d29", "nome": "Dra. Laís Santiago", "partido": "PDT", "novo": true, "votos": 79016, "ig": "laisantiago", "fol": 26200, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 29.0, "naud": 24.2, "ifde": 26.6, "quad": "t", "vpm": 3016.0, "ifde_orig": 41.3, "erfonte": null}, {"id": "d63", "nome": "Luizinho", "partido": "PT", "novo": false, "votos": 53586, "ig": "luizinho.minas", "fol": 26000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 16.2, "naud": 24.0, "ifde": 20.1, "quad": "e", "vpm": 2061.0, "ifde_orig": 33.0, "erfonte": null}, {"id": "d42", "nome": "Ricardo Campos", "partido": "PT", "novo": false, "votos": 68926, "ig": "ricardocamposdeputado", "fol": 23800, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 24.5, "naud": 22.4, "ifde": 23.5, "quad": "e", "vpm": 2896.0, "ifde_orig": 38.5, "erfonte": null}, {"id": "d68", "nome": "Heleno do Hospital", "partido": "PSDB", "novo": true, "votos": 46224, "ig": "helenodohospital", "fol": 23000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 11.3, "naud": 21.8, "ifde": 16.5, "quad": "e", "vpm": 2010.0, "ifde_orig": 29.9, "erfonte": null}, {"id": "d47", "nome": "Marcelo Heitor", "partido": "PL", "novo": true, "votos": 63738, "ig": "marceloheitor.oficial", "fol": 22800, "er": null, "reels": 3500, "status": "Verificado jul/2026; revalidar audiência atual", "flag": true, "tema": null, "cresc": null, "fonte": null, "nv": 21.9, "naud": 21.7, "ifde": 21.8, "quad": "e", "vpm": 2796.0, "ifde_orig": 36.8, "erfonte": null}, {"id": "d52", "nome": "Betão", "partido": "PT", "novo": false, "votos": 61835, "ig": "betaopt", "fol": 20000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 20.9, "naud": 19.3, "ifde": 20.1, "quad": "e", "vpm": 3092.0, "ifde_orig": 36.2, "erfonte": null}, {"id": "d54", "nome": "Gustavo Santana", "partido": "PL", "novo": false, "votos": 60293, "ig": "gustavosantanaplmg", "fol": 20000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 20.1, "naud": 19.3, "ifde": 19.7, "quad": "e", "vpm": 3015.0, "ifde_orig": 35.6, "erfonte": null}, {"id": "d39", "nome": "Tito Torres", "partido": "PSD", "novo": false, "votos": 72256, "ig": "titotorresmg", "fol": 20000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 26.0, "naud": 19.3, "ifde": 22.7, "quad": "e", "vpm": 3613.0, "ifde_orig": 39.5, "erfonte": null}, {"id": "d28", "nome": "Betinho Pinto Coelho", "partido": "UNIÃO", "novo": false, "votos": 79539, "ig": "betinhopintocoelho", "fol": 19000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 29.2, "naud": 18.4, "ifde": 23.8, "quad": "t", "vpm": 4186.0, "ifde_orig": 41.6, "erfonte": null}, {"id": "d14", "nome": "João Magalhães", "partido": "PSD", "novo": false, "votos": 102469, "ig": null, "fol": 18500, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 37.6, "naud": 17.9, "ifde": 27.7, "quad": "t", "vpm": 5539.0, "ifde_orig": 47.0, "erfonte": null}, {"id": "d25", "nome": "Rodrigo Lopes", "partido": "UNIÃO", "novo": false, "votos": 82823, "ig": "rodrigolopes.mg", "fol": 18000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 30.6, "naud": 17.4, "ifde": 24.0, "quad": "t", "vpm": 4601.0, "ifde_orig": 42.5, "erfonte": null}, {"id": "d44", "nome": "Zé Guilherme", "partido": "PP", "novo": false, "votos": 65652, "ig": "deputadozeguilherme", "fol": 16200, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 22.9, "naud": 15.5, "ifde": 19.2, "quad": "e", "vpm": 4053.0, "ifde_orig": 37.5, "erfonte": null}, {"id": "d49", "nome": "Zé Laviola", "partido": "NOVO", "novo": false, "votos": 62939, "ig": "joselaviola", "fol": 16000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 21.5, "naud": 15.2, "ifde": 18.4, "quad": "e", "vpm": 3934.0, "ifde_orig": 36.6, "erfonte": null}, {"id": "d59", "nome": "Tony Carlos", "partido": "PSDB", "novo": true, "votos": 56546, "ig": "tonycarlosuberaba", "fol": 16000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026); confirmar", "flag": true, "tema": null, "cresc": null, "fonte": null, "nv": 17.9, "naud": 15.2, "ifde": 16.6, "quad": "e", "vpm": 3534.0, "ifde_orig": 34.3, "erfonte": null}, {"id": "d18", "nome": "Gustavo Valadares", "partido": "PSD", "novo": false, "votos": 93956, "ig": "valadaresgustavo", "fol": 15000, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 34.7, "naud": 14.1, "ifde": 24.4, "quad": "t", "vpm": 6264.0, "ifde_orig": 45.2, "erfonte": null}, {"id": "d16", "nome": "Duarte Bechir", "partido": "PSD", "novo": false, "votos": 97817, "ig": "duartebechir", "fol": 13600, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 36.1, "naud": 12.3, "ifde": 24.2, "quad": "t", "vpm": 7192.0, "ifde_orig": 46.1, "erfonte": null}, {"id": "d55", "nome": "Anderson Lima", "partido": "PL", "novo": true, "votos": 59870, "ig": "andersonlima.mg", "fol": 11900, "er": null, "reels": 112980, "status": "Seguidores observados em fonte de analytics; validar no perfil", "flag": true, "tema": null, "cresc": null, "fonte": "https://chartex.com/song/leonardo-travensoli-show-hair-the-epic-barber-490898", "nv": 19.8, "naud": 9.9, "ifde": 14.9, "quad": "e", "vpm": 5031.0, "ifde_orig": 35.7, "erfonte": null}, {"id": "d51", "nome": "Marquinho Lemos", "partido": "PT", "novo": false, "votos": 62032, "ig": "marquinhodeputado", "fol": 9300, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 21.0, "naud": 5.4, "ifde": 13.2, "quad": "e", "vpm": 6670.0, "ifde_orig": 36.5, "erfonte": null}, {"id": "d76", "nome": "Fernando Breno", "partido": "PRD", "novo": true, "votos": 36648, "ig": "fernandobrenocoro", "fol": 6900, "er": null, "reels": null, "status": "Aproximado, lista do gabinete (out/2026)", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 3.6, "naud": 0.0, "ifde": 1.8, "quad": "e", "vpm": 5311.0, "ifde_orig": 25.3, "erfonte": null}, {"id": "d9", "nome": "Elismar Prado", "partido": "PSD", "novo": false, "votos": 113243, "ig": null, "fol": null, "er": null, "reels": null, "status": "Contagem atual não confirmada", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 40.9, "naud": null, "ifde": null, "quad": null, "vpm": null, "ifde_orig": null, "erfonte": null}, {"id": "d45", "nome": "Dr. Maurício", "partido": "NOVO", "novo": false, "votos": 64692, "ig": "drmauricio", "fol": null, "er": null, "reels": null, "status": "Contagem atual não confirmada", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 22.4, "naud": null, "ifde": null, "quad": null, "vpm": null, "ifde_orig": null, "erfonte": null}, {"id": "d58", "nome": "Roberto Andrade", "partido": "PRD", "novo": false, "votos": 59125, "ig": "deprobertoandrade", "fol": null, "er": null, "reels": null, "status": "Contagem atual não confirmada", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 19.4, "naud": null, "ifde": null, "quad": null, "vpm": null, "ifde_orig": null, "erfonte": null}, {"id": "d61", "nome": "Denerval Germano", "partido": "PL", "novo": true, "votos": 54552, "ig": "denerval.germano", "fol": null, "er": null, "reels": null, "status": "Contagem atual não confirmada", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 16.8, "naud": null, "ifde": null, "quad": null, "vpm": null, "ifde_orig": null, "erfonte": null}, {"id": "d77", "nome": "Cabo Gregório Silva", "partido": "DEMOCRATA", "novo": true, "votos": 32872, "ig": "cabogregoriocruzazul", "fol": null, "er": null, "reels": null, "status": "Contagem atual não confirmada", "flag": false, "tema": null, "cresc": null, "fonte": null, "nv": 0.0, "naud": null, "ifde": null, "quad": null, "vpm": null, "ifde_orig": null, "erfonte": null}], "mv": 26.8, "ma": 35.5};const DATA=PACK.deps,MV=PACK.mv,MA=PACK.ma;
+const median=a=>{const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+const T={
+"lead":"Identidade, antagonismo e emoção mobilizam mais do que comunicação eleitoral burocrática.",
+"matriz":[
+ {"t":"Conflito político, direita x esquerda, Lula e Bolsonaro","q":["Bruno Engler","Pablo Almeida","Amanda Teixeira Dias","Flávia Borja","Delegada Sheila","Pedro Luiz"],"p":"Muito alto","n":5},
+ {"t":"Família, crianças, religião e valores","q":["Delegada Sheila","Pablo Almeida","Flávia Borja","Amanda Teixeira Dias","Chiara Biondini"],"p":"Muito alto","n":5},
+ {"t":"Política nacional e personagens famosos","q":["Bruno Engler","Pablo Almeida","Leleco Pimentel","Amanda Teixeira Dias","Delegada Sheila"],"p":"Muito alto","n":5},
+ {"t":"Animais e resgates","q":["Noraldino Júnior"],"p":"Muito alto","n":5},
+ {"t":"Mulheres, violência e misoginia","q":["Iza Lourença","Delegada Sheila","Amanda Teixeira Dias","Macaé Evaristo"],"p":"Muito alto quando há caso concreto","n":4.5},
+ {"t":"Denúncia, fiscalização e descoberta","q":["Leleco Pimentel","Beatriz Cerqueira","Iza Lourença"],"p":"Muito alto quando há narrativa forte","n":4.5},
+ {"t":"História pessoal, família e trajetória","q":["Lud Falcão","Macaé Evaristo","Amanda Teixeira Dias","Flávia Borja"],"p":"Alto","n":4},
+ {"t":"Futebol e esporte","q":["Mário Henrique Caixa"],"p":"Alto e recorrente","n":4},
+ {"t":"Educação e servidores","q":["Beatriz Cerqueira","Macaé Evaristo"],"p":"Alto dentro de comunidades específicas","n":3.5},
+ {"t":"Agenda institucional, reuniões e projetos","q":[],"qtxt":"Praticamente todos","p":"Baixo a médio","n":2}
+],
+"mecanismos":[
+ {"t":"Identidade ideológica","f":"Nós contra eles.","q":["Bruno Engler","Pablo Almeida","Delegada Sheila","Amanda Teixeira Dias","Flávia Borja"]},
+ {"t":"Causa emocional","f":"Isso está acontecendo com alguém e precisa ser impedido.","q":["Noraldino Júnior","Delegada Sheila","Iza Lourença","Cristiano Silveira"]},
+ {"t":"Denúncia e descoberta","f":"Descobrimos algo que você precisa saber.","q":["Leleco Pimentel","Iza Lourença","Beatriz Cerqueira"]},
+ {"t":"Identidade pessoal e cultural","f":"Você já me conhece por quem eu sou, não apenas pelo cargo.","q":["Mário Henrique Caixa","Lud Falcão","Macaé Evaristo","Mauro Tramonte"]}
+],
+"conteudo":{
+ "Delegada Sheila":"Crimes contra crianças, pedofilia, violência, proteção",
+ "Bruno Engler":"Lula e Bolsonaro, esquerda x direita, confronto ideológico",
+ "Pablo Almeida":"Política nacional, conservadorismo, religião",
+ "Macaé Evaristo":"Trajetória pessoal, raça, educação, direitos humanos",
+ "Mário Henrique Caixa":"Futebol, Atlético, esporte e mídia",
+ "Noraldino Júnior":"Resgate animal, maus-tratos e histórias emocionais",
+ "Mauro Tramonte":"Cotidiano, televisão, histórias populares e proximidade",
+ "Beatriz Cerqueira":"Educação, servidores, conflito com o governo e privatizações",
+ "Eduardo Azevedo":"Conservadorismo, família, religião e política nacional",
+ "Amanda Teixeira Dias":"Direita, família, mulheres, política nacional",
+ "Flávia Borja":"Fé, família, crianças e valores conservadores",
+ "Roberta Lopes":"Nikolas, anistia, bolsonarismo, “liberdade”",
+ "Chiara Biondini":"Fé católica, vida, família e temas de costumes",
+ "Lud Falcão":"Família, trajetória pessoal, território e histórias humanas",
+ "Cristiano Silveira":"Experiência pessoal, TEA, inclusão e confronto político",
+ "Leleco Pimentel":"Denúncia, fiscalização e descoberta",
+ "Pedro Luiz":"Política nacional e conservadora, comunicação curta",
+ "Iza Lourença":"Mulheres, misoginia, direitos e confronto político",
+ "Andréia de Jesus":"Raça, direitos humanos, periferias e violência institucional",
+ "Fabão":"Presença territorial, cotidiano e identidade local"
+},
+"casos":[
+ {"t":"Pablo Almeida: a política estadual não é o motor principal","q":["Pablo Almeida"],"b":["Os três melhores Reels observados giram em torno de política nacional e personagens conhecidos, disputa cultural e religião.","Pablo chega à ALMG com uma audiência construída sobre identidade política nacionalizada, não sobre políticas públicas estaduais. O modelo se aproxima mais do de Bruno Engler do que do de parlamentares territoriais.","Sua identidade pública foi construída em torno de “Deus, pátria, família e liberdade”, segurança, valores cristãos e fiscalização do Executivo."],"src":[["Portal CMBH","https://cmbh.mg.gov.br/vereadores/pablo-almeida"]]},
+ {"t":"Roberta Lopes: identidade da direita nacional rompe a bolha","q":["Roberta Lopes"],"viz":"reels","b":["171 mil seguidores, taxa de engajamento de 2,27% e média de 31,1 mil visualizações por Reel.","A pauta municipal e estadual aparece, mas o conteúdo que ultrapassa a bolha está associado a Nikolas, anistia, liberdade e bolsonarismo."],"src":[["Modash","https://www.modash.io/find-influencers/brazil/juiz-de-fora"]]},
+ {"t":"Iza Lourença: oposto ideológico, mecanismo semelhante","q":["Iza Lourença"],"viz":"iza","b":["O conteúdo sobre política de ódio e mulheres chegou a 63 mil de engajamento; os conteúdos eleitorais seguintes ficaram em 29 mil e 27 mil.","Para Iza, a pauta das mulheres não é só identidade programática: mobiliza mais que o pedido de voto. A agenda recente inclui feminicídio, misoginia, violência obstétrica, violência política de gênero e política de cuidados.","Perfil que merece acompanhamento especial. Cresceu de 57,6 mil seguidores em julho para 76,4 mil em outubro de 2026."],"src":[["HubPolítico","https://hubpolitico.com.br/perfil/izalourenca"],["Site de Iza Lourença","https://www.izalourenca.com.br/blog/mulheres-quais-as-propostas-de-iza-lourenca-para-minas-gerais"]]},
+ {"t":"Crianças, família e ameaça: um dos padrões mais fortes","q":["Delegada Sheila","Flávia Borja"],"b":["A conta da Delegada Sheila é classificada por ferramentas de analytics em segurança pública, direitos das mulheres, proteção infantil e aplicação da lei. A taxa de engajamento estimada é de 3,98%, considerada boa para 1,7 milhão de seguidores.","Funciona melhor a história concreta, com criança, ameaça, indignação e necessidade de proteção, do que “apresentei um projeto de proteção infantil”.","O mesmo mecanismo aparece em Flávia Borja: valores cristãos, família, educação dos filhos, gravidez, violência doméstica e oposição à erotização infantil."],"src":[["HypeAuditor","https://hypeauditor.com/pt/instagram/delegadasheila/"],["CMBH","https://cmbhweb.cmbh.mg.gov.br/vereadores/fl%C3%A1via-borja"]]},
+ {"t":"Denúncia e fiscalização: o caso Leleco","q":["Leleco Pimentel"],"viz":"leleco","b":["O Palácio das Mangabeiras mostra a diferença entre o tema institucional (destinação de bens do patrimônio estadual) e o tema digital (“onde foram parar os móveis e as obras de arte do Palácio?”).","A vistoria de 2 de julho encontrou poucos itens e levantou perguntas sobre o restante do acervo. A pauta passou a outros veículos e vídeos.","Do ponto de vista da comunicação digital, a fórmula é eficiente: objeto concreto, patrimônio conhecido, pergunta, possível responsável e indignação."],"src":[["ALMG, notícia","https://www.almg.gov.br/comunicacao/noticias/arquivos/Paradeiro-de-moveis-e-obras-de-arte-do-Palacio-das-Mangabeiras-intriga-Comissao-de-Cultura/"],["ALMG, pronunciamento","https://www.almg.gov.br/pronunciamentos/deputado-leleco-pimentel/2026-07-07/58614"],["Site do deputado","https://lelecopimentel.com.br/mais-veiculos-repercutem-vistoria-no-palacio-das-mangabeiras/"]]},
+ {"t":"Animais: categoria extremamente privilegiada","q":["Noraldino Júnior"],"b":["Noraldino tem talvez a assinatura temática mais clara de toda a Assembleia. Até o material eleitoral de 2026 gira em torno de cães e gatos, com frases como “Quem cuida transforma”.","A pauta une imagem forte, emoção, vítima identificável, possibilidade de final feliz e indignação. Um resgate tem muito mais potencial orgânico do que a foto de uma reunião."],"src":[["Materiais de campanha","https://noraldinojunior.com.br/materiais"]]},
+ {"t":"História pessoal supera prestação de contas","q":["Lud Falcão","Macaé Evaristo","Flávia Borja","Amanda Teixeira Dias"],"b":["O conteúdo funciona melhor quando o parlamentar deixa de ser instituição e vira personagem: família, maternidade e paternidade, origem social, formação, fé, dificuldades, conquistas e histórias com filhos ou parentes.","Macaé é um bom exemplo: mulher negra, professora, trajetória na educação pública, doutorado e experiência institucional. Sua biografia já é altamente comunicável."],"src":[]},
+ {"t":"Conflito político continua sendo o maior motor","q":["Bruno Engler","Pablo Almeida","Delegada Sheila","Amanda Teixeira Dias","Flávia Borja"],"b":["Entre os grandes perfis conservadores, o que ultrapassa a bolha do mandato é o conteúdo que transforma a política em disputa clara entre lados.","Os anúncios de campanha de Amanda Teixeira Dias em 2026 usaram ataques a adversários (Lula, TSE e Duda Salabert) e forte associação com Cleitinho. Um deles chegou a 300 mil a 350 mil impressões só no Instagram.","Personagem e conflito nacional ampliam a circulação muito além da pauta estadual."],"src":[["Vipima","https://vipima.com/pt-BR/brazil/candidates/amanda-teixeira-dias-22000-mg"]]}
+]
+}
+;
+const PARTY_COLORS={PL:"#1E4FA3",PT:"#C8102E",PSD:"#E08A00",PP:"#3A8FD6",REPUBLICANOS:"#0F7F86","UNIÃO":"#2C3E8F",PSDB:"#4C7DC9",PRD:"#7A4FB8",PSB:"#E3572B",AVANTE:"#D6457F",NOVO:"#F07C1A",PV:"#3E9B3A",PODE:"#5BB6A8",PSOL:"#8E1F6E",REDE:"#2BA383",PDT:"#B5352A",DEMOCRATA:"#8A6D3B"};
+const FAIXAS=[
+ {k:"A",nome:"500 mil ou mais",min:5e5,c:"#0B2D6B"},
+ {k:"B",nome:"150 a 499 mil",min:15e4,c:"#2B5FB8"},
+ {k:"C",nome:"100 a 149 mil",min:1e5,c:"#5C8FD9"},
+ {k:"D",nome:"50 a 99 mil",min:5e4,c:"#97B8E8"},
+ {k:"E",nome:"Menos de 50 mil",min:0,c:"#C9D8EE"},
+ {k:"X",nome:"Não confirmado",min:null,c:"transparent"}];
+const faixa=d=>d.fol==null?FAIXAS[5]:FAIXAS.find(f=>f.min!=null&&d.fol>=f.min);
+const IG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>';
+const fmt=n=>n==null||isNaN(n)?"–":Math.round(n).toLocaleString("pt-BR");
+const fmtShort=n=>n>=1e6?(n/1e6).toLocaleString("pt-BR",{maximumFractionDigits:2})+" mi":n>=1e3?(n/1e3).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mil":String(Math.round(n));
+const pct=n=>n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+"%";
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const igUrl=h=>`https://www.instagram.com/${encodeURIComponent(h)}/`;
+const igSearch=n=>`https://www.google.com/search?q=${encodeURIComponent(n+" deputado estadual instagram")}`;
+const byName=Object.fromEntries(DATA.map(d=>[norm(d.nome),d]));
+const findName=n=>byName[norm(n)];
+const initials=n=>n.replace(/^(Dr\.|Dra\.|Doutor|Delegad[oa]|Sargento|Coronel|Cabo)\s+/,"").split(/\s+/).filter(w=>w.length>2).slice(0,2).map(w=>w[0]).join("").toUpperCase()||n[0];
+const conteudo=d=>T.conteudo[d.nome]||null;
+
+/* posições */
+const voteRank=Object.fromEntries([...DATA].sort((a,b)=>b.votos-a.votos).map((d,i)=>[d.id,i+1]));
+const withF=DATA.filter(d=>d.fol!=null);
+const folRank=Object.fromEntries([...withF].sort((a,b)=>b.fol-a.fol).map((d,i)=>[d.id,i+1]));
+const vRankF=Object.fromEntries([...withF].sort((a,b)=>b.votos-a.votos).map((d,i)=>[d.id,i+1]));
+const TOP20=[...withF].sort((a,b)=>b.fol-a.fol).slice(0,20);
+const MED_V=median(withF.map(d=>d.votos)),MED_F=median(withF.map(d=>d.fol));
+function spearman(xs,ys){const rk=a=>{const idx=a.map((v,i)=>[v,i]).sort((p,q)=>p[0]-q[0]);const r=Array(a.length);let i=0;
+  while(i<idx.length){let j=i;while(j+1<idx.length&&idx[j+1][0]===idx[i][0])j++;for(let k=i;k<=j;k++)r[idx[k][1]]=(i+j)/2+1;i=j+1}return r};
+  const a=rk(xs),b=rk(ys),n=a.length,ma=a.reduce((s,v)=>s+v,0)/n,mb=b.reduce((s,v)=>s+v,0)/n;let num=0,da=0,db=0;
+  for(let i=0;i<n;i++){num+=(a[i]-ma)*(b[i]-mb);da+=(a[i]-ma)**2;db+=(b[i]-mb)**2}return num/Math.sqrt(da*db)}
+const strength=r=>{const a=Math.abs(r);return a<.2?"praticamente nenhuma":a<.4?"fraca":a<.6?"moderada":a<.8?"forte":"muito forte"};
+const rhoTxt=r=>r.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const gapHTML=g=>g==null?"":g===0?`<span class="gap eq" title="Mesma posição">=</span>`:g>0?`<span class="gap up" title="Sobe ${g} posições em relação aos votos">▲ ${g}</span>`:`<span class="gap down" title="Cai ${-g} posições em relação aos votos">▼ ${-g}</span>`;
+
+/* fatos */
+(function(){const tot=withF.reduce((a,d)=>a+d.fol,0);
+  document.getElementById("facts").innerHTML=[[fmtShort(TOP20[0].fol),"seguidores no maior perfil"],[withF.filter(d=>d.fol>=1e5).length,"deputados com 100 mil ou mais"],[fmtShort(tot),"seguidores somados"],[`${withF.length} de 77`,"com contagem confirmada"]]
+  .map(([b,s])=>`<li><b>${b}</b><span>${s}</span></li>`).join("")})();
+
+/* plenário */
+let mode="faixa",highlight=null;
+const partyOrder=Object.keys(DATA.reduce((m,d)=>(m[d.partido]=(m[d.partido]||0)+1,m),{})).sort((a,b)=>DATA.filter(d=>d.partido===b).length-DATA.filter(d=>d.partido===a).length);
+function seats(){const rows=6,r0=118,r1=290,cx=320,cy=312,n=77;const radii=[...Array(rows)].map((_,i)=>r0+(r1-r0)*i/(rows-1));const sum=radii.reduce((a,b)=>a+b,0);
+  let c=radii.map(r=>Math.round(n*r/sum));c[rows-1]+=n-c.reduce((a,b)=>a+b,0);const pts=[];
+  radii.forEach((r,i)=>{for(let k=0;k<c[i];k++){const a=Math.PI-(Math.PI*(k+.5)/c[i]);pts.push({x:cx+r*Math.cos(a),y:cy-r*Math.sin(a),a,r})}});
+  return pts.sort((p,q)=>q.a-p.a)}
+const SEATS=seats();
+function seatOrder(){if(mode==="faixa")return[...DATA].sort((a,b)=>(b.fol??-1)-(a.fol??-1));
+  if(mode==="status")return[...DATA].sort((a,b)=>(b.novo-a.novo)||b.votos-a.votos);
+  return[...DATA].sort((a,b)=>partyOrder.indexOf(a.partido)-partyOrder.indexOf(b.partido)||b.votos-a.votos)}
+const keyOf=d=>mode==="faixa"?faixa(d).k:mode==="partido"?d.partido:(d.novo?"novo":"re");
+function fillFor(d){if(mode==="faixa")return faixa(d).c;if(mode==="partido")return PARTY_COLORS[d.partido];return d.novo?"var(--red)":"var(--ink)"}
+function legendItems(){
+  if(mode==="faixa")return FAIXAS.map(f=>({k:f.k,label:`${f.nome} ${DATA.filter(d=>faixa(d).k===f.k).length}`,c:f.c,dash:f.k==="X"}));
+  if(mode==="partido")return partyOrder.map(p=>({k:p,label:`${p} ${DATA.filter(d=>d.partido===p).length}`,c:PARTY_COLORS[p]}));
+  return[{k:"novo",label:"Novos 24",c:"var(--red)"},{k:"re",label:"Reeleitos 53",c:"var(--ink)"}]}
+function drawHemi(){
+  const o=seatOrder();let h=o.map((d,i)=>{const p=SEATS[i];const dim=highlight&&keyOf(d)!==highlight;const f=fillFor(d);const x=f==="transparent";
+    return `<circle class="seat${dim?" dim":""}" data-id="${d.id}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="10.5" fill="${x?"var(--bg)":f}" ${x?'stroke="var(--muted)" stroke-dasharray="3 2" stroke-width="1.5"':""} tabindex="0" role="button" aria-label="${esc(d.nome)}, ${d.fol?fmtShort(d.fol)+" seguidores":"seguidores não confirmados"}"></circle>`}).join("");
+  h+=`<text class="hemi-center" x="320" y="300" text-anchor="middle" font-size="64">77</text><text class="hemi-sub" x="320" y="326" text-anchor="middle">${mode==="faixa"?"do maior para o menor perfil":"deputados, 2027–2031"}</text>`;
+  document.getElementById("hemi").innerHTML=h;
+  document.getElementById("legend").innerHTML=legendItems().map(x=>`<li data-k="${x.k}" style="${highlight&&highlight!==x.k?"opacity:.45":""}"><i style="background:${x.c};${x.dash?"border:1.5px dashed var(--muted)":""}"></i>${esc(x.label)}</li>`).join("")}
+document.querySelectorAll(".modes button").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;highlight=null;document.querySelectorAll(".modes button").forEach(x=>x.setAttribute("aria-pressed",x===b));drawHemi()});
+document.getElementById("legend").addEventListener("click",e=>{const li=e.target.closest("li");if(!li)return;highlight=highlight===li.dataset.k?null:li.dataset.k;drawHemi()});
+function bindTip(svgId,boxId,tipId,sel,text){const s=document.getElementById(svgId),t=document.getElementById(tipId),b=document.getElementById(boxId);
+  s.addEventListener("mousemove",e=>{const c=e.target.closest(sel);if(!c){t.style.opacity=0;return}const d=DATA.find(x=>x.id===c.dataset.id);const r=b.getBoundingClientRect();
+    t.textContent=text(d);t.style.left=(e.clientX-r.left)+"px";t.style.top=(e.clientY-r.top)+"px";t.style.opacity=1});
+  s.addEventListener("mouseleave",()=>t.style.opacity=0);
+  s.addEventListener("click",e=>{const c=e.target.closest(sel);if(c)openDrawer(c.dataset.id)});
+  s.addEventListener("keydown",e=>{const c=e.target.closest(sel);if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openDrawer(c.dataset.id)}})}
+bindTip("hemi","hemiBox","tip",".seat",d=>`${d.nome} (${d.partido}): ${d.fol?fmtShort(d.fol)+" seguidores":"não confirmado"}`);
+
+/* abas */
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",x===b));
+  document.querySelectorAll("section.panel").forEach(s=>s.hidden=s.id!==b.dataset.tab)});
+
+/* ranking */
+let st="all";
+document.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{st=b.dataset.st;document.querySelectorAll("[data-st]").forEach(x=>x.setAttribute("aria-pressed",x===b));drawRank()});
+(function(){const sh=TOP20[0];const be=DATA.find(d=>d.nome==="Bruno Engler");
+  document.getElementById("verdict1").innerHTML=`<span class="rho">${voteRank[sh.id]}º</span><b>A maior audiência não foi a maior votação</b>
+  <span>${esc(sh.nome)} lidera o Instagram com ${fmtShort(sh.fol)} seguidores e foi a ${voteRank[sh.id]}ª mais votada. ${esc(be.nome)}, o mais votado, tem cerca de um terço dessa audiência. A aba Força Digital-Eleitoral mostra essa relação para os 77.</span>`})();
+function drawRank(){
+  const show=d=>st==="all"||(st==="novo"?d.novo:!d.novo);
+  const has=[...withF].sort((a,b)=>b.fol-a.fol).filter(show),no=DATA.filter(d=>d.fol==null&&show(d));
+  const max=TOP20[0].fol;
+  const row=d=>{const g=d.fol!=null?vRankF[d.id]-folRank[d.id]:null;
+    return `<li data-id="${d.id}" tabindex="0"><span class="pos">${d.fol!=null?folRank[d.id]:"·"}</span>
+    <span class="who"><b>${esc(d.nome)}${d.novo?'<span class="badge-new">novo</span>':""}${d.flag?'<span class="flag" title="'+esc(d.status)+'">confirmar</span>':""}</b><small>${d.partido}, ${voteRank[d.id]}º em votos (${fmtShort(d.votos)})${gapHTML(g)}</small></span>
+    <span class="barcell"><div class="bar"><span style="width:${d.fol!=null?Math.max(1.2,100*d.fol/max):0}%;background:${PARTY_COLORS[d.partido]}"></span></div></span>
+    <span style="display:flex;gap:14px;align-items:center">${d.er!=null?`<span class="ertag" title="Taxa de engajamento">ER ${pct(d.er)}</span>`:""}
+    <a class="net${d.ig?"":" miss"}" href="${d.ig?igUrl(d.ig):igSearch(d.nome)}" target="_blank" rel="noopener" aria-label="Instagram de ${esc(d.nome)}" onclick="event.stopPropagation()">${IG}</a>
+    <span class="val${d.fol==null?" na":""}">${d.fol==null?"não confirmado":fmt(d.fol)}</span></span></li>`};
+  document.getElementById("rankList").innerHTML=has.map(row).join("")+no.map(row).join("")}
+document.getElementById("rankList").addEventListener("click",e=>{const li=e.target.closest("li");if(li)openDrawer(li.dataset.id)});
+document.getElementById("rankList").addEventListener("keydown",e=>{const li=e.target.closest("li");if(li&&e.key==="Enter")openDrawer(li.dataset.id)});
+
+/* IFDE */
+const inter=d=>d.er!=null&&d.fol?d.fol*d.er/100:null;
+const QUAD={c:{t:"Força eleitoral e digital",d:"Acima da mediana nos votos e no Instagram.",c:"#1E4FA3"},
+  d:{t:"Mais digital que eleitoral",d:"Audiência acima da mediana, votação abaixo. A audiência não se converteu em voto na mesma proporção.",c:"#C8102E"},
+  t:{t:"Mais eleitoral que digital",d:"Votação acima da mediana com Instagram menor. Típico de voto territorial e de bases municipais.",c:"#E08A00"},
+  e:{t:"Espaço para crescer",d:"Abaixo da mediana nas duas forças. Maior margem de crescimento durante o mandato.",c:"#7C8CA3"}};
+const withI=DATA.filter(d=>d.ifde!=null);
+const gapF=d=>d.naud-d.nv; /* positivo: mais digital; negativo: mais eleitoral */
+const TOPGAP=new Set([...withI].filter(d=>d.quad==="d").sort((a,b)=>gapF(b)-gapF(a)).slice(0,3).map(d=>d.id).concat([...withI].filter(d=>d.quad==="t").sort((a,b)=>gapF(a)-gapF(b)).slice(0,3).map(d=>d.id)));
+const ptsTxt=n=>Math.round(Math.abs(n))+(Math.round(Math.abs(n))===1?" ponto":" pontos");
+const ifdeRank=Object.fromEntries([...withI].sort((a,b)=>b.ifde-a.ifde).map((d,i)=>[d.id,i+1]));
+let qHi=null,st2="all";
+document.getElementById("quadFilter").innerHTML=`<button class="chip-btn" data-q="" aria-pressed="true">Todos</button>`+Object.entries(QUAD).map(([k,q])=>`<button class="chip-btn" data-q="${k}" aria-pressed="false"><i class="sw" style="background:${q.c}"></i>${q.t} ${withI.filter(d=>d.quad===k).length}</button>`).join("");
+document.getElementById("quadFilter").addEventListener("click",e=>{const b=e.target.closest("[data-q]");if(!b)return;qHi=b.dataset.q||null;
+  document.querySelectorAll("[data-q]").forEach(x=>x.setAttribute("aria-pressed",x===b));drawMap();drawIfdeList()});
+document.querySelectorAll("[data-st2]").forEach(b=>b.onclick=()=>{st2=b.dataset.st2;document.querySelectorAll("[data-st2]").forEach(x=>x.setAttribute("aria-pressed",x===b));drawIfdeList()});
+function drawMap(){
+  const W=900,H=620,m={l:64,r:24,t:44,b:58},X=v=>m.l+v/100*(W-m.l-m.r),Y=v=>H-m.b-v/100*(H-m.t-m.b);
+  let s=`<rect x="${X(MV)}" y="${Y(100)}" width="${X(100)-X(MV)}" height="${Y(MA)-Y(100)}" fill="${QUAD.c.c}" opacity=".05"/>
+    <rect x="${X(0)}" y="${Y(100)}" width="${X(MV)-X(0)}" height="${Y(MA)-Y(100)}" fill="${QUAD.d.c}" opacity=".05"/>
+    <rect x="${X(MV)}" y="${Y(MA)}" width="${X(100)-X(MV)}" height="${Y(0)-Y(MA)}" fill="${QUAD.t.c}" opacity=".06"/>`;
+  s+=`<g class="axis">`;[0,25,50,75,100].forEach(t=>{s+=`<line x1="${X(t)}" x2="${X(t)}" y1="${m.t}" y2="${H-m.b}"/><text x="${X(t)}" y="${H-m.b+18}" text-anchor="middle">${t}</text><line x1="${m.l}" x2="${W-m.r}" y1="${Y(t)}" y2="${Y(t)}"/><text x="${m.l-8}" y="${Y(t)+4}" text-anchor="end">${t}</text>`});
+  s+=`<text x="${(W+m.l)/2}" y="${H-12}" text-anchor="middle">Força eleitoral (votos) →</text><text transform="translate(18 ${(H-m.b+m.t)/2}) rotate(-90)" text-anchor="middle">Força digital (Instagram) →</text></g>`;
+  s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(100)}" y2="${Y(100)}" stroke="var(--muted)" stroke-width="1" opacity=".35"/>`;
+  s+=`<line x1="${X(MV)}" x2="${X(MV)}" y1="${m.t}" y2="${H-m.b}" stroke="var(--muted)" stroke-dasharray="5 4"/><line x1="${m.l}" x2="${W-m.r}" y1="${Y(MA)}" y2="${Y(MA)}" stroke="var(--muted)" stroke-dasharray="5 4"/>`;
+  const qt=(x,y,k,a)=>`<text x="${x}" y="${y}" text-anchor="${a}" fill="${QUAD[k].c}" font-size="13" font-weight="800">${QUAD[k].t}</text>`;
+  s+=qt(X(100),m.t-14,"c","end")+qt(X(0),m.t-14,"d","start")+qt(X(100)-6,Y(0)-8,"t","end")+qt(X(0)+8,Y(0)-8,"e","start");
+  const pts=[...withI].sort((a,b)=>a.ifde-b.ifde);
+  pts.filter(d=>TOPGAP.has(d.id)&&(!qHi||d.quad===qHi)).forEach(d=>{s+=`<circle cx="${X(d.nv).toFixed(1)}" cy="${Y(d.naud).toFixed(1)}" r="13" fill="none" stroke="${QUAD[d.quad].c}" stroke-width="2"/>`});
+  pts.forEach(d=>{const dim=qHi&&d.quad!==qHi;s+=`<circle class="dot" data-id="${d.id}" tabindex="0" role="button" aria-label="${esc(d.nome)}, IFDE ${d.ifde}" cx="${X(d.nv).toFixed(1)}" cy="${Y(d.naud).toFixed(1)}" r="${d.novo?7:7}" fill="${QUAD[d.quad].c}" fill-opacity="${dim?.12:.85}" stroke="${d.novo?"var(--ink)":"var(--surface)"}" stroke-width="${d.novo?2:1.5}"></circle>`});
+  // rótulos: destaque do filtro ou top IFDE e extremos
+  const lab=qHi?pts.filter(d=>d.quad===qHi):pts.filter(d=>TOPGAP.has(d.id)||ifdeRank[d.id]<=10||d.nv>60);
+  const boxes=[],dots=pts.map(d=>({id:d.id,x:X(d.nv),y:Y(d.naud)}));
+  const hit=(a,id)=>boxes.some(b=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y)||dots.some(o=>o.id!==id&&o.x+5>a.x&&o.x-5<a.x+a.w&&o.y+5>a.y&&o.y-5<a.y+a.h);
+  [...lab].sort((a,b)=>(TOPGAP.has(b.id)-TOPGAP.has(a.id))||b.ifde-a.ifde).forEach(d=>{const tg=TOPGAP.has(d.id),txt=d.nome+(tg?` (${gapF(d)>0?"+":"−"}${Math.round(Math.abs(gapF(d)))})`:""),x=X(d.nv),y=Y(d.naud),w=txt.length*7.2,h=15,r=tg?15:9;
+    const cR=[x+r,y-h/2,"start"],cL=[x-r-w,y-h/2,"end"];const cands=[...(d.quad==="d"||d.quad==="e"?[cL,cR]:[cR,cL]),[x-w/2,y-r-h,"middle"],[x-w/2,y+r,"middle"],[x+r-2,y-r-h+3,"start"],[x+r-2,y+r-3,"start"],[x-r-w+2,y-r-h+3,"end"],[x-r-w+2,y+r-3,"end"]];
+    let c=cands.find(([bx,by])=>bx>=m.l&&bx+w<=W-4&&by>=m.t-10&&by+h<=H-m.b&&!hit({x:bx,y:by,w,h},d.id));
+    if(!c&&tg)c=cands.find(([bx,by])=>bx>=m.l&&bx+w<=W-4&&!boxes.some(b=>bx<b.x+b.w&&bx+w>b.x&&by<b.y+b.h&&by+h>b.y));
+    if(!c)return;boxes.push({x:c[0],y:c[1],w,h});const tx=c[2]==="start"?c[0]:c[2]==="end"?c[0]+w:c[0]+w/2;
+    s+=`<text class="lbl" x="${tx.toFixed(1)}" y="${(c[1]+h-3.5).toFixed(1)}" text-anchor="${c[2]}"${tg?` style="fill:${QUAD[d.quad].c}"`:""}>${esc(txt)}</text>`});
+  document.getElementById("map").innerHTML=s;
+}
+bindTip("map","mapBox","tip3",".dot",d=>`${d.nome}: IFDE ${d.ifde.toLocaleString("pt-BR")} (eleitoral ${d.nv.toLocaleString("pt-BR")}, digital ${d.naud.toLocaleString("pt-BR")})`);
+function drawIfdeList(){
+  const v=[...withI].sort((a,b)=>b.ifde-a.ifde).filter(d=>(st2==="all"||(st2==="novo"?d.novo:!d.novo))&&(!qHi||d.quad===qHi));
+  document.getElementById("ifdeList").innerHTML=v.map(d=>`<li data-id="${d.id}" tabindex="0"><span class="pos" style="color:${ifdeRank[d.id]<=3?"var(--red)":"var(--muted)"}">${ifdeRank[d.id]}</span>
+    <span class="who"><b>${esc(d.nome)}${d.novo?'<span class="badge-new">novo</span>':""}</b><small><i class="sw" style="background:${QUAD[d.quad].c}"></i>${QUAD[d.quad].t}</small></span>
+    <span class="barcell"><div class="bar stack2" title="Eleitoral ${d.nv} + digital ${d.naud}"><span class="c-el-bg" style="width:${d.nv/2}%"></span><span class="c-dg-bg" style="width:${d.naud/2}%"></span></div></span>
+    <span class="val">${d.ifde.toLocaleString("pt-BR",{minimumFractionDigits:1})}</span></li>`).join("")||`<p class="sub">Ninguém com esses filtros.</p>`}
+document.getElementById("ifdeList").addEventListener("click",e=>{const li=e.target.closest("li");if(li)openDrawer(li.dataset.id)});
+document.getElementById("ifdeList").addEventListener("keydown",e=>{const li=e.target.closest("li");if(li&&e.key==="Enter")openDrawer(li.dataset.id)});
+(function(){document.getElementById("quads").innerHTML=Object.entries(QUAD).map(([k,q])=>{
+  const byGap=k==="d"||k==="t";const ps=withI.filter(d=>d.quad===k).sort(byGap?(a,b)=>Math.abs(gapF(b))-Math.abs(gapF(a)):(a,b)=>b.ifde-a.ifde);
+  return `<div class="quad" style="border-top:4px solid ${q.c}"><h4>${q.t} (${ps.length})</h4><p>${q.d} ${byGap?"Ordenados pela diferença entre as duas forças.":"Ordenados pelo IFDE."}</p><div class="people">${ps.map(d=>`<button class="person" data-id="${d.id}">${esc(d.nome)}${byGap?` <span class="gapn" style="color:${q.c}">${gapF(d)>0?"+":"−"}${Math.round(Math.abs(gapF(d)))}</span>`:""}</button>`).join("")}</div></div>`}).join("");
+  document.getElementById("quads").addEventListener("click",e=>{const b=e.target.closest(".person");if(b)openDrawer(b.dataset.id)});
+  const pend=DATA.filter(d=>d.ifde==null).map(d=>d.nome);document.getElementById("pendList").textContent=pend.slice(0,-1).join(", ")+" e "+pend.at(-1);
+  const det=document.querySelector("details.method");det.innerHTML=det.innerHTML.replace("${MEDV}",fmtShort(MED_V)).replace("${MEDF}",fmtShort(MED_F));})();
+
+/* temas */
+function chips(names){return names.map(n=>{const d=findName(n);return d?`<button class="person" data-id="${d.id}">${esc(n)}</button>`:`<span class="person">${esc(n)}</span>`}).join("")}
+function potBar(n){let h="";for(let i=1;i<=5;i++)h+=`<b class="${n>=i?"on":n>=i-.5?"half":""}"></b>`;return `<i aria-hidden="true">${h}</i>`}
+function bars(rows,fmtv,color){const max=Math.max(...rows.map(r=>r[1]));return `<div class="mini">${rows.map(([l,v])=>`<div class="r"><span>${esc(l)}</span><span>${fmtv(v)}</span><div class="bar"><span style="width:${100*v/max}%;background:${color}"></span></div></div>`).join("")}</div>`}
+const VIZ={
+ reels:()=>`<p class="dnote"><span>Visualizações dos Reels com melhor desempenho</span></p>`+bars([["Nikolas Ferreira e simbolismo religioso e político",109500],["“Anistia Já”",102600],["Caminhada pela “liberdade”",72900],["Média por Reel",31100]],v=>fmtShort(v),"#1E4FA3"),
+ iza:()=>`<p class="dnote"><span>Composição do feed, set–out/2026</span></p>`+bars([["Campanha e eleição",34],["Mulheres",31],["Combate à corrupção",8],["Assistência social",7],["Meio ambiente",6]],v=>v+"%","#8E1F6E")+`<p class="dnote"><span>Engajamento por conteúdo</span></p>`+bars([["Política de ódio e mulheres",63000],["Conteúdo eleitoral",29000],["Conteúdo eleitoral",27000]],v=>fmtShort(v),"#8E1F6E"),
+ leleco:()=>`<p class="dnote"><span>Seguidores no Instagram</span></p>`+bars([["jan/2025",18000],["jul/2025",40000],["set/2025",51600],["out/2026",113200]],v=>fmtShort(v),"#C8102E")
+};
+(function(){
+  const sec=document.getElementById("temas");
+  const missing=TOP20.filter(d=>!T.conteudo[d.nome]).map(d=>d.nome);
+  sec.innerHTML=`<h2>Temas de engajamento</h2>
+  <p class="lead-q">${esc(T.lead)}</p>
+  <h3 class="h3" style="margin-top:0">Matriz de temas</h3>
+  <p class="sub">Quais temas fazem os perfis circularem e quem aparece com força em cada um.</p>
+  <div class="tbl-wrap"><table class="tbl"><thead><tr><th class="l">Tema</th><th class="l">Quem aparece com força</th><th class="l">Potencial</th></tr></thead><tbody>${
+    T.matriz.map(m=>`<tr><td class="l wrap"><b>${esc(m.t)}</b></td><td class="l wrap"><div class="people">${m.q.length?chips(m.q):`<span class="coleta">${esc(m.qtxt)}</span>`}</div></td><td class="l"><span class="pot">${potBar(m.n)}${esc(m.p)}</span></td></tr>`).join("")}</tbody></table></div>
+  <h3 class="h3">Quatro mecanismos que geram circulação</h3>
+  <p class="sub">A ideologia muda, a lógica digital se repete.</p>
+  <div class="mechs">${T.mecanismos.map(m=>`<article class="mech"><h4>${esc(m.t)}</h4><q>${esc(m.f)}</q><div class="people">${chips(m.q)}</div></article>`).join("")}</div>
+  <h3 class="h3">Conteúdo com maior potencial, perfil a perfil</h3>
+  <p class="sub">Perfis com análise de conteúdo concluída.${missing.length?` ${missing.length>1?missing.slice(0,-1).join(", ")+" e "+missing.at(-1):missing[0]} estão entre os 20 maiores em seguidores, mas ainda não têm análise de conteúdo.`:""}</p>
+  <div class="tbl-wrap"><table class="tbl" id="contTable"><thead><tr><th class="l">Deputado</th><th>Seguidores</th><th class="l">Conteúdo com maior potencial de engajamento</th></tr></thead><tbody>${
+    Object.entries(T.conteudo).sort((a,b)=>(findName(b[0]).fol||0)-(findName(a[0]).fol||0)).map(([n,c])=>{const d=findName(n);return `<tr data-id="${d.id}"><td class="l">${esc(d.nome)} <small style="color:var(--muted)">${d.partido}</small></td><td>${fmt(d.fol)}</td><td class="l wrap">${esc(c)}</td></tr>`}).join("")}</tbody></table></div>
+  <h3 class="h3">Considerações</h3>
+  <p class="sub">Leituras do levantamento, com as fontes de cada caso.</p>
+  <div class="cases">${T.casos.map(c=>`<article class="case"><h4>${esc(c.t)}</h4>${c.viz?VIZ[c.viz]():""}${c.b.map(p=>`<p>${esc(p)}</p>`).join("")}
+    <div class="people">${chips(c.q)}</div>${c.src.length?`<p class="src">Fontes: ${c.src.map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)}</a>`).join(", ")}</p>`:""}</article>`).join("")}</div>`;
+  sec.addEventListener("click",e=>{const b=e.target.closest("button.person,tr[data-id]");if(b)openDrawer(b.dataset.id)});
+})();
+
+/* perfis */
+const fParty=document.getElementById("fParty"),fFaixa=document.getElementById("fFaixa");
+partyOrder.forEach(p=>fParty.insertAdjacentHTML("beforeend",`<option>${p}</option>`));
+FAIXAS.forEach(f=>fFaixa.insertAdjacentHTML("beforeend",`<option value="${f.k}">${f.nome}</option>`));
+["q","fParty","fFaixa","fSt"].forEach(id=>document.getElementById(id).addEventListener("input",drawGrid));
+function drawGrid(){
+  const q=norm(document.getElementById("q").value.trim()),p=fParty.value,f=fFaixa.value,s=document.getElementById("fSt").value;
+  const v=DATA.filter(d=>(!q||norm(d.nome+" "+(d.ig||"")).includes(q))&&(!p||d.partido===p)&&(!f||faixa(d).k===f)&&(!s||(s==="novo")===d.novo))
+    .sort((a,b)=>(b.fol??-1)-(a.fol??-1));
+  document.getElementById("count").textContent=`${v.length} ${v.length===1?"parlamentar":"parlamentares"}, do maior para o menor perfil`;
+  document.getElementById("grid").innerHTML=v.length?v.map(d=>`<article class="card">
+    <div class="card-top" data-id="${d.id}" role="button" tabindex="0"><span class="mono" style="background:${PARTY_COLORS[d.partido]}">${initials(d.nome)}</span>
+      <span><b>${esc(d.nome)}${d.novo?'<span class="badge-new">novo</span>':""}</b><small>${d.partido}, ${d.fol?fmtShort(d.fol)+" seguidores":"seguidores não confirmados"}${d.ifde!=null?", IFDE "+d.ifde.toLocaleString("pt-BR",{minimumFractionDigits:1}):""}</small></span></div>
+    ${conteudo(d)||d.tema?`<small style="color:var(--muted)">${esc(conteudo(d)||d.tema)}</small>`:""}
+    <div class="handles"><a class="handle${d.ig?"":" miss"}" href="${d.ig?igUrl(d.ig):igSearch(d.nome)}" target="_blank" rel="noopener">${IG}<span>${d.ig?"@"+esc(d.ig):"Instagram não informado, buscar"}</span></a></div></article>`).join(""):`<p class="sub">Nenhum parlamentar com esses filtros. Limpe a busca ou escolha outra faixa.</p>`}
+document.getElementById("grid").addEventListener("click",e=>{const c=e.target.closest(".card-top");if(c)openDrawer(c.dataset.id)});
+document.getElementById("grid").addEventListener("keydown",e=>{const c=e.target.closest(".card-top");if(c&&e.key==="Enter")openDrawer(c.dataset.id)});
+
+/* gaveta */
+const drawer=document.getElementById("drawer"),scrim=document.getElementById("scrim");let lastFocus=null;
+function openDrawer(id){lastFocus=document.activeElement;const d=DATA.find(x=>x.id===id);
+  const mechs=T.mecanismos.filter(m=>m.q.includes(d.nome)).map(m=>m.t),temas=T.matriz.filter(m=>m.q.includes(d.nome)).map(m=>m.t);
+  drawer.innerHTML=`<button class="close" aria-label="Fechar">×</button><h2 id="dName">${esc(d.nome)}</h2>
+  <p class="meta">${d.partido}, ${d.novo?"primeiro mandato na ALMG":"reeleito"}.</p>
+  <a class="biglink" href="${d.ig?igUrl(d.ig):igSearch(d.nome)}" target="_blank" rel="noopener">${IG}<span>${d.ig?"@"+esc(d.ig):"Buscar Instagram"}<small>${d.ig?"Abrir no Instagram":"Perfil não informado na planilha"}</small></span></a>
+  <h4>Números</h4>
+  <div class="dstat">
+    <div><b>${d.fol?fmt(d.fol):"–"}</b><span>seguidores${d.fol?`, ${folRank[d.id]}º da Assembleia`:""}</span></div>
+    <div><b>${fmt(d.votos)}</b><span>votos, ${voteRank[d.id]}º mais votado</span></div>
+    <div><b>${d.er!=null?pct(d.er):"–"}</b><span>taxa de engajamento${d.er==null?" (sem dado comparável)":""}</span></div>
+    <div><b>${d.reels?fmtShort(d.reels):d.er!=null?fmt(inter(d)):"–"}</b><span>${d.reels?"visualizações médias por Reel":"interações por post (estimadas)"}</span></div>
+  </div>
+  ${d.ifde!=null?`<h4>Força Digital-Eleitoral</h4><div class="dstat"><div><b>${d.ifde.toLocaleString("pt-BR",{minimumFractionDigits:1})}</b><span>IFDE, ${ifdeRank[d.id]}º de ${withI.length}</span></div><div><b style="color:${QUAD[d.quad].c};font-size:1rem">${QUAD[d.quad].t}</b><span>eleitoral ${d.nv.toLocaleString("pt-BR")}, digital ${d.naud.toLocaleString("pt-BR")}</span></div></div><p class="dnote"><span>Diferença:</span> força ${gapF(d)>=0?"digital":"eleitoral"} ${ptsTxt(gapF(d))} acima da ${gapF(d)>=0?"eleitoral":"digital"}${TOPGAP.has(d.id)?", uma das três maiores diferenças da Assembleia":""}.</p>`:`<p class="dnote"><span>IFDE:</span> pendente, sem contagem de seguidores confirmada.</p>`}
+  <p class="dnote"><span>Situação do dado:</span> ${esc(d.status)}</p>
+  ${d.cresc?`<p class="dnote"><span>Crescimento:</span> ${esc(d.cresc)}</p>`:""}
+  ${conteudo(d)?`<h4>Conteúdo com maior potencial</h4><p class="dnote">${esc(conteudo(d))}</p>`:""}
+  ${d.tema?`<h4>Assinatura temática</h4><p class="dnote">${esc(d.tema)}</p>`:""}
+  ${mechs.length?`<h4>Mecanismo de engajamento</h4><p class="dnote">${mechs.map(esc).join(", ")}</p>`:""}
+  ${temas.length?`<h4>Aparece com força em</h4><p class="dnote">${temas.map(esc).join("; ")}</p>`:""}
+  ${(d.erfonte||d.fonte)?`<p class="dnote"><span>Fonte do engajamento:</span> <a href="${esc(d.erfonte||d.fonte)}" target="_blank" rel="noopener">${esc(new URL(d.erfonte||d.fonte).hostname.replace("www.",""))}</a></p>`:""}`;
+  drawer.classList.add("open");scrim.classList.add("open");drawer.setAttribute("aria-hidden","false");drawer.querySelector(".close").focus()}
+function closeDrawer(){drawer.classList.remove("open");scrim.classList.remove("open");drawer.setAttribute("aria-hidden","true");if(lastFocus)lastFocus.focus()}
+drawer.addEventListener("click",e=>{if(e.target.closest(".close"))closeDrawer()});scrim.onclick=closeDrawer;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&drawer.classList.contains("open"))closeDrawer()});
+
+drawHemi();drawRank();drawMap();drawIfdeList();drawGrid();
+
+/* CSV */
+(async()=>{try{if(!window.claude||!claude.use)return;const dl=await claude.use("downloads");if(!dl)return;const b=document.getElementById("exportBtn");b.hidden=false;
+  b.onclick=async()=>{const rows=[["Posição seguidores","Parlamentar","Partido","Situação","Instagram","Seguidores","ER %","Votos 2026","Posição votos","Força eleitoral","Força digital","IFDE","Posição IFDE","Perfil IFDE","Situação do dado","Conteúdo com maior potencial"]].concat(
+    [...DATA].sort((a,b)=>(b.fol??-1)-(a.fol??-1)).map(d=>[d.fol?folRank[d.id]:"",d.nome,d.partido,d.novo?"Novo":"Reeleito",d.ig?"@"+d.ig:"",d.fol??"",d.er!=null?String(d.er).replace(".",","):"",d.votos,voteRank[d.id],d.nv,d.naud??"",d.ifde??"",d.ifde!=null?ifdeRank[d.id]:"",d.quad?QUAD[d.quad].t:"",d.status,conteudo(d)||d.tema||""]));
+    const csv="\ufeff"+rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(";")).join("\r\n");try{await dl.save({filename:"almg-2027-instagram.csv",data:csv})}catch(e){}}}catch(e){}})();
+</script>
+</body>
+</html>
