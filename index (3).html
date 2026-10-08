@@ -278,6 +278,8 @@ details.method p{font-size:.92rem;max-width:78ch;margin:10px 0}
 .letters a{display:inline-grid;place-items:center;min-width:30px;height:30px;border:1px solid var(--line);border-radius:6px;text-decoration:none;font-size:.85rem;font-weight:700;background:var(--surface)}
 .lpos{color:var(--red);font-stretch:118%;font-weight:850;margin-right:8px;font-variant-numeric:tabular-nums}
 .letters[hidden]{display:none}
+.kpis2{grid-column:1/-1;display:grid;grid-template-columns:1fr 2fr;gap:12px}
+@media (max-width:640px){.kpis2{grid-template-columns:1fr}}
 .letters a.off{opacity:.3;pointer-events:none}
 .dep{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;scroll-margin-top:70px}
 .dep>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1.6fr) auto auto auto 22px;gap:18px;align-items:center;padding:12px 16px}
@@ -353,6 +355,29 @@ details.method p{font-size:.92rem;max-width:78ch;margin:10px 0}
 .hex{cursor:pointer}
 .hex:hover polygon{stroke:var(--ink)}
 @media (max-width:860px){.regmap{grid-template-columns:1fr}}
+
+.cell .cl{display:none}
+.only-mob{display:none}
+@media (max-width:700px){.only-desk{display:none}.only-mob{display:block}}
+@media (max-width:700px){
+  nav.tabs{position:static;margin-top:16px;border-bottom:0}
+  nav.tabs .wrap{flex-wrap:wrap;gap:6px;overflow:visible;padding-top:6px;padding-bottom:10px}
+  nav.tabs button{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:.88rem;white-space:normal}
+  nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .matrix-wrap{overflow:visible}
+  .matrix{display:flex;flex-direction:column;min-width:0;gap:8px}
+  .matrix .ax,.matrix .cell.empty{display:none}
+  .matrix .cell{order:var(--o);min-height:0;padding:10px}
+  .matrix .cell .cn{display:none}
+  .matrix .cell .cl{display:block;width:100%;font-size:.8rem;font-weight:800;margin-bottom:4px}
+  #forca .axis-title{display:none}
+  .tbl-stack thead{display:none}
+  .tbl-stack,.tbl-stack tbody,.tbl-stack tr,.tbl-stack td{display:block;width:100%}
+  .tbl-stack tr{padding:10px 14px;border-bottom:1px solid var(--line)}
+  .tbl-stack td{border:0;padding:3px 0;text-align:left!important;white-space:normal!important;min-width:0!important}
+  .tbl-stack td[data-label]::before{content:attr(data-label) ": ";color:var(--muted);font-size:.82rem}
+  .tbl-wrap{overflow-x:visible}
+}
 </style>
 </head>
 <body>
@@ -393,8 +418,8 @@ details.method p{font-size:.92rem;max-width:78ch;margin:10px 0}
     <div class="toolbar">
       <input type="search" id="q" placeholder="Buscar nome, município ou profissão" aria-label="Buscar">
       <select id="fParty" aria-label="Partido"><option value="">Todos os partidos</option></select>
-      <select id="fLvl" aria-label="Escala"><option value="">Todas as notas da escala</option></select>
-      <select id="fTema" aria-label="Tema"><option value="">Todos os perfis</option><option value="tema">Com tema de destaque</option><option value="terr">Perfil territorial</option><option value="pend">Tema não analisado</option></select>
+      <select id="fLvl" aria-label="Escala" hidden><option value="">Todas as notas da escala</option></select>
+      <select id="fTema" aria-label="Tema" hidden><option value="">Todos os perfis</option><option value="tema">Com tema de destaque</option><option value="terr">Perfil territorial</option><option value="pend">Tema não analisado</option></select>
       <select id="fSort" aria-label="Ordenar"><option value="nome">Ordem alfabética</option><option value="votos">Mais votados</option><option value="fol">Mais seguidores</option></select>
       <select id="fSt" aria-label="Situação"><option value="">Novatos e reeleitos</option><option value="novo">Novatos</option><option value="re">Reeleitos</option></select>
       <button class="btn ghost" id="toggleAll">Abrir todos</button>
@@ -410,15 +435,15 @@ details.method p{font-size:.92rem;max-width:78ch;margin:10px 0}
     <div class="scale" id="scale"></div>
     <details class="method" style="margin:0 0 24px">
       <summary>Como a nota é calculada</summary>
-      <p><b>Objetivo:</b> apontar a relação entre o número de seguidores no Instagram e o número de eleitores de cada deputado. Não há como fazer afirmações a partir dessa relação, pois não houve estudos de todos os fatores que envolvem a decisão pelo voto.</p>
+      <p><b>Objetivo:</b> comparação simples entre o número de seguidores no Instagram e o número de eleitores de cada deputado.</p>
       <p><b>Nota eleitoral (1 a 5):</b> os 77 são ordenados pelos votos e divididos em cinco faixas de 15 ou 16 deputados. Os 15 mais votados recebem 5; os 16 menos votados, 1.</p>
       <p><b>Nota digital (1 a 5):</b> a mesma divisão, pelos seguidores no Instagram. Os 15 maiores perfis recebem 5; os 16 menores, 1.</p>
       <p><b>Nota da escala:</b> média das duas, de meio em meio ponto. 5 significa forte nos votos e nas redes; 1, fraca nos dois. Uma nota 3 pode ser equilíbrio (3 e 3) ou concentração (5 e 1), por isso o mapa abaixo mostra as duas notas separadas.</p>
       <p><b>Por que posições, e não números:</b> a distância entre o maior perfil (1,72 milhão) e o menor (6,9 mil) é tão grande que uma escala por números deixaria quase todos nas notas mais baixas. Com posições, a nota diz em que faixa da Assembleia cada um está.</p>
-      <p><b>Cautelas:</b> seguidores não equivalem a eleitores; a nota não demonstra que seguidores geraram votos; audiências podem incluir pessoas de outros estados. Seguidores são aproximados, de outubro de 2026.</p>
+      <p><b>Cautelas:</b> seguidores não equivalem a eleitores; a nota não demonstra que seguidores geraram votos; audiências podem incluir pessoas de outros estados. Seguidores são aproximados, de outubro de 2026. A comparação é feita a partir do número de seguidores, já que o Instagram veda o acesso das ferramentas de IA aos comentários.</p>
     </details>
     <h3 class="h3" style="margin-top:0">Mapa das duas notas</h3>
-    <p class="sub">Linhas: nota digital. Colunas: nota eleitoral. Quanto mais escura a célula, maior a nota da escala.</p>
+    <p class="sub only-desk">Linhas: nota digital. Colunas: nota eleitoral. Quanto mais escura a célula, maior a nota da escala.</p><p class="sub only-mob">Cada grupo reúne os deputados com a mesma combinação de notas, da maior para a menor nota da escala.</p>
     <div class="matrix-wrap"><div class="matrix" id="matrix"></div></div>
     <p class="axis-title" style="text-align:center">Nota eleitoral →</p>
     <h3 class="h3">Ranking pela nota da escala</h3>
@@ -573,7 +598,7 @@ document.getElementById("legend").addEventListener("click",e=>{const li=e.target
   s.addEventListener("keydown",e=>{const c=e.target.closest(".seat");if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openDrawer(c.dataset.id)}})})();
 
 /* abas */
-function showTab(id){document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",x.dataset.tab===id));document.querySelectorAll("section.panel").forEach(s=>s.hidden=s.id!==id)}
+function showTab(id){if(window.innerWidth<=700){const n=document.querySelector("nav.tabs");if(n&&n.getBoundingClientRect().top<0)n.scrollIntoView()}document.querySelectorAll("[data-tab]").forEach(x=>x.setAttribute("aria-selected",x.dataset.tab===id));document.querySelectorAll("section.panel").forEach(s=>s.hidden=s.id!==id)}
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 
 /* temas por deputado */
@@ -627,7 +652,7 @@ function filtered(){const q=norm(document.getElementById("q").value.trim()),p=fP
   const o=document.getElementById("fSort").value;return [...DATA].sort(o==="votos"?(a,b)=>b.votos-a.votos:o==="fol"?(a,b)=>b.fol-a.fol:(a,b)=>sortKey(a).localeCompare(sortKey(b),"pt-BR")).filter(d=>(!q||norm([d.nome,d.nome_completo,d.profissao,d.ig||"",...d.top_mun.map(m=>m.m)].join(" ")).includes(q))&&(!p||d.partido===p)&&(!l||lvlBand(d.I)===l)&&(!t||themeKind(d)===t)&&(!s||(s==="novo")===d.novo))}
 function drawList(){const v=filtered(),o=document.getElementById("fSort").value,az=o==="nome";const L=[...new Set(v.map(d=>sortKey(d)[0].toUpperCase()))];
   document.getElementById("count").textContent=`${v.length} ${v.length===1?"deputado":"deputados"}${az?"":o==="votos"?", do mais ao menos votado":", do maior ao menor perfil no Instagram"}`;
-  document.getElementById("letters").hidden=!az;
+  document.getElementById("letters").hidden=true;
   const all=[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
   document.getElementById("letters").innerHTML=all.map(c=>`<a href="#L-${c}" class="${L.includes(c)?"":"off"}" data-l="${c}">${c}</a>`).join("");
   let h="",cur="";v.forEach((d,i)=>{const c=sortKey(d)[0].toUpperCase();if(az&&c!==cur){cur=c;h+=`<span id="L-${c}" style="display:block;scroll-margin-top:70px"></span>`}h+=depHTML(d,az?null:i+1)});
@@ -643,7 +668,7 @@ function openDrawer(id){showTab("deputados");["q","fParty","fLvl","fTema","fSt"]
   document.getElementById("scale").innerHTML=[[5,"Forte nos votos e nas redes"],[4,"Forte"],[3,"Média"],[2,"Fraca"],[1,"Fraca nos votos e nas redes"]].map(([v,t])=>`<div style="background:${LV_COL(v)};${v<2.5?"color:#13233F":""}"><b>${v}</b>${t}</div>`).join("");
   let h=`<div class="ax">Nota digital ↓</div>`+[1,2,3,4,5].map(e=>`<div class="ax">${e}</div>`).join("");
   for(let g=5;g>=1;g--){h+=`<div class="ax">${g}</div>`;for(let e=1;e<=5;e++){const ps=DATA.filter(d=>d.E===e&&d.D===g).sort((a,b)=>b.votos-a.votos);const v=(e+g)/2;
-    h+=`<div class="cell" style="background:${LV_COL(v)}" title="Eleitoral ${e}, digital ${g}: nota ${dec(v)}">${ps.map(d=>`<button class="person" data-id="${d.id}">${esc(d.nome)}</button>`).join("")}<span class="cn" style="color:${v>=2.5?"#fff":"#13233F"}">${dec(v)}</span></div>`}}
+    h+=`<div class="cell${ps.length?"":" empty"}" style="background:${LV_COL(v)};--o:${(10-e-g)*10+(5-g)}" title="Eleitoral ${e}, digital ${g}: nota ${dec(v)}"><span class="cl" style="color:${v>=2.5?"#fff":"#13233F"}">Nota ${dec(v)} · eleitoral ${e}, digital ${g}</span>${ps.map(d=>`<button class="person" data-id="${d.id}">${esc(d.nome)}</button>`).join("")}<span class="cn" style="color:${v>=2.5?"#fff":"#13233F"}">${dec(v)}</span></div>`}}
   document.getElementById("matrix").innerHTML=h;
   document.getElementById("matrix").addEventListener("click",e=>{const b=e.target.closest(".person");if(b)openDrawer(b.dataset.id)});
 })();
@@ -660,14 +685,16 @@ document.getElementById("ifdeList").addEventListener("keydown",e=>{const li=e.ta
 
 /* partidos */
 (function(){const S=PACK.seats;
-  document.getElementById("seatKpis").innerHTML=[[S.ganharam.length,"partidos ganharam cadeiras"],[S.mantiveram.length,"mantiveram"],[S.perderam.length,"perderam"],[S.perderam.filter(x=>x[2]===0).length,"ficaram sem nenhuma"]].map(([b,s])=>`<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join("");
+  document.getElementById("seatKpis").innerHTML=[[S.ganharam.length,"partidos ganharam cadeiras"],[S.mantiveram.length,"mantiveram"],[S.perderam.length,"perderam"] ].map(([b,s])=>`<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join("")+
+    (()=>{const nv=S.ganharam.filter(x=>x[1]===0).map(x=>x[0]),out=S.perderam.filter(x=>x[2]===0).map(x=>x[0]);const lst=a=>a.length>1?a.slice(0,-1).join(", ")+" e "+a.at(-1):a[0];
+      return `<div class="kpis2"><div class="kpi"><b>${nv.length}</b><span>novas representações partidárias: ${esc(lst(nv))}</span></div><div class="kpi"><b>${out.length}</b><span>partidos deixam de ser representados: ${esc(lst(out))}</span></div></div>`})();
   const maxD=Math.max(...S.ganharam.map(x=>x[2]-x[1]),...S.perderam.map(x=>x[1]-x[2])),maxK=Math.max(...S.mantiveram.map(x=>x[2]));
   const col=(t,k,c,rows)=>`<div class="seatcol" style="border-top:4px solid ${c}"><h4>${t}<span style="color:var(--muted);font-weight:600;font-size:.9rem">${rows.length}</span></h4>${rows.map(([p,a,b])=>{const w=k==="m"?100*b/maxK:100*Math.abs(b-a)/maxD;
     return `<div class="sd"><span>${esc(p)}</span><div class="bar"><span style="width:${w}%;background:${c}"></span></div><span>${a} → ${b}${k==="m"?"":` (${b>a?"+":"−"}${Math.abs(b-a)})`}</span></div>`}).join("")}</div>`;
   document.getElementById("seatDiff").innerHTML=col("Ganharam","g","#11795B",S.ganharam)+col("Mantiveram","m","#7C8CA3",S.mantiveram)+col("Perderam","p","#C8102E",S.perderam);
-  document.getElementById("occTable").innerHTML=`<thead><tr><th class="l">Partido</th><th>Vagas</th><th>2022</th><th class="l">Eleitos (ordem de votação)</th></tr></thead><tbody>${
+  document.getElementById("occTable").classList.add("tbl-stack");document.getElementById("occTable").innerHTML=`<thead><tr><th class="l">Partido</th><th>Vagas</th><th>2022</th><th class="l">Eleitos (ordem de votação)</th></tr></thead><tbody>${
     partyOrder.map(p=>{const ps=DATA.filter(d=>d.partido===p).sort((a,b)=>b.votos-a.votos);const old=[...S.ganharam,...S.mantiveram,...S.perderam].find(x=>x[0]===p);
-      return `<tr><td class="l"><span class="sw" style="background:${PARTY_COLORS[p]}"></span><b>${p}</b></td><td><b>${ps.length}</b></td><td>${old?old[1]:"–"}</td><td class="l wrap">${ps.map(d=>`<button class="person${d.novo?" nov":""}" data-id="${d.id}">${esc(d.nome)}</button>`).join("")}</td></tr>`}).join("")}</tbody>`;
+      return `<tr><td class="l"><span class="sw" style="background:${PARTY_COLORS[p]}"></span><b>${p}</b></td><td data-label="Vagas em 2026"><b>${ps.length}</b></td><td data-label="Vagas em 2022">${old?old[1]:"–"}</td><td class="l wrap">${ps.map(d=>`<button class="person${d.novo?" nov":""}" data-id="${d.id}">${esc(d.nome)}</button>`).join("")}</td></tr>`}).join("")}</tbody>`;
   document.getElementById("occTable").addEventListener("click",e=>{const b=e.target.closest(".person");if(b)openDrawer(b.dataset.id)});
 })();
 
@@ -676,9 +703,8 @@ document.getElementById("ifdeList").addEventListener("keydown",e=>{const li=e.ta
   const tv=DATA.reduce((a,d)=>a+d.votos,0),allMun=DATA.filter(d=>d.municipios===853).length,ages=DATA.map(d=>d.idade);
   const young=[...DATA].sort((a,b)=>a.idade-b.idade)[0],old=[...DATA].sort((a,b)=>b.idade-a.idade)[0];
   document.getElementById("atlasKpis").innerHTML=[
-    [fmtShort(tv),"votos somados dos 77 eleitos"],[fmt(Math.round(tv/77)),"votos em média por eleito"],[`${allMun}`,`tiveram voto nos 853 municípios`],
-    [dec(ages.reduce((a,b)=>a+b,0)/77),"anos de idade média na posse"],[`${young.idade} e ${old.idade}`,`anos: ${esc(young.nome)} é o mais jovem; ${esc(old.nome)}, o mais velho`],
-    [`${DATA.filter(d=>d.resultado!=="eleito por qp").length}`,"eleitos por média (os demais, por quociente partidário)"]].map(([b,s])=>`<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join("");
+    [fmtShort(tv),"votos somados dos 77 eleitos"],[`${allMun}`,`tiveram voto nos 853 municípios`],
+    [dec(ages.reduce((a,b)=>a+b,0)/77),"anos de idade média na posse"],[`${young.idade} e ${old.idade}`,`anos: ${esc(young.nome)} é o mais jovem; ${esc(old.nome)}, o mais velho`]].map(([b,s])=>`<div class="kpi"><b>${b}</b><span>${s}</span></div>`).join("");
   const S=[[1998,4],[2002,10],[2006,7],[2010,4],[2014,5],[2018,10],[2022,15],[2026,20]];
   document.getElementById("serie").innerHTML=S.map(([y,v])=>`<div style="height:${v/20*100}%"><span>${v}</span></div>`).join("");
   document.getElementById("serieX").innerHTML=S.map(([y])=>`<span>${y}</span>`).join("");
@@ -725,15 +751,15 @@ const VIZ={
   <p class="lead-q">${esc(T.lead)}</p>
   <h3 class="h3" style="margin-top:0">Matriz de temas</h3>
   <p class="sub">Quais temas fazem os perfis circularem e quem se destaca em cada um.</p>
-  <div class="tbl-wrap"><table class="tbl"><thead><tr><th class="l">Tema</th><th class="l">Quem se destaca</th><th class="l">Potencial</th></tr></thead><tbody>${
-    T.matriz.map(m=>`<tr><td class="l wrap"><b>${esc(m.t)}</b></td><td class="l wrap"><div class="people">${m.q.length?chips(m.q):`<span class="coleta">${esc(m.qtxt)}</span>`}</div></td><td class="l"><span class="pot">${potBar(m.n)}${esc(m.p)}</span></td></tr>`).join("")}</tbody></table></div>
+  <div class="tbl-wrap"><table class="tbl tbl-stack"><thead><tr><th class="l">Tema</th><th class="l">Quem se destaca</th><th class="l">Potencial</th></tr></thead><tbody>${
+    T.matriz.map(m=>`<tr><td class="l wrap"><b>${esc(m.t)}</b></td><td class="l wrap"><div class="people">${m.q.length?chips(m.q):`<span class="coleta">${esc(m.qtxt)}</span>`}</div></td><td class="l" data-label="Potencial"><span class="pot">${potBar(m.n)}${esc(m.p)}</span></td></tr>`).join("")}</tbody></table></div>
   <h3 class="h3">Quatro mecanismos que geram circulação</h3>
   <p class="sub">A ideologia muda, a lógica digital se repete.</p>
   <div class="mechs">${T.mecanismos.map(m=>`<article class="mech"><h4>${esc(m.t)}</h4><q>${esc(m.f)}</q><div class="people">${chips(m.q)}</div></article>`).join("")}</div>
   <h3 class="h3">Conteúdo com maior potencial, perfil a perfil</h3>
   <p class="sub">Perfis com análise de conteúdo concluída.${missing.length?` ${missing.length>1?missing.slice(0,-1).join(", ")+" e "+missing.at(-1):missing[0]} estão entre os 20 maiores em seguidores, mas ainda não têm análise de conteúdo.`:""}</p>
-  <div class="tbl-wrap"><table class="tbl" id="contTable"><thead><tr><th class="l">Deputado</th><th>Seguidores</th><th class="l">Conteúdo com maior potencial de engajamento</th></tr></thead><tbody>${
-    Object.entries(T.conteudo).sort((a,b)=>(findName(b[0]).fol||0)-(findName(a[0]).fol||0)).map(([n,c])=>{const d=findName(n);return `<tr data-id="${d.id}"><td class="l">${esc(d.nome)} <small style="color:var(--muted)">${d.partido}</small></td><td>${fmt(d.fol)}</td><td class="l wrap">${esc(c)}</td></tr>`}).join("")}</tbody></table></div>
+  <div class="tbl-wrap"><table class="tbl tbl-stack" id="contTable"><thead><tr><th class="l">Deputado</th><th>Seguidores</th><th class="l">Conteúdo com maior potencial de engajamento</th></tr></thead><tbody>${
+    Object.entries(T.conteudo).sort((a,b)=>(findName(b[0]).fol||0)-(findName(a[0]).fol||0)).map(([n,c])=>{const d=findName(n);return `<tr data-id="${d.id}"><td class="l">${esc(d.nome)} <small style="color:var(--muted)">${d.partido}</small></td><td data-label="Seguidores">${fmt(d.fol)}</td><td class="l wrap">${esc(c)}</td></tr>`}).join("")}</tbody></table></div>
   <h3 class="h3">Considerações</h3>
   <p class="sub">Leituras do levantamento, com as fontes de cada caso.</p>
   <div class="cases">${T.casos.map(c=>`<article class="case"><h4>${esc(c.t)}</h4>${c.viz?VIZ[c.viz]():""}${c.b.map(p=>`<p>${esc(p)}</p>`).join("")}
