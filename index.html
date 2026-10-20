@@ -1,130 +1,461 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Clipping Estratégico ALMG — Arquivo</title>
-<meta name="description" content="Arquivo de edições do Clipping Estratégico da Assembleia Legislativa de Minas Gerais.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Clipping Estratégico — ALMG">
-<meta property="og:description" content="Arquivo de edições do Clipping Estratégico da Assembleia Legislativa de Minas Gerais.">
-<meta property="og:image" content="https://anaterra06.github.io/clippingestrategico/og-image.png">
-<meta property="og:url" content="https://anaterra06.github.io/clippingestrategico/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Clipping Estratégico — ALMG">
-<meta name="twitter:description" content="Arquivo de edições do Clipping Estratégico da Assembleia Legislativa de Minas Gerais.">
-<meta name="twitter:image" content="https://anaterra06.github.io/clippingestrategico/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,680;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matemática 7º ano – Treino</title>
 <style>
 :root{
---black:#0a0a0a;
---paper:#f7f4ee;
---paper-dim:#ece7dc;
---red:#a4120a;
---red-bright:#e2321c;
---red-deep:#6e0c06;
---gray:#8a8378;
---gray-on-black:#9c948a;
---line:#d8d2c4;
---line-on-black:#3a352f;
+  --bg:#f5f6fa;--card:#fff;--ink:#1d2433;--muted:#667085;--line:#e2e5ee;
+  --pri:#2f5bea;--pri2:#e9eefe;--ok:#178a50;--okbg:#e4f5ec;--warn:#a87200;--warnbg:#fff4d4;
+  --bad:#cc3d3d;--badbg:#fde9e9;--fig:#a8d8b9;--figline:#2e9e5e;--shade:#f6b26b;
 }
-*{box-sizing:border-box; margin:0; padding:0;}
-html,body{ background:var(--black); }
-body{
-font-family:'IBM Plex Sans', sans-serif;
-color:var(--paper);
--webkit-font-smoothing:antialiased;
-min-height:100vh; min-height:100svh;
-}
-.eyebrow{
-font-family:'IBM Plex Mono', monospace;
-font-size:11px;
-letter-spacing:.14em;
-text-transform:uppercase;
-font-weight:500;
-color:var(--gray-on-black);
-}
-.serif{ font-family:'Fraunces', serif; }
-header{
-padding:64px 26px 40px;
-max-width:640px; margin:0 auto;
-}
-.kicker{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
-.kicker .dot{ width:7px; height:7px; border-radius:50%; background:var(--red-bright); flex:none; }
-h1{ font-weight:560; line-height:1.05; font-size:clamp(34px,9vw,52px); margin-bottom:16px; }
-p.lede{ font-size:16px; line-height:1.6; color:var(--gray-on-black); max-width:480px; }
-main{ max-width:640px; margin:0 auto; padding:0 26px 80px; }
-.archive-list{ display:flex; flex-direction:column; gap:14px; }
-.edition-card{
-display:block; text-decoration:none; color:inherit;
-border:1px solid var(--line-on-black);
-background:rgba(255,255,255,.03);
-border-radius:6px;
-padding:22px 22px 20px;
-position:relative;
-transition:border-color .2s ease, background .2s ease, transform .2s ease;
-}
-.edition-card:hover{ border-color:var(--red-bright); background:rgba(226,50,28,.06); transform:translateY(-2px); }
-.edition-card.latest{ border-color:var(--red-bright); background:rgba(226,50,28,.08); }
-.edition-card .tag{
-display:inline-flex; align-items:center; gap:6px;
-font-family:'IBM Plex Mono', monospace;
-font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
-color:var(--red-bright);
-border:1px solid var(--red-bright);
-padding:3px 8px 2px; border-radius:3px;
-margin-bottom:12px;
-}
-.edition-card .date{
-font-family:'IBM Plex Mono', monospace;
-font-size:12px; letter-spacing:.06em;
-color:var(--gray-on-black);
-margin-bottom:6px;
-}
-.edition-card h2{
-font-family:'Fraunces', serif; font-weight:560;
-font-size:22px; line-height:1.15; margin-bottom:8px;
-}
-.edition-card p.desc{
-font-size:13.5px; line-height:1.55; color:var(--gray-on-black);
-}
-.edition-card .arrow{
-position:absolute; top:22px; right:22px;
-font-family:'IBM Plex Mono', monospace;
-color:var(--red-bright); font-size:16px;
-}
-.divider-rule{ height:1px; background:var(--line-on-black); margin:36px 0 28px; }
-.note-block{
-font-size:12.5px; line-height:1.6; color:var(--gray-on-black);
-font-style:italic; max-width:480px;
-}
-footer{
-max-width:640px; margin:0 auto; padding:0 26px 48px;
-font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.08em;
-color:var(--gray-on-black);
-}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--pri);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:5;box-shadow:0 2px 6px #0002}
+.hwrap{max-width:980px;margin:auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font-size:18px;margin:0}
+header nav button{background:#ffffff22;color:#fff;border:1px solid #ffffff55;border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer}
+header nav button.on{background:#fff;color:var(--pri);font-weight:600}
+main{max-width:980px;margin:auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0 2px}
+.bar i{display:block;height:100%;background:var(--ok);width:0}
+.small{font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer}
+.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+.num{width:38px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:14px}
+.num.cur{outline:3px solid var(--pri);outline-offset:1px}
+.num.ok1{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.num.ok{background:var(--warnbg);border-color:var(--warn);color:var(--warn)}
+.num.viu{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .l1::before{background:var(--okbg);border-color:var(--ok)}
+.legend .l2::before{background:var(--warnbg);border-color:var(--warn)}
+.legend .l3::before{background:var(--badbg);border-color:var(--bad)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.tag{font-size:12px;padding:2px 10px;border-radius:12px;background:var(--pri2);color:var(--pri);font-weight:600}
+.fonte{font-size:12px;color:var(--muted)}
+.timer{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:700;background:#f0f2f7;border-radius:8px;padding:3px 10px}
+.timer.stop{color:var(--muted)}
+h2{font-size:19px;margin:6px 0 10px}
+.enun p{margin:0 0 10px}
+.enun svg{display:block;max-width:100%;height:auto;margin:8px auto 12px}
+.resp{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.resp input[type=text]{font-size:18px;padding:8px 12px;border:2px solid var(--line);border-radius:10px;width:200px}
+.resp input[type=text]:focus{border-color:var(--pri);outline:none}
+.unid{font-weight:600;color:var(--muted)}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opts label{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer}
+.opts label:has(input:checked){border-color:var(--pri);background:var(--pri2)}
+.opts input{margin-top:5px}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.btn{border:none;border-radius:10px;padding:10px 16px;font-size:15px;font-weight:600;cursor:pointer}
+.btn.p{background:var(--pri);color:#fff}
+.btn.s{background:#eef1f7;color:var(--ink)}
+.btn.d{background:var(--badbg);color:var(--bad)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.fb{margin-top:12px;padding:10px 14px;border-radius:10px;font-weight:600}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.fb.info{background:var(--warnbg);color:var(--warn)}
+.resol{margin-top:14px;border-left:4px solid var(--pri);background:#f8f9fd;border-radius:0 10px 10px 0;padding:10px 16px}
+.resol h3{margin:4px 0 6px;font-size:16px;color:var(--pri)}
+.resol ol{margin:0;padding-left:22px}
+.resol li{margin:4px 0}
+.nav{display:flex;justify-content:space-between;margin-top:16px;gap:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:#f8f9fd;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{display:block;font-size:22px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f3f5fa;font-size:13px}
+.tw{overflow-x:auto}
+.st-ok1{color:var(--ok);font-weight:600}.st-ok{color:var(--warn);font-weight:600}.st-viu{color:var(--bad);font-weight:600}
+.namebox{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.namebox input{font-size:15px;padding:7px 10px;border:1px solid var(--line);border-radius:8px}
+code{background:#eef1f7;padding:1px 5px;border-radius:5px}
+@media print{header,.noprint{display:none!important}body{background:#fff}.card{border:none;padding:0}}
 </style>
 </head>
 <body>
-<header>
-<div class="kicker"><span class="dot"></span><span class="eyebrow">Assembleia Legislativa de Minas Gerais</span></div>
-<h1 class="serif">Clipping<br>Estratégico.</h1>
-<p class="lede">Arquivo de edições. Leitura institucional do noticiário diário — o que gera fiscalização, projeto de lei ou obrigação legal para a Assembleia.</p>
-</header>
-<main>
-<div class="archive-list">
+<header><div class="hwrap">
+  <h1>📐 Matemática 7º ano</h1>
+  <nav><button id="tabQ" class="on">Exercícios</button> <button id="tabR">Relatório</button></nav>
+</div></header>
+<main id="app"></main>
 
-<a class="edition-card latest" href="2026-09-16/index.html">
-<span class="tag">Edição mais recente</span>
-<div class="date">15 e 16 de setembro de 2026</div>
-<h2>Ipsemg, Gasmig, Copasa e a concessão do Biribiri</h2>
-<p class="desc">Auditoria por dentro dos R$ 954 milhões do Ipsemg, a privatização da Gasmig em discussão e a concessão contestada do Parque do Biribiri.</p>
-<span class="arrow">→</span>
-</a>
+<script>
+/* ======================= FIGURAS ======================= */
+const FIG = {
+rect9: `<svg viewBox="0 0 340 160" width="340"><g fill="var(--fig)" stroke="var(--figline)" stroke-width="2">
+${[0,1,2,3,4].map(i=>`<rect x="${10+i*64}" y="8" width="64" height="80"/>`).join('')}
+${[0,1,2,3].map(i=>`<rect x="${10+i*80}" y="88" width="80" height="64"/>`).join('')}</g></svg>`,
+L: `<svg viewBox="0 0 280 210" width="280"><path d="M40 20 H120 V120 H240 V180 H40 Z" fill="var(--fig)" stroke="var(--figline)" stroke-width="2"/>
+<g font-size="14" fill="currentColor" text-anchor="middle"><text x="80" y="14">4 cm</text><text x="140" y="200">10 cm</text>
+<text x="20" y="104" transform="rotate(-90 20 100)">8 cm</text><text x="262" y="154">3 cm</text></g></svg>`,
+quadTri: `<svg viewBox="0 0 220 210" width="220"><rect x="30" y="20" width="160" height="160" fill="#fff" stroke="var(--figline)" stroke-width="2"/>
+<path d="M30 180 L190 180 L130 20 Z" fill="var(--shade)" stroke="#b86b1c" stroke-width="2"/>
+<g font-size="14" fill="currentColor"><text x="14" y="196">A</text><text x="194" y="196">B</text><text x="194" y="16">C</text><text x="14" y="16">D</text><text x="126" y="14">P</text>
+<text x="110" y="202" text-anchor="middle">8 cm</text></g></svg>`,
+moldura: `<svg viewBox="0 0 240 180" width="240"><rect x="30" y="20" width="180" height="120" fill="var(--shade)" stroke="#b86b1c" stroke-width="2"/>
+<rect x="90" y="50" width="60" height="60" fill="#fff" stroke="#b86b1c" stroke-width="2"/>
+<g font-size="14" fill="currentColor" text-anchor="middle"><text x="120" y="160">12 cm</text><text x="14" y="84" transform="rotate(-90 14 80)">8 cm</text><text x="120" y="84">4 cm</text></g></svg>`,
+malha: (()=>{let g='';for(let i=0;i<=8;i++)g+=`<line x1="${20+30*i}" y1="20" x2="${20+30*i}" y2="170" stroke="#cfd5e3"/>`;for(let j=0;j<=5;j++)g+=`<line x1="20" y1="${20+30*j}" x2="260" y2="${20+30*j}" stroke="#cfd5e3"/>`;
+return `<svg viewBox="0 0 280 190" width="280">${g}<path d="M20 170 L200 170 L80 50 Z" fill="var(--fig)" fill-opacity=".85" stroke="var(--figline)" stroke-width="2.5"/></svg>`})()
+};
 
-</div>
-</main>
-<footer>CLIPPING ESTRATÉGICO · ALMG</footer>
+/* ======================= QUESTÕES ======================= */
+const T_U='Unidades de medida', T_A='Áreas', T_D='Composição e decomposição', T_V='Volume', T_P='Probabilidade';
+const AP='Apostila da escola', LD='Modelo: livro didático', OL='Modelo: olimpíada (OBMEP)';
+
+const Q = [
+/* ---------- UNIDADES ---------- */
+{tema:T_U,fonte:AP,tipo:'num',resp:0.2,unid:'m',
+ enun:'<p>Converta <b>20 centímetros</b> em metros.</p>',
+ resol:['Lembre: 1 m = 100 cm.','Para passar de cm para m, dividimos por 100.','20 ÷ 100 = 0,2','<b>Resposta: 0,2 m</b>']},
+{tema:T_U,fonte:AP,tipo:'num',resp:0.2,unid:'km',
+ enun:'<p>Converta <b>200 metros</b> em quilômetros.</p>',
+ resol:['Lembre: 1 km = 1 000 m.','Para passar de m para km, dividimos por 1 000.','200 ÷ 1 000 = 0,2','<b>Resposta: 0,2 km</b>']},
+{tema:T_U,fonte:AP,tipo:'num',resp:1300,unid:'dm',
+ enun:'<p>Converta <b>13 decâmetros</b> em decímetros.</p>',
+ resol:['Use a tabela: km – hm – <b>dam</b> – m – <b>dm</b> – cm – mm.','De dam até dm andamos 2 casas para a direita. Cada casa para a direita multiplica por 10.','Então multiplicamos por 10 × 10 = 100.','13 × 100 = 1 300','<b>Resposta: 1 300 dm</b>']},
+{tema:T_U,fonte:AP,tipo:'num',resp:50000,unid:'cm',
+ enun:'<p>Converta <b>5 hectômetros</b> em centímetros.</p>',
+ resol:['Tabela: km – <b>hm</b> – dam – m – dm – <b>cm</b> – mm.','De hm até cm são 4 casas para a direita: multiplicamos por 10 000.','5 × 10 000 = 50 000','Conferindo: 5 hm = 500 m = 50 000 cm.','<b>Resposta: 50 000 cm</b>']},
+{tema:T_U,fonte:LD,tipo:'num',resp:35000,unid:'cm²',
+ enun:'<p>Converta <b>3,5 m²</b> em cm².</p>',
+ resol:['Atenção: em medidas de <b>área</b>, cada casa da tabela vale ×100 (e não ×10).','1 m² = 100 cm × 100 cm = 10 000 cm².','3,5 × 10 000 = 35 000','<b>Resposta: 35 000 cm²</b>']},
+{tema:T_U,fonte:LD,tipo:'num',resp:2.5,unid:'m²',
+ enun:'<p>Uma cartolina tem <b>25 000 cm²</b> de área. Quanto é isso em m²?</p>',
+ resol:['1 m² = 10 000 cm².','De cm² para m² dividimos por 10 000.','25 000 ÷ 10 000 = 2,5','<b>Resposta: 2,5 m²</b>']},
+{tema:T_U,fonte:LD,tipo:'num',resp:2000,unid:'dm³',
+ enun:'<p>Converta <b>2 m³</b> em dm³.</p>',
+ resol:['Em medidas de <b>volume</b>, cada casa da tabela vale ×1 000.','1 m³ = 10 dm × 10 dm × 10 dm = 1 000 dm³.','2 × 1 000 = 2 000','<b>Resposta: 2 000 dm³</b>']},
+{tema:T_U,fonte:LD,tipo:'num',resp:4.5,unid:'litros',
+ enun:'<p>Uma garrafa tem capacidade de <b>4 500 cm³</b>. Quantos litros cabem nela?</p>',
+ resol:['Relação importante: 1 dm³ = 1 litro = 1 000 cm³.','Então 1 L = 1 000 cm³.','4 500 ÷ 1 000 = 4,5','<b>Resposta: 4,5 litros</b>']},
+{tema:T_U,fonte:LD,tipo:'num',resp:36000,unid:'litros',
+ enun:'<p>Uma piscina contém <b>36 m³</b> de água. Quantos litros de água há na piscina?</p>',
+ resol:['1 m³ = 1 000 dm³ e 1 dm³ = 1 litro.','Logo, 1 m³ = 1 000 litros.','36 × 1 000 = 36 000','<b>Resposta: 36 000 litros</b>']},
+{tema:T_U,fonte:'BNCC – medidas aproximadas',tipo:'mc',correta:1,
+ enun:'<p>Três alunos mediram o comprimento da <b>mesma</b> carteira, cada um com sua régua, e obtiveram: 59,8 cm, 60,1 cm e 60 cm. O que melhor explica essa diferença?</p>',
+ opcoes:['Dois alunos erraram a leitura, só um está certo.','Toda medida feita com instrumentos é aproximada; pequenas diferenças são normais.','A carteira mudou de tamanho entre uma medição e outra.','Só se pode medir carteiras com fita métrica.'],
+ resol:['Quando medimos algo de verdade (medida empírica), sempre há pequenas imprecisões: a régua, a posição do olho, o alinhamento.','Por isso, toda medida é <b>aproximada</b>. Valores muito próximos, como 59,8 / 60 / 60,1 cm, são todos aceitáveis.','<b>Resposta: alternativa b</b>']},
+
+/* ---------- ÁREAS ---------- */
+{tema:T_A,fonte:LD,tipo:'num',resp:90,unid:'cm²',
+ enun:'<p>Calcule a área de um retângulo de <b>12 cm</b> de comprimento por <b>7,5 cm</b> de largura.</p>',
+ resol:['Área do retângulo: A = comprimento × largura.','A = 12 × 7,5','12 × 7 = 84 e 12 × 0,5 = 6 → 84 + 6 = 90','<b>Resposta: 90 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:81,unid:'cm²',
+ enun:'<p>Um quadrado tem <b>perímetro de 36 cm</b>. Qual é a sua área?</p>',
+ resol:['O quadrado tem 4 lados iguais. Lado = 36 ÷ 4 = 9 cm.','Área do quadrado: A = lado × lado.','A = 9 × 9 = 81','<b>Resposta: 81 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:120,unid:'cm²',
+ enun:'<p>Um paralelogramo tem <b>base de 15 cm</b>, lado inclinado de 10 cm e <b>altura de 8 cm</b>. Qual é a sua área?</p>',
+ resol:['Área do paralelogramo: A = base × altura.','Cuidado: a altura é a distância <b>perpendicular</b> (reta, 90°) entre as bases. O lado inclinado (10 cm) não entra na conta!','A = 15 × 8 = 120','<b>Resposta: 120 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:63,unid:'cm²',
+ enun:'<p>Calcule a área de um triângulo com <b>base de 14 cm</b> e <b>altura de 9 cm</b>.</p>',
+ resol:['Um triângulo é metade de um paralelogramo de mesma base e altura.','Por isso: A = (base × altura) ÷ 2.','A = (14 × 9) ÷ 2 = 126 ÷ 2 = 63','<b>Resposta: 63 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:40,unid:'cm²',
+ enun:'<p>Um trapézio tem <b>base maior de 10 cm</b>, <b>base menor de 6 cm</b> e <b>altura de 5 cm</b>. Qual é a sua área?</p>',
+ resol:['Área do trapézio: A = (base maior + base menor) × altura ÷ 2.','A = (10 + 6) × 5 ÷ 2','A = 16 × 5 ÷ 2 = 80 ÷ 2 = 40','<b>Resposta: 40 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:48,unid:'cm²',
+ enun:'<p>Um losango tem <b>diagonais de 12 cm e 8 cm</b>. Qual é a sua área?</p>',
+ resol:['Área do losango: A = (diagonal maior × diagonal menor) ÷ 2.','Por quê? O losango ocupa metade do retângulo formado pelas diagonais.','A = (12 × 8) ÷ 2 = 96 ÷ 2 = 48','<b>Resposta: 48 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:24,unid:'cm²',
+ enun:'<p>Um triângulo retângulo tem lados de <b>6 cm, 8 cm e 10 cm</b>. Os lados de 6 cm e 8 cm formam o ângulo reto. Qual é a área desse triângulo?</p>',
+ resol:['No triângulo retângulo, os dois lados que formam o ângulo reto (catetos) servem como base e altura.','O lado de 10 cm (o maior) não é usado.','A = (6 × 8) ÷ 2 = 48 ÷ 2 = 24','<b>Resposta: 24 cm²</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:5400,unid:'reais',
+ enun:'<p>Um terreno retangular mede <b>25 m por 18 m</b>. O metro quadrado de grama custa <b>R$ 12,00</b>. Quanto se gastará para gramar todo o terreno?</p>',
+ resol:['Primeiro a área: A = 25 × 18 = 450 m².','Depois o custo: 450 × 12.','450 × 12 = 450 × 10 + 450 × 2 = 4 500 + 900 = 5 400','<b>Resposta: R$ 5 400,00</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:40,unid:'cm',
+ enun:'<p>Um retângulo tem <b>área de 96 cm²</b> e <b>comprimento de 12 cm</b>. Qual é o seu <b>perímetro</b>?</p>',
+ resol:['Área = comprimento × largura → 96 = 12 × largura.','Largura = 96 ÷ 12 = 8 cm.','Perímetro = soma dos 4 lados = 12 + 8 + 12 + 8 = 40.','<b>Resposta: 40 cm</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:56,unid:'peças',
+ enun:'<p>O piso de uma sala retangular de <b>4 m por 3,5 m</b> será coberto com peças de cerâmica <b>quadradas de 50 cm de lado</b>. Quantas peças serão necessárias (sem perdas)?</p>',
+ resol:['Coloque tudo na mesma unidade: 50 cm = 0,5 m.','Área da sala: 4 × 3,5 = 14 m². Área de uma peça: 0,5 × 0,5 = 0,25 m².','Número de peças: 14 ÷ 0,25 = 56.','Outra forma: no comprimento cabem 4 ÷ 0,5 = 8 peças; na largura 3,5 ÷ 0,5 = 7 peças; 8 × 7 = 56.','<b>Resposta: 56 peças</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:5,unid:'cm',
+ enun:'<p>Um triângulo tem <b>área de 30 cm²</b> e <b>base de 12 cm</b>. Qual é a sua altura?</p>',
+ resol:['A = (base × altura) ÷ 2 → 30 = (12 × altura) ÷ 2.','12 ÷ 2 = 6, então 30 = 6 × altura.','Altura = 30 ÷ 6 = 5.','<b>Resposta: 5 cm</b>']},
+{tema:T_A,fonte:LD,tipo:'num',resp:10,unid:'hectares',
+ enun:'<p>Um sítio retangular mede <b>400 m por 250 m</b>. Sabendo que <b>1 hectare = 10 000 m²</b>, qual é a área do sítio em hectares?</p>',
+ resol:['Área em m²: 400 × 250 = 100 000 m².','Em hectares: 100 000 ÷ 10 000 = 10.','<b>Resposta: 10 hectares</b>']},
+{tema:T_A,fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>Se dobrarmos a medida do lado de um quadrado, o que acontece com a sua área?</p>',
+ opcoes:['Também dobra (fica 2 vezes maior).','Fica 4 vezes maior.','Fica 6 vezes maior.','Fica 8 vezes maior.'],
+ resol:['Teste com um exemplo: lado 3 → área 3 × 3 = 9.','Dobrando o lado: lado 6 → área 6 × 6 = 36.','36 ÷ 9 = 4. A área ficou 4 vezes maior (2 × 2 = 4).','<b>Resposta: alternativa b</b>']},
+
+/* ---------- COMPOSIÇÃO E DECOMPOSIÇÃO ---------- */
+{tema:T_D,fonte:AP+' / '+OL,tipo:'mc',correta:3,
+ enun:'<p>A figura mostra um retângulo de <b>área 720 cm²</b>, formado por <b>9 retângulos menores e iguais</b>.</p>'+FIG.rect9+'<p>Qual é o perímetro, em centímetros, de um dos retângulos menores?</p>',
+ opcoes:['24 cm','28 cm','32 cm','36 cm','40 cm'],
+ resol:['Área de cada retângulo menor: 720 ÷ 9 = 80 cm².','Chame o lado menor de <b>a</b> e o maior de <b>b</b>. Em cima há 5 retângulos "em pé" (largura a) e embaixo 4 "deitados" (largura b). As duas fileiras têm o mesmo comprimento: <b>5 × a = 4 × b</b>.','Procure dois números com a × b = 80 e 5a = 4b. Testando: a = 8 e b = 10 → 8 × 10 = 80 ✔ e 5 × 8 = 40 = 4 × 10 ✔.','Perímetro de um retângulo menor: 2 × (8 + 10) = 2 × 18 = 36.','<b>Resposta: 36 cm (alternativa d)</b>']},
+{tema:T_D,fonte:LD,tipo:'num',resp:50,unid:'cm²',
+ enun:'<p>Calcule a área da figura abaixo (todos os ângulos são retos).</p>'+FIG.L,
+ resol:['Divida a figura em dois retângulos.','Retângulo da esquerda (em pé): 4 × 8 = 32 cm².','Retângulo da direita (deitado): largura 10 − 4 = 6 cm e altura 3 cm → 6 × 3 = 18 cm².','Total: 32 + 18 = 50 cm².','Outra forma: retângulo inteiro 10 × 8 = 80, menos o "pedaço que falta" 6 × 5 = 30 → 80 − 30 = 50.','<b>Resposta: 50 cm²</b>']},
+{tema:T_D,fonte:LD,tipo:'num',resp:32,unid:'cm²',
+ enun:'<p>ABCD é um quadrado de lado <b>8 cm</b>. O ponto P está em qualquer posição do lado CD. Qual é a área do triângulo ABP (em laranja)?</p>'+FIG.quadTri,
+ resol:['A base do triângulo é AB = 8 cm.','A altura é a distância de P até AB, que é o próprio lado do quadrado: 8 cm (não importa onde P esteja em CD!).','A = (8 × 8) ÷ 2 = 64 ÷ 2 = 32.','Repare: o triângulo ocupa sempre <b>metade</b> do quadrado.','<b>Resposta: 32 cm²</b>']},
+{tema:T_D,fonte:LD,tipo:'num',resp:80,unid:'cm²',
+ enun:'<p>De uma placa retangular de <b>12 cm por 8 cm</b> foi recortado um quadrado de <b>4 cm de lado</b>. Qual é a área da parte que sobrou (em laranja)?</p>'+FIG.moldura,
+ resol:['Área da placa inteira: 12 × 8 = 96 cm².','Área do quadrado recortado: 4 × 4 = 16 cm².','Área que sobrou: 96 − 16 = 80.','<b>Resposta: 80 cm²</b>']},
+{tema:T_D,fonte:LD,tipo:'num',resp:12,unid:'cm²',
+ enun:'<p>Na malha quadriculada abaixo, cada quadradinho tem <b>1 cm de lado</b>. Qual é a área do triângulo verde?</p>'+FIG.malha,
+ resol:['Conte os quadradinhos: a base do triângulo (lado de baixo) tem 6 quadradinhos → 6 cm.','A altura vai da base até o vértice de cima: 4 quadradinhos → 4 cm.','A = (6 × 4) ÷ 2 = 24 ÷ 2 = 12.','<b>Resposta: 12 cm²</b>']},
+{tema:T_D,fonte:LD,tipo:'mc',correta:2,
+ enun:'<p>Lia recortou um triângulo de um dos lados de um paralelogramo e encaixou esse triângulo no outro lado, formando um <b>retângulo</b>. Comparando o retângulo com o paralelogramo original, podemos dizer que:</p>',
+ opcoes:['O retângulo tem área maior.','O retângulo tem área menor.','Eles têm a mesma área (são figuras equivalentes).','Não dá para comparar as áreas.'],
+ resol:['Ela só mudou um pedaço de lugar: não acrescentou nem tirou nada.','Figuras com a mesma área são chamadas de <b>equivalentes</b>.','É exatamente por isso que a área do paralelogramo é base × altura, igual à do retângulo.','<b>Resposta: alternativa c</b>']},
+
+/* ---------- VOLUME ---------- */
+{tema:T_V,fonte:LD,tipo:'num',resp:60,unid:'cm³',
+ enun:'<p>Calcule o volume de um bloco retangular com <b>5 cm de comprimento, 4 cm de largura e 3 cm de altura</b>.</p>',
+ resol:['Volume do bloco retangular: V = comprimento × largura × altura.','V = 5 × 4 × 3 = 20 × 3 = 60.','<b>Resposta: 60 cm³</b>']},
+{tema:T_V,fonte:LD,tipo:'num',resp:216,unid:'cm³',
+ enun:'<p>Qual é o volume de um cubo com aresta de <b>6 cm</b>?</p>',
+ resol:['No cubo, todas as arestas são iguais: V = aresta × aresta × aresta.','V = 6 × 6 × 6 = 36 × 6 = 216.','<b>Resposta: 216 cm³</b>']},
+{tema:T_V,fonte:LD,tipo:'num',resp:3000,unid:'litros',
+ enun:'<p>Uma caixa-d’água tem a forma de bloco retangular com <b>2 m de comprimento, 1,5 m de largura e 1 m de altura</b>. Quantos litros ela comporta quando cheia?</p>',
+ resol:['V = 2 × 1,5 × 1 = 3 m³.','1 m³ = 1 000 litros.','3 × 1 000 = 3 000.','<b>Resposta: 3 000 litros</b>']},
+{tema:T_V,fonte:LD,tipo:'num',resp:72,unid:'litros',
+ enun:'<p>Um aquário mede <b>60 cm de comprimento, 30 cm de largura e 40 cm de altura</b>. Quantos litros de água cabem nele?</p>',
+ resol:['V = 60 × 30 × 40 = 1 800 × 40 = 72 000 cm³.','1 litro = 1 000 cm³.','72 000 ÷ 1 000 = 72.','Dica: dava para converter antes: 6 dm × 3 dm × 4 dm = 72 dm³ = 72 L.','<b>Resposta: 72 litros</b>']},
+{tema:T_V,fonte:LD,tipo:'num',resp:5,unid:'cm',
+ enun:'<p>Uma caixa em forma de bloco retangular tem <b>volume de 240 cm³</b>. A base mede <b>8 cm por 6 cm</b>. Qual é a altura da caixa?</p>',
+ resol:['V = comprimento × largura × altura → 240 = 8 × 6 × altura.','8 × 6 = 48, então 240 = 48 × altura.','Altura = 240 ÷ 48 = 5.','<b>Resposta: 5 cm</b>']},
+{tema:T_V,fonte:LD,tipo:'num',resp:30,unid:'cubos',
+ enun:'<p>Quantos cubinhos de <b>2 cm de aresta</b> cabem, no máximo, dentro de uma caixa de <b>10 cm × 6 cm × 4 cm</b>?</p>',
+ resol:['Veja quantos cubinhos cabem em cada direção:','Comprimento: 10 ÷ 2 = 5. Largura: 6 ÷ 2 = 3. Altura: 4 ÷ 2 = 2.','Total: 5 × 3 × 2 = 30.','Conferindo pelo volume: caixa 240 cm³, cubinho 2×2×2 = 8 cm³ → 240 ÷ 8 = 30 ✔','<b>Resposta: 30 cubinhos</b>']},
+{tema:T_V,fonte:LD,tipo:'num',resp:80000,unid:'litros',
+ enun:'<p>Uma piscina tem <b>10 m de comprimento, 5 m de largura e 1,6 m de profundidade</b>. Quantos litros de água são necessários para enchê-la?</p>',
+ resol:['V = 10 × 5 × 1,6 = 50 × 1,6 = 80 m³.','1 m³ = 1 000 litros.','80 × 1 000 = 80 000.','<b>Resposta: 80 000 litros</b>']},
+{tema:T_V,fonte:OL,tipo:'num',resp:3000,unid:'cm³',
+ enun:'<p>Um aquário com base de <b>50 cm por 30 cm</b> tem água até certa altura. Ao colocar uma pedra totalmente submersa, o nível da água <b>subiu 2 cm</b>. Qual é o volume da pedra?</p>',
+ resol:['A pedra "empurra" a água para cima. O volume que a água subiu é igual ao volume da pedra.','Esse volume é um bloco de 50 cm × 30 cm × 2 cm.','V = 50 × 30 × 2 = 1 500 × 2 = 3 000.','<b>Resposta: 3 000 cm³ (ou 3 litros)</b>']},
+{tema:T_V,fonte:LD,tipo:'mc',correta:3,
+ enun:'<p>Se a aresta de um cubo for <b>dobrada</b>, o volume do cubo fica:</p>',
+ opcoes:['2 vezes maior','4 vezes maior','6 vezes maior','8 vezes maior'],
+ resol:['Exemplo: aresta 1 → volume 1 × 1 × 1 = 1.','Aresta 2 → volume 2 × 2 × 2 = 8.','O volume ficou 8 vezes maior (2 × 2 × 2 = 8).','<b>Resposta: alternativa d</b>']},
+
+/* ---------- PROBABILIDADE ---------- */
+{tema:T_P,fonte:AP,tipo:'mc',correta:2,
+ enun:'<p>Qual é o <b>espaço amostral</b> do experimento “lançar um dado com 6 faces e anotar o valor da face superior”?</p>',
+ opcoes:['{0, 1, 2, 3, 4, 5, 6}','{1, 2, 3, 4, 5}','{1, 2, 3, 4, 5, 6}','{6}'],
+ resol:['Espaço amostral = conjunto de <b>todos</b> os resultados possíveis.','Um dado comum tem faces de 1 a 6 (não tem 0).','<b>Resposta: alternativa c → {1, 2, 3, 4, 5, 6}</b>']},
+{tema:T_P,fonte:AP,tipo:'num',resp:8,unid:'elementos',
+ enun:'<p>Vamos escolher, ao acaso, uma pessoa em um grupo de <b>5 meninas e 3 meninos</b>. Quantos elementos tem o espaço amostral desse experimento?</p>',
+ resol:['Cada pessoa do grupo é um resultado possível.','Espaço amostral: {menina 1, menina 2, menina 3, menina 4, menina 5, menino 1, menino 2, menino 3}.','5 + 3 = 8 elementos.','<b>Resposta: 8</b>']},
+{tema:T_P,fonte:AP,tipo:'num',resp:5/8,prob:true,
+ enun:'<p>No mesmo grupo de <b>5 meninas e 3 meninos</b>, qual é a probabilidade de a pessoa escolhida ser uma <b>menina</b>?</p>',
+ resol:['Probabilidade = casos favoráveis ÷ casos possíveis.','Casos favoráveis (meninas): 5. Casos possíveis (todas as pessoas): 8.','P = 5/8 = 0,625 = 62,5%.','<b>Resposta: 5/8</b>']},
+{tema:T_P,fonte:AP,tipo:'num',resp:1/2,prob:true,
+ enun:'<p>Considere bolas numeradas de <b>0 a 15</b>. Sorteando uma bola, qual é a probabilidade de sair um número <b>ímpar</b>?</p>',
+ resol:['Atenção: de 0 a 15 são <b>16</b> bolas (o zero conta!).','Ímpares: 1, 3, 5, 7, 9, 11, 13, 15 → 8 bolas.','P = 8/16 = 1/2 = 0,5 = 50%.','<b>Resposta: 1/2</b>']},
+{tema:T_P,fonte:AP,tipo:'num',resp:36,unid:'elementos',
+ enun:'<p>Luísa lançou <b>dois dados</b> e anotou a soma das faces superiores, usando uma tabela com 6 linhas (dado 1) e 6 colunas (dado 2). Quantos elementos compõem o espaço amostral (todos os pares possíveis de resultados)?</p>',
+ resol:['Para cada um dos 6 resultados do 1º dado, há 6 resultados do 2º dado.','Na tabela: 6 linhas × 6 colunas = 36 casas.','<b>Resposta: 36</b>']},
+{tema:T_P,fonte:AP,tipo:'num',resp:1/6,prob:true,
+ enun:'<p>Lançando <b>dois dados</b>, qual é a probabilidade de a soma das faces ser <b>exatamente 7</b>?</p>',
+ resol:['Pares com soma 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) → 6 casos.','Na tabela, são as casas da diagonal com o número 7.','P = 6/36 = 1/6 ≈ 0,167 ≈ 16,7%.','<b>Resposta: 1/6</b>']},
+{tema:T_P,fonte:LD,tipo:'num',resp:5/36,prob:true,
+ enun:'<p>Lançando <b>dois dados</b>, qual é a probabilidade de a soma das faces ser <b>8</b>?</p>',
+ resol:['Pares com soma 8: (2,6), (3,5), (4,4), (5,3), (6,2) → 5 casos.','Total de casos possíveis: 36.','P = 5/36 ≈ 0,139 ≈ 13,9%. (5/36 não dá para simplificar.)','<b>Resposta: 5/36</b>']},
+{tema:T_P,fonte:AP,tipo:'num',resp:2/3,prob:true,
+ enun:`<p>Veja a tabela de doação de sangue:</p>
+<div class="tw"><table><tr><th>Tipo</th><th>Pode doar para</th><th>Pode receber de</th></tr>
+<tr><td>A</td><td>A e AB</td><td>A e O</td></tr><tr><td>B</td><td>B e AB</td><td>B e O</td></tr>
+<tr><td>AB</td><td>AB</td><td>A, B, AB e O (receptor universal)</td></tr><tr><td>O</td><td>A, B, AB e O (doador universal)</td><td>O</td></tr></table></div>
+<p>Uma pessoa de tipo sanguíneo <b>A</b> precisa receber sangue. Em um grupo de <b>150 pessoas</b>: 80 têm sangue O, 10 têm AB, 20 têm A e 40 têm B. Qual é a probabilidade de alguém desse grupo ser um possível doador?</p>`,
+ resol:['Pela tabela, quem é tipo A pode receber de <b>A e O</b>.','Possíveis doadores: 20 (tipo A) + 80 (tipo O) = 100 pessoas.','P = 100/150 = 10/15 = 2/3 ≈ 0,667 ≈ 66,7%.','<b>Resposta: 2/3</b>']},
+{tema:T_P,fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>Qual das situações abaixo é um <b>experimento aleatório</b>?</p>',
+ opcoes:['Soltar uma pedra no ar e observar se ela cai.','Sortear um nome em uma urna com os nomes dos alunos da turma.','Calcular quanto é 25 × 4.','Aquecer água ao nível do mar e ver a que temperatura ela ferve.'],
+ resol:['Experimento aleatório é aquele cujo resultado <b>não dá para prever com certeza</b>, mesmo repetindo nas mesmas condições.','A pedra sempre cai, 25 × 4 sempre dá 100 e a água ferve a 100 °C: são resultados previsíveis.','No sorteio, não sabemos qual nome vai sair.','<b>Resposta: alternativa b</b>']},
+{tema:T_P,fonte:LD,tipo:'num',resp:0.56,prob:true,
+ enun:'<p>Uma moeda foi lançada <b>50 vezes</b> e saiu <b>cara 28 vezes</b>. Qual foi a <b>frequência relativa</b> de caras?</p>',
+ resol:['Frequência relativa = número de vezes que o evento ocorreu ÷ total de repetições.','28/50 = 56/100 = 0,56 = 56%.','Repare: está perto da probabilidade teórica (50%), mas não é igual — e tudo bem!','<b>Resposta: 0,56 (ou 56%, ou 28/50)</b>']},
+{tema:T_P,fonte:'BNCC – frequência × probabilidade',tipo:'mc',correta:0,
+ enun:'<p>Ana lançou um dado <b>120 vezes</b> e a face 6 saiu <b>25 vezes</b>. Qual afirmação está correta?</p>',
+ opcoes:['A frequência relativa da face 6 foi 25/120 ≈ 0,21, próxima da probabilidade teórica 1/6 ≈ 0,17; com mais lançamentos, a frequência tende a se aproximar de 1/6.','O dado com certeza está viciado, pois 25 é diferente de 20.','A probabilidade teórica de sair 6 é 25/120.','Se Ana lançar o dado mais 120 vezes, a face 6 sairá exatamente 20 vezes.'],
+ resol:['Frequência relativa observada: 25/120 ≈ 0,208.','Probabilidade teórica: 1/6 ≈ 0,167 (esperaríamos cerca de 120 ÷ 6 = 20 vezes).','Pequenas diferenças são normais em experimentos aleatórios; quanto mais repetições, mais a frequência relativa se aproxima da probabilidade.','Nada garante um resultado exato no futuro, e uma diferença pequena não prova que o dado é viciado.','<b>Resposta: alternativa a</b>']},
+{tema:T_P,fonte:LD,tipo:'num',resp:12,unid:'elementos',
+ enun:'<p>Lança-se uma <b>moeda</b> e um <b>dado</b> ao mesmo tempo. Quantos elementos tem o espaço amostral?</p>',
+ resol:['Moeda: 2 resultados (cara ou coroa). Dado: 6 resultados.','Cada resultado da moeda combina com cada resultado do dado: 2 × 6 = 12.','Exemplos: (cara,1), (cara,2), …, (coroa,6).','<b>Resposta: 12</b>']},
+{tema:T_P,fonte:LD,tipo:'num',resp:3/10,prob:true,
+ enun:'<p>As letras da palavra <b>MATEMATICA</b> foram escritas em fichas (uma letra por ficha) e colocadas em uma caixa. Sorteando uma ficha, qual é a probabilidade de sair a letra <b>A</b>?</p>',
+ resol:['Conte as fichas: M-A-T-E-M-A-T-I-C-A → 10 fichas.','Letra A aparece 3 vezes.','P = 3/10 = 0,3 = 30%.','<b>Resposta: 3/10</b>']},
+{tema:T_P,fonte:LD,tipo:'num',resp:24,unid:'bolas brancas',
+ enun:'<p>Um saco tem <b>40 bolas</b>, brancas e pretas, mas não sabemos quantas de cada cor. Pedro retirou uma bola, anotou a cor e devolveu, repetindo isso <b>50 vezes</b>. Saiu bola branca <b>30 vezes</b>. Qual é a melhor estimativa para o número de bolas brancas no saco?</p>',
+ resol:['Frequência relativa de branca: 30/50 = 3/5 = 0,6 (60%).','Estimamos que cerca de 60% das bolas do saco são brancas.','60% de 40 = 0,6 × 40 = 24.','<b>Resposta: cerca de 24 bolas brancas</b>']},
+];
+Q.forEach((q,i)=>q.id='q'+(i+1));
+const TEMAS=[...new Set(Q.map(q=>q.tema))];
+
+/* ======================= ESTADO ======================= */
+const KEY='mat7_treino_v1';
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!S.r)S={nome:'',r:{},atual:0,filtro:'Todos'};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function rec(id){return S.r[id]||(S.r[id]={t:0,tent:0,status:'',resps:[]})}
+let view='quiz', tStart=null, tick=null;
+const cur=()=>Q[S.atual];
+
+/* ======================= TEMPO ======================= */
+function fmt(s){s=Math.round(s||0);const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')}
+function flush(){if(tStart){const now=Date.now();rec(cur().id).t+=(now-tStart)/1000;tStart=now;save()}}
+function stopTimer(){if(tStart){flush();tStart=null}clearInterval(tick);tick=null;updTimer()}
+function startTimer(){stopTimer();if(view!=='quiz'||rec(cur().id).status)return;tStart=Date.now();let c=0;tick=setInterval(()=>{updTimer();if(++c%10===0)flush()},1000);updTimer()}
+function elapsed(id){const r=rec(id);return r.t+(tStart&&cur().id===id?(Date.now()-tStart)/1000:0)}
+function updTimer(){const el=document.getElementById('timer');if(!el)return;const r=rec(cur().id);el.textContent='⏱ '+fmt(elapsed(cur().id));el.classList.toggle('stop',!!r.status)}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopTimer();else if(view==='quiz')startTimer()});
+window.addEventListener('beforeunload',()=>flush());
+
+/* ======================= CORREÇÃO ======================= */
+function parseNum(s){
+  s=String(s).trim().toLowerCase();
+  const pct=s.includes('%');
+  s=s.replace(/[a-zà-ü$]+\s*[²³23]?/g,'').replace(/[²³%\s]/g,'');
+  const conv=t=>{if(!t)return NaN;
+    if(t.includes(',')&&t.includes('.'))t=t.replace(/\./g,'').replace(',','.');
+    else if(t.includes(','))t=t.replace(',','.');
+    else if(/^\d{1,3}(\.\d{3})+$/.test(t))t=t.replace(/\./g,'');
+    return /^-?\d*\.?\d+$/.test(t)?Number(t):NaN};
+  let v;
+  if(s.includes('/')){const p=s.split('/');if(p.length!==2)return NaN;v=conv(p[0])/conv(p[1])}else v=conv(s);
+  return pct?v/100:v;
+}
+function confere(q,txt){
+  if(q.tipo==='mc')return Number(txt)===q.correta;
+  const v=parseNum(txt);if(!isFinite(v))return null;
+  const tol=q.prob?0.007:Math.max(1e-9,Math.abs(q.resp)*1e-9);
+  return Math.abs(v-q.resp)<=tol;
+}
+const LET='abcde';
+
+/* ======================= TELAS ======================= */
+const app=document.getElementById('app');
+function stLabel(s){return {ok1:'Acertou de primeira',ok:'Acertou após errar',viu:'Viu a resolução',' ':''}[s]||'Não feita'}
+function filtradas(){return Q.map((q,i)=>i).filter(i=>S.filtro==='Todos'||Q[i].tema===S.filtro)}
+
+function renderQuiz(){
+  const q=cur(), r=rec(q.id), n=S.atual+1;
+  const feitas=Q.filter(x=>rec(x.id).status).length;
+  const totalT=Q.reduce((a,x)=>a+elapsed(x.id),0);
+  let h=`<div class="card noprint">
+   <div class="namebox"><label for="nome"><b>Aluno:</b></label><input id="nome" placeholder="Nome do aluno" value="${(S.nome||'').replace(/"/g,'&quot;')}">
+   <span class="small" style="margin-left:auto">${feitas}/${Q.length} concluídas · tempo total ${fmt(totalT)}</span></div>
+   <div class="bar"><i style="width:${feitas/Q.length*100}%"></i></div>
+  </div>
+  <div class="card noprint"><div class="chips">${['Todos',...TEMAS].map(t=>`<button class="chip ${S.filtro===t?'on':''}" data-f="${t}">${t}</button>`).join('')}</div>
+   <div class="grid">${filtradas().map(i=>`<button class="num ${rec(Q[i].id).status} ${i===S.atual?'cur':''}" data-i="${i}">${i+1}</button>`).join('')}</div>
+   <div class="legend"><span class="l1">Acertou de primeira</span><span class="l2">Acertou após errar</span><span class="l3">Viu a resolução</span><span>Não feita</span></div>
+  </div>
+  <div class="card">
+   <div class="meta"><span class="tag">${q.tema}</span><span class="fonte">${q.fonte}</span><span class="timer" id="timer">⏱ 00:00</span></div>
+   <h2>Questão ${n} de ${Q.length}</h2>
+   <div class="enun">${q.enun}</div>`;
+  if(q.tipo==='mc'){
+    h+=`<div class="opts">${q.opcoes.map((o,k)=>`<label><input type="radio" name="op" value="${k}"><span><b>${LET[k]})</b> ${o}</span></label>`).join('')}</div>`;
+  }else{
+    h+=`<div class="resp"><input type="text" id="ans" inputmode="decimal" autocomplete="off" placeholder="Sua resposta">${q.unid?`<span class="unid">${q.unid}</span>`:''}</div>
+    <div class="hint">${q.prob?'Pode responder em fração (ex: 3/8), decimal (ex: 0,375) ou porcentagem (ex: 37,5%).':'Digite só o número. Use vírgula para decimais (ex: 2,5).'}</div>`;
+  }
+  h+=`<div id="fb"></div>
+   <div class="actions"><button class="btn p" id="btnResp">Responder</button>
+   <button class="btn s" id="btnResol" ${r.tent||r.status?'':'disabled'} title="Disponível depois da primeira tentativa">📖 Ver resolução</button></div>
+   ${!r.tent&&!r.status?'<div class="hint">A resolução fica disponível depois que você tentar responder.</div>':''}
+   <div id="resol" class="resol" hidden><h3>Como resolver</h3><ol>${q.resol.map(p=>`<li>${p}</li>`).join('')}</ol></div>
+   <div class="nav"><button class="btn s" id="prev" ${S.atual===0?'disabled':''}>← Anterior</button><button class="btn s" id="next" ${S.atual===Q.length-1?'disabled':''}>Próxima →</button></div>
+  </div>`;
+  app.innerHTML=h;
+  if(r.status){showFb(); }
+  document.getElementById('nome').oninput=e=>{S.nome=e.target.value;save()};
+  app.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{S.filtro=b.dataset.f;const f=filtradas();if(!f.includes(S.atual))go(f[0]);else{save();renderQuiz();startTimer()}});
+  app.querySelectorAll('.num').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+  document.getElementById('prev').onclick=()=>go(S.atual-1);
+  document.getElementById('next').onclick=()=>go(S.atual+1);
+  document.getElementById('btnResp').onclick=responder;
+  document.getElementById('btnResol').onclick=verResol;
+  const a=document.getElementById('ans');if(a){a.addEventListener('keydown',e=>{if(e.key==='Enter')responder()});if(!r.status)a.focus({preventScroll:true})}
+  startTimer();
+}
+function showFb(msg,cls){
+  const r=rec(cur().id),fb=document.getElementById('fb');
+  if(!msg){
+    if(r.status==='ok1'){msg=`✔ Você acertou de primeira em ${fmt(r.t)}.`;cls='ok'}
+    else if(r.status==='ok'){msg=`✔ Você acertou após ${r.tent} tentativas, em ${fmt(r.t)}.`;cls='info'}
+    else if(r.status==='viu'){msg=`Você viu a resolução (${r.tent} tentativa${r.tent>1?'s':''}, ${fmt(r.t)}). Tente refazer no papel!`;cls='info'}
+  }
+  if(msg)fb.innerHTML=`<div class="fb ${cls}">${msg}</div>`;
+}
+function responder(){
+  const q=cur(),r=rec(q.id);let txt;
+  if(q.tipo==='mc'){const c=app.querySelector('input[name=op]:checked');if(!c){showFb('Escolha uma alternativa.','info');return}txt=c.value}
+  else{txt=document.getElementById('ans').value;if(!txt.trim()){showFb('Digite sua resposta.','info');return}}
+  const ok=confere(q,txt);
+  if(ok===null){showFb('Não entendi o número. Exemplos: 2,5 · 1300 · 3/8 · 40%','info');return}
+  const shown=q.tipo==='mc'?LET[+txt]+')':txt.trim();
+  if(r.status){ // já concluída: só confere, sem mudar o registro
+    showFb(ok?'✔ Correto! (questão já estava concluída, registro mantido)':'✘ Ainda não está certo. Confira a resolução.',ok?'ok':'bad');return}
+  flush();r.tent++;r.resps.push(shown);
+  if(ok){r.status=r.tent===1?'ok1':'ok';stopTimer();save();renderQuiz();
+    const bt=document.getElementById('btnResol');bt.disabled=false;
+  }else{save();showFb(`✘ Ainda não. Confira suas contas no papel e tente de novo, ou veja a resolução. (tentativa ${r.tent})`,'bad');
+    document.getElementById('btnResol').disabled=false;const h=app.querySelector('.actions + .hint');if(h)h.remove();}
+}
+function verResol(){
+  const r=rec(cur().id);
+  if(!r.status){flush();r.status='viu';stopTimer();save();renderQuiz()}
+  const el=document.getElementById('resol');el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function go(i){if(i<0||i>=Q.length)return;stopTimer();S.atual=i;save();renderQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+
+function renderRel(){
+  stopTimer();
+  const rs=Q.map(q=>({q,r:rec(q.id)}));
+  const feitas=rs.filter(x=>x.r.status), ok1=rs.filter(x=>x.r.status==='ok1').length, ok=rs.filter(x=>x.r.status==='ok').length, viu=rs.filter(x=>x.r.status==='viu').length;
+  const tot=rs.reduce((a,x)=>a+x.r.t,0), med=feitas.length?feitas.reduce((a,x)=>a+x.r.t,0)/feitas.length:0;
+  const lenta=feitas.slice().sort((a,b)=>b.r.t-a.r.t)[0];
+  let h=`<div class="card"><h2>Relatório${S.nome?' – '+S.nome:''}</h2><p class="small">Gerado em ${new Date().toLocaleString('pt-BR')}</p>
+  <div class="stats">
+   <div class="stat"><span class="small">Concluídas</span><b>${feitas.length}/${Q.length}</b></div>
+   <div class="stat"><span class="small">Acertos de primeira</span><b style="color:var(--ok)">${ok1}</b></div>
+   <div class="stat"><span class="small">Acertou após errar</span><b style="color:var(--warn)">${ok}</b></div>
+   <div class="stat"><span class="small">Viu a resolução</span><b style="color:var(--bad)">${viu}</b></div>
+   <div class="stat"><span class="small">Tempo total</span><b>${fmt(tot)}</b></div>
+   <div class="stat"><span class="small">Tempo médio por questão</span><b>${fmt(med)}</b></div>
+  </div>
+  ${lenta?`<p class="small">Questão mais demorada: nº ${Q.indexOf(lenta.q)+1} (${lenta.q.tema}) – ${fmt(lenta.r.t)}</p>`:''}
+  <h3>Por assunto</h3><div class="tw"><table><tr><th>Assunto</th><th>Concluídas</th><th>Acertos de 1ª</th><th>Aproveitamento</th><th>Tempo médio</th></tr>
+  ${TEMAS.map(t=>{const g=rs.filter(x=>x.q.tema===t),d=g.filter(x=>x.r.status),a=g.filter(x=>x.r.status==='ok1').length;
+   return `<tr><td>${t}</td><td>${d.length}/${g.length}</td><td>${a}</td><td>${d.length?Math.round(a/d.length*100)+'%':'–'}</td><td>${d.length?fmt(d.reduce((s,x)=>s+x.r.t,0)/d.length):'–'}</td></tr>`}).join('')}
+  </table></div>
+  <h3>Questão por questão</h3><div class="tw"><table><tr><th>Nº</th><th>Assunto</th><th>Situação</th><th>Tentativas</th><th>Tempo</th><th>Respostas dadas</th></tr>
+  ${rs.map((x,i)=>`<tr><td>${i+1}</td><td>${x.q.tema}</td><td class="st-${x.r.status}">${x.r.status?stLabel(x.r.status):(x.r.t>0?'Em andamento':'Não feita')}</td><td>${x.r.tent||'–'}</td><td>${x.r.t>0?fmt(x.r.t):'–'}</td><td>${(x.r.resps||[]).join(' · ')||'–'}</td></tr>`).join('')}
+  </table></div>
+  <div class="actions noprint"><button class="btn p" id="csv">⬇ Baixar planilha (CSV)</button><button class="btn s" id="imp">🖨 Imprimir</button><button class="btn d" id="zera">Apagar todo o progresso</button></div>
+  </div>`;
+  app.innerHTML=h;
+  document.getElementById('imp').onclick=()=>window.print();
+  document.getElementById('csv').onclick=()=>{
+    const linhas=[['Questao','Assunto','Situacao','Tentativas','Tempo (s)','Tempo (mm:ss)','Respostas']];
+    rs.forEach((x,i)=>linhas.push([i+1,x.q.tema,x.r.status?stLabel(x.r.status):'Não feita',x.r.tent,Math.round(x.r.t),fmt(x.r.t),(x.r.resps||[]).join(' | ')]));
+    const csv='\ufeff'+linhas.map(l=>l.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='relatorio_matematica_'+(S.nome||'aluno').replace(/\s+/g,'_')+'.csv';a.click();
+  };
+  document.getElementById('zera').onclick=()=>{if(confirm('Apagar todas as respostas e tempos? Isso não pode ser desfeito.')){const n=S.nome;S={nome:n,r:{},atual:0,filtro:'Todos'};save();renderRel()}};
+}
+function setView(v){view=v;document.getElementById('tabQ').classList.toggle('on',v==='quiz');document.getElementById('tabR').classList.toggle('on',v==='rel');
+  if(v==='quiz')renderQuiz();else renderRel();window.scrollTo(0,0)}
+document.getElementById('tabQ').onclick=()=>setView('quiz');
+document.getElementById('tabR').onclick=()=>setView('rel');
+if(S.atual>=Q.length)S.atual=0;
+setView('quiz');
+</script>
 </body>
 </html>
