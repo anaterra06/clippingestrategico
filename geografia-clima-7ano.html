@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Geografia 7º ano – O clima do Brasil</title>
+<style>
+:root{
+  --bg:#eef4f6;--card:#fff;--ink:#1f2a33;--muted:#5f6f7a;--line:#d9e4e8;
+  --pri:#0f7c8c;--pri2:#e0f2f4;--acc:#e08a1e;--accbg:#fff4e2;--rain:#6b4fbf;--temp:#ef8a2b;
+  --ok:#1d7f4c;--okbg:#e2f3e9;--warn:#9a6a00;--warnbg:#fff2cf;--bad:#c23b3b;--badbg:#fbe7e5;
+  --env:#4a5fa8;--envbg:#e7ebf8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--pri);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:5;box-shadow:0 2px 6px #0002}
+.hwrap{max-width:980px;margin:auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font-size:18px;margin:0}
+header nav{display:flex;flex-wrap:wrap;gap:6px}
+header nav button{background:#ffffff22;color:#fff;border:1px solid #ffffff55;border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer}
+header nav button.on{background:#fff;color:var(--pri);font-weight:700}
+main{max-width:980px;margin:auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0 2px}
+.bar i{display:block;height:100%;background:var(--ok);width:0}
+.small{font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+.num{width:40px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:13px;color:var(--ink);position:relative}
+.num.ab::after{content:"✎";position:absolute;top:-6px;right:-4px;font-size:10px;background:var(--card);border-radius:50%;line-height:1;padding:1px}
+.num.cur{outline:3px solid var(--pri);outline-offset:1px}
+.num.g{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.num.y{background:var(--warnbg);border-color:var(--warn);color:var(--warn)}
+.num.r{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.num.e{background:var(--envbg);border-color:var(--env);color:var(--env)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .lg::before{background:var(--okbg);border-color:var(--ok)}
+.legend .ly::before{background:var(--warnbg);border-color:var(--warn)}
+.legend .lr::before{background:var(--badbg);border-color:var(--bad)}
+.legend .le::before{background:var(--envbg);border-color:var(--env)}
+.legend .lab::before{display:none}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.tag{font-size:12px;padding:2px 10px;border-radius:12px;background:var(--pri2);color:var(--pri);font-weight:600}
+.tipo{font-size:12px;padding:2px 10px;border-radius:12px;background:var(--accbg);color:#9a5a00;font-weight:600}
+.timer{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:700;background:#e8eff1;border-radius:8px;padding:3px 10px}
+.timer.stop{color:var(--muted)}
+h2{font-size:21px;margin:6px 0 10px;line-height:1.3}
+h3{font-size:17px;margin:18px 0 6px;color:var(--pri)}
+.enun p{margin:0 0 10px}
+svg{display:block;max-width:100%;height:auto;margin:8px auto}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opts label{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;background:#fff}
+.opts label:has(input:checked){border-color:var(--pri);background:var(--pri2)}
+.opts label.certa{border-color:var(--ok);background:var(--okbg)}
+.opts input{margin-top:5px}
+textarea{width:100%;min-height:150px;font:16px/1.5 inherit;font-family:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:10px;resize:vertical;background:#fff;color:var(--ink)}
+textarea:focus{border-color:var(--pri);outline:none}
+textarea[readonly]{background:#f3f7f8}
+.cont{font-size:12px;color:var(--muted);text-align:right}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.btn{border:none;border-radius:10px;padding:10px 16px;font-size:15px;font-weight:600;cursor:pointer}
+.btn.p{background:var(--pri);color:#fff}
+.btn.s{background:#e3ebee;color:var(--ink)}
+.btn.d{background:var(--badbg);color:var(--bad)}
+.btn.w{background:#25a35a;color:#fff}
+.btn.ok{background:var(--ok);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.fb{margin-top:12px;padding:10px 14px;border-radius:10px;font-weight:600}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.fb.info{background:var(--warnbg);color:var(--warn)}
+.resol{margin-top:14px;border-left:4px solid var(--pri);background:#f4f9fa;border-radius:0 10px 10px 0;padding:10px 16px}
+.resol h3{margin:4px 0 6px}
+.resol ul{margin:0;padding-left:22px}
+.resol li{margin:4px 0}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-bottom:1px dashed var(--line);cursor:pointer}
+.check input{margin-top:5px;transform:scale(1.15)}
+.modelo{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:6px}
+.nav{display:flex;justify-content:space-between;margin-top:16px;gap:8px}
+a.rev{color:var(--pri);font-weight:600}
+/* estudo */
+.est p{margin:0 0 10px}
+.est ul{padding-left:22px;margin:0 0 10px}
+.est li{margin:3px 0}
+.box{border-radius:12px;padding:10px 14px;margin:12px 0}
+.box b.t{display:block;margin-bottom:4px}
+.lembrar{background:var(--accbg);border:1px solid #f3d29c}
+.cuidado{background:#fdeeee;border:1px solid #f2c4c4}
+.dica{background:var(--pri2);border:1px solid #b9e0e5}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:10px 0}
+.mini{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:#fbfdfd}
+.mini h4{margin:0 0 4px;font-size:15px}
+.secnav{display:flex;flex-wrap:wrap;gap:6px}
+.secbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;font-size:13px;cursor:pointer;color:var(--ink);text-align:left}
+.secbtn.cur{outline:3px solid var(--pri);outline-offset:1px}
+.secbtn.lido{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.tipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.tcard{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fbfdfd}
+.tcard h4{margin:0 0 4px;font-size:16px}
+.tcard ul{font-size:14px;margin:4px 0;padding-left:18px}
+.leg{display:flex;gap:14px;justify-content:center;font-size:12px;color:var(--muted)}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:#f4f8f9;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{display:block;font-size:22px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#e9f1f3;font-size:13px}
+.tw{overflow-x:auto}
+.cg{color:var(--ok);font-weight:600}.cy{color:var(--warn);font-weight:600}.cr{color:var(--bad);font-weight:600}.ce{color:var(--env);font-weight:600}
+.namebox{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.namebox input{font-size:15px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.abcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0;background:#fff}
+.abcard .txt{white-space:pre-wrap;background:#f3f7f8;border-radius:8px;padding:8px 10px;margin:6px 0}
+.abcard select{font-size:14px;padding:5px 8px;border-radius:8px;border:1px solid var(--line)}
+.falta{color:var(--bad);font-size:13px}
+.only-print{display:none}
+@media print{.only-print{display:block}header,.noprint{display:none!important}body{background:#fff}.card{border:none;padding:0}}
+</style>
+</head>
+<body>
+<header><div class="hwrap">
+  <h1>🌦️ Geografia 7º ano · O clima do Brasil</h1>
+  <nav><button id="tabE">1 · Estudar</button><button id="tabQ">2 · Exercícios</button><button id="tabR">3 · Acompanhamento</button></nav>
+</div></header>
+<main id="app"></main>
+
+<script>
+/* ======================= GRÁFICOS ======================= */
+const MESES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+/* Valores aproximados, lidos dos climogramas do livro (fontes: OMM e Climate-data) */
+const CLIM={
+ manaus:{nome:'Manaus (AM)',t:[26.6,26.5,26.6,26.7,26.9,27.0,27.1,27.9,28.3,28.2,27.8,27.1],p:[264,292,315,300,256,115,88,58,83,126,183,217],max:400},
+ rio:{nome:'Rio de Janeiro (RJ)',t:[26.2,26.6,26.0,24.5,23.0,21.8,21.3,21.8,22.2,23.0,24.3,25.4],p:[114,105,103,137,85,80,56,51,87,88,95,169],max:200},
+ cuiaba:{nome:'Cuiabá (MT)',t:[27.0,27.0,27.1,26.6,25.0,23.8,23.6,25.7,27.6,27.9,27.4,27.1],p:[208,200,167,125,58,17,12,12,58,117,150,192],max:250},
+ campos:{nome:'Campos do Jordão (SP)',t:[17.0,17.3,16.6,14.7,12.5,11.0,10.6,11.8,13.2,14.6,15.6,16.6],p:[280,260,190,80,50,50,30,35,60,140,180,250],max:300},
+ curitiba:{nome:'Curitiba (PR)',t:[20.5,20.8,20.0,17.8,15.0,13.6,13.4,14.8,15.8,17.4,18.9,20.0],p:[160,140,133,87,93,100,93,73,113,133,127,147],max:200},
+ salgueiro:{nome:'Salgueiro (PE)',t:[26.5,26.0,25.6,25.0,24.0,23.0,22.8,24.0,25.8,27.0,27.2,27.0],p:[67,100,160,100,20,13,7,3,7,13,20,67],max:200},
+};
+function climograma(k,titulo){
+  const c=CLIM[k],W=440,H=250,x0=46,x1=W-50,y0=28,y1=H-46,bw=(x1-x0)/12;
+  const yT=v=>y1-(v/30)*(y1-y0),yP=v=>y1-(v/c.max)*(y1-y0);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="Climograma ${titulo===undefined?c.nome:titulo}"><text x="${W/2}" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Climograma de ${titulo===undefined?c.nome:titulo}</text>`;
+  for(let v=0;v<=30;v+=5){const y=yT(v);s+=`<line x1="${x0}" x2="${x1}" y1="${y}" y2="${y}" stroke="#e2e8ea"/><text x="${x0-6}" y="${y+4}" font-size="10" text-anchor="end" fill="var(--temp)">${v}</text>`}
+  const step=c.max<=250?50:100;for(let v=0;v<=c.max;v+=step){const y=yP(v);s+=`<text x="${x1+6}" y="${y+4}" font-size="10" fill="var(--rain)">${v}</text>`}
+  s+=`<text x="12" y="${(y0+y1)/2}" font-size="10" fill="var(--temp)" transform="rotate(-90 12 ${(y0+y1)/2})" text-anchor="middle">Temperatura (°C)</text><text x="${W-8}" y="${(y0+y1)/2}" font-size="10" fill="var(--rain)" transform="rotate(90 ${W-8} ${(y0+y1)/2})" text-anchor="middle">Precipitação (mm)</text>`;
+  c.p.forEach((v,i)=>{const x=x0+i*bw+bw*.2;s+=`<rect x="${x}" y="${yP(v)}" width="${bw*.6}" height="${y1-yP(v)}" fill="var(--rain)" rx="2"/><text x="${x0+i*bw+bw/2}" y="${y1+14}" font-size="10" text-anchor="middle" fill="currentColor">${MESES[i]}</text>`});
+  s+=`<polyline fill="none" stroke="var(--temp)" stroke-width="2.5" points="${c.t.map((v,i)=>`${x0+i*bw+bw/2},${yT(v)}`).join(' ')}"/>`;
+  c.t.forEach((v,i)=>s+=`<circle cx="${x0+i*bw+bw/2}" cy="${yT(v)}" r="3" fill="var(--temp)"/>`);
+  s+=`<line x1="${x0}" x2="${x1}" y1="${y1}" y2="${y1}" stroke="#889"/></svg><div class="leg"><span><i style="background:var(--rain)"></i>Chuva (barras · eixo direito)</span><span><i style="background:var(--temp)"></i>Temperatura (linha · eixo esquerdo)</span></div>`;
+  return s;
+}
+const SVG_LAT=`<svg viewBox="0 0 440 230" width="440" role="img" aria-label="Incidência dos raios solares na Terra">
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#e0a21e"/></marker></defs>
+<circle cx="300" cy="115" r="95" fill="#bfe3ef" stroke="#4a8fa6" stroke-width="2"/>
+<line x1="205" y1="115" x2="395" y2="115" stroke="#c23b3b" stroke-width="2"/><text x="400" y="119" font-size="11" fill="#c23b3b">Equador</text>
+<line x1="214" y1="78" x2="386" y2="78" stroke="#c23b3b" stroke-dasharray="4 3"/><line x1="214" y1="152" x2="386" y2="152" stroke="#c23b3b" stroke-dasharray="4 3"/>
+<text x="300" y="72" font-size="10" text-anchor="middle" fill="#333">Trópico de Câncer</text><text x="300" y="166" font-size="10" text-anchor="middle" fill="#333">Trópico de Capricórnio</text>
+<text x="300" y="14" font-size="11" text-anchor="middle" fill="#333">Polo Norte</text><text x="300" y="226" font-size="11" text-anchor="middle" fill="#333">Polo Sul</text>
+<circle cx="20" cy="115" r="60" fill="#ffd25a" opacity=".9"/><text x="22" y="119" font-size="12" text-anchor="middle" font-weight="700">Sol</text>
+${[40,78,115,152,190].map(y=>{const dx=Math.sqrt(Math.max(0,95*95-(y-115)*(y-115)));return`<line x1="80" y1="${y}" x2="${300-dx-4}" y2="${y}" stroke="#e0a21e" stroke-width="3" marker-end="url(#ar)"/>`}).join('')}
+<text x="130" y="108" font-size="11" fill="#7a5200" font-weight="700">raios perpendiculares</text><text x="130" y="122" font-size="11" fill="#7a5200">→ mais calor</text>
+<text x="120" y="34" font-size="11" fill="#555">raios oblíquos → menos calor</text><text x="120" y="208" font-size="11" fill="#555">raios oblíquos → menos calor</text></svg>`;
+const SVG_BORB=`<svg viewBox="0 0 440 210" width="440" role="img" aria-label="Perfil do Planalto da Borborema e dinâmica das chuvas">
+<defs><marker id="b1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#2f6fd6"/></marker><marker id="b2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8z" fill="#d23c3c"/></marker></defs>
+<rect x="360" y="160" width="80" height="20" fill="#7cc6e6"/><text x="400" y="196" font-size="11" text-anchor="middle">Oceano</text>
+<path d="M0 170 L70 168 L120 150 L150 166 L190 166 L250 70 L300 120 L330 150 L362 162 L362 180 L0 180Z" fill="#c98a4a" stroke="#8a5a2a"/>
+<text x="250" y="62" font-size="11" text-anchor="middle" font-weight="700">Planalto da Borborema</text>
+<text x="95" y="163" font-size="11" text-anchor="middle" fill="#fff" font-weight="700">Agreste / Sertão</text><text x="340" y="140" font-size="10" text-anchor="middle">Zona da Mata</text>
+<ellipse cx="310" cy="40" rx="42" ry="16" fill="#8d9aa6"/><ellipse cx="290" cy="34" rx="22" ry="12" fill="#8d9aa6"/>
+${[288,298,308,318,328].map(x=>`<line x1="${x}" y1="58" x2="${x-6}" y2="100" stroke="#2f6fd6" stroke-dasharray="3 3"/>`).join('')}
+<path d="M430 150 Q360 140 300 105 Q275 85 262 78" fill="none" stroke="#2f6fd6" stroke-width="2.5" marker-end="url(#b1)"/>
+<path d="M238 78 Q200 110 150 125 Q110 135 60 140" fill="none" stroke="#d23c3c" stroke-width="2.5" marker-end="url(#b2)"/>
+<text x="436" y="128" font-size="10" text-anchor="end" fill="#2f6fd6">ar quente e úmido</text><text x="170" y="100" font-size="10" text-anchor="middle" fill="#d23c3c">ar quente e seco</text>
+<text x="335" y="18" font-size="10" text-anchor="middle" fill="#2f6fd6">chove deste lado</text></svg>`;
+const SVG_ILHA=(()=>{const pts=[[0,29.4],[1,29.4],[2,31.0],[3,31.2],[4,32.6],[5,33.2],[6,32.4],[7,30.8],[8,30.6],[9,31.4],[10,30.6],[11,29.4],[12,29.4]];
+ const x=i=>40+i*31,y=v=>200-(v-29)*40;
+ return `<svg viewBox="0 0 440 240" width="440" role="img" aria-label="Perfil de temperatura de uma ilha de calor"><text x="220" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Ilha de calor: temperatura do campo à cidade</text>
+ ${[29.4,30.6,31.7,32.8].map(v=>`<line x1="40" x2="412" y1="${y(v)}" y2="${y(v)}" stroke="#e2e8ea"/><text x="34" y="${y(v)+4}" font-size="10" text-anchor="end">${String(v).replace('.',',')}</text>`).join('')}
+ <polyline fill="none" stroke="var(--temp)" stroke-width="3" points="${pts.map(p=>x(p[0])+','+y(p[1])).join(' ')}"/>
+ ${[['Rural',1],['Centro da cidade',5],['Parque',8],['Bairros',9.6],['Rural',11.5]].map(l=>`<text x="${x(l[1])}" y="224" font-size="11" text-anchor="middle">${l[0]}</text>`).join('')}
+ <text x="${x(5)}" y="${y(33.2)-8}" font-size="11" text-anchor="middle" font-weight="700" fill="#c23b3b">mais quente</text></svg>`})();
+
+/* ======================= ESTUDO ORIENTADO ======================= */
+const SEC=[
+{id:'s1',titulo:'Tempo, clima, elementos e fatores',html:`
+<p>A <b>Climatologia</b> é a ciência que estuda o clima. Entender o clima ajuda na agricultura, na pecuária, na construção de casas e cidades e em muitas outras atividades.</p>
+<div class="duo"><div class="mini"><h4>☁️ Tempo atmosférico</h4>É como a atmosfera está <b>agora</b>, num momento curto. <br><i>"Hoje está chovendo em Belo Horizonte."</i></div>
+<div class="mini"><h4>📅 Clima</h4>É o comportamento <b>habitual</b> da atmosfera de um lugar, observado durante muitos anos (cerca de 30 anos).<br><i>"Em BH, os verões são quentes e chuvosos."</i></div></div>
+<h3>Elementos do clima: o que medimos</h3>
+<p>São as grandezas que podem ser <b>medidas</b> e que caracterizam o clima:</p>
+<div class="tw"><table><tr><th>Elemento</th><th>Unidade de medida</th></tr>
+<tr><td>Temperatura</td><td>graus Celsius (°C)</td></tr>
+<tr><td>Umidade do ar</td><td>porcentagem (%)</td></tr>
+<tr><td>Radiação solar (absorvida ou refletida)</td><td>porcentagem (%)</td></tr>
+<tr><td>Pressão atmosférica</td><td>milibares (mb)</td></tr></table></div>
+<p class="small">A chuva (precipitação) também é medida, em milímetros (mm) — é ela que aparece nas barras dos climogramas.</p>
+<h3>Fatores do clima: o que influencia</h3>
+<p>São as condições que <b>interferem</b> nos elementos e fazem o clima de um lugar ser diferente do de outro: <b>latitude, altitude, relevo, maritimidade e continentalidade, vegetação, correntes marítimas e massas de ar</b>.</p>
+<div class="box lembrar"><b class="t">📌 Para lembrar</b><b>Elementos</b> → o que os aparelhos medem (temperatura, umidade, pressão, radiação).<br><b>Fatores</b> → o que causa, explica ou modifica esses valores (latitude, altitude, massas de ar...).<br>Da combinação entre fatores e elementos surgem os diferentes <b>tipos de clima</b>.</div>
+<div class="box cuidado"><b class="t">⚠️ Cuidado</b>"Temperatura" é elemento, não fator! Já "altitude" é fator: ela <i>causa</i> mudança na temperatura.</div>`},
+
+{id:'s2',titulo:'Latitude',html:`
+<p><b>Latitude</b> é a distância, em graus, de um lugar até a <b>Linha do Equador</b> (latitude 0°).</p>
+${SVG_LAT}
+<ul><li>Perto do Equador e na <b>Zona Intertropical</b> (entre os trópicos de Câncer e de Capricórnio), os raios solares chegam de forma <b>perpendicular</b> (em ângulo reto, 90°) → <b>mais luz e calor</b>.</li>
+<li>Nas regiões polares (acima de 60° N ou 60° S), os raios chegam de forma <b>oblíqua</b> (inclinada) → a mesma energia se espalha por uma área maior → <b>menos calor</b>.</li>
+<li>Mais calor também aumenta a <b>evaporação</b>, por isso a latitude influencia até as chuvas.</li></ul>
+<h3>E o Brasil?</h3>
+<p>A maior parte do Brasil fica na Zona Intertropical, por isso predominam climas quentes. Quatro estados são atravessados pela Linha do Equador: <b>Amazonas, Roraima, Pará e Amapá</b>. A capital <b>Macapá (AP)</b> é cortada pela linha — lá está o <b>Marco Zero do Equador</b>, onde se pode ficar com um pé em cada hemisfério.</p>
+<div class="box lembrar"><b class="t">📌 Para lembrar</b>Quanto <b>menor</b> a latitude (mais perto do Equador) → <b>mais quente</b>.<br>Quanto <b>maior</b> a latitude (mais perto dos polos) → <b>mais frio</b>.</div>`},
+
+{id:'s3',titulo:'Altitude e relevo',html:`
+<p><b>Altitude</b> é a distância, em metros, de um ponto até o <b>nível do mar</b> (0 m).</p>
+<p>Quanto maior a altitude, <b>menor a temperatura</b>. Isso acontece porque o ar lá em cima é <b>rarefeito</b>: tem menos moléculas de ar para segurar o calor, e elas ficam afastadas umas das outras. Em média, a temperatura cai cerca de 0,6 °C a cada 100 m de subida.</p>
+<ul><li>Montanhas e planaltos costumam ser mais frios que planícies e depressões.</li>
+<li>O relevo brasileiro é antigo e desgastado, mas há pontos altos: no <b>Pico das Agulhas Negras</b> (entre MG e RJ) já se registraram cerca de <b>−8 °C</b>.</li>
+<li>Em <b>São Joaquim e Urubici (SC)</b> e em <b>Canela, São José dos Ausentes e Cambará do Sul (RS)</b> pode <b>nevar</b> no inverno: soma-se a altitude elevada à latitude maior do Sul.</li></ul>
+<h3>O relevo como barreira: Planalto da Borborema</h3>
+${SVG_BORB}
+<p>As massas de ar <b>úmidas</b> que vêm do Oceano Atlântico encontram o <b>Planalto da Borborema</b> (Nordeste). Ao subir, o ar esfria e a umidade vira <b>chuva na porção oriental</b> (Zona da Mata, lado do oceano). O ar que passa para o outro lado chega <b>leve e seco</b> → contribui para a <b>seca no Agreste e no Sertão</b>.</p>
+<div class="box lembrar"><b class="t">📌 Para lembrar</b>Subiu a altitude → caiu a temperatura.<br>Relevo pode <b>barrar</b> massas de ar úmidas: chove de um lado, fica seco do outro.</div>`},
+
+{id:'s4',titulo:'Vegetação, cidades e ação humana',html:`
+<h3>Vegetação como fator climático</h3>
+<ul><li>As plantas liberam vapor d'água para a atmosfera (<b>evapotranspiração</b>) → aumentam a <b>umidade</b> e favorecem as <b>chuvas</b>.</li>
+<li>Com mais umidade, a temperatura varia menos: diminui a <b>amplitude térmica</b>. A água "segura" o calor por mais tempo (calor específico).</li>
+<li>A <b>Floresta Amazônica</b> produz tanta umidade que ajuda a formar chuvas que abastecem rios das regiões Centro-Oeste, Sudeste e Sul (os chamados "rios voadores").</li></ul>
+<h3>Ilhas de calor</h3>
+${SVG_ILHA}
+<p>A vegetação <b>reflete cerca de 30%</b> da energia do Sol. Já o <b>asfalto e as construções</b> absorvem a radiação e refletem só <b>cerca de 5%</b>. Com o solo impermeabilizado e poucas árvores, os <b>centros das cidades ficam mais quentes</b> que o campo e que as áreas com parques: é a <b>ilha de calor</b>.</p>
+<h3>Inversão térmica</h3>
+<p>Normalmente o ar perto do chão é mais quente e sobe, levando a poluição embora. Na <b>inversão térmica</b>, uma <b>camada de ar frio fica embaixo</b> de uma camada de ar quente e não consegue subir. Resultado: a <b>poluição fica presa perto da superfície</b>.</p>
+<ul><li>É mais comum no <b>outono e no inverno</b> (madrugadas frias).</li>
+<li>Agrava <b>doenças respiratórias</b> nas grandes cidades.</li>
+<li>Áreas verdes (praças, parques, telhados verdes) <b>filtram poluentes</b>, refrescam e ajudam a reduzir as ilhas de calor.</li></ul>
+<div class="box cuidado"><b class="t">⚠️ Cuidado</b>A inversão térmica é um fenômeno <b>natural</b>; a ação humana (poluição) é que a torna perigosa nas cidades.</div>`},
+
+{id:'s5',titulo:'Maritimidade e continentalidade',html:`
+<div class="duo"><div class="mini"><h4>🌊 Maritimidade</h4>Influência do <b>mar</b> (e de grandes massas de água) no clima. A água esquenta e esfria devagar, então <b>regula a temperatura</b>: a diferença entre dia e noite é <b>pequena</b>.</div>
+<div class="mini"><h4>🏜️ Continentalidade</h4>É o contrário: no <b>interior</b> do continente, longe do mar, falta água para regular a temperatura. O calor se dispersa rápido: <b>dias quentes e noites frias</b> → amplitude <b>grande</b>.</div></div>
+<h3>Amplitude térmica</h3>
+<p><b>Amplitude térmica = temperatura máxima − temperatura mínima.</b></p>
+<div class="tw"><table><tr><th>4 de julho de 2019 (latitude 16° S)</th><th>Máxima</th><th>Mínima</th><th>Amplitude</th></tr>
+<tr><td>Goiânia (GO) – interior</td><td>31 °C</td><td>18 °C</td><td><b>13 °C</b></td></tr>
+<tr><td>Porto Seguro (BA) – litoral</td><td>30 °C</td><td>23 °C</td><td><b>7 °C</b></td></tr></table></div>
+<p>As duas cidades estão na mesma latitude, mas Goiânia, longe do mar, teve amplitude quase duas vezes maior: efeito da <b>continentalidade</b>.</p>
+<p>No Brasil a maritimidade é forte pelo longo litoral e pelos rios enormes: a <b>bacia do Rio Amazonas</b>, a maior do mundo em volume de água (cerca de 7 milhões de km²), faz a região Amazônica ter influência da água mesmo estando no interior do continente.</p>
+<div class="box lembrar"><b class="t">📌 Para lembrar</b>Perto da água → amplitude térmica <b>menor</b>.<br>Longe da água → amplitude térmica <b>maior</b>.</div>`},
+
+{id:'s6',titulo:'Massas de ar e ventos',html:`
+<p><b>Massas de ar</b> são grandes volumes de ar com temperatura e umidade parecidas em toda a sua extensão. Elas pegam as características do lugar onde se formam e as levam para onde se deslocam. São classificadas por temperatura (<b>quente ou fria</b>) e umidade (<b>úmida ou seca</b>).</p>
+<div class="tw"><table><tr><th>Massa de ar</th><th>Sigla</th><th>Características</th><th>Onde atua</th></tr>
+<tr><td>Equatorial Atlântica</td><td><b>mEa</b></td><td>quente e úmida</td><td>litoral do Norte e do Nordeste</td></tr>
+<tr><td>Equatorial Continental</td><td><b>mEc</b></td><td>quente e úmida (umidade da evapotranspiração da Floresta Amazônica)</td><td>oeste da Amazônia; no verão avança para o Centro-Oeste e o Sudeste</td></tr>
+<tr><td>Tropical Atlântica</td><td><b>mTa</b></td><td>quente e úmida</td><td>litoral do Nordeste, Sudeste e Sul</td></tr>
+<tr><td>Tropical Continental</td><td><b>mTc</b></td><td>quente e <b>seca</b></td><td>forma-se nas depressões do Paraguai, da Argentina e do Centro-Oeste</td></tr>
+<tr><td>Polar Atlântica</td><td><b>mPa</b></td><td><b>fria</b> e úmida</td><td>Sul do Brasil, trazendo baixas temperaturas no inverno</td></tr></table></div>
+<div class="box dica"><b class="t">💡 Dica para decorar as siglas</b>m = massa · <b>E</b> = equatorial (quente) · <b>T</b> = tropical (quente) · <b>P</b> = polar (fria)<br><b>a</b> = atlântica (veio do oceano → úmida) · <b>c</b> = continental (veio de terra → seca)<br>⚠️ Exceção: a <b>mEc</b> é continental, mas é <b>úmida</b> por causa da Floresta Amazônica.</div>
+<h3>ZCIT e ZCAS</h3>
+<ul><li><b>ZCIT</b> (Zona de Convergência Intertropical): região perto do Equador que recebe os <b>ventos alísios</b>, constantes, vindos dos trópicos. Por causa desses ventos, o <b>Nordeste</b> é ótimo para <b>parques de energia eólica</b>.</li>
+<li><b>ZCAS</b> (Zona de Convergência do Atlântico Sul): encontro de massas de ar quentes e úmidas da Amazônia e do Atlântico Sul, que provoca <b>muita chuva</b> no centro do país.</li></ul>`},
+
+{id:'s7',titulo:'Correntes marítimas, El Niño e La Niña',html:`
+<p><b>Correntes marítimas</b> são fluxos de água do oceano que se movimentam por causa da rotação da Terra.</p>
+<div class="duo"><div class="mini"><h4>🔴 Correntes quentes</h4>Formam-se perto do Equador. <b>Aumentam a umidade e as chuvas</b> e aquecem o litoral.<br>No Brasil: <b>Corrente do Brasil, Sul-Equatorial e das Guianas</b>.</div>
+<div class="mini"><h4>🔵 Correntes frias</h4>Vêm das áreas polares. <b>Diminuem a temperatura e a evaporação</b> → menos chuva.<br>Perto do Brasil: <b>Corrente das Falkland</b> (Malvinas), no extremo sul.</div></div>
+<p>Os oceanos funcionam como <b>reguladores térmicos</b>: levam o calor do Equador para regiões mais frias. Além disso, algas e fitoplânctons absorvem grande parte do gás carbônico (um dos gases do efeito estufa).</p>
+<h3>El Niño e La Niña</h3>
+<div class="tw"><table><tr><th></th><th>El Niño</th><th>La Niña</th></tr>
+<tr><td>O que é</td><td><b>Aquecimento</b> das águas do Oceano Pacífico (3 °C a 7 °C acima da média)</td><td><b>Resfriamento</b> das águas do Oceano Pacífico</td></tr>
+<tr><td>Sul e Sudeste</td><td>mais chuvas; invernos menos rigorosos</td><td>estiagens (Sudeste, Sul e Centro-Oeste)</td></tr>
+<tr><td>Norte e Nordeste</td><td><b>secas</b> no Sertão nordestino e no extremo norte</td><td>chuvas mais intensas</td></tr></table></div>
+<div class="box lembrar"><b class="t">📌 Para lembrar</b>El Niño e La Niña são fenômenos <b>naturais</b>, que acontecem em períodos alternados. Um é o "oposto" do outro.</div>`},
+
+{id:'s8',titulo:'Como ler um climograma',html:`
+<p>O <b>climograma</b> é um gráfico que mostra, mês a mês, a <b>temperatura média</b> e a <b>chuva (precipitação)</b> de um lugar.</p>
+${climograma('manaus')}
+<h3>Leitura em 3 passos</h3>
+<ol><li><b>Olhe a linha (temperatura):</b> ela fica quase reta (varia pouco ao longo do ano) ou faz uma "barriga" para baixo no meio do ano (inverno frio)? Fica acima de 25 °C, perto de 20 °C ou abaixo de 15 °C?</li>
+<li><b>Olhe as barras (chuva):</b> chove muito o ano todo? Chove só no verão (dezembro a março) e quase nada no inverno (junho a agosto)? As barras são quase todas parecidas (chuva bem distribuída) ou quase todas baixas (pouca chuva)?</li>
+<li><b>Compare</b> com as características dos tipos de clima (próxima seção).</li></ol>
+<h3>Tirando informações do gráfico</h3><ul><li><b>Mês mais chuvoso:</b> a barra mais alta. Leia o valor no eixo da <b>direita</b> (mm).</li><li><b>Mês mais seco:</b> a barra mais baixa.</li><li><b>Mês mais quente / mais frio:</b> o ponto mais alto / mais baixo da linha. Leia no eixo da <b>esquerda</b> (°C).</li><li><b>Amplitude térmica anual</b> = maior temperatura média − menor temperatura média. Ex.: se a linha vai de 17 °C a 10 °C → 17 − 10 = 7 °C.</li><li><b>Estação seca:</b> vários meses seguidos com barras muito baixas (ex.: junho a agosto).</li></ul>
+<p>No exemplo de <b>Manaus</b>: a linha fica sempre perto de 27 °C (quente o ano todo, pouca variação) e as barras são altas, principalmente no verão → clima <b>Equatorial</b>.</p>
+<div class="box cuidado"><b class="t">⚠️ Cuidado</b>Cada climograma pode ter <b>escalas diferentes</b>. Sempre leia os números dos eixos: a chuva fica no eixo da direita e a temperatura no da esquerda.</div>
+<div class="box dica"><b class="t">💡 Lembre</b>No Brasil (Hemisfério Sul), o <b>verão</b> vai de dezembro a março e o <b>inverno</b> de junho a setembro. As pontas do gráfico (Jan e Dez) são verão; o meio (Jun, Jul) é inverno.</div>`},
+
+{id:'s9',titulo:'Os seis tipos climáticos do Brasil',html:`
+<p>A combinação de elementos e fatores divide o Brasil em <b>seis tipos climáticos</b>:</p>
+<div class="tw"><table><tr><th>Clima</th><th>Temperatura média</th><th>Chuva</th><th>Marca registrada</th></tr>
+<tr><td><b>Equatorial</b></td><td>25 a 30 °C</td><td>1.500 a 2.800 mm/ano, o ano todo</td><td>quente e úmido sempre; pouca amplitude</td></tr>
+<tr><td><b>Tropical Atlântico</b></td><td>20 a 30 °C</td><td>1.200 a 1.700 mm/ano</td><td>litoral; mTa + maritimidade</td></tr>
+<tr><td><b>Tropical Continental</b></td><td>20 a 30 °C (15 a 20 °C em jul/ago)</td><td>1.400 a 1.700 mm/ano</td><td>verão chuvoso, <b>inverno seco</b></td></tr>
+<tr><td><b>Tropical de Altitude</b></td><td>14 a 22 °C</td><td>concentrada no verão</td><td>mais ameno por causa da altitude</td></tr>
+<tr><td><b>Subtropical</b></td><td>15 a 22 °C</td><td>1.300 a 1.900 mm/ano, bem distribuída</td><td>o mais <b>frio</b>; mPa; sem estação seca</td></tr>
+<tr><td><b>Semiárido</b></td><td>acima de 20 °C</td><td>400 a 1.000 mm/ano (a <b>menor</b>)</td><td>Sertão nordestino; chuvas escassas e irregulares</td></tr></table></div>
+<div class="tipos">
+<div class="tcard"><h4>🌳 Equatorial</h4><ul><li>Norte (Amazônia), partes do MT e do MA.</li><li>Alta radiação solar e evaporação; latitudes perto de 0°.</li><li>Florestas <b>latifoliadas</b> (folhas largas), como a Amazônica.</li></ul>${climograma('manaus')}</div>
+<div class="tcard"><h4>🏖️ Tropical Atlântico</h4><ul><li>Litoral do Nordeste ao Sudeste.</li><li>Influenciado pela <b>mTa</b> e pela <b>maritimidade</b>.</li><li>Verão mais quente e chuvoso (ex.: Rio de Janeiro); em Recife e Natal chove mais no inverno.</li></ul>${climograma('rio')}</div>
+<div class="tcard"><h4>🌾 Tropical Continental</h4><ul><li>Predomina no território: Centro-Oeste e partes do Nordeste, Sudeste e Sul.</li><li>Verão: cerca de 200 mm/mês; inverno: menos de 50 mm/mês.</li><li>Duas estações bem marcadas: chuvosa e seca.</li></ul>${climograma('cuiaba')}</div>
+<div class="tcard"><h4>⛰️ Tropical de Altitude</h4><ul><li>Serras do Sudeste, planaltos de Goiás-Minas, Borborema e Planalto Sul-Rio-Grandense.</li><li>Altitude reduz as temperaturas no verão e no inverno.</li><li>Ex.: Campos do Jordão (SP), acima de 1.600 m.</li></ul>${climograma('campos')}</div>
+<div class="tcard"><h4>❄️ Subtropical</h4><ul><li>Região Sul, sul do MS e de SP.</li><li>Menores temperaturas do país; influência da <b>mPa</b>.</li><li>Chuva bem distribuída, sem mês seco (ex.: Curitiba).</li></ul>${climograma('curitiba')}</div>
+<div class="tcard"><h4>🌵 Semiárido</h4><ul><li>Sertão nordestino, sub-região mais quente e seca.</li><li>Menor volume de chuvas do Brasil.</li><li>O relevo (Borborema) barra a umidade vinda da Zona da Mata.</li></ul>${climograma('salgueiro')}</div>
+</div>
+<p class="small">Climogramas redesenhados com valores aproximados dos gráficos do livro (fontes citadas no livro: Organização Meteorológica Mundial e Climate-data.org).</p>`},
+];
+
+/* ======================= QUESTÕES ======================= */
+const T1='Elementos e fatores',T2='Fatores climáticos',T3='Massas de ar e oceanos',T6='Climograma',T4='Tipos climáticos',T5='Clima e ação humana';
+const LD='Baseada no livro didático (AZ)',SE='Modelo: avaliação escolar';
+const Q=[
+/* ---- Elementos e fatores ---- */
+{tema:T1,sec:'s1',fonte:LD,tipo:'mc',correta:2,
+ enun:'<p>Qual alternativa apresenta <b>somente elementos do clima</b>?</p>',
+ opcoes:['Latitude, altitude e vegetação.','Massas de ar, correntes marítimas e relevo.','Temperatura, umidade, pressão atmosférica e radiação solar.','Maritimidade, temperatura e latitude.'],
+ expl:['<b>Elementos</b> são as grandezas que podem ser <b>medidas</b>: temperatura, umidade, pressão atmosférica e radiação solar.','Latitude, altitude, vegetação, massas de ar, correntes, relevo e maritimidade são <b>fatores</b> — eles influenciam os elementos.','A alternativa (d) mistura elementos e fatores.']},
+{tema:T1,sec:'s1',fonte:LD,tipo:'mc',correta:0,
+ enun:'<p>Em que unidades são medidas, respectivamente, a <b>temperatura</b>, a <b>umidade</b> e a <b>pressão atmosférica</b>?</p>',
+ opcoes:['Graus Celsius (°C), porcentagem (%) e milibares (mb).','Milímetros (mm), graus Celsius (°C) e quilômetros (km).','Porcentagem (%), milibares (mb) e graus Celsius (°C).','Metros (m), porcentagem (%) e litros (L).'],
+ expl:['Temperatura → <b>°C</b> (escala Celsius).','Umidade (e radiação solar) → <b>%</b>.','Pressão atmosférica → <b>milibares (mb)</b>.','A chuva é medida em milímetros (mm), mas a questão não perguntou sobre ela.']},
+{tema:T1,sec:'s1',fonte:SE,tipo:'ab',
+ enun:'<p>Para compreender a dinâmica do clima, é preciso diferenciar <b>elementos</b> e <b>fatores</b> climáticos. Explique a diferença entre eles e dê <b>dois exemplos de cada</b>.</p>',
+ pontos:['Explicou que elementos são as grandezas que podem ser medidas e que caracterizam o clima.','Deu dois exemplos corretos de elementos (temperatura, umidade, pressão atmosférica, radiação solar).','Explicou que fatores são as condições que interferem/influenciam os elementos.','Deu dois exemplos corretos de fatores (latitude, altitude, maritimidade, continentalidade, vegetação, correntes marítimas, massas de ar, relevo).','Mencionou que a interação entre fatores e elementos forma os diferentes tipos de clima.'],
+ modelo:'Os elementos do clima são as grandezas que podem ser medidas e que caracterizam o clima de um lugar, como a temperatura (medida em °C), a umidade (%), a pressão atmosférica (mb) e a radiação solar. Já os fatores climáticos são as condições que influenciam ou modificam esses elementos, como a latitude, a altitude, a maritimidade, a vegetação, as correntes marítimas e as massas de ar. Por exemplo, a altitude (fator) faz a temperatura (elemento) diminuir. A interação entre fatores e elementos dá origem aos diferentes tipos de clima.'},
+
+/* ---- Fatores climáticos ---- */
+{tema:T2,sec:'s2',fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>Por que as áreas próximas à Linha do Equador recebem mais calor do que as regiões polares?</p>',
+ opcoes:['Porque ficam mais perto do Sol.','Porque os raios solares chegam de forma perpendicular, concentrando a energia, enquanto nos polos chegam de forma oblíqua.','Porque nelas não existe atmosfera.','Porque ficam acima do nível do mar.'],
+ expl:['O que importa é o <b>ângulo</b> com que os raios chegam: perto do Equador eles chegam <b>perpendiculares</b> (90°) e concentram calor numa área menor.','Nos polos chegam <b>oblíquos</b> (inclinados): a mesma energia se espalha por uma área maior → menos calor.','A distância até o Sol é praticamente a mesma para toda a Terra; não é isso que explica a diferença.']},
+{tema:T2,sec:'s2',fonte:LD,tipo:'mc',correta:3,
+ enun:'<p>Quais estados brasileiros são atravessados pela <b>Linha do Equador</b>, e qual capital é cortada por ela?</p>',
+ opcoes:['Bahia, Pernambuco, Ceará e Piauí; capital: Fortaleza.','Mato Grosso, Goiás, Tocantins e Pará; capital: Palmas.','Acre, Rondônia, Amazonas e Mato Grosso; capital: Manaus.','Amazonas, Roraima, Pará e Amapá; capital: Macapá.'],
+ expl:['A Linha do Equador corta <b>Amazonas, Roraima, Pará e Amapá</b>.','<b>Macapá (AP)</b> é cortada pela linha — lá fica o Marco Zero do Equador, com parte da cidade no Hemisfério Norte e parte no Sul.','Manaus fica um pouco ao sul do Equador (cerca de 3° S).']},
+{tema:T2,sec:'s3',fonte:LD,tipo:'mc',correta:0,
+ enun:'<p>Por que a temperatura diminui à medida que a altitude aumenta?</p>',
+ opcoes:['Porque o ar é rarefeito: há menos moléculas de ar, afastadas umas das outras, o que dificulta reter o calor.','Porque nas montanhas há mais nuvens que bloqueiam totalmente o Sol.','Porque nas altitudes elevadas o Sol nunca aparece.','Porque o ar nas montanhas tem mais moléculas e pesa mais.'],
+ expl:['Em altitudes elevadas o ar é <b>rarefeito</b>: há menos moléculas de ar, e elas ficam mais distantes umas das outras.','Com menos ar para "segurar" o calor, a temperatura cai — em média cerca de 0,6 °C a cada 100 m.','A alternativa (d) diz o oposto do que acontece.']},
+{tema:T2,sec:'s3',fonte:LD,tipo:'ab',
+ enun:'<p>Em municípios como <b>São Joaquim e Urubici</b>, em Santa Catarina, e <b>Cambará do Sul</b>, no Rio Grande do Sul, pode nevar durante o inverno, algo raro no Brasil.</p><p>Explique quais <b>fatores climáticos</b> ajudam a entender esse fenômeno.</p>',
+ pontos:['Citou a altitude elevada (serras) como fator que diminui a temperatura.','Explicou por que a altitude reduz a temperatura (ar rarefeito, menos moléculas para reter calor).','Citou a latitude: a região Sul está mais distante do Equador, recebendo raios mais inclinados e menos calor.','Citou a influência da Massa Polar Atlântica (mPa), fria, que chega ao Sul no inverno.'],
+ modelo:'A neve nesses municípios é explicada pela combinação de fatores climáticos. Primeiro, a altitude: eles ficam em áreas elevadas das serras catarinense e gaúcha, e quanto maior a altitude menor a temperatura, porque o ar é rarefeito e tem menos moléculas para reter calor. Segundo, a latitude: a Região Sul está mais longe do Equador, então os raios solares chegam mais inclinados e aquecem menos. Por fim, no inverno, a região recebe a Massa Polar Atlântica (mPa), fria e úmida, que provoca quedas fortes de temperatura.'},
+{tema:T2,sec:'s3',fonte:LD,tipo:'mc',correta:2,
+ enun:SVG_BORB+'<p>O esquema mostra o <b>Planalto da Borborema</b>, no Nordeste. Qual é o efeito desse relevo no clima da região?</p>',
+ opcoes:['Ele atrai as massas de ar frias da Antártida para o Sertão.','Ele faz chover mais no Sertão do que no litoral.','Ele barra as massas de ar úmidas vindas do Atlântico: chove na porção oriental (Zona da Mata) e o ar chega seco ao Agreste e ao Sertão.','Ele não interfere no clima, pois o relevo não é um fator climático.'],
+ expl:['Ao subir o planalto, o ar úmido do oceano esfria e a umidade vira <b>chuva do lado leste</b> (Zona da Mata).','O ar que passa para o outro lado chega <b>leve e seco</b>, contribuindo para a <b>seca no Agreste e no Sertão</b>.','Por isso o livro diz que o relevo é um fator determinante para o clima do Nordeste.']},
+{tema:T2,sec:'s4',fonte:LD,tipo:'ab',
+ enun:'<p>Explique por que a <b>vegetação</b> é considerada um fator climático. Use como exemplo a <b>Floresta Amazônica</b>.</p>',
+ pontos:['Explicou a evapotranspiração: as plantas liberam vapor d\'água para a atmosfera.','Disse que isso aumenta a umidade do ar e favorece a formação de chuvas.','Disse que a vegetação diminui a amplitude térmica (temperaturas mais constantes) e/ou ajuda no equilíbrio térmico.','Usou o exemplo da Amazônia: sua umidade influencia chuvas em outras regiões (Centro-Oeste, Sudeste e Sul).'],
+ modelo:'A vegetação é um fator climático porque, pela evapotranspiração, as plantas liberam vapor d\'água para a atmosfera. Isso aumenta a umidade do ar, favorece a formação de chuvas e deixa as temperaturas mais constantes, diminuindo a amplitude térmica. A Floresta Amazônica é o maior exemplo: ela produz tanta umidade que influencia a formação de chuvas não só na própria região, mas também nas regiões Centro-Oeste, Sudeste e Sul do Brasil.'},
+{tema:T2,sec:'s5',fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>Em 4 de julho de 2019, <b>Goiânia (GO)</b> teve máxima de 31 °C e mínima de 18 °C, e <b>Porto Seguro (BA)</b> teve máxima de 30 °C e mínima de 23 °C. As duas cidades estão na mesma latitude (16° S). O que explica a diferença entre elas?</p>',
+ opcoes:['A maritimidade deixou Goiânia com menor amplitude térmica.','A continentalidade fez Goiânia ter maior amplitude térmica (13 °C) que Porto Seguro (7 °C).','A latitude diferente das duas cidades.','A altitude de Porto Seguro, que é muito maior que a de Goiânia.'],
+ expl:['Amplitude = máxima − mínima. Goiânia: 31 − 18 = <b>13 °C</b>. Porto Seguro: 30 − 23 = <b>7 °C</b>.','Goiânia fica no interior: sem grandes massas de água, o calor se dispersa rápido → <b>continentalidade</b>, amplitude maior.','Porto Seguro fica no litoral: o mar regula a temperatura → <b>maritimidade</b>.','A latitude é a mesma (16° S), por isso não explica a diferença; e Porto Seguro está ao nível do mar.']},
+{tema:T2,sec:'s5',fonte:SE,tipo:'mc',correta:3,
+ enun:'<p>Em um dia de inverno, uma cidade do interior registrou máxima de <b>29 °C</b> e mínima de <b>12 °C</b>. Qual foi a amplitude térmica desse dia?</p>',
+ opcoes:['41 °C','12 °C','20,5 °C','17 °C'],
+ expl:['Amplitude térmica = máxima − mínima.','29 − 12 = <b>17 °C</b>.','Cuidado: 41 é a soma (29 + 12) e 20,5 é a média ((29 + 12) ÷ 2). Nenhuma das duas é a amplitude.']},
+{tema:T2,sec:'s5',fonte:SE,tipo:'ab',
+ enun:'<p>Explique a diferença entre <b>maritimidade</b> e <b>continentalidade</b> e como cada uma influencia a <b>amplitude térmica</b>.</p>',
+ pontos:['Explicou que maritimidade é a influência do mar/oceano (grandes massas de água) na regulação da temperatura.','Explicou que a continentalidade ocorre no interior, longe do mar, sem a regulação da água.','Disse que a maritimidade gera menor amplitude térmica e a continentalidade gera maior amplitude (dias quentes, noites frias).','Explicou o motivo: a água demora a esquentar e a esfriar (conserva o calor) e/ou deu um exemplo (Goiânia × Porto Seguro).'],
+ modelo:'A maritimidade é a influência dos mares e oceanos sobre o clima: como a água demora a esquentar e a esfriar, ela regula a temperatura, e a diferença entre o dia e a noite fica pequena, ou seja, a amplitude térmica é menor. A continentalidade acontece no interior do continente, longe das grandes massas de água. Sem a água para regular, o calor se dispersa rapidamente e ocorrem dias quentes e noites frias, com amplitude térmica maior. Exemplo: em 4/7/2019, Porto Seguro (litoral) teve amplitude de 7 °C e Goiânia (interior) de 13 °C.'},
+
+/* ---- Massas de ar e oceanos ---- */
+{tema:T3,sec:'s6',fonte:LD,tipo:'mc',correta:4,
+ enun:'<p>Qual massa de ar é <b>fria e úmida</b> e favorece as baixas temperaturas na Região Sul durante o inverno?</p>',
+ opcoes:['Massa Equatorial Atlântica (mEa).','Massa Equatorial Continental (mEc).','Massa Tropical Atlântica (mTa).','Massa Tropical Continental (mTc).','Massa Polar Atlântica (mPa).'],
+ expl:['"P" de <b>polar</b> = fria. "a" de <b>atlântica</b> = úmida (formada sobre o oceano).','A <b>mPa</b> atua no Sul do Brasil e traz as baixas temperaturas do inverno.','As outras quatro massas são quentes.']},
+{tema:T3,sec:'s6',fonte:LD,tipo:'mc',correta:0,
+ enun:'<p>A única massa de ar <b>quente e seca</b> que atua no Brasil é a:</p>',
+ opcoes:['Massa Tropical Continental (mTc), formada nas depressões do Paraguai, da Argentina e do Centro-Oeste.','Massa Equatorial Continental (mEc), formada na Amazônia.','Massa Polar Atlântica (mPa), formada no sul do oceano Atlântico.','Massa Tropical Atlântica (mTa), formada no oceano Atlântico.'],
+ expl:['A <b>mTc</b> se forma sobre terra (continental), numa área de depressões no interior do continente, por isso é <b>quente e seca</b>.','A mEc também é continental, mas é <b>úmida</b> por causa da evapotranspiração da Floresta Amazônica.']},
+{tema:T3,sec:'s6',fonte:LD,tipo:'mc',correta:2,
+ enun:'<p>A <b>Massa Equatorial Continental (mEc)</b> forma-se no interior do continente, mas é quente e <b>úmida</b>. Por quê?</p>',
+ opcoes:['Porque se forma sobre o Oceano Pacífico.','Porque recebe a neve que derrete nos Andes.','Porque é influenciada pela grande evapotranspiração da Floresta Amazônica.','Porque é formada pela Corrente das Falkland.'],
+ expl:['A mEc se forma no oeste da Amazônia.','A floresta libera enorme quantidade de vapor d\'água (<b>evapotranspiração</b>), deixando essa massa de ar úmida, mesmo sendo continental.','É a "exceção" da dica das siglas: continental, mas úmida.']},
+{tema:T3,sec:'s6',fonte:SE,tipo:'ab',
+ enun:'<p>O clima do Brasil é influenciado por <b>cinco grandes massas de ar</b>. Cite-as e indique as características térmicas (quente ou fria) e hídricas (úmida ou seca) de cada uma, além de uma região onde atuam.</p>',
+ pontos:['Citou a mEa (quente e úmida; litoral do Norte e do Nordeste).','Citou a mEc (quente e úmida; oeste da Amazônia).','Citou a mTa (quente e úmida; litoral do Nordeste, Sudeste e Sul).','Citou a mTc (quente e seca; Centro-Oeste/depressões do Paraguai e da Argentina).','Citou a mPa (fria e úmida; Região Sul no inverno).'],
+ modelo:'As cinco massas de ar que atuam no Brasil são: a Massa Equatorial Atlântica (mEa), quente e úmida, que atua no litoral do Norte e do Nordeste; a Massa Equatorial Continental (mEc), quente e úmida por causa da evapotranspiração da Floresta Amazônica, que atua no oeste da Amazônia; a Massa Tropical Atlântica (mTa), quente e úmida, que atua no litoral do Nordeste, do Sudeste e do Sul; a Massa Tropical Continental (mTc), quente e seca, formada nas depressões do Paraguai, da Argentina e do Centro-Oeste; e a Massa Polar Atlântica (mPa), fria e úmida, que atua na Região Sul e traz baixas temperaturas no inverno.'},
+{tema:T3,sec:'s7',fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>No Brasil ocorrem quatro importantes correntes marítimas. Qual alternativa as classifica corretamente?</p>',
+ opcoes:['Quentes: Corrente das Falkland e Corrente do Golfo; frias: Corrente do Brasil e das Guianas.','Quentes: Corrente do Brasil, Sul-Equatorial e das Guianas; fria: Corrente das Falkland.','Todas as correntes do litoral brasileiro são frias.','Quente: Corrente das Falkland; frias: Corrente do Brasil, Sul-Equatorial e das Guianas.'],
+ expl:['As três correntes <b>quentes</b> nascem perto do Equador: <b>do Brasil, Sul-Equatorial e das Guianas</b>.','A corrente <b>fria</b> vem da área polar: <b>Corrente das Falkland</b> (Malvinas), no extremo sul do continente.','A Corrente do Golfo é quente, mas atua na América Central e no Atlântico Norte, não no Brasil.']},
+{tema:T3,sec:'s7',fonte:LD,tipo:'mc',correta:3,
+ enun:'<p>Qual é o efeito das <b>correntes marítimas frias</b> sobre o clima das áreas litorâneas?</p>',
+ opcoes:['Aumentam a evaporação e as chuvas.','Provocam furacões frequentes.','Aquecem o litoral durante o inverno.','Diminuem a temperatura e limitam a evaporação, reduzindo as chuvas.'],
+ expl:['Água fria evapora menos. Com menos vapor no ar, há <b>menos chuva</b>.','As correntes <b>quentes</b> é que aumentam a umidade e as chuvas e aquecem o litoral.']},
+{tema:T3,sec:'s7',fonte:LD,tipo:'mc',correta:0,
+ enun:'<p>O <b>El Niño</b> é um fenômeno natural causado pelo aquecimento das águas do Oceano Pacífico, de 3 °C a 7 °C acima da média. Quais são os seus efeitos no Brasil?</p>',
+ opcoes:['Mais chuvas e invernos menos rigorosos no Sul e no Sudeste, e secas no Sertão nordestino e no extremo norte.','Secas em todo o Brasil, sem exceção.','Chuvas intensas no Nordeste e estiagem no Sul.','Neve em todas as capitais do Sudeste.'],
+ expl:['Com o <b>El Niño</b>: chuvas mais abundantes e invernos menos rigorosos no <b>Sul e Sudeste</b>; <b>secas</b> no <b>Sertão nordestino</b> e no extremo norte.','A alternativa (c) descreve, de forma resumida, o efeito da <b>La Niña</b> (chuvas no Norte/Nordeste, estiagens no Sul, Sudeste e Centro-Oeste).']},
+{tema:T3,sec:'s7',fonte:SE,tipo:'ab',
+ enun:'<p>Compare os fenômenos <b>El Niño</b> e <b>La Niña</b>: o que acontece no Oceano Pacífico em cada um e quais são seus efeitos no Brasil?</p>',
+ pontos:['Explicou que o El Niño é o aquecimento das águas do Oceano Pacífico (3 a 7 °C acima da média).','Explicou que a La Niña é o resfriamento das águas do Oceano Pacífico.','Citou os efeitos do El Niño: mais chuva/invernos amenos no Sul e Sudeste e secas no Sertão nordestino e extremo norte.','Citou os efeitos da La Niña: chuvas mais intensas no Norte e Nordeste e estiagens no Sudeste, Sul e Centro-Oeste.','Mencionou que são fenômenos naturais que ocorrem em períodos alternados (efeitos opostos).'],
+ modelo:'O El Niño é o aquecimento das águas do Oceano Pacífico, entre 3 °C e 7 °C acima da média. Ele altera a circulação dos ventos e das massas de ar: no Brasil, as chuvas ficam mais abundantes e os invernos menos rigorosos no Sul e no Sudeste, enquanto ocorrem secas no Sertão nordestino e no extremo norte. A La Niña é o resfriamento das águas do Pacífico e costuma ter efeitos contrários: chuvas mais intensas no Norte e no Nordeste e estiagens no Sudeste, no Sul e no Centro-Oeste. Os dois são fenômenos naturais que ocorrem em períodos alternados.'},
+{tema:T3,sec:'s6',fonte:LD,tipo:'mc',correta:2,
+ enun:'<p>A região Nordeste do Brasil é considerada um local propício para a instalação de <b>parques de energia eólica</b>. Isso se deve:</p>',
+ opcoes:['à neve frequente nas serras nordestinas.','às correntes marítimas frias que chegam ao litoral nordestino.','aos ventos alísios, constantes, que sopram em direção à Zona de Convergência Intertropical (ZCIT).','à ausência total de ventos na região.'],
+ expl:['A região próxima ao Equador é chamada <b>ZCIT</b> porque recebe ventos constantes, os <b>alísios</b>, vindos dos trópicos.','Ventos <b>constantes</b> movem as turbinas o tempo todo → ótimo para energia <b>eólica</b> (dos ventos).']},
+
+/* ---- Tipos climáticos ---- */
+{tema:T6,sec:'s8',fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>Em Geografia, o <b>climograma</b> é um gráfico que reúne quais informações?</p>',
+ opcoes:['A altitude e a latitude de uma cidade.','A temperatura média (linha) e a precipitação/chuva (barras) de cada mês do ano.','A quantidade de habitantes e a área da cidade.','A direção dos ventos e das correntes marítimas.'],
+ expl:['O climograma mostra, mês a mês, a <b>temperatura média</b> (geralmente em linha, em °C) e a <b>precipitação</b> (em barras, em mm).','Com ele, identificamos o tipo de clima de um lugar.']},
+{id:'g31',tema:T6,sec:'s8',fonte:SE,tipo:'mc',correta:1,
+ enun:climograma('cuiaba')+'<p>De acordo com o climograma de Cuiabá (MT), em quais meses chove <b>menos</b>?</p>',
+ opcoes:['Dezembro, janeiro e fevereiro.','Junho, julho e agosto.','Março, abril e maio.','Outubro, novembro e dezembro.'],
+ expl:['Procure as <b>barras mais baixas</b>: junho, julho e agosto, com apenas cerca de 10 a 20 mm de chuva.','Esses meses são o <b>inverno</b>: é a estação seca do clima Tropical Continental.','Dezembro, janeiro e fevereiro (verão) são justamente os meses <b>mais chuvosos</b>, perto de 200 mm.']},
+{id:'g32',tema:T6,sec:'s8',fonte:SE,tipo:'mc',correta:3,
+ enun:climograma('manaus')+'<p>Qual é o mês <b>mais chuvoso</b> em Manaus e, aproximadamente, quanto chove nele?</p>',
+ opcoes:['Agosto, com cerca de 60 mm.','Julho, com cerca de 90 mm.','Dezembro, com cerca de 220 mm.','Março, com cerca de 300 mm.'],
+ expl:['A <b>barra mais alta</b> é a de março.','Para saber quanto chove, leia o <b>eixo da direita</b> (precipitação): a barra passa um pouco da marca de 300 mm.','Agosto é o contrário: o mês <b>menos</b> chuvoso. Cuidado para não ler a chuva no eixo da esquerda, que é o da temperatura!']},
+{id:'g33',tema:T6,sec:'s8',fonte:SE,tipo:'mc',correta:1,
+ enun:climograma('campos')+'<p>A <b>amplitude térmica anual</b> é a diferença entre a maior e a menor temperatura média mensal. Pelo climograma de Campos do Jordão (SP), qual é, aproximadamente, a amplitude térmica anual?</p>',
+ opcoes:['Cerca de 2 °C.','Cerca de 7 °C.','Cerca de 17 °C.','Cerca de 28 °C.'],
+ expl:['Leia a <b>linha</b> no <b>eixo da esquerda</b>: o ponto mais alto fica perto de <b>17 °C</b> (fevereiro) e o mais baixo perto de <b>10,5 °C</b> (julho).','Amplitude = maior − menor ≈ 17 − 10,5 ≈ <b>7 °C</b>.','Cuidado: 17 °C é só a maior temperatura, e 28 °C é a soma das duas — nenhuma delas é a amplitude.']},
+{id:'g34',tema:T6,sec:'s8',fonte:SE,tipo:'mc',correta:2,
+ enun:climograma('manaus')+climograma('campos')+'<p>Compare as <b>linhas de temperatura</b> dos dois climogramas. Qual alternativa está correta?</p>',
+ opcoes:['Em Manaus a temperatura varia muito ao longo do ano, e em Campos do Jordão quase não varia.','As duas cidades têm temperaturas parecidas em todos os meses.','Em Manaus a linha fica quase reta, perto de 27 °C; em Campos do Jordão ela desce no meio do ano (inverno), chegando perto de 11 °C, principalmente por causa da altitude.','Campos do Jordão é mais quente que Manaus em todos os meses.'],
+ expl:['<b>Manaus</b>: linha quase reta, sempre perto de 27 °C → quente o ano todo, pouca variação (clima Equatorial, baixa latitude).','<b>Campos do Jordão</b>: a linha faz uma "barriga" para baixo no meio do ano, chegando perto de 11 °C em julho, e fica sempre bem abaixo da de Manaus.','A cidade fica acima de 1.600 m de altitude: quanto maior a altitude, menor a temperatura (clima Tropical de Altitude).']},
+{id:'g35',tema:T6,sec:'s8',fonte:SE,tipo:'ab',
+ enun:climograma('rio','uma cidade litorânea do Sudeste')+'<p>Observe o climograma. Descreva o comportamento da <b>temperatura</b> e da <b>chuva</b> ao longo do ano e identifique o <b>tipo climático</b>, justificando sua resposta.</p>',
+ pontos:['Descreveu a temperatura: alta o ano todo (entre cerca de 21 °C e 27 °C), um pouco menor no meio do ano (inverno).','Descreveu a chuva: chove em todos os meses, mais no verão, e menos no inverno, mas sem um período totalmente seco (o mínimo fica perto de 50 mm).','Identificou o clima Tropical Atlântico.','Justificou com a localização litorânea: influência da Massa Tropical Atlântica (mTa) e da maritimidade (amplitude térmica pequena).'],
+ modelo:'A temperatura é alta durante todo o ano, entre cerca de 21 °C e 27 °C, ficando um pouco mais baixa no meio do ano, no inverno; a variação é pequena. Chove em todos os meses, com mais chuva no verão (dezembro a abril) e menos no inverno, mas sem um período totalmente seco, já que o mês menos chuvoso ainda tem cerca de 50 mm. Esse é o clima Tropical Atlântico, típico do litoral brasileiro, influenciado pela Massa Tropical Atlântica, quente e úmida, e pela maritimidade, que mantém a amplitude térmica pequena. Trata-se do climograma do Rio de Janeiro.'},
+
+{tema:T4,sec:'s9',fonte:LD,tipo:'mc',correta:0,
+ enun:climograma('manaus','uma cidade brasileira')+'<p>Observe o climograma. Ele representa qual tipo climático?</p>',
+ opcoes:['Equatorial: temperaturas altas o ano todo, com pouca variação, e chuvas abundantes.','Subtropical: temperaturas abaixo de 15 °C no inverno.','Semiárido: chuvas escassas na maior parte do ano.','Tropical de Altitude: temperaturas entre 14 °C e 22 °C.'],
+ expl:['A <b>linha</b> fica sempre perto de 27 °C: quente o ano todo, pouca amplitude térmica.','As <b>barras</b> são altas: chuva abundante, passando de 250 mm em vários meses.','Essas são as marcas do clima <b>Equatorial</b> — esse é o climograma de <b>Manaus (AM)</b>.']},
+{tema:T4,sec:'s9',fonte:LD,tipo:'mc',correta:3,
+ enun:climograma('salgueiro','uma cidade brasileira')+'<p>O climograma acima apresenta temperaturas sempre acima de 20 °C e chuvas muito baixas na maior parte do ano. Ele representa o clima:</p>',
+ opcoes:['Equatorial.','Subtropical.','Tropical de Altitude.','Semiárido.'],
+ expl:['Temperaturas <b>acima de 20 °C</b> em todos os meses e <b>pouquíssima chuva</b> de maio a novembro → clima <b>Semiárido</b>.','É o climograma de <b>Salgueiro (PE)</b>, no Sertão nordestino. O total de chuva do Semiárido fica entre 400 e 1.000 mm por ano, o menor do Brasil.']},
+{tema:T4,sec:'s9',fonte:LD,tipo:'mc',correta:2,
+ enun:climograma('cuiaba','uma cidade brasileira')+'<p>Esse climograma mostra muita chuva no verão (dezembro a março) e quase nenhuma entre junho e agosto. A que tipo climático ele corresponde?</p>',
+ opcoes:['Subtropical, com chuvas bem distribuídas o ano todo.','Equatorial, sem estação seca.','Tropical Continental, com verão chuvoso e inverno seco.','Tropical Atlântico, com influência direta do mar.'],
+ expl:['A marca do <b>Tropical Continental</b> são as <b>duas estações bem definidas</b>: verão chuvoso (cerca de 200 mm/mês) e inverno seco (menos de 50 mm/mês).','É o climograma de <b>Cuiabá (MT)</b>, no Centro-Oeste.','No Subtropical a chuva é bem distribuída — aqui claramente não é.']},
+{id:'g36',tema:T4,sec:'s9',fonte:LD,tipo:'mc',correta:2,
+ enun:climograma('curitiba','uma cidade brasileira')+'<p>Observe o climograma e identifique o tipo climático.</p>',
+ opcoes:['Tropical Continental, com inverno seco.','Semiárido, com chuvas escassas.','Subtropical, com temperaturas mais baixas e chuva bem distribuída ao longo do ano.','Equatorial, quente o ano todo.'],
+ expl:['A <b>linha</b> vai de cerca de 21 °C no verão a cerca de 13 °C no inverno: temperaturas mais baixas que nos outros climas.','As <b>barras</b> são parecidas em todos os meses, sem estação seca: chuva <b>bem distribuída</b>.','Essas são as marcas do clima <b>Subtropical</b> — é o climograma de <b>Curitiba (PR)</b>.','No Tropical Continental haveria quase nenhuma chuva no inverno; no Equatorial a linha ficaria perto de 27 °C.']},
+
+{tema:T4,sec:'s9',fonte:LD,tipo:'mc',correta:1,
+ enun:'<p>Qual tipo climático apresenta as <b>menores temperaturas</b> do país, chuvas <b>bem distribuídas</b> ao longo do ano (sem estação seca) e forte influência da <b>Massa Polar Atlântica</b>?</p>',
+ opcoes:['Tropical Continental.','Subtropical.','Semiárido.','Equatorial.'],
+ expl:['O <b>Subtropical</b> predomina na Região Sul (e em pequenas áreas do sul de MS e SP).','Temperaturas médias entre 15 °C e 22 °C; chuva de 1.300 a 1.900 mm/ano, <b>sem mês seco</b>.','A <b>mPa</b> mantém as temperaturas baixas no inverno. Exemplo: Curitiba (PR).']},
+{tema:T4,sec:'s9',fonte:LD,tipo:'mc',correta:3,
+ enun:'<p>O município de <b>Campos do Jordão (SP)</b>, localizado acima de 1.600 m, tem temperaturas médias mensais entre 14 °C e 22 °C e chuvas concentradas no verão. Seu clima é o:</p>',
+ opcoes:['Equatorial, pela proximidade com a Linha do Equador.','Semiárido, pela escassez de chuvas.','Subtropical, pela influência da corrente fria das Falkland.','Tropical de Altitude, pois a elevada altitude reduz as temperaturas.'],
+ expl:['O <b>Tropical de Altitude</b> sofre grande influência da <b>altitude</b>: as áreas elevadas têm temperaturas mais baixas no verão e no inverno.','Ocorre nas serras do Sudeste, nos planaltos de Goiás-Minas, na Borborema e no Planalto Sul-Rio-Grandense.']},
+{tema:T4,sec:'s9',fonte:SE,tipo:'ab',
+ enun:'<p>O clima <b>Semiárido</b> predomina no Sertão nordestino. Descreva as principais <b>características</b> desse clima e explique <b>por que chove pouco</b> em algumas áreas da região.</p>',
+ pontos:['Disse que as temperaturas são altas (médias acima de 20 °C em todos os meses).','Disse que a precipitação é baixa (400 a 1.000 mm/ano, o menor índice do Brasil) e/ou irregular.','Explicou o papel do relevo: o Planalto da Borborema barra a umidade que vem do litoral/Zona da Mata.','Explicou que o ar chega seco ao Agreste e ao Sertão depois de perder a umidade em forma de chuva na porção oriental.','Mencionou outro fator (ex.: El Niño provoca secas no Sertão) ou a vegetação adaptada à seca (Caatinga).'],
+ modelo:'O clima Semiárido é o mais quente e seco do Brasil: as temperaturas médias ficam acima de 20 °C em todos os meses e a chuva é baixa e irregular, entre 400 e 1.000 mm por ano, o menor volume do país. Em algumas áreas, o relevo ajuda a explicar a falta de chuva: o Planalto da Borborema funciona como uma barreira para as massas de ar úmidas que vêm do Oceano Atlântico. Ao subir o planalto, essas massas perdem a umidade em forma de chuva na porção oriental (Zona da Mata) e chegam secas ao Agreste e ao Sertão. Em anos de El Niño, as secas no Sertão ficam ainda mais fortes.'},
+
+/* ---- Clima e ação humana ---- */
+{tema:T5,sec:'s4',fonte:LD,tipo:'mc',correta:2,
+ enun:SVG_ILHA+'<p>O gráfico mostra o fenômeno das <b>ilhas de calor</b>. O que explica as temperaturas mais altas no centro das cidades?</p>',
+ opcoes:['A maior quantidade de árvores no centro das cidades.','A proximidade do centro com o Polo Sul.','O asfalto e as edificações absorvem a radiação e refletem pouco (cerca de 5%), enquanto a vegetação reflete cerca de 30%; além disso, o solo é impermeabilizado.','A neve que cai nas áreas rurais.'],
+ expl:['Asfalto e prédios <b>absorvem</b> muito calor e refletem só cerca de <b>5%</b> da energia solar; a vegetação reflete cerca de <b>30%</b>.','A <b>impermeabilização do solo</b> e o <b>corte de árvores</b> pioram o problema.','Repare no gráfico: os <b>parques</b> são mais frescos que o centro — por isso áreas verdes ajudam a amenizar a ilha de calor.']},
+{tema:T5,sec:'s4',fonte:SE,tipo:'ab',
+ enun:'<p>Explique o que é a <b>inversão térmica</b>, em que época do ano ela é mais comum e por que se torna um problema nos grandes centros urbanos. Depois, indique como as <b>áreas verdes</b> podem ajudar.</p>',
+ pontos:['Explicou que na inversão térmica uma camada de ar frio fica abaixo de uma camada de ar quente e não consegue subir.','Disse que é mais comum no outono e no inverno.','Explicou que a poluição fica presa perto da superfície, piorando a qualidade do ar e causando/agravando doenças respiratórias.','Explicou que as áreas verdes filtram os gases poluentes e/ou reduzem as ilhas de calor (praças, parques, telhados verdes).'],
+ modelo:'A inversão térmica acontece quando uma camada de ar frio fica abaixo de uma camada de ar quente. Como o ar frio é mais pesado, ele não consegue subir, e a poluição fica presa perto da superfície. É mais comum no outono e no inverno, quando as temperaturas e as chuvas diminuem. Nas grandes cidades, onde há muitos carros e indústrias, isso piora a qualidade do ar e provoca ou agrava doenças respiratórias. As áreas verdes, como praças, parques e telhados verdes, ajudam porque filtram gases poluentes e também diminuem as ilhas de calor, deixando a cidade mais fresca.'},
+];
+{let n=0;Q.forEach(q=>{if(!q.id)q.id='g'+(++n)})}
+const TEMAS=[...new Set(Q.map(q=>q.tema))];
+const MINCH=60;
+
+/* ======================= ESTADO ======================= */
+const KEY='geo7_clima_v1';
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!S.r)S={nome:'',r:{},est:{},atual:0,sec:0,filtro:'Todos',view:'estudo'};
+S.est=S.est||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function rec(id){return S.r[id]||(S.r[id]={t:0,tent:0,status:'',resps:[]})}
+function erec(id){return S.est[id]||(S.est[id]={t:0,lido:false})}
+let view=S.view||'estudo',tStart=null,tick=null,tR=null;
+const cur=()=>Q[S.atual];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const strip=s=>String(s).replace(/<svg[\s\S]*?<\/svg>/g,'').replace(/<div class="leg">[\s\S]*?<\/div>/g,'').replace(/<[^>]+>/g,'');
+const hoje=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const fdata=s=>s?s.split('-').reverse().join('/'):'';
+const secNome=id=>{const i=SEC.findIndex(s=>s.id===id);return (i+1)+'. '+SEC[i].titulo};
+
+/* ======================= TEMPO ======================= */
+function fmt(s){s=Math.round(s||0);const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')}
+function curR(){return view==='estudo'?erec(SEC[S.sec].id):view==='quiz'?rec(cur().id):null}
+function flush(){if(tStart&&tR){const now=Date.now();tR.t+=(now-tStart)/1000;tStart=now;save()}}
+function stopTimer(){if(tStart)flush();tStart=null;tR=null;clearInterval(tick);tick=null;updTimer()}
+function startTimer(){stopTimer();const R=curR();if(!R)return;if(view==='quiz'&&R.status)return;tR=R;tStart=Date.now();let c=0;tick=setInterval(()=>{updTimer();if(++c%10===0)flush()},1000);updTimer()}
+function elapsed(R){return R.t+(tStart&&tR===R?(Date.now()-tStart)/1000:0)}
+function updTimer(){const el=document.getElementById('timer');if(!el)return;const R=curR();if(!R)return;el.textContent='⏱ '+fmt(elapsed(R));el.classList.toggle('stop',!tStart)}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopTimer();else startTimer()});
+window.addEventListener('beforeunload',()=>flush());
+
+/* ======================= CLASSIFICAÇÃO ======================= */
+const LET='abcde';
+function cor(q,r){if(!r.status)return'';if(q.tipo==='mc')return{ok1:'g',ok:'y',viu:'r'}[r.status];if(r.status==='env')return'e';return r.nota>=.75?'g':r.nota>=.4?'y':'r'}
+function rotulo(q,r){
+  if(!r.status)return r.t>0?'Em andamento':'Não feita';
+  if(q.tipo==='mc')return{ok1:'Acertou de primeira',ok:'Acertou após errar',viu:'Viu a explicação'}[r.status];
+  if(r.status==='env')return'Enviada (falta autoavaliação)';
+  return'Autoavaliação: '+Math.round(r.nota*100)+'%';
+}
+const CLS={g:'cg',y:'cy',r:'cr',e:'ce','':''};
+const app=document.getElementById('app');
+
+/* ======================= TELA: ESTUDO ======================= */
+function renderEstudo(){
+  const s=SEC[S.sec],R=erec(s.id),lidos=SEC.filter(x=>erec(x.id).lido).length;
+  let h=`<div class="card noprint">
+   <div class="namebox"><label for="nome"><b>Aluno:</b></label><input id="nome" placeholder="Nome do aluno" value="${esc(S.nome)}">
+   <span class="small" style="margin-left:auto">Estudo: ${lidos}/${SEC.length} partes concluídas</span></div>
+   <div class="bar"><i style="width:${lidos/SEC.length*100}%"></i></div>
+   <p class="small" style="margin:8px 0 6px">Leia cada parte com calma, depois clique em <b>"Entendi"</b>. Quando terminar, siga para os exercícios.</p>
+   <div class="secnav">${SEC.map((x,i)=>`<button class="secbtn ${erec(x.id).lido?'lido':''} ${i===S.sec?'cur':''}" data-s="${i}">${erec(x.id).lido?'✔ ':''}${i+1}. ${x.titulo}</button>`).join('')}</div>
+  </div>
+  <div class="card est">
+   <div class="meta"><span class="tag">Estudo orientado · parte ${S.sec+1} de ${SEC.length}</span><span class="timer" id="timer">⏱ 00:00</span></div>
+   <h2>${s.titulo}</h2>
+   ${s.html}
+   <div class="actions">${R.lido?`<span class="fb ok" style="margin:0">✔ Parte concluída</span>`:`<button class="btn ok" id="btnLido">✔ Entendi esta parte</button>`}</div>
+   <div class="nav"><button class="btn s" id="prev" ${S.sec===0?'disabled':''}>← Anterior</button>
+   ${S.sec===SEC.length-1?`<button class="btn p" id="irQ">Ir para os exercícios →</button>`:`<button class="btn s" id="next">Próxima →</button>`}</div>
+  </div>`;
+  app.innerHTML=h;
+  document.getElementById('nome').oninput=e=>{S.nome=e.target.value;save()};
+  app.querySelectorAll('.secbtn').forEach(b=>b.onclick=()=>goSec(+b.dataset.s));
+  document.getElementById('prev').onclick=()=>goSec(S.sec-1);
+  const nx=document.getElementById('next');if(nx)nx.onclick=()=>goSec(S.sec+1);
+  const iq=document.getElementById('irQ');if(iq)iq.onclick=()=>setView('quiz');
+  const bl=document.getElementById('btnLido');if(bl)bl.onclick=()=>{R.lido=true;R.quando=hoje();save();if(S.sec<SEC.length-1)goSec(S.sec+1);else renderEstudo()};
+  startTimer();
+}
+function goSec(i){if(i<0||i>=SEC.length)return;stopTimer();S.sec=i;save();renderEstudo();window.scrollTo({top:0,behavior:'smooth'})}
+
+/* ======================= TELA: EXERCÍCIOS ======================= */
+function filtradas(){return Q.map((q,i)=>i).filter(i=>S.filtro==='Todos'||(S.filtro==='Abertas'?Q[i].tipo==='ab':Q[i].tema===S.filtro))}
+function renderQuiz(){
+  const q=cur(),r=rec(q.id),n=S.atual+1;
+  const feitas=Q.filter(x=>{const s=rec(x.id).status;return s&&s!=='env'}).length;
+  const totalT=Q.reduce((a,x)=>a+elapsed(rec(x.id)),0);
+  const lidos=SEC.filter(x=>erec(x.id).lido).length;
+  const revLink=`<p class="small" style="margin-top:10px">📘 Rever no estudo: <a href="#" class="rev" data-sec="${q.sec}">${secNome(q.sec)}</a></p>`;
+  let h=`<div class="card noprint">
+   <div class="namebox"><label for="nome"><b>Aluno:</b></label><input id="nome" placeholder="Nome do aluno" value="${esc(S.nome)}">
+   <span class="small" style="margin-left:auto">${feitas}/${Q.length} concluídas · tempo ${fmt(totalT)}</span></div>
+   <div class="bar"><i style="width:${feitas/Q.length*100}%"></i></div>
+   ${lidos<SEC.length?`<p class="small" style="margin:6px 0 0">💡 Você concluiu ${lidos} de ${SEC.length} partes do estudo. O ideal é estudar tudo antes de fazer os exercícios.</p>`:''}
+  </div>
+  <div class="card noprint"><div class="chips">${['Todos',...TEMAS,'Abertas'].map(t=>`<button class="chip ${S.filtro===t?'on':''}" data-f="${t}">${t==='Abertas'?'✎ Só abertas':t}</button>`).join('')}</div>
+   <div class="grid">${filtradas().map(i=>{const qq=Q[i];return`<button class="num ${cor(qq,rec(qq.id))} ${qq.tipo==='ab'?'ab':''} ${i===S.atual?'cur':''}" data-i="${i}">${i+1}</button>`}).join('')}</div>
+   <div class="legend"><span class="lg">Acertou de 1ª / boa resposta</span><span class="ly">Acertou após errar / parcial</span><span class="lr">Viu explicação / revisar</span><span class="le">Enviada, falta autoavaliar</span><span class="lab">✎ = questão aberta</span></div>
+  </div>
+  <div class="card">
+   <div class="meta"><span class="tag">${q.tema}</span><span class="tipo">${q.tipo==='ab'?'✎ Aberta':'Múltipla escolha'}</span><span class="small">${q.fonte}</span><span class="timer" id="timer">⏱ 00:00</span></div>
+   <h2>Questão ${n} de ${Q.length}</h2>
+   <div class="enun">${q.enun}</div>`;
+  if(q.tipo==='mc'){
+    h+=`<div class="opts">${q.opcoes.map((o,k)=>`<label class="${r.status&&k===q.correta?'certa':''}"><input type="radio" name="op" value="${k}"><span><b>${LET[k]})</b> ${o}</span></label>`).join('')}</div>
+    <div id="fb"></div>
+    <div class="actions"><button class="btn p" id="btnResp">Responder</button>
+    <button class="btn s" id="btnExp" ${r.tent||r.status?'':'disabled'}>📖 Ver explicação</button></div>
+    ${!r.tent&&!r.status?'<div class="hint" id="hintExp">A explicação aparece quando você acertar, ou pode ser aberta depois da primeira tentativa.</div>':''}
+    <div id="exp" class="resol" ${r.status?'':'hidden'}><h3>Explicação</h3><ul>${q.expl.map(p=>`<li>${p}</li>`).join('')}</ul>${revLink}</div>`;
+  }else{
+    const env=!!r.status;
+    h+=`<textarea id="txt" ${env?'readonly':''} placeholder="Escreva sua resposta com suas palavras. Use frases completas e explique o porquê.">${esc(r.texto||'')}</textarea>
+    <div class="cont" id="cont"></div><div id="fb"></div>
+    ${env?'':`<div class="actions"><button class="btn p" id="btnEnv">Enviar resposta</button></div><div class="hint">Depois de enviar, você verá a resposta-modelo e vai conferir quais pontos importantes incluiu. A resposta enviada não pode mais ser alterada.</div>`}
+    ${env?`<div class="resol"><h3>Confira sua resposta</h3>
+      <p class="small">Marque <b>com sinceridade</b> os pontos que a sua resposta incluiu.</p>
+      <div class="check">${q.pontos.map((p,k)=>`<label><input type="checkbox" data-k="${k}" ${(r.marcados||[]).includes(k)?'checked':''}><span>${p}</span></label>`).join('')}</div>
+      <div class="actions"><button class="btn p" id="btnAval">Salvar autoavaliação</button></div>
+      <h3 style="margin-top:16px">Resposta-modelo</h3><div class="modelo">${q.modelo}</div>
+      <p class="small" style="margin-top:8px">💡 Copie no caderno os pontos que você não marcou.</p>${revLink}</div>`:''}`;
+  }
+  h+=`<div class="nav"><button class="btn s" id="prev" ${S.atual===0?'disabled':''}>← Anterior</button><button class="btn s" id="next" ${S.atual===Q.length-1?'disabled':''}>Próxima →</button></div></div>`;
+  app.innerHTML=h;
+  document.getElementById('nome').oninput=e=>{S.nome=e.target.value;save()};
+  app.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{S.filtro=b.dataset.f;const f=filtradas();if(!f.includes(S.atual))go(f[0]);else{save();renderQuiz()}});
+  app.querySelectorAll('.num').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+  app.querySelectorAll('[data-sec]').forEach(a=>a.onclick=e=>{e.preventDefault();S.sec=SEC.findIndex(s=>s.id===a.dataset.sec);setView('estudo')});
+  document.getElementById('prev').onclick=()=>go(S.atual-1);
+  document.getElementById('next').onclick=()=>go(S.atual+1);
+  if(q.tipo==='mc'){
+    if(r.status)fbStatus();
+    document.getElementById('btnResp').onclick=responderMC;
+    document.getElementById('btnExp').onclick=verExp;
+  }else{
+    const t=document.getElementById('txt'),c=document.getElementById('cont');
+    const upd=()=>{const n=t.value.trim().length;c.textContent=r.status?'':(n<MINCH?`${n} caracteres (mínimo ${MINCH})`:`${n} caracteres`)};
+    if(!r.status){t.value=r.rascunho||'';t.oninput=()=>{r.rascunho=t.value;save();upd()};document.getElementById('btnEnv').onclick=enviarAberta}
+    else{fbStatus();document.getElementById('btnAval').onclick=salvarAval}
+    upd();
+  }
+  startTimer();
+}
+function fb(msg,cls){document.getElementById('fb').innerHTML=`<div class="fb ${cls}">${msg}</div>`}
+function fbStatus(){
+  const q=cur(),r=rec(q.id);
+  if(q.tipo==='mc'){
+    if(r.status==='ok1')fb(`✔ Você acertou de primeira em ${fmt(r.t)}.`,'ok');
+    else if(r.status==='ok')fb(`✔ Você acertou após ${r.tent} tentativas, em ${fmt(r.t)}.`,'info');
+    else fb(`Você abriu a explicação (${r.tent} tentativa${r.tent>1?'s':''}, ${fmt(r.t)}). A alternativa correta está destacada em verde.`,'info');
+  }else{
+    if(r.status==='env')fb(`Resposta enviada em ${fmt(r.t)}. Agora confira os pontos abaixo e salve sua autoavaliação.`,'info');
+    else{const p=Math.round(r.nota*100);fb(`Autoavaliação salva: ${p}% dos pontos importantes (${(r.marcados||[]).length} de ${q.pontos.length}). Tempo: ${fmt(r.t)}.`,r.nota>=.75?'ok':r.nota>=.4?'info':'bad')}
+  }
+}
+function responderMC(){
+  const q=cur(),r=rec(q.id);
+  const c=app.querySelector('input[name=op]:checked');if(!c){fb('Escolha uma alternativa.','info');return}
+  const k=+c.value,ok=k===q.correta;
+  if(r.status){fb(ok?'✔ Correto! (o registro desta questão foi mantido)':'✘ Não é essa. A correta está destacada em verde.',ok?'ok':'bad');return}
+  flush();r.tent++;r.resps.push(LET[k]+')');
+  if(ok){r.status=r.tent===1?'ok1':'ok';r.quando=hoje();stopTimer();save();renderQuiz();document.getElementById('exp').scrollIntoView({behavior:'smooth',block:'nearest'})}
+  else{save();fb(`✘ Ainda não. Releia o enunciado e tente de novo, ou veja a explicação. (tentativa ${r.tent})`,'bad');
+    document.getElementById('btnExp').disabled=false;const hn=document.getElementById('hintExp');if(hn)hn.remove()}
+}
+function verExp(){const r=rec(cur().id);if(!r.status){flush();r.status='viu';r.quando=hoje();stopTimer();save();renderQuiz()}document.getElementById('exp').scrollIntoView({behavior:'smooth',block:'nearest'})}
+function enviarAberta(){
+  const r=rec(cur().id),t=document.getElementById('txt').value.trim();
+  if(t.length<MINCH){fb(`Sua resposta está muito curta. Escreva pelo menos ${MINCH} caracteres (umas duas frases), explicando com suas palavras.`,'info');return}
+  if(!confirm('Enviar a resposta? Depois de enviada ela não poderá ser alterada.'))return;
+  flush();r.texto=t;delete r.rascunho;r.tent=1;r.status='env';r.quando=hoje();stopTimer();save();renderQuiz();
+  app.querySelector('.resol').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function salvarAval(){
+  const q=cur(),r=rec(q.id);
+  r.marcados=[...app.querySelectorAll('.check input:checked')].map(i=>+i.dataset.k);
+  r.nota=r.marcados.length/q.pontos.length;r.status='ab';save();renderQuiz();
+  document.getElementById('fb').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function go(i){if(i<0||i>=Q.length)return;stopTimer();S.atual=i;save();renderQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+
+/* ======================= ACOMPANHAMENTO ======================= */
+const AVP={'':'—',boa:'Boa',parcial:'Parcial',refazer:'Refazer'};
+function calc(lista){
+  const mc=lista.filter(x=>x.q.tipo==='mc'&&x.r.status),ab=lista.filter(x=>x.q.tipo==='ab'&&x.r.status==='ab');
+  const ok1=mc.filter(x=>x.r.status==='ok1').length,feitas=lista.filter(x=>x.r.status&&x.r.status!=='env');
+  return{mc,ab,ok1,feitas,pmc:mc.length?Math.round(ok1/mc.length*100):null,pab:ab.length?Math.round(ab.reduce((a,x)=>a+x.r.nota,0)/ab.length*100):null,
+    tmc:mc.length?mc.reduce((a,x)=>a+x.r.t,0)/mc.length:null,tab:ab.length?ab.reduce((a,x)=>a+x.r.t,0)/ab.length:null,tot:lista.reduce((a,x)=>a+x.r.t,0)};
+}
+const pct=v=>v==null?'–':v+'%';
+const pc=v=>v==null?'':v>=75?'cg':v>=40?'cy':'cr';
+function revisar(rs){return rs.filter(x=>x.r.status&&(x.r.status==='viu'||x.r.status==='ok'||(x.q.tipo==='ab'&&x.r.status==='ab'&&x.r.nota<.5)||x.r.pai==='refazer'))}
+
+function renderRel(){
+  const rs=Q.map((q,i)=>({q,i,r:rec(q.id)}));
+  const G=calc(rs),pend=rs.filter(x=>x.r.status==='env'),rev=revisar(rs);
+  const tEst=SEC.reduce((a,s)=>a+erec(s.id).t,0),lidos=SEC.filter(s=>erec(s.id).lido).length;
+  const dias={};rs.forEach(x=>{if(x.r.quando&&x.r.status)(dias[x.r.quando]=dias[x.r.quando]||[]).push(x)});
+  const secRev=[...new Set(rev.map(x=>x.q.sec))];
+  let h=`<div class="card"><h2>Acompanhamento${S.nome?' – '+esc(S.nome):''}</h2><p class="small">Gerado em ${new Date().toLocaleString('pt-BR')}</p>
+  <div class="stats">
+   <div class="stat"><span class="small">Estudo orientado</span><b>${lidos}/${SEC.length}</b><span class="small">partes · ${fmt(tEst)} de leitura</span></div>
+   <div class="stat"><span class="small">Exercícios concluídos</span><b>${G.feitas.length}/${Q.length}</b></div>
+   <div class="stat"><span class="small">Múltipla escolha: acerto de 1ª</span><b class="${pc(G.pmc)}">${pct(G.pmc)}</b><span class="small">${G.ok1} de ${G.mc.length} feitas</span></div>
+   <div class="stat"><span class="small">Abertas: autoavaliação média</span><b class="${pc(G.pab)}">${pct(G.pab)}</b><span class="small">${G.ab.length} avaliadas${pend.length?` · ${pend.length} pendente(s)`:''}</span></div>
+   <div class="stat"><span class="small">Tempo nos exercícios</span><b>${fmt(G.tot)}</b></div>
+   <div class="stat"><span class="small">Tempo médio m. escolha / aberta</span><b style="font-size:18px">${G.tmc==null?'–':fmt(G.tmc)} / ${G.tab==null?'–':fmt(G.tab)}</b></div>
+  </div>
+
+  <h3>Estudo orientado</h3><div class="tw"><table><tr><th>Parte</th><th>Situação</th><th>Tempo de leitura</th><th>Concluída em</th></tr>
+  ${SEC.map((s,i)=>{const e=erec(s.id);return`<tr><td>${i+1}. ${s.titulo}</td><td class="${e.lido?'cg':''}">${e.lido?'✔ Concluída':(e.t>0?'Iniciada':'Não lida')}</td><td>${e.t>0?fmt(e.t):'–'}</td><td>${fdata(e.quando)||'–'}</td></tr>`}).join('')}</table></div>
+  <p class="small">Dica: tempo de leitura muito curto (menos de 1 minuto) em uma parte pode indicar que ela foi só "passada".</p>
+
+  <h3>Exercícios por assunto</h3><div class="tw"><table><tr><th>Assunto</th><th>Concluídas</th><th>M. escolha (acerto de 1ª)</th><th>Abertas (autoavaliação)</th><th>Tempo</th></tr>
+  ${TEMAS.map(t=>{const g=rs.filter(x=>x.q.tema===t),c=calc(g);return`<tr><td>${t}</td><td>${c.feitas.length}/${g.length}</td><td class="${pc(c.pmc)}">${pct(c.pmc)}</td><td class="${pc(c.pab)}">${pct(c.pab)}</td><td>${fmt(c.tot)}</td></tr>`}).join('')}</table></div>
+
+  <h3>Evolução por dia</h3>${Object.keys(dias).length?`<div class="tw"><table><tr><th>Dia</th><th>Questões concluídas</th><th>M. escolha (acerto de 1ª)</th><th>Abertas (autoavaliação)</th><th>Tempo</th></tr>
+  ${Object.keys(dias).sort().map(d=>{const c=calc(dias[d]);return`<tr><td>${fdata(d)}</td><td>${dias[d].length}</td><td class="${pc(c.pmc)}">${pct(c.pmc)}</td><td class="${pc(c.pab)}">${pct(c.pab)}</td><td>${fmt(c.tot)}</td></tr>`}).join('')}</table></div>`:'<p class="small">Ainda não há exercícios concluídos.</p>'}
+
+  <h3>Para revisar</h3>${rev.length?`<ul>${rev.map(x=>`<li><a href="#" data-go="${x.i}">Questão ${x.i+1}</a> – ${x.q.tema}: <span class="${CLS[cor(x.q,x.r)]}">${rotulo(x.q,x.r)}</span>${x.r.pai==='refazer'?' · <b class="cr">Responsável: refazer</b>':''}</li>`).join('')}</ul>
+   <p class="small">Partes do estudo para reler: ${secRev.map(id=>`<a href="#" class="rev" data-sec="${id}">${secNome(id)}</a>`).join(' · ')}</p>`:'<p class="small">Nada para revisar por enquanto. 👏</p>'}
+
+  <h3>Respostas abertas</h3><p class="small">Leia o que ele escreveu, veja os pontos que faltaram e registre a sua avaliação.</p>
+  ${rs.filter(x=>x.q.tipo==='ab').map(x=>{
+    if(!x.r.status)return`<div class="abcard"><b>Questão ${x.i+1}</b> – <span class="small">${x.q.tema} · ${x.r.rascunho?'rascunho iniciado, não enviada':'não respondida'}</span></div>`;
+    const falt=x.r.status==='ab'?x.q.pontos.filter((p,k)=>!(x.r.marcados||[]).includes(k)):[];
+    return`<div class="abcard"><b>Questão ${x.i+1}</b> – <span class="small">${x.q.tema} · ${fdata(x.r.quando)} · tempo ${fmt(x.r.t)}</span>
+     <div class="small" style="margin-top:4px">${esc(strip(x.q.enun).replace(/\s+/g,' ').trim())}</div>
+     <div class="txt">${esc(x.r.texto)}</div>
+     <div><span class="${CLS[cor(x.q,x.r)]}">${rotulo(x.q,x.r)}</span></div>
+     ${falt.length?`<div class="falta">Pontos que ele não marcou:<ul>${falt.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+     <div class="noprint" style="margin-top:6px"><label class="small">Avaliação do responsável: <select data-pai="${x.q.id}">${Object.keys(AVP).map(k=>`<option value="${k}" ${(x.r.pai||'')===k?'selected':''}>${AVP[k]}</option>`).join('')}</select></label></div>
+     ${x.r.pai?`<div class="small only-print">Avaliação do responsável: ${AVP[x.r.pai]}</div>`:''}</div>`}).join('')}
+
+  <h3>Questão por questão</h3><div class="tw"><table><tr><th>Nº</th><th>Assunto</th><th>Tipo</th><th>Situação</th><th>Tentativas</th><th>Tempo</th><th>Dia</th><th>Respostas</th></tr>
+  ${rs.map(x=>`<tr><td>${x.i+1}</td><td>${x.q.tema}</td><td>${x.q.tipo==='ab'?'Aberta':'M. escolha'}</td><td class="${CLS[cor(x.q,x.r)]}">${rotulo(x.q,x.r)}</td><td>${x.r.tent||'–'}</td><td>${x.r.t>0?fmt(x.r.t):'–'}</td><td>${fdata(x.r.quando)||'–'}</td><td>${x.q.tipo==='mc'?((x.r.resps||[]).join(' · ')||'–'):'–'}</td></tr>`).join('')}</table></div>
+
+  <div class="actions noprint"><button class="btn w" id="wpp">📲 Enviar resumo pelo WhatsApp</button><button class="btn p" id="csv">⬇ Baixar planilha (CSV)</button><button class="btn s" id="imp">🖨 Imprimir</button><button class="btn d" id="zera">Apagar todo o progresso</button></div>
+  </div>`;
+  app.innerHTML=h;
+  app.querySelectorAll('[data-go]').forEach(a=>a.onclick=e=>{e.preventDefault();S.filtro='Todos';S.atual=+a.dataset.go;setView('quiz')});
+  app.querySelectorAll('[data-sec]').forEach(a=>a.onclick=e=>{e.preventDefault();S.sec=SEC.findIndex(s=>s.id===a.dataset.sec);setView('estudo')});
+  app.querySelectorAll('[data-pai]').forEach(s=>s.onchange=()=>{S.r[s.dataset.pai].pai=s.value;save();renderRel()});
+  document.getElementById('imp').onclick=()=>window.print();
+  document.getElementById('wpp').onclick=()=>{
+    let t=`🌦️ Geografia 7º ano – O clima do Brasil${S.nome?'\nAluno: '+S.nome:''}\nData: ${new Date().toLocaleDateString('pt-BR')}\n\nEstudo: ${lidos}/${SEC.length} partes (${fmt(tEst)} de leitura)\nExercícios: ${G.feitas.length}/${Q.length}\nMúltipla escolha (acerto de 1ª): ${pct(G.pmc)}\nAbertas (autoavaliação): ${pct(G.pab)}\nTempo nos exercícios: ${fmt(G.tot)}\n\nPor assunto:\n`;
+    TEMAS.forEach(tm=>{const g=rs.filter(x=>x.q.tema===tm),c=calc(g);t+=`• ${tm}: ${c.feitas.length}/${g.length} · m.e. ${pct(c.pmc)} · abertas ${pct(c.pab)}\n`});
+    if(rev.length)t+=`\nPara revisar: questões ${rev.map(x=>x.i+1).join(', ')}`;
+    window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+  };
+  document.getElementById('csv').onclick=()=>{
+    const L=[['Questao','Assunto','Tipo','Situacao','Tentativas','Tempo (s)','Tempo (mm:ss)','Dia','Respostas m.e.','Nota autoavaliacao (%)','Avaliacao responsavel','Resposta aberta']];
+    rs.forEach(x=>L.push([x.i+1,x.q.tema,x.q.tipo==='ab'?'Aberta':'Multipla escolha',rotulo(x.q,x.r),x.r.tent||0,Math.round(x.r.t),fmt(x.r.t),fdata(x.r.quando),(x.r.resps||[]).join(' | '),x.r.status==='ab'?Math.round(x.r.nota*100):'',AVP[x.r.pai||''].replace('—',''),x.r.texto||'']));
+    L.push([]);L.push(['Estudo orientado','Parte','Situacao','Tempo (mm:ss)','Concluida em']);
+    SEC.forEach((s,i)=>{const e=erec(s.id);L.push(['',(i+1)+'. '+s.titulo,e.lido?'Concluida':(e.t>0?'Iniciada':'Nao lida'),fmt(e.t),fdata(e.quando)])});
+    const csv='﻿'+L.map(l=>l.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='acompanhamento_geografia_'+(S.nome||'aluno').replace(/\s+/g,'_')+'.csv';a.click();
+  };
+  document.getElementById('zera').onclick=()=>{if(confirm('Apagar todo o progresso (estudo e exercícios)? Isso não pode ser desfeito.')){const n=S.nome;S={nome:n,r:{},est:{},atual:0,sec:0,filtro:'Todos',view:'rel'};save();renderRel()}};
+}
+
+/* ======================= NAVEGAÇÃO ======================= */
+function setView(v){
+  stopTimer();view=v;S.view=v;save();
+  [['tabE','estudo'],['tabQ','quiz'],['tabR','rel']].forEach(([id,k])=>document.getElementById(id).classList.toggle('on',k===v));
+  if(v==='estudo')renderEstudo();else if(v==='quiz')renderQuiz();else renderRel();
+  window.scrollTo(0,0);
+}
+document.getElementById('tabE').onclick=()=>setView('estudo');
+document.getElementById('tabQ').onclick=()=>setView('quiz');
+document.getElementById('tabR').onclick=()=>setView('rel');
+if(S.atual>=Q.length)S.atual=0;if(S.sec>=SEC.length)S.sec=0;
+setView(view);
+</script>
+</body>
+</html>
