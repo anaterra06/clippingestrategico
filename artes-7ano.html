@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Artes 7º ano – Música e Arte</title>
+<style>
+:root{
+  --bg:#f3eee3;--card:#fffdf8;--ink:#2f2a26;--muted:#6f665d;--line:#e4dccd;
+  --pri:#7b3fa0;--pri2:#f1e7f7;--acc:#8a4b2a;
+  --ok:#1d7f4c;--okbg:#e2f3e9;--warn:#9a6a00;--warnbg:#fff2cf;--bad:#c23b3b;--badbg:#fbe7e5;
+  --env:#4a5fa8;--envbg:#e7ebf8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--pri);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:5;box-shadow:0 2px 6px #0002}
+.hwrap{max-width:980px;margin:auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+header h1{font:700 19px/1.2 Georgia,"Times New Roman",serif;margin:0}
+header nav button{background:#ffffff22;color:#fff;border:1px solid #ffffff55;border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer}
+header nav button.on{background:#fff;color:var(--pri);font-weight:600}
+main{max-width:980px;margin:auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin:6px 0 2px}
+.bar i{display:block;height:100%;background:var(--ok);width:0}
+.small{font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+.num{width:40px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:13px;color:var(--ink);position:relative}
+.num.ab::after{content:"✎";position:absolute;top:-6px;right:-4px;font-size:10px;background:var(--card);border-radius:50%;line-height:1;padding:1px}
+.num.cur{outline:3px solid var(--pri);outline-offset:1px}
+.num.g{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.num.y{background:var(--warnbg);border-color:var(--warn);color:var(--warn)}
+.num.r{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.num.e{background:var(--envbg);border-color:var(--env);color:var(--env)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px;border:1px solid var(--line)}
+.legend .lg::before{background:var(--okbg);border-color:var(--ok)}
+.legend .ly::before{background:var(--warnbg);border-color:var(--warn)}
+.legend .lr::before{background:var(--badbg);border-color:var(--bad)}
+.legend .le::before{background:var(--envbg);border-color:var(--env)}
+.legend .lab::before{display:none}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.tag{font-size:12px;padding:2px 10px;border-radius:12px;background:var(--pri2);color:var(--pri);font-weight:600}
+.tipo{font-size:12px;padding:2px 10px;border-radius:12px;background:#f3e7de;color:var(--acc);font-weight:600}
+.fonte{font-size:12px;color:var(--muted)}
+.timer{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:700;background:#efe9dd;border-radius:8px;padding:3px 10px}
+.timer.stop{color:var(--muted)}
+h2{font:700 20px/1.3 Georgia,"Times New Roman",serif;margin:6px 0 10px}
+h3{font:700 17px/1.3 Georgia,"Times New Roman",serif}
+.enun p{margin:0 0 10px}
+.enun blockquote{margin:8px 0 12px;padding:10px 14px;background:#f7f2e8;border-left:4px solid var(--acc);border-radius:0 8px 8px 0}
+.enun blockquote cite{display:block;font-size:12px;color:var(--muted);margin-top:6px;font-style:normal}
+.enun figure{margin:8px 0 12px;text-align:center}
+.enun figure img{max-width:100%;border-radius:8px}
+.enun figcaption{font-size:12px;color:var(--muted);margin-top:4px}
+.enun svg{display:block;max-width:100%;height:auto;margin:6px auto}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opts label{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;background:#fff}
+.opts label:has(input:checked){border-color:var(--pri);background:var(--pri2)}
+.opts label.certa{border-color:var(--ok);background:var(--okbg)}
+.opts input{margin-top:5px}
+textarea{width:100%;min-height:150px;font:16px/1.5 inherit;font-family:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:10px;resize:vertical;background:#fff;color:var(--ink)}
+textarea:focus{border-color:var(--pri);outline:none}
+textarea[readonly]{background:#f7f4ee}
+.cont{font-size:12px;color:var(--muted);text-align:right}
+.hint{font-size:13px;color:var(--muted);margin-top:6px}
+.btn{border:none;border-radius:10px;padding:10px 16px;font-size:15px;font-weight:600;cursor:pointer}
+.btn.p{background:var(--pri);color:#fff}
+.btn.s{background:#ebe4d6;color:var(--ink)}
+.btn.d{background:var(--badbg);color:var(--bad)}
+.btn.w{background:#25a35a;color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.fb{margin-top:12px;padding:10px 14px;border-radius:10px;font-weight:600}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.fb.info{background:var(--warnbg);color:var(--warn)}
+.resol{margin-top:14px;border-left:4px solid var(--pri);background:#f6f9f7;border-radius:0 10px 10px 0;padding:10px 16px}
+.resol h3{margin:4px 0 6px;color:var(--pri)}
+.resol ul,.resol ol{margin:0;padding-left:22px}
+.resol li{margin:4px 0}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-bottom:1px dashed var(--line);cursor:pointer}
+.check input{margin-top:5px;transform:scale(1.15)}
+.modelo{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:6px}
+.nav{display:flex;justify-content:space-between;margin-top:16px;gap:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:#f8f4ec;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{display:block;font-size:22px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f1ebdf;font-size:13px}
+.tw{overflow-x:auto}
+.cg{color:var(--ok);font-weight:600}.cy{color:var(--warn);font-weight:600}.cr{color:var(--bad);font-weight:600}.ce{color:var(--env);font-weight:600}
+.namebox{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.namebox input{font-size:15px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.abcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0;background:#fff}
+.abcard .txt{white-space:pre-wrap;background:#f7f4ee;border-radius:8px;padding:8px 10px;margin:6px 0}
+.abcard select{font-size:14px;padding:5px 8px;border-radius:8px;border:1px solid var(--line)}
+.falta{color:var(--bad);font-size:13px}
+.only-print{display:none}
+@media print{.only-print{display:block}header,.noprint{display:none!important}body{background:#fff}.card{border:none;padding:0}}
+</style>
+</head>
+<body>
+<header><div class="hwrap">
+  <h1>🎼 Artes 7º ano · Música e Arte</h1>
+  <nav><button id="tabQ" class="on">Questões</button> <button id="tabR">Acompanhamento</button></nav>
+</div></header>
+<main id="app"></main>
+
+<script>
+/* ======================= FIGURAS ======================= */
+const SVG_VIT=`<svg viewBox="-10 -12 420 400" width="340" role="img" aria-label="Esquema do Homem Vitruviano: figura humana inscrita em um círculo e em um quadrado">
+<rect x="50" y="40" width="300" height="300" fill="none" stroke="#7a4b22" stroke-width="2.5"/>
+<circle cx="200" cy="168" r="172" fill="none" stroke="#b5462f" stroke-width="2.5"/>
+<g stroke="#3b2a1a" stroke-width="5" stroke-linecap="round" fill="none">
+<circle cx="200" cy="68" r="24" stroke-width="3"/>
+<line x1="200" y1="92" x2="200" y2="215"/>
+<line x1="52" y1="125" x2="348" y2="125"/>
+<line x1="200" y1="112" x2="56" y2="75" stroke-opacity=".45"/><line x1="200" y1="112" x2="344" y2="75" stroke-opacity=".45"/>
+<line x1="200" y1="215" x2="190" y2="338"/><line x1="200" y1="215" x2="210" y2="338"/>
+<line x1="200" y1="215" x2="106" y2="309" stroke-opacity=".45"/><line x1="200" y1="215" x2="294" y2="309" stroke-opacity=".45"/>
+</g>
+<circle cx="200" cy="168" r="5" fill="#b5462f"/>
+<g font-size="13" fill="currentColor"><text x="210" y="172">umbigo = centro do círculo</text>
+<text x="58" y="332" fill="#7a4b22">quadrado</text><text x="300" y="30" fill="#b5462f">círculo</text>
+<text x="200" y="372" text-anchor="middle">altura = envergadura (braços abertos)</text></g>
+<line x1="52" y1="352" x2="348" y2="352" stroke="#888" stroke-dasharray="4 3"/></svg>`;
+const SVG_TECLADO=(()=>{const nomes=['Dó','Ré','Mi','Fá','Sol','Lá','Si','Dó'];let s=`<svg viewBox="0 0 400 190" width="400" role="img" aria-label="Teclado com a escala de Dó maior">`;
+ nomes.forEach((n,i)=>{const x=10+i*47.5,ton=(i===0||i===7);s+=`<rect x="${x}" y="10" width="47.5" height="140" fill="${ton?'#ffe2b8':'#fff'}" stroke="#333"/><text x="${x+23.75}" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#222">${n}</text>`});
+ [0,1,3,4,5].forEach(i=>{const x=10+(i+1)*47.5-14;s+=`<rect x="${x}" y="10" width="28" height="85" fill="#222"/>`});
+ s+=`<text x="33.75" y="175" text-anchor="middle" font-size="12" fill="currentColor">tônica</text><text x="223.75" y="175" text-anchor="middle" font-size="12" fill="currentColor">Sol</text><text x="366.25" y="175" text-anchor="middle" font-size="12" fill="currentColor">tônica</text></svg>`;return s})();
+
+/* ======================= QUESTÕES ======================= */
+const T1='Renascimento e Barroco',T2='Música barroca e Bach',T3='Rococó e Clássico',T4='Período Romântico',T5='Sistema tonal',T6='Homem Vitruviano';
+const C10='Cap. 10',C11='Cap. 11',C13='Cap. 13';
+
+const Q=[
+/* ===================== CAP 10 – RENASCIMENTO E BARROCO ===================== */
+{tema:T1,fonte:C10,tipo:'mc',correta:2,
+ enun:'<p>O <b>Renascimento</b> foi um movimento cultural e artístico que começou na Itália, entre os séculos XIV e XVI. Qual alternativa apresenta suas principais características?</p>',
+ opcoes:['Arte voltada apenas para Deus (teocentrismo), sem interesse pelo ser humano e pela natureza.','Rejeição total da cultura da Grécia e da Roma antigas.','Valorização do ser humano e da razão (antropocentrismo e humanismo), retomada da cultura greco-romana e interesse pela ciência.','Arte dramática, cheia de exageros e contrastes, criada para a Contrarreforma.'],
+ expl:['O Renascimento "fez renascer" a cultura da <b>Grécia e da Roma antigas</b>.','Colocou o <b>ser humano no centro</b> (antropocentrismo), valorizou a razão, a observação da natureza e a ciência (humanismo).','A alternativa (a) descreve a visão da Idade Média, e a (d) descreve o <b>Barroco</b>.']},
+{tema:T1,fonte:C10,tipo:'mc',correta:0,
+ enun:'<p>Quais destes artistas são considerados grandes nomes do <b>Renascimento</b> italiano?</p>',
+ opcoes:['Leonardo da Vinci, Michelangelo e Rafael.','Aleijadinho, Mestre Ataíde e Caravaggio.','Mozart, Haydn e Beethoven.','Chopin, Liszt e Wagner.'],
+ expl:['<b>Leonardo da Vinci</b> (Mona Lisa, A Última Ceia, Homem Vitruviano), <b>Michelangelo</b> (teto da Capela Sistina, escultura de Davi) e <b>Rafael</b> (A Escola de Atenas) são os grandes mestres do Renascimento.','Caravaggio e Aleijadinho são do <b>Barroco</b>; Mozart e Haydn são do período <b>Clássico</b>; Chopin, Liszt e Wagner, do <b>Romântico</b>.']},
+{tema:T1,fonte:C10,tipo:'mc',correta:3,
+ enun:'<p>Como era a <b>música no Renascimento</b>?</p>',
+ opcoes:['Feita só para orquestras sinfônicas gigantes, sem cantores.','Formada por uma única melodia cantada por todos ao mesmo tempo (monofonia), como o canto gregoriano.','Inteiramente eletrônica.','Principalmente vocal e polifônica, com várias vozes independentes cantando ao mesmo tempo, em obras sacras (missas, motetos) e profanas (madrigais).'],
+ expl:['A música renascentista era sobretudo <b>vocal</b> e <b>polifônica</b>: várias melodias (vozes) diferentes soando ao mesmo tempo, de forma equilibrada.','Havia música <b>sacra</b> (para a Igreja: missas e motetos) e <b>profana</b> (não religiosa, como os madrigais).','Um compositor importante foi <b>Palestrina</b>. O canto gregoriano, com uma só melodia, é típico da Idade Média.']},
+{tema:T1,fonte:C10,tipo:'mc',correta:1,
+ enun:'<p>O <b>Barroco</b> foi o estilo artístico predominante do século XVII até meados do século XVIII. Quais são suas principais características?</p>',
+ opcoes:['Equilíbrio, simplicidade e linhas retas, sem nenhum enfeite.','Dramaticidade, emoção, movimento, forte contraste entre luz e sombra e muitos ornamentos; arte muito usada pela Igreja Católica na Contrarreforma.','Pinturas sem figuras humanas, apenas formas geométricas.','Arte criada para criticar a Igreja e os reis.'],
+ expl:['O Barroco é a arte do <b>exagero</b>, do <b>movimento</b> e do <b>drama</b>: muitos detalhes, curvas, dourados e contrastes fortes de <b>claro-escuro</b>.','A Igreja Católica usou essa arte grandiosa para emocionar os fiéis durante a <b>Contrarreforma</b>.','Exemplos: Caravaggio e Bernini, na Europa; Aleijadinho, no Brasil.']},
+{tema:T1,fonte:C10,tipo:'ab',
+ enun:'<p>Compare o <b>Renascimento</b> e o <b>Barroco</b>: o que caracteriza cada um desses períodos artísticos? Cite pelo menos uma característica de cada e um artista de cada período.</p>',
+ pontos:['Situou os períodos no tempo (Renascimento: séculos XIV–XVI; Barroco: século XVII até meados do XVIII).','Citou características do Renascimento: equilíbrio, harmonia, proporção, razão, humanismo/antropocentrismo, retomada da cultura greco-romana.','Citou características do Barroco: emoção, drama, movimento, exagero, contraste de luz e sombra, ornamentação, ligação com a Contrarreforma.','Citou um artista renascentista (ex.: Leonardo da Vinci, Michelangelo, Rafael) e um barroco (ex.: Caravaggio, Bernini, Bach, Aleijadinho).'],
+ modelo:'O Renascimento aconteceu entre os séculos XIV e XVI, começando na Itália. Ele valorizava o ser humano e a razão (humanismo e antropocentrismo), retomava a cultura da Grécia e da Roma antigas e buscava equilíbrio, harmonia e proporção nas obras. Leonardo da Vinci e Michelangelo são exemplos de artistas renascentistas. O Barroco veio depois, do século XVII até meados do século XVIII. Era uma arte mais dramática e emocional, com muito movimento, exageros, ornamentos e fortes contrastes de luz e sombra, muito usada pela Igreja Católica na Contrarreforma. Caravaggio, na pintura, Bach, na música, e Aleijadinho, no Brasil, são artistas do Barroco.'},
+{tema:T1,fonte:C10,tipo:'mc',correta:2,
+ enun:'<p>O estilo Barroco também chegou ao Brasil. Onde e com quem ele mais se destacou?</p>',
+ opcoes:['Em São Paulo, no século XX, com Tarsila do Amaral.','No Rio Grande do Sul, no século XVI, com os jesuítas espanhóis.','Em Minas Gerais, no século XVIII, nas igrejas das cidades do ouro, com artistas como Aleijadinho e Mestre Ataíde.','No Amazonas, com os pintores holandeses de Nassau.'],
+ expl:['Com a riqueza do ouro, as cidades mineiras (Ouro Preto, Mariana, Congonhas, São João del-Rei) construíram igrejas ricamente decoradas.','<b>Aleijadinho</b> (escultor e arquiteto) e <b>Mestre Ataíde</b> (pintor) são os grandes nomes do <b>barroco mineiro</b>.','Tarsila do Amaral é do Modernismo (século XX).']},
+
+/* ===================== CAP 10 – MÚSICA BARROCA E BACH ===================== */
+{tema:T2,fonte:C10,tipo:'mc',correta:0,
+ enun:'<p>Uma das marcas da música barroca é o <b>baixo contínuo</b>. O que é isso?</p>',
+ opcoes:['Uma linha de notas graves tocada sem parar (por exemplo, por cravo ou órgão e violoncelo), que sustenta a harmonia da música.','Um instrumento de sopro inventado no século XX.','Uma pausa longa no final da música.','Um tipo de dança da corte francesa.'],
+ expl:['O <b>baixo contínuo</b> é um acompanhamento que aparece "continuamente" na música barroca.','Geralmente era tocado por um instrumento grave (como o violoncelo) junto com um instrumento de teclado (cravo ou órgão), que completava os acordes.','Ele dá a base harmônica sobre a qual as melodias se desenvolvem.']},
+{tema:T2,fonte:C10,tipo:'mc',correta:3,
+ enun:'<p>Qual gênero musical, que une música, canto, teatro e cenário, surgiu na Itália no início do Barroco (por volta de 1600)?</p>',
+ opcoes:['O samba.','A sinfonia.','O rock.','A ópera.'],
+ expl:['A <b>ópera</b> nasceu na Itália por volta de 1600: uma história contada por meio de música e canto, com atores, figurinos e cenários.','Uma das primeiras grandes óperas foi <b>Orfeu</b> (1607), de Claudio Monteverdi.','A sinfonia se desenvolveu mais tarde, no período Clássico.']},
+{tema:T2,fonte:C10,tipo:'mc',correta:1,
+ enun:'<p><b>"As Quatro Estações"</b>, conjunto de concertos para violino e orquestra que representa a primavera, o verão, o outono e o inverno, é uma das obras mais famosas do Barroco. Quem a compôs?</p>',
+ opcoes:['Ludwig van Beethoven.','Antonio Vivaldi.','Frédéric Chopin.','Wolfgang Amadeus Mozart.'],
+ expl:['<b>Antonio Vivaldi</b> (1678–1741) foi um compositor e violinista italiano do Barroco.','Em "As Quatro Estações", a música imita sons da natureza: pássaros, tempestades, o frio do inverno...','Beethoven, Chopin e Mozart são de períodos posteriores (Clássico e Romântico).']},
+{tema:T2,fonte:C10,tipo:'mc',correta:2,
+ enun:'<p>Sobre <b>Johann Sebastian Bach</b>, é correto afirmar:</p>',
+ opcoes:['Foi um pintor italiano do Renascimento.','Foi um compositor brasileiro do período Romântico.','Foi um compositor e organista alemão (1685–1750), considerado um dos maiores músicos do Barroco; o ano de sua morte é usado para marcar o fim desse período na música.','Foi o inventor do piano elétrico.'],
+ expl:['Bach nasceu em 1685, em Eisenach, na <b>Alemanha</b>, numa família de muitos músicos, e morreu em 1750, em Leipzig.','Foi <b>organista</b>, professor e compositor de música sacra e instrumental.','Muitos historiadores usam <b>1750</b>, ano da morte de Bach, como marco do fim do Barroco musical.']},
+{tema:T2,fonte:C10,tipo:'mc',correta:0,
+ enun:'<p>Bach escreveu <b>"O Cravo Bem Temperado"</b>, uma coleção de prelúdios e fugas. Por que essa obra foi um avanço importante?</p>',
+ opcoes:['Porque tem peças em todas as 24 tonalidades maiores e menores, mostrando que, com a afinação temperada, um mesmo instrumento pode tocar em qualquer tonalidade sem ser reafinado.','Porque foi a primeira música escrita para guitarra elétrica.','Porque não usava nenhuma nota musical, só silêncio.','Porque era tocada apenas por cantores, sem instrumentos.'],
+ expl:['Antes, alguns sistemas de afinação faziam certas tonalidades soarem bem e outras soarem desafinadas.','Com o <b>temperamento</b> (afinação "temperada"), as notas ficam ajustadas de modo que é possível tocar em <b>todas as tonalidades</b>.','Bach compôs dois volumes, cada um com 24 prelúdios e fugas — um para cada tonalidade maior e menor — e mostrou na prática as vantagens desse sistema.']},
+{tema:T2,fonte:C10,tipo:'mc',correta:3,
+ enun:'<p>Bach é considerado um mestre do <b>contraponto</b> e da <b>fuga</b>. O que isso significa?</p>',
+ opcoes:['Ele só compunha músicas com uma única melodia, sem acompanhamento.','Ele fugia das apresentações para não tocar em público.','Ele criava músicas sempre muito curtas, de poucos segundos.','Ele combinava várias melodias independentes ao mesmo tempo; na fuga, um tema é apresentado e depois imitado por outras vozes, que se entrelaçam.'],
+ expl:['<b>Contraponto</b> é a arte de combinar várias melodias independentes que soam juntas e combinam entre si ("ponto contra ponto", nota contra nota).','Na <b>fuga</b>, uma voz apresenta um tema e as outras vozes "correm atrás", repetindo esse tema em momentos diferentes — como se uma "fugisse" da outra.','Bach levou essas técnicas ao seu ponto mais alto.']},
+{tema:T2,fonte:C10,tipo:'ab',
+ enun:'<p>Johann Sebastian Bach é considerado um dos compositores mais importantes da história. Explique quais foram os principais <b>avanços e contribuições de Bach</b> para a música.</p>',
+ pontos:['Citou o domínio do contraponto e da fuga (combinação de várias melodias independentes).','Citou "O Cravo Bem Temperado" e a demonstração de que era possível tocar em todas as tonalidades com a afinação temperada.','Mencionou que reuniu/levou ao auge as técnicas do Barroco, em música sacra e instrumental (ex.: Paixões, cantatas, Concertos de Brandenburgo).','Mencionou sua influência sobre compositores posteriores (Mozart, Beethoven e outros estudaram sua obra) e/ou sobre o sistema tonal.'],
+ modelo:'Bach foi um grande mestre do contraponto e da fuga: ele combinava várias melodias independentes que soavam juntas de forma perfeita. Em "O Cravo Bem Temperado", compôs prelúdios e fugas em todas as 24 tonalidades maiores e menores, mostrando que, com a afinação temperada, um mesmo instrumento podia tocar em qualquer tonalidade. Ele também reuniu e levou ao ponto mais alto as técnicas da música barroca, compondo obras sacras, como as Paixões e as cantatas, e instrumentais, como os Concertos de Brandenburgo. Sua obra ajudou a consolidar o sistema tonal e foi estudada por compositores como Mozart e Beethoven, influenciando a música até hoje.'},
+
+/* ===================== CAP 11 – ROCOCÓ E CLÁSSICO ===================== */
+{tema:T3,fonte:C11,tipo:'mc',correta:1,
+ enun:'<p>O <b>Rococó</b> surgiu na França no século XVIII, como uma transição entre o Barroco e o Clássico. Quais são suas características?</p>',
+ opcoes:['Arte pesada e sombria, com temas de guerra e tragédia.','Arte leve, delicada e alegre, com muitos ornamentos, cores claras e temas ligados à vida e aos divertimentos da aristocracia.','Arte sem enfeites, inspirada apenas em formas geométricas.','Arte de protesto feita pelos operários das fábricas.'],
+ expl:['O Rococó é mais <b>leve</b>, <b>delicado</b> e <b>decorativo</b> que o Barroco.','Usava cores claras (tons pastel), curvas, enfeites em forma de conchas e retratava festas, jardins e a vida elegante da nobreza.','O nome vem de <i>rocaille</i>, palavra francesa ligada a conchas e pedrinhas usadas em decorações.']},
+{tema:T3,fonte:C11,tipo:'mc',correta:2,
+ enun:'<p>Como era a <b>música no período Rococó</b>, também chamada de <b>estilo galante</b>?</p>',
+ opcoes:['Muito complexa, com fugas longas para órgão de igreja.','Feita para grandes estádios, com milhares de pessoas.','Leve, elegante e agradável, com melodias simples e ornamentadas, feita para entreter a nobreza nos salões; destacam-se compositores como Couperin e Rameau.','Música de protesto contra a monarquia.'],
+ expl:['O <b>estilo galante</b> deixou de lado a complexidade do contraponto barroco.','Preferia <b>melodias simples, graciosas e enfeitadas</b> (ornamentos), com acompanhamento leve.','Era música de <b>entretenimento</b> para os salões e festas da aristocracia. Os franceses <b>François Couperin</b> e <b>Jean-Philippe Rameau</b> compuseram muito para o cravo.']},
+{tema:T3,fonte:C11,tipo:'ab',
+ enun:'<p>Explique a principal diferença entre a música do <b>Barroco</b> e a música do <b>Rococó</b>.</p>',
+ pontos:['Descreveu a música barroca como mais complexa e grandiosa, com contraponto/fuga e várias melodias entrelaçadas (e baixo contínuo).','Descreveu a música rococó (estilo galante) como mais leve, simples, elegante e ornamentada.','Mencionou a função da música rococó: entretenimento da nobreza nos salões.','Citou um compositor de cada estilo (ex.: Bach/Vivaldi × Couperin/Rameau) ou explicou que o Rococó foi uma transição para o Clássico.'],
+ modelo:'A música barroca era mais complexa e grandiosa: usava muito o contraponto e a fuga, com várias melodias entrelaçadas sobre o baixo contínuo, como nas obras de Bach. Já a música do Rococó, chamada de estilo galante, era mais leve, simples e elegante, com melodias graciosas e cheias de ornamentos e um acompanhamento mais simples. Ela era feita principalmente para entreter a nobreza nos salões, como nas peças de Couperin e Rameau. O Rococó foi uma transição entre o Barroco e o período Clássico.'},
+{tema:T3,fonte:C11,tipo:'mc',correta:0,
+ enun:'<p>O <b>período Clássico</b> (aproximadamente de 1750 a 1820) recebeu esse nome porque:</p>',
+ opcoes:['buscava inspiração nos ideais da Antiguidade grega e romana, como equilíbrio, clareza, ordem e simetria, em sintonia com o Iluminismo.','toda música feita nessa época era considerada "clássica", inclusive o rock.','usava apenas instrumentos da Grécia antiga, como a lira.','foi um período em que só se compunha música para a Igreja.'],
+ expl:['"Clássico" lembra a <b>Antiguidade clássica</b> (Grécia e Roma), com seus ideais de <b>equilíbrio, clareza, ordem e proporção</b>.','O período coincidiu com o <b>Iluminismo</b>, que valorizava a razão.','Atenção: no dia a dia chamamos de "música clássica" toda música erudita, mas o <b>período Clássico</b> é uma época específica, entre cerca de 1750 e 1820.']},
+{tema:T3,fonte:C11,tipo:'mc',correta:3,
+ enun:'<p>Quais são os três compositores mais importantes do <b>período Clássico</b>, ligados à cidade de Viena?</p>',
+ opcoes:['Bach, Vivaldi e Handel.','Chopin, Liszt e Wagner.','Palestrina, Monteverdi e Couperin.','Haydn, Mozart e Beethoven (em sua fase inicial).'],
+ expl:['<b>Joseph Haydn</b>, <b>Wolfgang Amadeus Mozart</b> e <b>Ludwig van Beethoven</b> formam o chamado "classicismo vienense".','Beethoven começou no estilo clássico e depois abriu caminho para o <b>Romantismo</b>.','Bach, Vivaldi e Handel são do Barroco; Chopin, Liszt e Wagner, do Romântico.']},
+{tema:T3,fonte:C11,tipo:'mc',correta:1,
+ enun:'<p>Sobre <b>Wolfgang Amadeus Mozart</b>, é correto afirmar:</p>',
+ opcoes:['Foi um pintor do Renascimento que desenhou o Homem Vitruviano.','Nasceu em Salzburgo (Áustria), foi uma criança prodígio que compunha desde muito pequeno e criou obras como a ópera "A Flauta Mágica" e "Pequena Serenata Noturna".','Foi um compositor brasileiro que escreveu "O Guarani".','Foi o criador do baixo contínuo no início do Barroco.'],
+ expl:['Mozart (1756–1791) nasceu em <b>Salzburgo</b>, na Áustria.','Desde criança tocava e compunha, apresentando-se em cortes de toda a Europa: era uma <b>criança prodígio</b>.','Morreu com apenas 35 anos, mas deixou mais de 600 obras: óperas, sinfonias, concertos e música de câmara.','"O Guarani" é de Carlos Gomes, e o Homem Vitruviano é de Leonardo da Vinci.']},
+{tema:T3,fonte:C11,tipo:'mc',correta:2,
+ enun:'<p>Qual destas foi uma novidade importante da <b>música do período Clássico</b>?</p>',
+ opcoes:['O surgimento do canto gregoriano.','A proibição dos instrumentos de corda.','O desenvolvimento da sinfonia e da forma sonata, a organização da orquestra em grupos de instrumentos e o piano substituindo o cravo.','A invenção da guitarra elétrica.'],
+ expl:['A <b>sinfonia</b> (obra para orquestra, geralmente em quatro movimentos) se desenvolveu muito — Haydn é chamado de "pai da sinfonia".','A <b>forma sonata</b> organizava a música de forma clara e equilibrada.','A orquestra se organizou em <b>cordas, madeiras, metais e percussão</b>, e o <b>piano</b> (pianoforte), que permite tocar forte e piano, foi substituindo o cravo.']},
+{tema:T3,fonte:C11,tipo:'ab',
+ enun:'<p>Descreva as principais <b>características da música do período Clássico</b> e cite um compositor desse período.</p>',
+ pontos:['Citou clareza, equilíbrio, simplicidade, ordem e/ou simetria das frases musicais.','Mencionou a melodia em destaque com acompanhamento (sem tanto contraponto como no Barroco).','Citou novidades: sinfonia, forma sonata, concerto, quarteto de cordas, organização da orquestra e/ou uso do piano.','Citou pelo menos um compositor clássico (Haydn, Mozart ou Beethoven).'],
+ modelo:'A música do período Clássico buscava clareza, equilíbrio e simplicidade, inspirada nos ideais da Antiguidade grega e romana. As frases musicais eram simétricas e bem organizadas, e a melodia ficava em destaque, com um acompanhamento mais simples do que o contraponto barroco. Nesse período se desenvolveram a sinfonia, a forma sonata, o concerto e o quarteto de cordas; a orquestra se organizou em grupos de instrumentos e o piano foi substituindo o cravo. Os principais compositores foram Haydn, Mozart e Beethoven.'},
+
+/* ===================== CAP 11 – ROMÂNTICO ===================== */
+{tema:T4,fonte:C11,tipo:'ab',
+ enun:'<p>O <b>período Romântico</b> marcou as artes durante o século XIX. Explique o que caracterizou esse período e qual era a principal preocupação dos artistas românticos.</p>',
+ pontos:['Situou o período no século XIX (aproximadamente 1820 a 1900).','Disse que os artistas valorizavam a emoção, os sentimentos e a imaginação acima da razão.','Citou outros temas: individualismo/liberdade de expressão, natureza, amor, passado/lendas, nacionalismo.','Citou exemplos de artistas ou obras românticas (ex.: Beethoven, Chopin, Schubert, Wagner, Carlos Gomes, Delacroix).'],
+ modelo:'O período Romântico aconteceu durante o século XIX, aproximadamente de 1820 a 1900. Os artistas românticos queriam expressar emoções e sentimentos intensos, valorizando a imaginação e a liberdade individual mais do que as regras e o equilíbrio do período Clássico. Os temas preferidos eram o amor, a natureza, a saudade, as lendas, o passado e o nacionalismo, ou seja, o orgulho pela cultura de cada país. Na música, destacaram-se compositores como Beethoven (em sua fase final), Chopin, Schubert, Wagner e, no Brasil, Carlos Gomes.'},
+{tema:T4,fonte:C11,tipo:'mc',correta:0,
+ enun:'<p>Ludwig van Beethoven é considerado uma "ponte" entre o período Clássico e o Romântico. Qual alternativa traz informações corretas sobre ele?</p>',
+ opcoes:['Compositor alemão que foi perdendo a audição até ficar surdo, mas continuou compondo; sua Nona Sinfonia, com o coral "Ode à Alegria", foi composta quando já estava surdo.','Compositor italiano que criou a ópera no ano 1600.','Pintor que fez o teto da Capela Sistina.','Compositor polonês que só escreveu para piano.'],
+ expl:['Beethoven (1770–1827) nasceu em Bonn, na Alemanha, e viveu em Viena.','Começou no estilo clássico, mas suas obras foram ficando cada vez mais <b>intensas e emocionais</b>, abrindo caminho para o Romantismo.','Mesmo <b>surdo</b>, compôs a <b>Nona Sinfonia</b>, cujo final, a "Ode à Alegria", é hoje o hino da União Europeia.','O compositor polonês que escreveu quase só para piano é Chopin.']},
+{tema:T4,fonte:C11,tipo:'mc',correta:3,
+ enun:'<p>Qual alternativa descreve corretamente a <b>música do período Romântico</b>?</p>',
+ opcoes:['Música sem emoção, feita apenas com regras matemáticas rígidas.','Música feita apenas para a Igreja, com canto gregoriano.','Música sempre curta e sem instrumentos.','Música muito expressiva e emotiva, com orquestras maiores, virtuosismo dos solistas, música que conta histórias (música programática) e valorização das culturas nacionais.'],
+ expl:['Os compositores românticos buscavam <b>emocionar</b>: grandes contrastes, melodias apaixonadas.','As <b>orquestras cresceram</b> e surgiram solistas <b>virtuoses</b>, como Paganini (violino) e Liszt (piano).','Na <b>música programática</b>, a música descreve uma história, uma cena ou um poema (ex.: o poema sinfônico).','O <b>nacionalismo</b> levou compositores a usar melodias e danças de seus países.']},
+{tema:T4,fonte:C11,tipo:'mc',correta:1,
+ enun:'<p>Um grande compositor <b>brasileiro</b> do período Romântico ficou famoso internacionalmente com a ópera <b>"O Guarani"</b>, baseada no romance de José de Alencar. Quem foi ele?</p>',
+ opcoes:['Heitor Villa-Lobos.','Antônio Carlos Gomes.','Aleijadinho.','Tom Jobim.'],
+ expl:['<b>Carlos Gomes</b> (1836–1896), nascido em Campinas (SP), estreou "O Guarani" em <b>1870</b>, no Teatro alla Scala, em Milão, na Itália.','A ópera mostra temas nacionais (um herói indígena), bem ao gosto do Romantismo.','Sua abertura é muito conhecida no Brasil. Villa-Lobos e Tom Jobim são do século XX, e Aleijadinho é do Barroco.']},
+{tema:T4,fonte:C11,tipo:'ab',
+ enun:'<p>Compare a música do <b>período Clássico</b> com a música do <b>período Romântico</b>. O que mudou de um período para o outro?</p>',
+ pontos:['Disse que a música clássica valorizava equilíbrio, clareza, ordem, simetria e regras/formas bem definidas.','Disse que a música romântica valorizava a emoção, a expressão dos sentimentos e a liberdade, com mais contrastes.','Citou mudanças concretas: orquestras maiores, virtuosismo, música programática, nacionalismo e/ou formas mais livres.','Citou compositores de cada período (ex.: Haydn/Mozart × Chopin/Schubert/Wagner) ou Beethoven como transição.'],
+ modelo:'No período Clássico, a música buscava equilíbrio, clareza e ordem: as frases eram simétricas e as formas, como a sinfonia e a sonata, seguiam regras bem definidas. Mozart e Haydn são exemplos. No período Romântico, os compositores passaram a valorizar a emoção e a liberdade de expressão: a música ficou mais intensa e cheia de contrastes, as orquestras cresceram, surgiram solistas virtuoses e obras que contavam histórias (música programática), além do nacionalismo musical. Chopin, Schubert e Wagner são exemplos. Beethoven foi a ponte entre os dois períodos.'},
+
+/* ===================== CAP 11 – SISTEMA TONAL ===================== */
+{tema:T5,fonte:C11,tipo:'mc',correta:2,
+ enun:'<p>O que é o <b>sistema tonal</b>?</p>',
+ opcoes:['Um aparelho eletrônico que aumenta o volume do som.','Um sistema que proíbe o uso de acordes.','Uma forma de organizar a música em torno de uma nota principal (a tônica), usando escalas maiores e menores e acordes que criam tensão e repouso.','Um tipo de dança da corte francesa.'],
+ expl:['No <b>sistema tonal</b>, a música gira em torno de uma nota principal, a <b>tônica</b>, que dá nome à <b>tonalidade</b> (por exemplo, Dó maior).','Usa escalas <b>maiores</b> e <b>menores</b> e acordes que criam <b>tensão</b> e <b>repouso</b> (resolução).','Ele se consolidou no Barroco e foi a base da música dos períodos Clássico e Romântico.']},
+{tema:T5,fonte:C11,tipo:'mc',correta:0,
+ enun:SVG_TECLADO+'<p>O teclado mostra a <b>escala de Dó maior</b>. Quais são as notas dessa escala e qual é a sua tônica?</p>',
+ opcoes:['Dó, Ré, Mi, Fá, Sol, Lá, Si (e Dó de novo); a tônica é Dó.','Ré, Mi, Fá, Sol, Lá, Si, Dó; a tônica é Si.','Somente as teclas pretas; a tônica é Sol.','Dó, Mi e Sol apenas; não existe tônica.'],
+ expl:['A escala de <b>Dó maior</b> usa apenas as teclas brancas: <b>Dó, Ré, Mi, Fá, Sol, Lá, Si</b> — e volta ao Dó.','A <b>tônica</b> é a primeira nota da escala, que dá nome à tonalidade: <b>Dó</b>.','Dó, Mi e Sol formam o <b>acorde</b> de Dó maior, não a escala inteira.']},
+{tema:T5,fonte:C11,tipo:'mc',correta:3,
+ enun:'<p>Quando uma música tonal termina na <b>tônica</b>, que sensação ela costuma transmitir ao ouvinte?</p>',
+ opcoes:['Sensação de que a música foi interrompida no meio.','Sensação de desafinação.','Nenhuma sensação, pois a tônica não tem importância.','Sensação de conclusão, de repouso, de "chegada em casa".'],
+ expl:['No sistema tonal, a <b>tônica</b> é o "ponto de repouso", a "casa" da música.','Outros acordes, como o da <b>dominante</b> (em Dó maior, o acorde de <b>Sol</b>), criam <b>tensão</b>, que pede para "resolver" na tônica.','Experimente cantar "Parabéns pra você" e parar antes da última nota: dá a sensação de que falta algo!']},
+{tema:T5,fonte:C11,tipo:'ab',
+ enun:'<p>Explique <b>o que é o sistema tonal</b>, em que período da história da música ele se consolidou e se ele ainda é usado hoje.</p>',
+ pontos:['Explicou que é uma forma de organizar a música em torno de uma nota/acorde principal, a tônica, que define a tonalidade.','Mencionou escalas/tonalidades maiores e menores e/ou a relação de tensão (dominante) e repouso (tônica).','Disse que se consolidou no Barroco (séculos XVII–XVIII) e foi a base dos períodos Clássico e Romântico (antes predominava o sistema modal).','Disse que continua presente hoje, por exemplo, na maior parte da música popular (MPB, pop, sertanejo, rock).'],
+ modelo:'O sistema tonal é uma forma de organizar a música em torno de uma nota principal, chamada tônica, que dá nome à tonalidade, como Dó maior ou Lá menor. Ele usa escalas maiores e menores e acordes que se relacionam entre si: alguns, como o da dominante, criam tensão, e a música "resolve" ao voltar para a tônica, que dá a sensação de repouso. Esse sistema se consolidou no período Barroco, substituindo aos poucos o antigo sistema modal, e foi a base da música dos períodos Clássico e Romântico. Ele continua muito presente hoje, por exemplo, na maior parte da música popular, como MPB, pop, sertanejo e rock.'},
+
+/* ===================== CAP 13 – HOMEM VITRUVIANO ===================== */
+{tema:T6,fonte:C13,tipo:'mc',correta:1,
+ enun:'<p>O <b>Homem Vitruviano</b> é um dos desenhos mais famosos do mundo. Quem o criou, quando e com qual técnica?</p>',
+ opcoes:['Michelangelo, em 1512, pintado no teto da Capela Sistina.','Leonardo da Vinci, por volta de 1490, desenhado com pena e tinta sobre papel.','Aleijadinho, em 1790, esculpido em pedra-sabão.','Pablo Picasso, em 1907, pintado a óleo sobre tela.'],
+ expl:['O desenho é de <b>Leonardo da Vinci</b>, feito por volta de <b>1490</b>, no Renascimento.','É um desenho com <b>pena e tinta sobre papel</b>, pequeno (cerca de 34 cm × 24 cm), acompanhado de anotações de Leonardo.','Hoje pertence às Gallerie dell\'Accademia, em Veneza (Itália), e quase nunca é exposto, por ser muito frágil.']},
+{tema:T6,fonte:C13,tipo:'mc',correta:3,
+ enun:'<p>O nome "Vitruviano" é uma homenagem a <b>Vitrúvio</b>. Quem foi ele?</p>',
+ opcoes:['Um pintor barroco que trabalhou em Minas Gerais.','O rei que encomendou o desenho a Leonardo.','Um compositor clássico amigo de Mozart.','Um arquiteto da Roma antiga (século I a.C.) que escreveu um tratado sobre arquitetura descrevendo as proporções ideais do corpo humano.'],
+ expl:['<b>Marco Vitrúvio Polião</b> foi um arquiteto romano do século I a.C.','Em seu tratado <b>"Sobre a Arquitetura"</b> (De Architectura), ele afirmou que o corpo humano bem proporcionado pode ser encaixado em um <b>círculo</b> e em um <b>quadrado</b>.','Leonardo leu essas ideias e as transformou em desenho — um bom exemplo de como o Renascimento retomou a cultura greco-romana.']},
+{tema:T6,fonte:C13,tipo:'mc',correta:2,
+ enun:SVG_VIT+'<p class="small" style="text-align:center">Esquema simplificado do desenho de Leonardo da Vinci.</p><p>Qual alternativa descreve corretamente o <b>Homem Vitruviano</b>?</p>',
+ opcoes:['Uma mulher sentada, pintada com cores fortes dentro de um triângulo.','Um homem correndo, desenhado sem nenhuma forma geométrica.','Um homem em duas posições sobrepostas (braços e pernas em posições diferentes), inscrito ao mesmo tempo em um círculo e em um quadrado; o umbigo é o centro do círculo.','Dois homens diferentes lutando dentro de um quadrado.'],
+ expl:['O desenho mostra <b>um só homem</b> em <b>duas posições sobrepostas</b>: com os braços abertos na horizontal e as pernas juntas (encaixando-se no <b>quadrado</b>) e com os braços levantados e as pernas abertas (encaixando-se no <b>círculo</b>).','O <b>umbigo</b> fica no centro do círculo.','Assim, Leonardo mostrou que o corpo humano se relaciona com formas geométricas perfeitas.']},
+{tema:T6,fonte:C13,tipo:'mc',correta:0,
+ enun:'<p>Segundo as proporções estudadas por Vitrúvio e desenhadas por Leonardo, qual relação existe entre a <b>altura</b> de uma pessoa e a <b>envergadura</b> (a distância entre as pontas dos dedos com os braços abertos)?</p>',
+ opcoes:['São aproximadamente iguais — por isso o homem de braços abertos cabe exatamente no quadrado.','A envergadura é o dobro da altura.','A altura é três vezes maior que a envergadura.','Não há nenhuma relação entre elas.'],
+ expl:['No quadrado, a <b>altura</b> (da cabeça aos pés) é igual à <b>envergadura</b> (de uma mão à outra, com os braços abertos).','Por isso o lado do quadrado serve para as duas medidas.','Você pode testar: peça para alguém medir sua altura e sua envergadura — os valores costumam ser bem parecidos!']},
+{tema:T6,fonte:C13,tipo:'ab',
+ enun:SVG_VIT+'<p>O capítulo "A arte e seus símbolos" apresenta o <b>Homem Vitruviano</b> como um símbolo. Explique o <b>significado</b> desse desenho e por que ele representa tão bem as ideias do Renascimento.</p>',
+ pontos:['Explicou que o desenho representa as proporções ideais do corpo humano, baseadas em Vitrúvio.','Relacionou com o humanismo/antropocentrismo: o ser humano no centro, como "medida de todas as coisas".','Mencionou a união entre arte, ciência e matemática (estudo do corpo, geometria, proporção, harmonia).','Explicou o simbolismo das formas: círculo (perfeição, universo, divino) e quadrado (terra, mundo material), com o ser humano ligando os dois.','Mencionou que é um símbolo usado até hoje (ex.: ligado à ciência, à saúde, à moeda de 1 euro da Itália).'],
+ modelo:'O Homem Vitruviano, desenhado por Leonardo da Vinci por volta de 1490, representa as proporções ideais do corpo humano, a partir das ideias do arquiteto romano Vitrúvio. Ele mostra que o corpo bem proporcionado se encaixa em duas formas geométricas perfeitas: o círculo, que simboliza a perfeição, o universo e o divino, e o quadrado, que simboliza a Terra e o mundo material. O ser humano aparece no centro, ligando os dois. Por isso o desenho representa tão bem o Renascimento: ele expressa o humanismo e o antropocentrismo, que colocavam o ser humano como centro e "medida de todas as coisas", e une arte, ciência e matemática. Até hoje ele é um símbolo muito usado, por exemplo na moeda de 1 euro da Itália e em imagens ligadas à ciência e à saúde.'},
+];
+Q.forEach((q,i)=>q.id='a'+(i+1));
+/* distribui a posição da alternativa correta (ordem fixa, igual para todos) */
+{const alvo=[2,1,3,0,3,2,0,1,1,3,0,2,0,2,1,3,0,1,3,2,0,2,1,0,3,1,3];let k=0;Q.forEach(q=>{if(q.tipo!=='mc')return;const t=alvo[k++];if(t===q.correta||/\([a-e]\)/.test(q.expl.join(' ')))return;const o=q.opcoes;[o[t],o[q.correta]]=[o[q.correta],o[t]];q.correta=t})}
+
+const TEMAS=[...new Set(Q.map(q=>q.tema))];
+const MINCH=60;
+
+/* ======================= ESTADO ======================= */
+const KEY='artes7_treino_v1';
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!S.r)S={nome:'',r:{},atual:0,filtro:'Todos'};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function rec(id){return S.r[id]||(S.r[id]={t:0,tent:0,status:'',resps:[]})}
+let view='quiz',tStart=null,tick=null;
+const cur=()=>Q[S.atual];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const strip=s=>String(s).replace(/<[^>]+>/g,'');
+const hoje=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const fdata=s=>s?s.split('-').reverse().join('/'):'';
+
+/* ======================= TEMPO ======================= */
+function fmt(s){s=Math.round(s||0);const m=Math.floor(s/60),x=s%60;return String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')}
+function flush(){if(tStart){const now=Date.now();rec(cur().id).t+=(now-tStart)/1000;tStart=now;save()}}
+function stopTimer(){if(tStart){flush();tStart=null}clearInterval(tick);tick=null;updTimer()}
+function startTimer(){stopTimer();if(view!=='quiz'||rec(cur().id).status)return;tStart=Date.now();let c=0;tick=setInterval(()=>{updTimer();if(++c%10===0)flush()},1000);updTimer()}
+function elapsed(id){const r=rec(id);return r.t+(tStart&&cur().id===id?(Date.now()-tStart)/1000:0)}
+function updTimer(){const el=document.getElementById('timer');if(!el)return;el.textContent='⏱ '+fmt(elapsed(cur().id));el.classList.toggle('stop',!!rec(cur().id).status)}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopTimer();else if(view==='quiz')startTimer()});
+window.addEventListener('beforeunload',()=>flush());
+
+/* ======================= CLASSIFICAÇÃO ======================= */
+const LET='abcde';
+function cor(q,r){ // g y r e ''
+  if(!r.status)return'';
+  if(q.tipo==='mc')return{ok1:'g',ok:'y',viu:'r'}[r.status];
+  if(r.status==='env')return'e';
+  return r.nota>=.75?'g':r.nota>=.4?'y':'r';
+}
+function rotulo(q,r){
+  if(!r.status)return r.t>0?'Em andamento':'Não feita';
+  if(q.tipo==='mc')return{ok1:'Acertou de primeira',ok:'Acertou após errar',viu:'Viu a explicação'}[r.status];
+  if(r.status==='env')return'Enviada (falta autoavaliação)';
+  return'Autoavaliação: '+Math.round(r.nota*100)+'%';
+}
+const CLS={g:'cg',y:'cy',r:'cr',e:'ce','':''};
+
+/* ======================= TELA DE QUESTÕES ======================= */
+const app=document.getElementById('app');
+function filtradas(){return Q.map((q,i)=>i).filter(i=>S.filtro==='Todos'||(S.filtro==='Abertas'?Q[i].tipo==='ab':Q[i].tema===S.filtro))}
+
+function renderQuiz(){
+  const q=cur(),r=rec(q.id),n=S.atual+1;
+  const feitas=Q.filter(x=>{const s=rec(x.id).status;return s&&s!=='env'}).length;
+  const totalT=Q.reduce((a,x)=>a+elapsed(x.id),0);
+  let h=`<div class="card noprint">
+   <div class="namebox"><label for="nome"><b>Aluno:</b></label><input id="nome" placeholder="Nome do aluno" value="${esc(S.nome)}">
+   <span class="small" style="margin-left:auto">${feitas}/${Q.length} concluídas · tempo total ${fmt(totalT)}</span></div>
+   <div class="bar"><i style="width:${feitas/Q.length*100}%"></i></div>
+  </div>
+  <div class="card noprint"><div class="chips">${['Todos',...TEMAS,'Abertas'].map(t=>`<button class="chip ${S.filtro===t?'on':''}" data-f="${t}">${t==='Abertas'?'✎ Só abertas':t}</button>`).join('')}</div>
+   <div class="grid">${filtradas().map(i=>{const qq=Q[i];return`<button class="num ${cor(qq,rec(qq.id))} ${qq.tipo==='ab'?'ab':''} ${i===S.atual?'cur':''}" data-i="${i}" title="${qq.tipo==='ab'?'Questão aberta':'Múltipla escolha'}">${i+1}</button>`}).join('')}</div>
+   <div class="legend"><span class="lg">Acertou de 1ª / boa resposta</span><span class="ly">Acertou após errar / parcial</span><span class="lr">Viu explicação / revisar</span><span class="le">Enviada, falta autoavaliar</span><span class="lab">✎ = questão aberta</span></div>
+  </div>
+  <div class="card">
+   <div class="meta"><span class="tag">${q.tema}</span><span class="tipo">${q.tipo==='ab'?'✎ Aberta':'Múltipla escolha'}</span><span class="fonte">${q.fonte}</span><span class="timer" id="timer">⏱ 00:00</span></div>
+   <h2>Questão ${n} de ${Q.length}</h2>
+   <div class="enun">${q.enun}</div>`;
+  if(q.tipo==='mc'){
+    h+=`<div class="opts">${q.opcoes.map((o,k)=>`<label class="${r.status&&k===q.correta?'certa':''}"><input type="radio" name="op" value="${k}"><span><b>${LET[k]})</b> ${o}</span></label>`).join('')}</div>
+    <div id="fb"></div>
+    <div class="actions"><button class="btn p" id="btnResp">Responder</button>
+    <button class="btn s" id="btnExp" ${r.tent||r.status?'':'disabled'}>📖 Ver explicação</button></div>
+    ${!r.tent&&!r.status?'<div class="hint" id="hintExp">A explicação aparece quando você acertar, ou pode ser aberta depois da primeira tentativa.</div>':''}
+    <div id="exp" class="resol" ${r.status?'':'hidden'}><h3>Explicação</h3><ul>${q.expl.map(p=>`<li>${p}</li>`).join('')}</ul></div>`;
+  }else{
+    const env=!!r.status;
+    h+=`<textarea id="txt" ${env?'readonly':''} placeholder="Escreva sua resposta com suas palavras. Use frases completas e explique o porquê.">${esc(r.texto||'')}</textarea>
+    <div class="cont" id="cont"></div>
+    <div id="fb"></div>
+    ${env?'':`<div class="actions"><button class="btn p" id="btnEnv">Enviar resposta</button></div><div class="hint">Depois de enviar, você verá a resposta-modelo e vai conferir quais pontos importantes incluiu. A resposta enviada não pode mais ser alterada.</div>`}
+    ${env?`<div class="resol"><h3>Confira sua resposta</h3>
+      <p class="small">Marque <b>com sinceridade</b> os pontos que a sua resposta incluiu. Isso ajuda a acompanhar o que você já sabe.</p>
+      <div class="check">${q.pontos.map((p,k)=>`<label><input type="checkbox" data-k="${k}" ${(r.marcados||[]).includes(k)?'checked':''}><span>${p}</span></label>`).join('')}</div>
+      <div class="actions"><button class="btn p" id="btnAval">Salvar autoavaliação</button></div>
+      <h3 style="margin-top:16px">Resposta-modelo</h3><div class="modelo">${q.modelo}</div>
+      <p class="small" style="margin-top:8px">💡 Dica: copie no caderno os pontos que você não marcou. É exatamente isso que costuma faltar na prova.</p></div>`:''}`;
+  }
+  h+=`<div class="nav"><button class="btn s" id="prev" ${S.atual===0?'disabled':''}>← Anterior</button><button class="btn s" id="next" ${S.atual===Q.length-1?'disabled':''}>Próxima →</button></div></div>`;
+  app.innerHTML=h;
+
+  document.getElementById('nome').oninput=e=>{S.nome=e.target.value;save()};
+  app.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{S.filtro=b.dataset.f;const f=filtradas();if(!f.includes(S.atual))go(f[0]);else{save();renderQuiz()}});
+  app.querySelectorAll('.num').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+  document.getElementById('prev').onclick=()=>go(S.atual-1);
+  document.getElementById('next').onclick=()=>go(S.atual+1);
+  if(q.tipo==='mc'){
+    if(r.status)fbStatus();
+    document.getElementById('btnResp').onclick=responderMC;
+    document.getElementById('btnExp').onclick=verExp;
+  }else{
+    const t=document.getElementById('txt'),c=document.getElementById('cont');
+    const upd=()=>{const n=t.value.trim().length;c.textContent=r.status?'':(n<MINCH?`${n} caracteres (mínimo ${MINCH})`:`${n} caracteres`)};
+    upd();
+    if(!r.status){
+      t.value=r.rascunho||'';upd();
+      t.oninput=()=>{r.rascunho=t.value;save();upd()};
+      document.getElementById('btnEnv').onclick=enviarAberta;
+    }else{
+      fbStatus();
+      document.getElementById('btnAval').onclick=salvarAval;
+    }
+  }
+  startTimer();
+}
+function fb(msg,cls){document.getElementById('fb').innerHTML=`<div class="fb ${cls}">${msg}</div>`}
+function fbStatus(){
+  const q=cur(),r=rec(q.id);
+  if(q.tipo==='mc'){
+    if(r.status==='ok1')fb(`✔ Você acertou de primeira em ${fmt(r.t)}.`,'ok');
+    else if(r.status==='ok')fb(`✔ Você acertou após ${r.tent} tentativas, em ${fmt(r.t)}.`,'info');
+    else fb(`Você abriu a explicação (${r.tent} tentativa${r.tent>1?'s':''}, ${fmt(r.t)}). A alternativa correta está destacada em verde.`,'info');
+  }else{
+    if(r.status==='env')fb(`Resposta enviada em ${fmt(r.t)}. Agora confira os pontos abaixo e salve sua autoavaliação.`,'info');
+    else{const p=Math.round(r.nota*100);fb(`Autoavaliação salva: ${p}% dos pontos importantes (${(r.marcados||[]).length} de ${q.pontos.length}). Tempo: ${fmt(r.t)}.`,r.nota>=.75?'ok':r.nota>=.4?'info':'bad')}
+  }
+}
+function responderMC(){
+  const q=cur(),r=rec(q.id);
+  const c=app.querySelector('input[name=op]:checked');if(!c){fb('Escolha uma alternativa.','info');return}
+  const k=+c.value,ok=k===q.correta;
+  if(r.status){fb(ok?'✔ Correto! (o registro desta questão foi mantido)':'✘ Não é essa. A correta está destacada em verde.',ok?'ok':'bad');return}
+  flush();r.tent++;r.resps.push(LET[k]+')');
+  if(ok){r.status=r.tent===1?'ok1':'ok';r.quando=hoje();stopTimer();save();renderQuiz();document.getElementById('exp').scrollIntoView({behavior:'smooth',block:'nearest'})}
+  else{save();fb(`✘ Ainda não. Releia o enunciado e tente de novo, ou veja a explicação. (tentativa ${r.tent})`,'bad');
+    document.getElementById('btnExp').disabled=false;const hn=document.getElementById('hintExp');if(hn)hn.remove()}
+}
+function verExp(){
+  const r=rec(cur().id);
+  if(!r.status){flush();r.status='viu';r.quando=hoje();stopTimer();save();renderQuiz()}
+  document.getElementById('exp').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function enviarAberta(){
+  const r=rec(cur().id),t=document.getElementById('txt').value.trim();
+  if(t.length<MINCH){fb(`Sua resposta está muito curta. Escreva pelo menos ${MINCH} caracteres (umas duas frases), explicando com suas palavras.`,'info');return}
+  if(!confirm('Enviar a resposta? Depois de enviada ela não poderá ser alterada.'))return;
+  flush();r.texto=t;delete r.rascunho;r.tent=1;r.status='env';r.quando=hoje();stopTimer();save();renderQuiz();
+  app.querySelector('.resol').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function salvarAval(){
+  const q=cur(),r=rec(q.id);
+  r.marcados=[...app.querySelectorAll('.check input:checked')].map(i=>+i.dataset.k);
+  r.nota=r.marcados.length/q.pontos.length;r.status='ab';save();renderQuiz();
+  document.getElementById('fb').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function go(i){if(i<0||i>=Q.length)return;stopTimer();S.atual=i;save();renderQuiz();window.scrollTo({top:0,behavior:'smooth'})}
+
+/* ======================= ACOMPANHAMENTO ======================= */
+const AVP={'':'—',boa:'Boa',parcial:'Parcial',refazer:'Refazer'};
+function calc(lista){
+  const mc=lista.filter(x=>x.q.tipo==='mc'&&x.r.status),ab=lista.filter(x=>x.q.tipo==='ab'&&x.r.status==='ab');
+  const ok1=mc.filter(x=>x.r.status==='ok1').length;
+  const feitas=lista.filter(x=>x.r.status&&x.r.status!=='env');
+  return{mc,ab,ok1,feitas,
+    pmc:mc.length?Math.round(ok1/mc.length*100):null,
+    pab:ab.length?Math.round(ab.reduce((a,x)=>a+x.r.nota,0)/ab.length*100):null,
+    tmc:mc.length?mc.reduce((a,x)=>a+x.r.t,0)/mc.length:null,
+    tab:ab.length?ab.reduce((a,x)=>a+x.r.t,0)/ab.length:null,
+    tot:lista.reduce((a,x)=>a+x.r.t,0)};
+}
+const pct=v=>v==null?'–':v+'%';
+const pc=v=>v==null?'':v>=75?'cg':v>=40?'cy':'cr';
+function revisar(rs){return rs.filter(x=>x.r.status&&(x.r.status==='viu'||x.r.status==='ok'||(x.q.tipo==='ab'&&x.r.status==='ab'&&x.r.nota<.5)||x.r.pai==='refazer'))}
+
+function renderRel(){
+  stopTimer();
+  const rs=Q.map((q,i)=>({q,i,r:rec(q.id)}));
+  const G=calc(rs),pend=rs.filter(x=>x.r.status==='env');
+  const dias={};rs.forEach(x=>{if(x.r.quando&&x.r.status){(dias[x.r.quando]=dias[x.r.quando]||[]).push(x)}});
+  const rev=revisar(rs);
+  let h=`<div class="card"><h2>Acompanhamento${S.nome?' – '+esc(S.nome):''}</h2><p class="small">Gerado em ${new Date().toLocaleString('pt-BR')}</p>
+  <div class="stats">
+   <div class="stat"><span class="small">Concluídas</span><b>${G.feitas.length}/${Q.length}</b></div>
+   <div class="stat"><span class="small">Múltipla escolha: acerto de 1ª</span><b class="${pc(G.pmc)}">${pct(G.pmc)}</b><span class="small">${G.ok1} de ${G.mc.length} feitas</span></div>
+   <div class="stat"><span class="small">Abertas: média da autoavaliação</span><b class="${pc(G.pab)}">${pct(G.pab)}</b><span class="small">${G.ab.length} avaliadas${pend.length?` · ${pend.length} pendente(s)`:''}</span></div>
+   <div class="stat"><span class="small">Tempo total</span><b>${fmt(G.tot)}</b></div>
+   <div class="stat"><span class="small">Tempo médio · múltipla escolha</span><b>${G.tmc==null?'–':fmt(G.tmc)}</b></div>
+   <div class="stat"><span class="small">Tempo médio · aberta</span><b>${G.tab==null?'–':fmt(G.tab)}</b></div>
+  </div>
+
+  <h3>Por assunto</h3><div class="tw"><table><tr><th>Assunto</th><th>Concluídas</th><th>Múlt. escolha (acerto de 1ª)</th><th>Abertas (autoavaliação)</th><th>Tempo total</th></tr>
+  ${TEMAS.map(t=>{const g=rs.filter(x=>x.q.tema===t),c=calc(g);return`<tr><td>${t}</td><td>${c.feitas.length}/${g.length}</td><td class="${pc(c.pmc)}">${pct(c.pmc)}</td><td class="${pc(c.pab)}">${pct(c.pab)}</td><td>${fmt(c.tot)}</td></tr>`}).join('')}
+  </table></div>
+
+  <h3>Evolução por dia</h3>${Object.keys(dias).length?`<div class="tw"><table><tr><th>Dia</th><th>Questões concluídas</th><th>Múlt. escolha (acerto de 1ª)</th><th>Abertas (autoavaliação)</th><th>Tempo</th></tr>
+  ${Object.keys(dias).sort().map(d=>{const c=calc(dias[d]);return`<tr><td>${fdata(d)}</td><td>${dias[d].length}</td><td class="${pc(c.pmc)}">${pct(c.pmc)}</td><td class="${pc(c.pab)}">${pct(c.pab)}</td><td>${fmt(c.tot)}</td></tr>`}).join('')}</table></div>`:'<p class="small">Ainda não há questões concluídas.</p>'}
+
+  <h3>Para revisar</h3>${rev.length?`<p class="small">Questões em que ele errou antes de acertar, abriu a explicação, marcou menos da metade dos pontos ou que o responsável marcou como "Refazer".</p><ul>${rev.map(x=>`<li><a href="#" data-go="${x.i}">Questão ${x.i+1}</a> – ${x.q.tema}: <span class="${CLS[cor(x.q,x.r)]}">${rotulo(x.q,x.r)}</span>${x.r.pai==='refazer'?' · <b class="cr">Responsável: refazer</b>':''}</li>`).join('')}</ul>`:'<p class="small">Nada para revisar por enquanto. 👏</p>'}
+
+  <h3>Respostas abertas</h3><p class="small">Leia o que ele escreveu, veja os pontos que faltaram e, se quiser, registre a sua avaliação.</p>
+  ${rs.filter(x=>x.q.tipo==='ab').map(x=>{
+    if(!x.r.status)return`<div class="abcard"><b>Questão ${x.i+1}</b> – <span class="small">${x.q.tema}</span> · <span class="small">${x.r.rascunho?'Rascunho iniciado, ainda não enviada':'Não respondida'}</span></div>`;
+    const falt=x.r.status==='ab'?x.q.pontos.filter((p,k)=>!(x.r.marcados||[]).includes(k)):[];
+    return`<div class="abcard"><b>Questão ${x.i+1}</b> – <span class="small">${x.q.tema} · ${fdata(x.r.quando)} · tempo ${fmt(x.r.t)}</span>
+     <div class="small" style="margin-top:4px">${strip(x.q.enun).replace(/\s+/g,' ').slice(-220).replace(/^\S*\s/,'… ')}</div>
+     <div class="txt">${esc(x.r.texto)}</div>
+     <div><span class="${CLS[cor(x.q,x.r)]}">${rotulo(x.q,x.r)}</span></div>
+     ${falt.length?`<div class="falta">Pontos que ele não marcou:<ul>${falt.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+     <div class="noprint" style="margin-top:6px"><label class="small">Avaliação do responsável: <select data-pai="${x.q.id}">${Object.keys(AVP).map(k=>`<option value="${k}" ${(x.r.pai||'')===k?'selected':''}>${AVP[k]}</option>`).join('')}</select></label></div>
+     ${x.r.pai?`<div class="small only-print">Avaliação do responsável: ${AVP[x.r.pai]}</div>`:''}
+    </div>`}).join('')}
+
+  <h3>Questão por questão</h3><div class="tw"><table><tr><th>Nº</th><th>Assunto</th><th>Tipo</th><th>Situação</th><th>Tentativas</th><th>Tempo</th><th>Dia</th><th>Respostas (m. escolha)</th></tr>
+  ${rs.map(x=>`<tr><td>${x.i+1}</td><td>${x.q.tema}</td><td>${x.q.tipo==='ab'?'Aberta':'M. escolha'}</td><td class="${CLS[cor(x.q,x.r)]}">${rotulo(x.q,x.r)}</td><td>${x.r.tent||'–'}</td><td>${x.r.t>0?fmt(x.r.t):'–'}</td><td>${fdata(x.r.quando)||'–'}</td><td>${x.q.tipo==='mc'?((x.r.resps||[]).join(' · ')||'–'):'–'}</td></tr>`).join('')}
+  </table></div>
+
+  <div class="actions noprint"><button class="btn w" id="wpp">📲 Enviar resumo pelo WhatsApp</button><button class="btn p" id="csv">⬇ Baixar planilha (CSV)</button><button class="btn s" id="imp">🖨 Imprimir</button><button class="btn d" id="zera">Apagar todo o progresso</button></div>
+  </div>`;
+  app.innerHTML=h;
+  app.querySelectorAll('[data-go]').forEach(a=>a.onclick=e=>{e.preventDefault();S.filtro='Todos';S.atual=+a.dataset.go;setView('quiz')});
+  app.querySelectorAll('[data-pai]').forEach(s=>s.onchange=()=>{const r=S.r[s.dataset.pai];r.pai=s.value;save();renderRel()});
+  document.getElementById('imp').onclick=()=>window.print();
+  document.getElementById('wpp').onclick=()=>{
+    let t=`🎼 Artes 7º ano – Caps. 10, 11 e 13${S.nome?'\nAluno: '+S.nome:''}\nData: ${new Date().toLocaleDateString('pt-BR')}\n\nConcluídas: ${G.feitas.length}/${Q.length}\nMúltipla escolha (acerto de 1ª): ${pct(G.pmc)}\nAbertas (autoavaliação): ${pct(G.pab)}\nTempo total: ${fmt(G.tot)}\n\nPor assunto:\n`;
+    TEMAS.forEach(tm=>{const g=rs.filter(x=>x.q.tema===tm),c=calc(g);t+=`• ${tm}: ${c.feitas.length}/${g.length} · m.e. ${pct(c.pmc)} · abertas ${pct(c.pab)}\n`});
+    if(rev.length)t+=`\nPara revisar: questões ${rev.map(x=>x.i+1).join(', ')}`;
+    window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+  };
+  document.getElementById('csv').onclick=()=>{
+    const L=[['Questao','Assunto','Tipo','Situacao','Tentativas','Tempo (s)','Tempo (mm:ss)','Dia','Respostas m.e.','Nota autoavaliacao (%)','Avaliacao responsavel','Resposta aberta']];
+    rs.forEach(x=>L.push([x.i+1,x.q.tema,x.q.tipo==='ab'?'Aberta':'Multipla escolha',rotulo(x.q,x.r),x.r.tent||0,Math.round(x.r.t),fmt(x.r.t),fdata(x.r.quando),(x.r.resps||[]).join(' | '),x.r.status==='ab'?Math.round(x.r.nota*100):'',AVP[x.r.pai||''].replace('—',''),x.r.texto||'']));
+    const csv='﻿'+L.map(l=>l.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='acompanhamento_artes_'+(S.nome||'aluno').replace(/\s+/g,'_')+'.csv';a.click();
+  };
+  document.getElementById('zera').onclick=()=>{if(confirm('Apagar todas as respostas, tempos e avaliações? Isso não pode ser desfeito.')){const n=S.nome;S={nome:n,r:{},atual:0,filtro:'Todos'};save();renderRel()}};
+}
+function setView(v){view=v;document.getElementById('tabQ').classList.toggle('on',v==='quiz');document.getElementById('tabR').classList.toggle('on',v==='rel');
+  if(v==='quiz')renderQuiz();else renderRel();window.scrollTo(0,0)}
+document.getElementById('tabQ').onclick=()=>setView('quiz');
+document.getElementById('tabR').onclick=()=>setView('rel');
+if(S.atual>=Q.length)S.atual=0;
+setView('quiz');
+</script>
+</body>
+</html>
